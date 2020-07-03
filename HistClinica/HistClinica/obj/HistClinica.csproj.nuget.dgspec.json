@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HistClinica\\HistClinica\\HistClinica\\HistClinica.csproj": {}
+    "D:\\CEM-HIS\\HistClinica\\HistClinica\\HistClinica.csproj": {}
   },
   "projects": {
-    "D:\\HistClinica\\HistClinica\\HistClinica\\HistClinica.csproj": {
+    "D:\\CEM-HIS\\HistClinica\\HistClinica\\HistClinica.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HistClinica\\HistClinica\\HistClinica\\HistClinica.csproj",
+        "projectUniqueName": "D:\\CEM-HIS\\HistClinica\\HistClinica\\HistClinica.csproj",
         "projectName": "HistClinica",
-        "projectPath": "D:\\HistClinica\\HistClinica\\HistClinica\\HistClinica.csproj",
+        "projectPath": "D:\\CEM-HIS\\HistClinica\\HistClinica\\HistClinica.csproj",
         "packagesPath": "C:\\Users\\victo\\.nuget\\packages\\",
-        "outputPath": "D:\\HistClinica\\HistClinica\\HistClinica\\obj\\",
+        "outputPath": "D:\\CEM-HIS\\HistClinica\\HistClinica\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

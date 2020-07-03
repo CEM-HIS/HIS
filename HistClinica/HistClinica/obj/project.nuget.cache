@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QaY8CwoCMolu0ZMvZg7qC6saWbdmFd4QfK36YW3HvY0/mAFu2d0yXEedrYEPGc0yS+lOdQYLLyzTeQrMgDMGfg==",
+  "dgSpecHash": "0cuCFdiIz1+g3pXyqwL8jdNhJi9IF0doq5koUcxT2fnBYvk3sKLDavD7TmCI+g/CTe77xP+cW+bs2gg97P5MsA==",
   "success": true,
-  "projectFilePath": "D:\\HistClinica\\HistClinica\\HistClinica\\HistClinica.csproj",
+  "projectFilePath": "D:\\CEM-HIS\\HistClinica\\HistClinica\\HistClinica.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\victo\\.nuget\\packages\\common.logging\\3.4.1\\common.logging.3.4.1.nupkg.sha512",
     "C:\\Users\\victo\\.nuget\\packages\\common.logging.core\\3.4.1\\common.logging.core.3.4.1.nupkg.sha512",
