@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tarea-ICajaRepository",
+      "appliesTo": "HistClinica/HistClinica/Repositories/EFC/Interfaces/ICajaRepository.cs",
+      "type": "launch"
+    }
+  ]
+}
