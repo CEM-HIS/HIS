@@ -117,9 +117,11 @@ namespace HistClinica.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("codTab")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("descripcion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("estado")
@@ -156,27 +158,34 @@ namespace HistClinica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("fechaFin")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("fechaIni")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("hrFin")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("hrInicio")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("idConsultorio")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("idEspecialidad")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("idEstado")
                         .HasColumnType("int");
 
                     b.Property<int?>("idMedico")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("mes")
@@ -504,7 +513,7 @@ namespace HistClinica.Migrations
                     b.Property<int?>("edadAcom")
                         .HasColumnType("int");
 
-                    b.Property<int>("estado")
+                    b.Property<int?>("estado")
                         .HasColumnType("int");
 
                     b.Property<int?>("estadoSeguro")
@@ -585,7 +594,7 @@ namespace HistClinica.Migrations
                     b.Property<int?>("tpDocumento")
                         .HasColumnType("int");
 
-                    b.Property<int>("tpPaciente")
+                    b.Property<int?>("tpPaciente")
                         .HasColumnType("int");
 
                     b.Property<int?>("tpPlanSalud")
