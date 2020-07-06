@@ -4,55 +4,60 @@
 	ViewData["Title"] = "Index";
 }
 
-<div class="container">
+<div class="container-fluid">
 	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-sm-12 text-center">
-				<div class="card card-primary">
-					<div class="card-header">
+			<div class="col-sm-12 text-left">
+				<div class="">
+					<div class="">
 						<h2>Gestion de personal</h2>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12" style="padding-top:50px;">
+	<div class="col-sm-12 pd-xs-0" style="padding-top:50px;">
 		@using (Html.BeginForm())
 		{
 			<div class="row">
-				<div class="col-sm-9">
+				<div class="col-sm-12">
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="pd-xs-0 col-sm-3">
 							<div class="col-sm-12">
 								<label>
 									Dni:
 								</label>
 							</div>
 							<div class="col-sm-12 form-inline">
-								<input type="text" id="dniper" name="dniper" class="form-control" style="width:200px;" />
+								<input type="text" id="dniper" name="dniper" class="form-control" style="width:100%;" />
 							</div>
 						</div>
-						<div class="col-sm-4">
+						<div class="pd-xs-0 col-sm-3">
 							<div class="col-sm-12">
 								<label>
 									Nombre:
 								</label>
 							</div>
 							<div class="col-sm-12 form-inline">
-								<input type="text" id="nombre" name="nombre" class="form-control" style="width:200px;" />
+								<input type="text" id="nombre" name="nombre" class="form-control" style="width:100%;" />
 							</div>
 						</div>
-						<div class="col-sm-4">
+						<div class="pd-xs-0 col-sm-3">
 							<div class="col-sm-12">
 								<label>
 									Apellidos:
 								</label>
 							</div>
-							<div class="col-sm-12 form-inline">
-								<input onkeydown="buscar(event)" type="text" id="apellido" name="apellido" class="form-control" style="width:200px;" />
-								<button type="submit" onclick="getByNombre();" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+							<div class="col-sm-12 form-inline" >
+								<input onkeydown="buscar(event)" type="text" id="apellido" name="apellido" class="form-control" style="width:100%;" />
+								
 							</div>
 						</div>
+                        <div class="pd-xs-0 col-sm-3" style="height: 100px; display: flex; flex-direction: column; justify-content: center;">
+                            <div class="col-sm-12" style="height: 100px; display: flex; flex-direction: column; justify-content: center;">
+                                <button type="submit" onclick="getByNombre();" class="btn btn-primary btn-buscar" style="width: 45px;"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-text">Buscar</span></button>
+                            </div>
+                        </div>
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -61,10 +66,9 @@
 			</div>
 		}
 	</div>
-	<div class="col-sm-12" style="padding-top: 30px;">
+	<div class="col-sm-12 agregar" >
 		<div class="row">
-			<div class="col-sm-6">
-			</div>
+            <div class="col-sm-6"></div>
 			<div class="col-sm-6 text-right" style="padding-bottom: 10px">
 				<a asp-controller="Persona" asp-action="Create" class="btn btn-primary" style="width: 152px;font-size: 16px;">Agregar Personal</a>
 			</div>
