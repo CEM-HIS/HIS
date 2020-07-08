@@ -6,59 +6,64 @@
 <div class="container">
 	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-sm-12 pt-2 pb-3">
-				<h2>Horario de Medicos</h2>
-			</div>
-		</div>
+            <div class="col-sm-12 pt-2 pb-3" style="height:80px">
+                <div class="card card-primary card-his">
+                    <div class="card-header card-shadow">
+                        <h2>Horario de Medicos</h2>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
 
 
-		<partial name="Create" model="new HistClinica.Models.CRONOGRAMA_MEDICO()">
+                <partial name="Create" model="new HistClinica.Models.D012_CRONOMEDICO()">
 
-			@if (ViewBag.message != null)
-			{
-				<div class="col-sm-12 alert alert-info alert-dismissible text-center" id="success-alert" role="alert" style="margin-top: 15px;">
-					<button type="button" class="close" data-dismiss="alert" aria-label="close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					@ViewBag.message
-				</div>
-			}
+                    @if (ViewBag.message != null)
+                    {
+                        <div class="col-sm-12 alert alert-info alert-dismissible text-center" id="success-alert" role="alert" style="margin-top: 15px;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @ViewBag.message
+                        </div>
+                    }
 
-			<div class="row pt-3">
-				<div class="col-sm-12">
-					<table class="table table-bordered table-hover text-center" id="cronogramagrid">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Fecha Ini</th>
-								<th>Fecha Fin</th>
-								<th>Hora ini</th>
-								<th>Hora fin</th>
-								<th>Estado</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var item in Model)
-							{
-								<tr>
-									<td>@item.idProgramMedica</td>
-									<td>@item.fechaIni</td>
-									<td>@item.fechaFin</td>
-									<td>@item.hrInicio</td>
-									<td>@item.hrFin</td>
-									<td>@item.desEstado</td>
-									<td>
-										<button type="submit" class="edit btn btn-primary"><i class="fas fa-edit"></i></button>
-										<button type="submit" class="delete btn btn-danger"><i class="fas fa-minus"></i></button>
-									</td>
-								</tr>
-							}
-						</tbody>
-					</table>
-				</div>
-			</div>
-	</div>
+                    <div class="row pt-3">
+                        <div class="col-sm-12">
+                            <table class="table table-responsive table-bordered table-hover text-center" id="cronogramagrid">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Fecha Ini</th>
+                                        <th>Fecha Fin</th>
+                                        <th>Hora ini</th>
+                                        <th>Hora fin</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.idProgramMedica</td>
+                                            <td>@item.fechaIni</td>
+                                            <td>@item.fechaFin</td>
+                                            <td>@item.hrInicio</td>
+                                            <td>@item.hrFin</td>
+                                            <td>@item.desEstado</td>
+                                            <td>
+                                                <button type="submit" class="edit btn btn-primary"><i class="fas fa-edit"></i></button>
+                                                <button type="submit" class="delete btn btn-danger"><i class="fas fa-minus"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
 </div>
 
 <div class="modal fade" id="modaldeletecrono" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
