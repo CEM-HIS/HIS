@@ -19,7 +19,7 @@ body [class*=sidebar-dark-] {
 	background: white;
 }
 body [class*=sidebar-dark-] .sidebar a {
-	color: #888;
+	color: white;
 }
 body [class*=sidebar-dark] .user-panel {
 	border-bottom: 1px solid rgba(136, 136, 136, 0.22);
@@ -57,6 +57,59 @@ body aside .nav-link {
 .hidden-text {
 	display:none;
 }
+body input[type="text"], textarea {
+	background-color: white;
+}
+.input-style {
+	margin-top: 30px;
+}
+.form-label {
+	position: absolute;
+	bottom: 26px;
+	left: 24px;
+	font-weight: 600;
+	font-size: 13.5px;
+	background: white;
+}
+body .form-control {
+	padding: 1.3rem 1rem;
+}
+body .form-control:focus {
+	color: #495057;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0, 174, 229, 0.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0, 174, 229, 0.53);
+	background-color: #fff;
+	border: 1px solid #00aee5;
+	outline: 0;
+	box-shadow: inset 0 0 0 transparent,none;
+}
+
+.card-his {
+	position: relative;
+	bottom: 60px;
+	background: #00aee5;
+}
+
+.card-shadow {
+	background: linear-gradient(60deg,#00b1d6,#00aee5);
+	box-shadow: 0 12px 20px -10px rgba(6, 103, 134, 0.32), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(0, 72, 95, 0.31);
+}
+.card-shadow h2 {
+	font-size: 1.5rem;
+	padding: 0.4rem 0;
+}
+
+
+
+.table-title {
+	color: #0f5493;
+}
+.table-title th {
+	font-weight:400;
+}
+
+
+
 @media (max-width:710px) {
 	.hidden-sm-down {
 		display: none;
@@ -75,7 +128,21 @@ body aside .nav-link {
 	}
 }
 
+body [class*=sidebar-dark-] {
+	background: url(../images/aside.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 @media (max-width:500px) {
+	.form-label {
+		position: relative;
+		bottom: 0px;
+		left: 0px;
+		font-weight: 600;
+		font-size: 14.5px;
+		background: white;
+	}
 	body .form-control {
 		width: 100% !important;
 		margin-bottom: 1rem;
