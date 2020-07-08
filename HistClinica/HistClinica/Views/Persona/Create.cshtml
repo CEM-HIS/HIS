@@ -8,16 +8,16 @@
 <div class="container">
 	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-sm-12 pb-2">
-				<div class="">
-					<div class="">
+			<div class="col-sm-12 pb-2  card-height">
+				<div class="card card-primary  card-his">
+					<div class="card-header card-shadow">
 						<h2>Registro de personal</h2>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-12 pt-5">
 		@using (Html.BeginForm())
 		{
 			@Html.AntiForgeryToken()
@@ -26,37 +26,42 @@
 				<div class="col-md-6">
 					<div class="box box-primary">
 						<div class="box-body">
-                            <div class="form-group">
-                                <label>TIPO DE EMPLEADO</label>
-                                @Html.DropDownListFor(m => m.personal.idTipoEmpleado, new SelectList(ViewBag.lsttipoempleado, "idtab", "descripcion"), new { @class = "form-control", @id = "cboemple" })
+                            <div class="col-sm-12">
+                                <div class="input-style">
+                                    <label class="form-label">TIPO DE EMPLEADO</label>
+                                    @Html.DropDownListFor(m => m.personal.idTipoEmpleado, new SelectList(ViewBag.lsttipoempleado, "idtab", "descripcion"), new { @class = "form-control", @id = "cboemple" })
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="txtNombres">NOMBRES</label>
-                                @Html.TextBoxFor(m => (m.nombres), new { @class = "form-control", tabindex = 2 })
-                                @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+                           
+                            <div class="col-sm-12">
+                                <div class="input-style">
+                                    <label for="txtNombres" class="form-label">NOMBRES</label>
+                                    @Html.TextBoxFor(m => (m.nombres), new { @class = "form-control", tabindex = 2 })
+                                    @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="txtNroDocumento">DOCUMENTO DE IDENTIDAD</label>
-                                @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", tabindex = 5, @onkeypress = "return isNumberKey(event);" })
-                                @Html.ValidationMessageFor(model => model.numeroDocumento, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label for="txtNroDocumento">DOCUMENTO DE IDENTIDAD</label>
+                                    @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", tabindex = 5, @onkeypress = "return isNumberKey(event);" })
+                                    @Html.ValidationMessageFor(model => model.numeroDocumento, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtcargo">CARGO</label>
+                                    @Html.TextBoxFor(m => m.personal.cargo, new { @class = "form-control", tabindex = 7 })
+                                    @Html.ValidationMessageFor(model => model.personal.cargo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtTelefono">TELÉFONO</label>
+                                    @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", tabindex = 9, @onkeypress = "return isNumberKey(event);" })
+                                    @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                                </div>
+                                <div id="esp1" class="form-group" style="display:none;">
+                                    <label for="txtespecialidad">ESPECIALIDAD</label>
+                                </div>
+                                <div id="esp2" class="form-group" style="display:none;">
+                                    @Html.DropDownListFor(m => m.personal.idEspecialidad, new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), new { @class = "form-control" })
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="txtcargo">CARGO</label>
-                                @Html.TextBoxFor(m => m.personal.cargo, new { @class = "form-control", tabindex = 7 })
-                                @Html.ValidationMessageFor(model => model.personal.cargo, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label for="txtTelefono">TELÉFONO</label>
-                                @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", tabindex = 9, @onkeypress = "return isNumberKey(event);" })
-                                @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
-                            </div>
-							<div id="esp1" class="form-group" style="display:none;">
-								<label for="txtespecialidad">ESPECIALIDAD</label>
-							</div>
-							<div id="esp2" class="form-group" style="display:none;">
-								@Html.DropDownListFor(m => m.personal.idEspecialidad, new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), new { @class = "form-control" })
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="col-md-6">

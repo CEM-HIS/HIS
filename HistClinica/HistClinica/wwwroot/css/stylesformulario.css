@@ -105,7 +105,10 @@ body .form-control:focus {
 	bottom: 60px;
 	background: #00aee5;
 }
-
+.card-height {
+	height: 0;
+	
+}
 .card-shadow {
 	background: linear-gradient(60deg,#00b1d6,#00aee5);
 	box-shadow: 0 12px 20px -10px rgba(6, 103, 134, 0.32), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(0, 72, 95, 0.31);
@@ -129,6 +132,12 @@ body .table-bordered {
 
 
 @media (max-width:710px) {
+	.card-height {
+		height: auto;
+	}
+	.card-his {
+		bottom: 0;
+			}
 	.hidden-sm-down {
 		display: none;
 	}
