@@ -11,7 +11,7 @@ namespace HistClinica.Controllers
     {
         public IActionResult Index()
         {
-            string name = HttpContext.Session.GetString("nombreusuario");
+            string name = "xdd";
             ViewBag.nombre = name;
             return View();
         }

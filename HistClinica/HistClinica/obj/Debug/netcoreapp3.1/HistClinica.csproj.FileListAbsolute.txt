@@ -2416,3 +2416,5 @@ C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\bin\Debug\netcoreapp3.
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.Views.pdb
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.csproj.CopyComplete
+C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\Index.cshtml.g.cs
+C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\Registro.cshtml.g.cs

@@ -25,7 +25,7 @@ namespace HistClinica.Controllers
             var user = _context.USUARIO.Where(u => u.loginUser.Equals(usu.loginUser) && u.claveUser.Equals(usu.claveUser)).FirstOrDefault();
             if (user != null)
             {
-                HttpContext.Session.SetString("nombreusuario", "Bertol Franco");
+               // HttpContext.Session.SetString("nombreusuario", "Bertol Franco");
                 return RedirectToAction("Index", "Panel");
             }
             ViewBag.error = "Usuario invalido";
