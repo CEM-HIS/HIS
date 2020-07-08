@@ -80,14 +80,15 @@ body input[type="text"], textarea {
 }
 .form-label {
 	position: absolute;
-	bottom: 26px;
+	bottom: 32px;
 	left: 24px;
 	font-weight: 600;
 	font-size: 13.5px;
 	background: white;
 }
 body .form-control {
-	padding: 1.3rem 1rem;
+	padding: 0.3rem 1rem;
+	height: calc(3.15rem + 2px);
 }
 body .form-control:focus {
 	color: #495057;
@@ -114,7 +115,9 @@ body .form-control:focus {
 	padding: 0.4rem 0;
 }
 
-
+body .table-bordered {
+	border: 1px solid #ffffff;
+}
 
 .table-title {
 	color: #0f5493;
