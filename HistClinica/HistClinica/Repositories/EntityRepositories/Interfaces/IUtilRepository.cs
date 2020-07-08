@@ -18,6 +18,6 @@ namespace HistClinica.Repositories.Interfaces
 		Task<object> GetCronograma();
 		Task<List<ESTADO_CITA>> getEstadoCita();
 		Task<List<CAJA>> getCajas();
-		Task<List<TABLADETALLE>> getServicios();
+		Task<List<TABLA_DETALLE>> getServicios();
 	}
 }

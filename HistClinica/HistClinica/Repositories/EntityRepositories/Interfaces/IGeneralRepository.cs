@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Interfaces
+namespace HistClinica.Repositories.Interfaces
 {
 	public interface IGeneralRepository
 	{
-		Task<List<TABLAGENERAL>> GetAllGeneral();
-		Task<TABLAGENERAL> GetById(int? id);
+		Task<List<TABLA_GENERAL>> GetAllGeneral();
+		Task<TABLA_GENERAL> GetById(int? id);
 
-		Task<List<TABLAGENERAL>> GetByCodigo(string codigo,string descripcion);
-		Task<string> InsertGeneral(TABLAGENERAL general);
-		Task<string> UpdateGeneral(TABLAGENERAL general);
-		Task<string> DeleteGeneral(TABLAGENERAL general);
+		Task<List<TABLA_GENERAL>> GetByCodigo(string codigo,string descripcion);
+		Task<string> InsertGeneral(TABLA_GENERAL general);
+		Task<string> UpdateGeneral(TABLA_GENERAL general);
+		Task<string> DeleteGeneral(TABLA_GENERAL general);
 		Task<bool> GeneralExists(int? id);
 		Task Save();
 	}

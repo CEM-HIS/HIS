@@ -10,7 +10,7 @@ namespace HistClinica.Repositories.Interfaces
     public interface IUsuarioRepository
     {
         Task<string> InsertUsuario(PersonaDTO persona);
-        //Task<string> UpdateUsuario(D001_USUARIO usuario);
+        //Task<string> UpdateUsuario(USUARIO usuario);
         Task<bool> UsuarioExists(int? id);
         Task DeleteUsuario(int? UsuarioID);
         Task Save();

@@ -1,6 +1,5 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
-using HistClinica.Interfaces;
 using HistClinica.Models;
 using HistClinica.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -46,15 +45,15 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<bool> DetalleExists(int? id)
         {
-            return await _context.D00_TBDETALLE.AnyAsync(e => e.idDet == id);
+            return await _context.TABLA_DETALLE.AnyAsync(e => e.idDet == id);
         }
 
-        public async Task<TABLADETALLE> GetById(int? Id)
+        public async Task<TABLA_DETALLE> GetById(int? Id)
         {
-            TABLADETALLE listaDetalle = new TABLADETALLE();
-            listaDetalle = await (from detalle in _context.D00_TBDETALLE
+            TABLA_DETALLE listaDetalle = new TABLA_DETALLE();
+            listaDetalle = await (from detalle in _context.TABLA_DETALLE
                                  where detalle.idDet == Id
-                                 select new TABLADETALLE
+                                 select new TABLA_DETALLE
                                  {
                                      idDet = detalle.idDet,
                                      coddetTab = detalle.coddetTab,
@@ -64,11 +63,11 @@ namespace HistClinica.Repositories.Repositories
             return listaDetalle;
         }
 
-        public async Task<string> InsertDetalle(TABLADETALLE Detalle)
+        public async Task<string> InsertDetalle(TABLA_DETALLE Detalle)
         {
             try
             {
-                await _context.D00_TBDETALLE.AddAsync(new TABLADETALLE()
+                await _context.TABLA_DETALLE.AddAsync(new TABLA_DETALLE()
                 {
                     coddetTab = Detalle.coddetTab,
                     descripcion = Detalle.descripcion,
@@ -87,8 +86,8 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                TABLADETALLE Detalle = await _context.D00_TBDETALLE.FindAsync(DetalleID);
-                _context.D00_TBDETALLE.Remove(Detalle);
+                TABLA_DETALLE Detalle = await _context.TABLA_DETALLE.FindAsync(DetalleID);
+                _context.TABLA_DETALLE.Remove(Detalle);
                 await Save();
                 return "Registro eliminado correctamente";
             }
@@ -98,7 +97,7 @@ namespace HistClinica.Repositories.Repositories
             }
         }
 
-        public async Task<string> UpdateDetalle(TABLADETALLE Detalle)
+        public async Task<string> UpdateDetalle(TABLA_DETALLE Detalle)
         {
             try
             {
@@ -117,7 +116,7 @@ namespace HistClinica.Repositories.Repositories
         public async Task<DetalleDTO> GetDetalle(int? id)
         {
             DetalleDTO dto = new DetalleDTO();
-            TABLAGENERAL general = await generalRepository.GetById(id);
+            TABLA_GENERAL general = await generalRepository.GetById(id);
             dto.idTab = general.idTab;
             dto.codTab = general.codTab;
             dto.ldetalle = await GetDetalleByIdGeneral(id);
@@ -126,14 +125,14 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<int> GetIdDetalleByDescripcion(string descripcion)
         {
-            return await (from det in _context.D00_TBDETALLE
+            return await (from det in _context.TABLA_DETALLE
                           where det.descripcion == descripcion
                           select det.idDet).FirstOrDefaultAsync();
         }
 
-        public async Task<List<TABLADETALLE>> GetDetalleByIdGeneral(int? id)
+        public async Task<List<TABLA_DETALLE>> GetDetalleByIdGeneral(int? id)
         {
-            List<TABLADETALLE> general = await (from p in _context.D00_TBDETALLE join g in _context.D00_TBGENERAL
+            List<TABLA_DETALLE> general = await (from p in _context.TABLA_DETALLE join g in _context.TABLA_GENERAL
                                            on p.idTab equals g.idTab where g.idTab == id select p).ToListAsync();
             return general;
         }

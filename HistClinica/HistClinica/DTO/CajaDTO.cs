@@ -7,8 +7,11 @@ namespace HistClinica.DTO
 {
     public class CajaDTO
     {
-        public string descripcion { get; set; }
-        public int tipo { get; set; }
+        public int idEmpleado { get; set; }
+        public int idCaja { get; set; }
+        public string fecha { get; set; }
+        public string tipo { get; set; }
+        public string turno { get; set; }
         public int estado { get; set; }
     }
 }

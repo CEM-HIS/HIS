@@ -12,8 +12,9 @@ namespace HistClinica.Repositories.Interfaces
         Task<List<CAJA>> GetAllCajas();
         Task<CAJA> GetById(int? Id);
         //Operaciones Transaccionales
-        Task<string> InsertCaja(CajaDTO Caja);
-        Task<string> AsignaCaja(CAJA_ASIGNADA cajaAsignada);
+        Task<string> InsertCaja(CAJA Caja);
+        Task<string> AperturaCaja(CAJA_ASIGNADA cajaAsignada);
+        Task<string> CierreCaja(CAJA_ASIGNADA cajaAsignada);
         Task DeleteCaja(int CajaID);
         Task<bool> CajaExists(int? id);
         Task Save();

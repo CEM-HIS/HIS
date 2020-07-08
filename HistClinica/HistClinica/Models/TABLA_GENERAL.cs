@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HistClinica.Models
 {
-	public class TABLAGENERAL
+	public class TABLA_GENERAL
 	{
 		[Key]
 		public int idTab { get; set; }

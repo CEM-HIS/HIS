@@ -1,6 +1,4 @@
 using HistClinica.Data;
-using HistClinica.Interfaces;
-using HistClinica.Repositories;
 using HistClinica.Repositories.Interfaces;
 using HistClinica.Repositories.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -61,7 +59,7 @@ namespace HistClinica
             }
             app.UseStaticFiles();
 
-            app.UseSession();
+            //app.UseSession();
             app.UseRouting();
 
           //  app.UseSession();

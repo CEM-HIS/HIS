@@ -12,5 +12,6 @@ namespace HistClinica.Models
 		public string fechaCrea { get; set; }
 		public string usuMod { get; set; }
 		public string fechaMod { get; set; }
+		public string fechaBaja { get; set; }
 	}
 }

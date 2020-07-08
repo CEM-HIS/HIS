@@ -91,6 +91,10 @@ namespace HistClinica.Controllers
             if (personaDTO != null)
             {
                 TempData["mensajepersona"] = await _personaRepository.InsertPersona(personaDTO);
+                if(personaDTO.personal != null)
+                {
+                    await _usuarioRepository.InsertUsuario(personaDTO);
+                }
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction("Create");
@@ -167,17 +171,17 @@ namespace HistClinica.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Asignar(int? id)
-        {
-            var tipoEmpleados = await _utilrepository.GetTipo("Tipo Empleado");
-            ViewBag.lsttipoempleado = tipoEmpleados;
+        //public async Task<IActionResult> Asignar(int? id)
+        //{
+        //    var tipoEmpleados = await _utilrepository.GetTipo("Tipo Empleado");
+        //    ViewBag.lsttipoempleado = tipoEmpleados;
 
-            List<CAJA> cajas = await _utilrepository.getCajas();
-            ViewBag.lscaja = cajas;
+        //    List<CAJA> cajas = await _utilrepository.getCajas();
+        //    ViewBag.lscaja = cajas;
 
-            PersonaDTO persona = await _empleadorepository.GetById(id);
-            return PartialView(persona);
-        }
+        //    PersonaDTO persona = await _empleadorepository.GetById(id);
+        //    return PartialView(persona);
+        //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]

@@ -1,5 +1,4 @@
 ﻿using HistClinica.Data;
-using HistClinica.Interfaces;
 using HistClinica.Models;
 using HistClinica.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories
+namespace HistClinica.Repositories.Repositories
 {
 	public class GeneralRepository : IGeneralRepository
 	{
@@ -18,12 +17,12 @@ namespace HistClinica.Repositories
 		{
 			_context = context;
 		}
-		public async Task<string> DeleteGeneral(TABLAGENERAL modelo)
+		public async Task<string> DeleteGeneral(TABLA_GENERAL modelo)
 		{
 			try
 			{
-				TABLAGENERAL general = await _context.D00_TBGENERAL.FindAsync(modelo.idTab);
-				_context.D00_TBGENERAL.Remove(general);
+				TABLA_GENERAL general = await _context.TABLA_GENERAL.FindAsync(modelo.idTab);
+				_context.TABLA_GENERAL.Remove(general);
 				await Save();
 				return "Registro eliminado correctamente";
 			}
@@ -35,23 +34,23 @@ namespace HistClinica.Repositories
 
 		public async Task<bool> GeneralExists(int? id)
 		{
-			return await _context.D00_TBGENERAL.AnyAsync(e => e.idTab == id);
+			return await _context.TABLA_GENERAL.AnyAsync(e => e.idTab == id);
 		}
 
-		public async Task<List<TABLAGENERAL>> GetAllGeneral()
+		public async Task<List<TABLA_GENERAL>> GetAllGeneral()
 		{
 
-			List<TABLAGENERAL> general = await (from g in _context.D00_TBGENERAL
+			List<TABLA_GENERAL> general = await (from g in _context.TABLA_GENERAL
 										   select g).ToListAsync();
 			return general;
 		}
 
-		public async Task<List<TABLAGENERAL>> GetByCodigo(string codigo,string descripcion)
+		public async Task<List<TABLA_GENERAL>> GetByCodigo(string codigo,string descripcion)
 		{
-			List<TABLAGENERAL> general = new List<TABLAGENERAL>();
+			List<TABLA_GENERAL> general = new List<TABLA_GENERAL>();
 			try
 			{
-				 general = await (from p in _context.D00_TBGENERAL
+				 general = await (from p in _context.TABLA_GENERAL
 													 where p.codTab == codigo || p.descripcion.Contains(descripcion)
 													 select p).ToListAsync();
 			}
@@ -63,20 +62,20 @@ namespace HistClinica.Repositories
 			return general;
 		}
 
-		public async Task<TABLAGENERAL> GetById(int? id)
+		public async Task<TABLA_GENERAL> GetById(int? id)
 		{
 
-			TABLAGENERAL general = await (from p in _context.D00_TBGENERAL
+			TABLA_GENERAL general = await (from p in _context.TABLA_GENERAL
 										   where p.idTab == id
 										   select p).FirstOrDefaultAsync();
 			return general;
 		}
 
-		public async Task<string> InsertGeneral(TABLAGENERAL general)
+		public async Task<string> InsertGeneral(TABLA_GENERAL general)
 		{
 			try
 			{
-				await _context.D00_TBGENERAL.AddAsync(new TABLAGENERAL()
+				await _context.TABLA_GENERAL.AddAsync(new TABLA_GENERAL()
 				{
 					codTab = general.codTab,
 					descripcion = general.descripcion,
@@ -96,7 +95,7 @@ namespace HistClinica.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<string> UpdateGeneral(TABLAGENERAL general)
+		public async Task<string> UpdateGeneral(TABLA_GENERAL general)
 		{
 			try
 			{

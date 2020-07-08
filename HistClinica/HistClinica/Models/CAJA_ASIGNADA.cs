@@ -12,8 +12,10 @@ namespace HistClinica.Models
         [Key]
         public int idEmpleado { get; set; }
         public int idCaja { get; set; }
-        public DateTime fechaApertura { get; set; }
-        public DateTime? fechaCierre { get; set; }
+        public string fechaApertura { get; set; }
+        public string horaApertura { get; set; }
+        public string fechaCierre { get; set; }
+        public string horaCierre { get; set; }
         public string turno { get; set; }
         public bool? pos { get; set; }
         public double? montoSolesApertura { get; set; }
