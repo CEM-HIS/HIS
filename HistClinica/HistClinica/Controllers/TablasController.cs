@@ -37,7 +37,7 @@ namespace HistClinica.Controllers
                 return RedirectToAction("Index");
             } else
             {
-                List<D00_TBGENERAL> modelo = await _generalRepository.GetByCodigo(codigo,descripcion);
+                List<TABLAGENERAL> modelo = await _generalRepository.GetByCodigo(codigo,descripcion);
                 return View(modelo);
             }
         }
@@ -51,7 +51,7 @@ namespace HistClinica.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AgregarTipo(D00_TBGENERAL modelo)
+        public async Task<IActionResult> AgregarTipo(TABLAGENERAL modelo)
         {
             TempData["mensajetipo"] = await _generalRepository.InsertGeneral(modelo);
             return RedirectToAction("Index", "Tablas");
@@ -63,12 +63,12 @@ namespace HistClinica.Controllers
             {
                 return NotFound();
             }
-            D00_TBGENERAL general = await _generalRepository.GetById(id);
+            TABLAGENERAL general = await _generalRepository.GetById(id);
             return PartialView(general);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarTipo(D00_TBGENERAL modelo)
+        public async Task<IActionResult> EditarTipo(TABLAGENERAL modelo)
         {
             // D00_TBGENERAL general = _generalRepository.listarxIdGeneral(id);
             var mensaje = await _generalRepository.UpdateGeneral(modelo);
@@ -103,13 +103,13 @@ namespace HistClinica.Controllers
         public async Task<IActionResult> AgregarDetalle(int id)
         {
             var model = await _generalRepository.GetById(id);
-            D00_TBDETALLE detalle = new D00_TBDETALLE();
+            TABLADETALLE detalle = new TABLADETALLE();
             detalle.idTab = model.idTab;
             return PartialView(detalle);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AgregarDetalle(D00_TBDETALLE modelo)
+        public async Task<IActionResult> AgregarDetalle(TABLADETALLE modelo)
         {
             TempData["mensajedetalle"] = await _detalleRepository.InsertDetalle(modelo);
             return RedirectToAction("VistaDetalle", new { id = modelo.idTab });
@@ -121,12 +121,12 @@ namespace HistClinica.Controllers
             {
                 return NotFound();
             }
-            D00_TBDETALLE detalle = await _detalleRepository.GetById(id);
+            TABLADETALLE detalle = await _detalleRepository.GetById(id);
             return PartialView(detalle);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarDetalle(D00_TBDETALLE modelo)
+        public async Task<IActionResult> EditarDetalle(TABLADETALLE modelo)
         {
             var mensaje = await _detalleRepository.UpdateDetalle(modelo);
             TempData["mensajedetalle"] = mensaje;
@@ -136,13 +136,13 @@ namespace HistClinica.Controllers
         // GET: Detalle/Delete/5
         public async Task<IActionResult> DeleteTipo(int id)
         {
-            D00_TBGENERAL general = await _generalRepository.GetById(id);
+            TABLAGENERAL general = await _generalRepository.GetById(id);
             return PartialView(general);
         }
 
         // POST: Detalle/Delete/5
         [HttpPost]
-        public async Task<IActionResult> DeleteTipo(D00_TBGENERAL modelo)
+        public async Task<IActionResult> DeleteTipo(TABLAGENERAL modelo)
         {
             try
             {
@@ -158,13 +158,13 @@ namespace HistClinica.Controllers
 
         public async Task<IActionResult> DeleteDetalle(int id)
         {
-            D00_TBDETALLE detalle = await _detalleRepository.GetById(id);
+            TABLADETALLE detalle = await _detalleRepository.GetById(id);
             return PartialView(detalle);
         }
 
         // POST: Detalle/Delete/5
         [HttpPost]
-        public async Task<IActionResult> DeleteDetalle(D00_TBDETALLE modelo)
+        public async Task<IActionResult> DeleteDetalle(TABLADETALLE modelo)
         {
             try
             {

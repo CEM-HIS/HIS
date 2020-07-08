@@ -1,4 +1,4 @@
-﻿@model HistClinica.Models.D001_USUARIO
+﻿@model HistClinica.Models.USUARIO
 @{
 	Layout = null;
 }
@@ -13,14 +13,14 @@
 	<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-	<div class="login-med">
-		<div class="bg-white headerLogin">
+	<div>
+		<div>
 			<img class="imglogo" src="~/images/imgclinica.png" />
 		</div>
 		<div class="sub-main-w3">
 			@using (Html.BeginForm())
 			{
-				
+				<img src="/images/logo.png" alt="">
 				<h2>Por favor inicie sesión</h2>
 				<div class="form-style-agile">
 					@Html.TextBoxFor(m => m.loginUser, new { @class = "form-control" })
@@ -30,6 +30,19 @@
 				</div>
 				<div class="wthree-text">
 					<ul>
+						<li>
+							<!--<div class="checkout-w3l">
+								<div class="demo5">
+									<div class="switch demo3">
+										<input type="checkbox">
+										<label>
+											<i></i>
+										</label>
+									</div>
+								</div>
+								<a href="#">Stay Signed In</a>
+							</div>-->
+						</li>
 						<li>
 							<a href="#">Olvidaste tu contraseña?</a>
 						</li>

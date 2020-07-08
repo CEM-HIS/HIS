@@ -65,7 +65,7 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task DeletePersona(int? PersonaID)
         {
-            T000_PERSONA Persona = await _context.T000_PERSONA.FindAsync(PersonaID);
+            PERSONA Persona = await _context.T000_PERSONA.FindAsync(PersonaID);
             Persona.estado = "2";
             Persona.fechabaja = DateTime.Now.ToString();
             _context.Update(Persona);
@@ -87,7 +87,7 @@ namespace HistClinica.Repositories.Repositories
             int idEmpleado = 0;
             try
             {
-                await _context.T000_PERSONA.AddAsync(new T000_PERSONA()
+                await _context.T000_PERSONA.AddAsync(new PERSONA()
                 {
                     apePaterno = persona.apellidoPaterno,
                     apeMaterno = persona.apellidoMaterno,
@@ -161,7 +161,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                _context.Update(new T000_PERSONA()
+                _context.Update(new PERSONA()
                 {
                     idPersona = (int)persona.idPersona,
                     apePaterno = persona.apellidoPaterno,

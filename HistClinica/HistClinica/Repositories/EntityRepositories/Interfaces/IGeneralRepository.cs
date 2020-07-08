@@ -8,13 +8,13 @@ namespace HistClinica.Interfaces
 {
 	public interface IGeneralRepository
 	{
-		Task<List<D00_TBGENERAL>> GetAllGeneral();
-		Task<D00_TBGENERAL> GetById(int? id);
+		Task<List<TABLAGENERAL>> GetAllGeneral();
+		Task<TABLAGENERAL> GetById(int? id);
 
-		Task<List<D00_TBGENERAL>> GetByCodigo(string codigo,string descripcion);
-		Task<string> InsertGeneral(D00_TBGENERAL general);
-		Task<string> UpdateGeneral(D00_TBGENERAL general);
-		Task<string> DeleteGeneral(D00_TBGENERAL general);
+		Task<List<TABLAGENERAL>> GetByCodigo(string codigo,string descripcion);
+		Task<string> InsertGeneral(TABLAGENERAL general);
+		Task<string> UpdateGeneral(TABLAGENERAL general);
+		Task<string> DeleteGeneral(TABLAGENERAL general);
 		Task<bool> GeneralExists(int? id);
 		Task Save();
 	}

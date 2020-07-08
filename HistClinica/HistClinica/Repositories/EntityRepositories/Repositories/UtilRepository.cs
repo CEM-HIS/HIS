@@ -18,9 +18,9 @@ namespace HistClinica.Repositories.Repositories
 			_context = contexto;
 		}
 
-		public async Task<List<D024_CAJA>> getCajas()
+		public async Task<List<CAJA>> getCajas()
 		{
-			List<D024_CAJA> caja = await (from c in _context.D024_CAJA
+			List<CAJA> caja = await (from c in _context.D024_CAJA
 										  select c).ToListAsync();
 
 			return caja;
@@ -38,7 +38,7 @@ namespace HistClinica.Repositories.Repositories
 			public string hora { get; set; }
 		}
 
-		public List<Fecha> ObtenerFechaHora(List<D012_CRONOMEDICO> cronograma)
+		public List<Fecha> ObtenerFechaHora(List<CRONOGRAMA_MEDICO> cronograma)
         {
 			int intervalofecha, intervalohora;
 			List<Fecha> fechas = new List<Fecha>();
@@ -62,7 +62,7 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<object> GetCronograma()
 		{
-			List<D012_CRONOMEDICO> cronograma = await(from cro in _context.D012_CRONOMEDICO
+			List<CRONOGRAMA_MEDICO> cronograma = await(from cro in _context.D012_CRONOMEDICO
 								   join med in _context.T212_MEDICO on cro.idMedico equals med.idMedico
 								   select cro
 									).ToListAsync();
@@ -72,7 +72,7 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<object> GetCronogramaByMedico(int id)
 		{
-			List<D012_CRONOMEDICO> cronograma = await (from cro in _context.D012_CRONOMEDICO
+			List<CRONOGRAMA_MEDICO> cronograma = await (from cro in _context.D012_CRONOMEDICO
 									join med in _context.T212_MEDICO on cro.idMedico equals med.idMedico
 									where med.idMedico == id
 									select cro).ToListAsync();
@@ -93,10 +93,10 @@ namespace HistClinica.Repositories.Repositories
 			return combo;
 		}
 
-		public async Task<List<T109_ESTADOCITA>> getEstadoCita()
+		public async Task<List<ESTADO_CITA>> getEstadoCita()
 		{
 
-			List<T109_ESTADOCITA> estado = await (from e in _context.T109_ESTADOCITA
+			List<ESTADO_CITA> estado = await (from e in _context.T109_ESTADOCITA
 											select e).ToListAsync();
 			return estado;
 		}
@@ -171,9 +171,9 @@ namespace HistClinica.Repositories.Repositories
 			return combo;
 		}
 
-		public async Task<List<D00_TBDETALLE>> getServicios()
+		public async Task<List<TABLADETALLE>> getServicios()
 		{
-			List<D00_TBDETALLE> servicios = await (from s in _context.D00_TBDETALLE
+			List<TABLADETALLE> servicios = await (from s in _context.D00_TBDETALLE
 													   where s.idTab == 16
 													   select s
 													   ).ToListAsync();

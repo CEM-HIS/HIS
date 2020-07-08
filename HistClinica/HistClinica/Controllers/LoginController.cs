@@ -20,7 +20,7 @@ namespace HistClinica.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(D001_USUARIO usu)
+        public IActionResult Index(USUARIO usu)
         {
             var user = _context.D001_USUARIO.Where(u => u.loginUser.Equals(usu.loginUser) && u.claveUser.Equals(usu.claveUser)).FirstOrDefault();
             if (user != null)

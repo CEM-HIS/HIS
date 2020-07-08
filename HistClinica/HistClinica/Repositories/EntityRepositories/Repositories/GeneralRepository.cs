@@ -18,11 +18,11 @@ namespace HistClinica.Repositories
 		{
 			_context = context;
 		}
-		public async Task<string> DeleteGeneral(D00_TBGENERAL modelo)
+		public async Task<string> DeleteGeneral(TABLAGENERAL modelo)
 		{
 			try
 			{
-				D00_TBGENERAL general = await _context.D00_TBGENERAL.FindAsync(modelo.idTab);
+				TABLAGENERAL general = await _context.D00_TBGENERAL.FindAsync(modelo.idTab);
 				_context.D00_TBGENERAL.Remove(general);
 				await Save();
 				return "Registro eliminado correctamente";
@@ -38,17 +38,17 @@ namespace HistClinica.Repositories
 			return await _context.D00_TBGENERAL.AnyAsync(e => e.idTab == id);
 		}
 
-		public async Task<List<D00_TBGENERAL>> GetAllGeneral()
+		public async Task<List<TABLAGENERAL>> GetAllGeneral()
 		{
 
-			List<D00_TBGENERAL> general = await (from g in _context.D00_TBGENERAL
+			List<TABLAGENERAL> general = await (from g in _context.D00_TBGENERAL
 										   select g).ToListAsync();
 			return general;
 		}
 
-		public async Task<List<D00_TBGENERAL>> GetByCodigo(string codigo,string descripcion)
+		public async Task<List<TABLAGENERAL>> GetByCodigo(string codigo,string descripcion)
 		{
-			List<D00_TBGENERAL> general = new List<D00_TBGENERAL>();
+			List<TABLAGENERAL> general = new List<TABLAGENERAL>();
 			try
 			{
 				 general = await (from p in _context.D00_TBGENERAL
@@ -63,20 +63,20 @@ namespace HistClinica.Repositories
 			return general;
 		}
 
-		public async Task<D00_TBGENERAL> GetById(int? id)
+		public async Task<TABLAGENERAL> GetById(int? id)
 		{
 
-			D00_TBGENERAL general = await (from p in _context.D00_TBGENERAL
+			TABLAGENERAL general = await (from p in _context.D00_TBGENERAL
 										   where p.idTab == id
 										   select p).FirstOrDefaultAsync();
 			return general;
 		}
 
-		public async Task<string> InsertGeneral(D00_TBGENERAL general)
+		public async Task<string> InsertGeneral(TABLAGENERAL general)
 		{
 			try
 			{
-				await _context.D00_TBGENERAL.AddAsync(new D00_TBGENERAL()
+				await _context.D00_TBGENERAL.AddAsync(new TABLAGENERAL()
 				{
 					codTab = general.codTab,
 					descripcion = general.descripcion,
@@ -96,7 +96,7 @@ namespace HistClinica.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<string> UpdateGeneral(D00_TBGENERAL general)
+		public async Task<string> UpdateGeneral(TABLAGENERAL general)
 		{
 			try
 			{

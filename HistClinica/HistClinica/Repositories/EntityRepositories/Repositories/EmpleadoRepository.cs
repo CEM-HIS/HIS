@@ -12,9 +12,11 @@ namespace HistClinica.Repositories.Repositories
     public class EmpleadoRepository : IEmpleadoRepository
     {
         private readonly ClinicaServiceContext _context;
-        public EmpleadoRepository(ClinicaServiceContext context)
+        private readonly UsuarioRepository _usuarioRepository;
+        public EmpleadoRepository(ClinicaServiceContext context, UsuarioRepository usuarioRepository)
         {
             _context = context;
+            _usuarioRepository = usuarioRepository;
         }
 
         private bool disposed = false;
@@ -46,7 +48,7 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task DeleteEmpleado(int EmpleadoID)
         {
-            T120_EMPLEADO Empleado = await _context.T120_EMPLEADO.FindAsync(EmpleadoID);
+            EMPLEADO Empleado = await _context.T120_EMPLEADO.FindAsync(EmpleadoID);
             Empleado.estado = 2;
             Empleado.fechabaja = DateTime.Now.ToString();
             _context.Update(Empleado);
@@ -57,7 +59,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T120_EMPLEADO Empleado = new T120_EMPLEADO
+                EMPLEADO Empleado = new EMPLEADO
                 {
                     idPersona = idPersona,
                     codEmpleado = persona.personal.codEmpleado,
@@ -74,6 +76,7 @@ namespace HistClinica.Repositories.Repositories
                 if (persona.personal.fechaIngreso != null) Empleado.fecIngreso = DateTime.Parse(persona.personal.fechaIngreso);
                 await _context.T120_EMPLEADO.AddAsync(Empleado);
                 await Save();
+                await _usuarioRepository.InsertUsuario(persona);
                 return "Ingreso Exitoso Empleado";
             }
             catch (Exception ex)
@@ -85,7 +88,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T120_EMPLEADO Empleado = new T120_EMPLEADO
+                EMPLEADO Empleado = new EMPLEADO
                 {
                     idPersona = persona.idPersona,
                     idEmpleado = (int)persona.personal.idEmpleado,

@@ -12,6 +12,6 @@ namespace HistClinica.DTO
       
         public int idTab { get; set; }
         public string codTab { get; set; }
-        public List<D00_TBDETALLE> ldetalle { get; set; }
+        public List<TABLADETALLE> ldetalle { get; set; }
     }
 }

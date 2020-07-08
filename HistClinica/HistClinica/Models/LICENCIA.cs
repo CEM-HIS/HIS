@@ -18,4 +18,8 @@ namespace HistClinica.Models
 		public DateTime? fechaFin { get; set; }
 		public int estado { get; set; }
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master

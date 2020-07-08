@@ -9,16 +9,16 @@ namespace HistClinica.Repositories.Interfaces
 {
     public interface IDetalleRepository
     {
-        Task<D00_TBDETALLE> GetById(int? Id);
+        Task<TABLADETALLE> GetById(int? Id);
         //Operaciones Transaccionales
-        Task<string> InsertDetalle(D00_TBDETALLE Detalle);
-        Task<string> UpdateDetalle(D00_TBDETALLE Detalle);
+        Task<string> InsertDetalle(TABLADETALLE Detalle);
+        Task<string> UpdateDetalle(TABLADETALLE Detalle);
         Task<string> DeleteDetalle(int DetalleID);
         Task<bool> DetalleExists(int? id);
         Task Save();
 
         Task<DetalleDTO> GetDetalle(int? id);
         Task<int> GetIdDetalleByDescripcion(string descripcion);
-        Task<List<D00_TBDETALLE>> GetDetalleByIdGeneral(int? id);
+        Task<List<TABLADETALLE>> GetDetalleByIdGeneral(int? id);
     }
 }
