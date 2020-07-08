@@ -5,34 +5,30 @@ namespace HistClinica.Data
 {
     public class ClinicaServiceContext:DbContext
     {
-        public ClinicaServiceContext()
-        {
-        }
-
         public ClinicaServiceContext(DbContextOptions<ClinicaServiceContext> options)
        : base(options)
         { }
 
-        public DbSet<T000_PERSONA> T000_PERSONA { get; set; }
-        public DbSet<T120_EMPLEADO> T120_EMPLEADO { get; set; }
-        public DbSet<T001_PACIENTE> T001_PACIENTE { get; set; }
-        public DbSet<D012_CRONOMEDICO> D012_CRONOMEDICO { get; set; }
-        public DbSet<T212_MEDICO> T212_MEDICO { get; set; }
-        public DbSet<T068_CITA> T068_CITA { get; set; }
-        public DbSet<T109_ESTADOCITA> T109_ESTADOCITA { get; set; }
-        public DbSet<D001_USUARIO> D001_USUARIO { get; set; }
-        public DbSet<D002_PERFIL> D002_PERFIL { get; set; }
-        public DbSet<D00_TBGENERAL> D00_TBGENERAL { get; set; }
-        public DbSet<D00_TBDETALLE> D00_TBDETALLE { get; set; }
-        public DbSet<D024_CAJA> D024_CAJA { get; set; }
-        public DbSet<D025_ASIGNACAJA> D025_ASIGNACAJA { get; set; }
+        public DbSet<PERSONA> PERSONA { get; set; }
+        public DbSet<EMPLEADO> EMPLEADO { get; set; }
+        public DbSet<PACIENTE> PACIENTE { get; set; }
+        public DbSet<CRONOGRAMA_MEDICO> CRONOGRAMA_MEDICO { get; set; }
+        public DbSet<MEDICO> MEDICO { get; set; }
+        public DbSet<CITA> CITA { get; set; }
+        public DbSet<ESTADO_CITA> ESTADO_CITA { get; set; }
+        public DbSet<USUARIO> USUARIO { get; set; }
+        public DbSet<PERFIL> PERFIL { get; set; }
+        public DbSet<TABLA_GENERAL> TABLA_GENERAL { get; set; }
+        public DbSet<TABLA_DETALLE> TABLA_DETALLE { get; set; }
+        public DbSet<CAJA> CAJA { get; set; }
+        public DbSet<CAJA_ASIGNADA> CAJA_ASIGNADA { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<D025_ASIGNACAJA>()
-                .HasKey(o => new { o.idCaja, o.idEmpleado });
-            modelBuilder.Entity<D001_USUARIO>()
+            modelBuilder.Entity<CAJA_ASIGNADA>()
+                .HasKey(o => new { o.idCaja,o.fechaApertura,o.turno});
+            modelBuilder.Entity<USUARIO>()
                 .HasKey(c => new { c.idEmpleado, c.loginUser });
         }
-        public DbSet<D015_PAGO> D015_PAGO { get; set; }
+        public DbSet<PAGO> PAGO { get; set; }
     }
 }

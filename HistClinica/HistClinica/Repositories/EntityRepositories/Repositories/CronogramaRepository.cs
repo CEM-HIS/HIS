@@ -41,14 +41,14 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task DeleteCronograma(int? CronoID)
 		{
-			D012_CRONOMEDICO D012_CRONOMEDICO = await _context.D012_CRONOMEDICO.FindAsync(CronoID);
-			_context.D012_CRONOMEDICO.Remove(D012_CRONOMEDICO);
+			CRONOGRAMA_MEDICO CRONOGRAMA_MEDICO = await _context.CRONOGRAMA_MEDICO.FindAsync(CronoID);
+			_context.CRONOGRAMA_MEDICO.Remove(CRONOGRAMA_MEDICO);
 			await Save();
 		}
 
 		public async Task<List<CronogramaDTO>> GetAllCronogramas()
 		{
-			List<CronogramaDTO> D012_CRONOMEDICOs = await (	from c in _context.D012_CRONOMEDICO
+			List<CronogramaDTO> D012_CRONOMEDICOs = await (	from c in _context.CRONOGRAMA_MEDICO
 															select new CronogramaDTO
 															{
 																idProgramMedica = c.idProgramMedica,
@@ -56,7 +56,7 @@ namespace HistClinica.Repositories.Repositories
 																fechaFin = c.fechaFin.Value.ToString("yyyy-MM-dd"),
 																hrInicio = c.hrInicio,
 																hrFin = c.hrFin,
-																desEstado = (from det in _context.D00_TBDETALLE
+																desEstado = (from det in _context.TABLA_DETALLE
 																			 where det.idDet == c.idEstado
 																			 select det.descripcion).FirstOrDefault()
 															}).ToListAsync();
@@ -66,7 +66,7 @@ namespace HistClinica.Repositories.Repositories
 		//guiate con esto y el interface? 
 		public async Task<CronogramaDTO> GetByIdCrono(int CronoID)
 		{
-			CronogramaDTO D012_CRONOMEDICOs = await (from c in _context.D012_CRONOMEDICO
+			CronogramaDTO D012_CRONOMEDICOs = await (from c in _context.CRONOGRAMA_MEDICO
 											  where c.idProgramMedica == CronoID
 											  select new CronogramaDTO() { 
 												  idConsultorio = c.idConsultorio,
@@ -82,11 +82,11 @@ namespace HistClinica.Repositories.Repositories
 			return D012_CRONOMEDICOs;
 		}
 
-		public async Task<string> InsertCronograma(D012_CRONOMEDICO cronograma)
+		public async Task<string> InsertCronograma(CRONOGRAMA_MEDICO cronograma)
 		{
 			try
 			{
-				await _context.D012_CRONOMEDICO.AddAsync(new D012_CRONOMEDICO()
+				await _context.CRONOGRAMA_MEDICO.AddAsync(new CRONOGRAMA_MEDICO()
 				{
 					idEspecialidad = cronograma.idEspecialidad,
 					idMedico = cronograma.idMedico,
@@ -111,7 +111,7 @@ namespace HistClinica.Repositories.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<string> UpdateCronograma(D012_CRONOMEDICO cronograma)
+		public async Task<string> UpdateCronograma(CRONOGRAMA_MEDICO cronograma)
 		{
 			try
 			{
@@ -127,10 +127,10 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<List<CronogramaDTO>> GetCronogramaByMedico(int idmedico)
 		{
-			List<CronogramaDTO> cronogramas = await (from c in _context.D012_CRONOMEDICO 
-													 join td in _context.D00_TBDETALLE on c.idEstado equals td.idDet
-													 join med in _context.T212_MEDICO on c.idMedico equals med.idMedico
-													 join pe in _context.T000_PERSONA on med.idPersona equals pe.idPersona
+			List<CronogramaDTO> cronogramas = await (from c in _context.CRONOGRAMA_MEDICO 
+													 join td in _context.TABLA_DETALLE on c.idEstado equals td.idDet
+													 join med in _context.MEDICO on c.idMedico equals med.idMedico
+													 join pe in _context.PERSONA on med.idPersona equals pe.idPersona
 													 where c.idMedico == idmedico
 														select new CronogramaDTO {
 															idProgramMedica = c.idProgramMedica,
@@ -147,9 +147,9 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<List<CronogramaDTO>> GetAllCronogramasConsulta()
 		{
-			List<CronogramaDTO> D012_CRONOMEDICOs = await(from c in _context.D012_CRONOMEDICO
-														  join td in _context.D00_TBDETALLE on c.idEstado equals td.idDet join med in _context.T212_MEDICO 
-														  on c.idMedico equals med.idMedico join pe in _context.T000_PERSONA on med.idPersona equals pe.idPersona
+			List<CronogramaDTO> D012_CRONOMEDICOs = await(from c in _context.CRONOGRAMA_MEDICO
+														  join td in _context.TABLA_DETALLE on c.idEstado equals td.idDet join med in _context.MEDICO 
+														  on c.idMedico equals med.idMedico join pe in _context.PERSONA on med.idPersona equals pe.idPersona
 														  select new CronogramaDTO
 														  {
 															  idProgramMedica = c.idProgramMedica,

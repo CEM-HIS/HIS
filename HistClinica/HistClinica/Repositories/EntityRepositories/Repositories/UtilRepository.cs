@@ -18,9 +18,9 @@ namespace HistClinica.Repositories.Repositories
 			_context = contexto;
 		}
 
-		public async Task<List<D024_CAJA>> getCajas()
+		public async Task<List<CAJA>> getCajas()
 		{
-			List<D024_CAJA> caja = await (from c in _context.D024_CAJA
+			List<CAJA> caja = await (from c in _context.CAJA
 										  select c).ToListAsync();
 
 			return caja;
@@ -38,7 +38,7 @@ namespace HistClinica.Repositories.Repositories
 			public string hora { get; set; }
 		}
 
-		public List<Fecha> ObtenerFechaHora(List<D012_CRONOMEDICO> cronograma)
+		public List<Fecha> ObtenerFechaHora(List<CRONOGRAMA_MEDICO> cronograma)
         {
 			int intervalofecha, intervalohora;
 			List<Fecha> fechas = new List<Fecha>();
@@ -62,8 +62,8 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<object> GetCronograma()
 		{
-			List<D012_CRONOMEDICO> cronograma = await(from cro in _context.D012_CRONOMEDICO
-								   join med in _context.T212_MEDICO on cro.idMedico equals med.idMedico
+			List<CRONOGRAMA_MEDICO> cronograma = await(from cro in _context.CRONOGRAMA_MEDICO
+								   join med in _context.MEDICO on cro.idMedico equals med.idMedico
 								   select cro
 									).ToListAsync();
 			
@@ -72,8 +72,8 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<object> GetCronogramaByMedico(int id)
 		{
-			List<D012_CRONOMEDICO> cronograma = await (from cro in _context.D012_CRONOMEDICO
-									join med in _context.T212_MEDICO on cro.idMedico equals med.idMedico
+			List<CRONOGRAMA_MEDICO> cronograma = await (from cro in _context.CRONOGRAMA_MEDICO
+									join med in _context.MEDICO on cro.idMedico equals med.idMedico
 									where med.idMedico == id
 									select cro).ToListAsync();
 			return ObtenerFechaHora(cronograma);
@@ -81,8 +81,8 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<object> GetEspecialidad(int id)
 		{
-			var combo = await(	from td in _context.D00_TBDETALLE
-								join med in _context.T212_MEDICO
+			var combo = await(	from td in _context.TABLA_DETALLE
+								join med in _context.MEDICO
 								on td.idDet equals med.idEspecialidad
 								where med.idMedico == id
 								select new
@@ -93,10 +93,10 @@ namespace HistClinica.Repositories.Repositories
 			return combo;
 		}
 
-		public async Task<List<T109_ESTADOCITA>> getEstadoCita()
+		public async Task<List<ESTADO_CITA>> getEstadoCita()
 		{
 
-			List<T109_ESTADOCITA> estado = await (from e in _context.T109_ESTADOCITA
+			List<ESTADO_CITA> estado = await (from e in _context.ESTADO_CITA
 											select e).ToListAsync();
 			return estado;
 		}
@@ -112,7 +112,7 @@ namespace HistClinica.Repositories.Repositories
 			int intervalohora;
 			Hora hora;
 			List<Hora> horas = new List<Hora>();
-			var cronograma = await (from cro in _context.D012_CRONOMEDICO
+			var cronograma = await (from cro in _context.CRONOGRAMA_MEDICO
                                where cro.idProgramMedica == id
                                select cro).FirstOrDefaultAsync();
 			intervalohora = int.Parse(cronograma.hrFin.Split(":")[0]) - int.Parse(cronograma.hrInicio.Split(":")[0]);
@@ -130,10 +130,10 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<object> GetMedicoByEspecialidad(int id)
 		{
-			var medico = await (from td in _context.D00_TBDETALLE
-								join med in _context.T212_MEDICO
+			var medico = await (from td in _context.TABLA_DETALLE
+								join med in _context.MEDICO
                                 on td.idDet equals med.idEspecialidad
-								join per in _context.T000_PERSONA
+								join per in _context.PERSONA
                                 on med.idPersona equals per.idPersona
 								where td.idDet == id
 								select new
@@ -146,10 +146,10 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<object> GetMedicos()
 		{
-			var medico = await (from per in _context.T000_PERSONA
-						 join e in _context.T120_EMPLEADO on per.idPersona
+			var medico = await (from per in _context.PERSONA
+						 join e in _context.EMPLEADO on per.idPersona
 						 equals e.idPersona
-						 join med in _context.T212_MEDICO on e.idPersona equals med.idPersona
+						 join med in _context.MEDICO on e.idPersona equals med.idPersona
 						 select new
 						 {
 							 idMedico = med.idMedico,
@@ -160,8 +160,8 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<object> GetTipo(string nombretipo)
 		{
-			var combo = await (from tg in _context.D00_TBGENERAL
-								 join td in _context.D00_TBDETALLE on tg.idTab equals td.idTab
+			var combo = await (from tg in _context.TABLA_GENERAL
+								 join td in _context.TABLA_DETALLE on tg.idTab equals td.idTab
 								 where tg.descripcion == nombretipo
 								 select new
 								 {
@@ -171,9 +171,9 @@ namespace HistClinica.Repositories.Repositories
 			return combo;
 		}
 
-		public async Task<List<D00_TBDETALLE>> getServicios()
+		public async Task<List<TABLA_DETALLE>> getServicios()
 		{
-			List<D00_TBDETALLE> servicios = await (from s in _context.D00_TBDETALLE
+			List<TABLA_DETALLE> servicios = await (from s in _context.TABLA_DETALLE
 													   where s.idTab == 16
 													   select s
 													   ).ToListAsync();

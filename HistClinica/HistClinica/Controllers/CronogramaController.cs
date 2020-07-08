@@ -65,7 +65,7 @@ namespace HistClinica.Controllers
             return Json(newlistespe);
         }
 
-        public async Task<IActionResult> Create(D012_CRONOMEDICO cronoMedico)
+        public async Task<IActionResult> Create(CRONOGRAMA_MEDICO cronoMedico)
         {
             if (cronoMedico != null)
             {
@@ -83,7 +83,7 @@ namespace HistClinica.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeletePost(D012_CRONOMEDICO cronograma)
+        public async Task<IActionResult> DeletePost(CRONOGRAMA_MEDICO cronograma)
         {
 
             await cronogramaRepository.DeleteCronograma(cronograma.idProgramMedica);
@@ -128,7 +128,7 @@ namespace HistClinica.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(D012_CRONOMEDICO cronoMedico)
+        public async Task<IActionResult> Edit(CRONOGRAMA_MEDICO cronoMedico)
         {
             if (ModelState.IsValid)
             {

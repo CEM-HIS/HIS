@@ -41,11 +41,11 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<bool> MedicoExists(int? id)
         {
-            return await _context.T212_MEDICO.AnyAsync(e => e.idMedico == id);
+            return await _context.MEDICO.AnyAsync(e => e.idMedico == id);
         }
         public async Task DeleteMedico(int MedicoID)
         {
-            T212_MEDICO Medico = await _context.T212_MEDICO.FindAsync(MedicoID);
+            MEDICO Medico = await _context.MEDICO.FindAsync(MedicoID);
             Medico.estado = 2;
             Medico.fechabaja = DateTime.Now.ToString();
             _context.Update(Medico);
@@ -55,7 +55,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T212_MEDICO Medico = new T212_MEDICO()
+                MEDICO Medico = new MEDICO()
                 {
                     codMedico = persona.personal.codMedico,
                     nroColegio = persona.personal.numeroColegio,
@@ -69,7 +69,7 @@ namespace HistClinica.Repositories.Repositories
                     estado = 1,
                     fechabaja = null
                 };
-                await _context.T212_MEDICO.AddAsync(Medico);
+                await _context.MEDICO.AddAsync(Medico);
                 await Save();
                 return "Ingreso Exitoso Medico";
             }
@@ -82,7 +82,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T212_MEDICO Medico = new T212_MEDICO()
+                MEDICO Medico = new MEDICO()
                 {
                     idMedico = (int)persona.personal.idMedico,
                     codMedico = persona.personal.codMedico,
@@ -110,7 +110,7 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<int> GetIdMedico(int? id)
         {
-            int idMedico = await (from p in _context.T212_MEDICO
+            int idMedico = await (from p in _context.MEDICO
                                   where p.idPersona == id
                                   select p.idMedico).FirstOrDefaultAsync();
             return idMedico;

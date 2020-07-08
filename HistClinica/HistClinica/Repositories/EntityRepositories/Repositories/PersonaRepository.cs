@@ -17,17 +17,14 @@ namespace HistClinica.Repositories.Repositories
         private readonly IMedicoRepository _medicoRepository;
         private readonly IEmpleadoRepository _empleadoRepository;
         private readonly IPacienteRepository _pacienteRepository;
-        private readonly IUsuarioRepository _usuarioRepository;
         private readonly IDetalleRepository _detalleRepository;
         public PersonaRepository(ClinicaServiceContext context, IMedicoRepository medicorepository, 
-            IEmpleadoRepository empleadoRepository, IPacienteRepository pacienteRepository,
-            IUsuarioRepository usuarioRepository, IDetalleRepository detalleRepository)
+            IEmpleadoRepository empleadoRepository, IPacienteRepository pacienteRepository, IDetalleRepository detalleRepository)
         {
             _context = context;
             _medicoRepository = medicorepository;
             _empleadoRepository = empleadoRepository;
             _pacienteRepository = pacienteRepository;
-            _usuarioRepository = usuarioRepository;
             _detalleRepository = detalleRepository;
         }
 
@@ -54,32 +51,31 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task<bool> PersonaExists(int? id)
         {
-            return await _context.T000_PERSONA.AnyAsync(e => e.idPersona == id);
+            return await _context.PERSONA.AnyAsync(e => e.idPersona == id);
         }
         public async Task<int> getIdTpEmpleado(string descripcion)
         {
-            return await (from d in _context.D00_TBDETALLE
+            return await (from d in _context.TABLA_DETALLE
                           where d.descripcion == descripcion
                          select d.idDet
                          ).FirstOrDefaultAsync();
         }
         public async Task DeletePersona(int? PersonaID)
         {
-            T000_PERSONA Persona = await _context.T000_PERSONA.FindAsync(PersonaID);
+            PERSONA Persona = await _context.PERSONA.FindAsync(PersonaID);
             Persona.estado = "2";
             Persona.fechabaja = DateTime.Now.ToString();
             _context.Update(Persona);
             await Save();
-            int idEmpleado = (from e in _context.T120_EMPLEADO
+            int idEmpleado = (from e in _context.EMPLEADO
                               where e.idPersona == Persona.idPersona
                               select e.idEmpleado).FirstOrDefault();
-            int idMedico = (from m in _context.T212_MEDICO
+            int idMedico = (from m in _context.MEDICO
                             where m.idPersona == Persona.idPersona
                             select m.idMedico).FirstOrDefault();
 
             await _empleadoRepository.DeleteEmpleado(idEmpleado);
             await _medicoRepository.DeleteMedico(idMedico);
-            await _usuarioRepository.DeleteUsuario(idEmpleado);
         }
         public async Task<string> InsertPersona(PersonaDTO persona)
         {
@@ -87,7 +83,7 @@ namespace HistClinica.Repositories.Repositories
             int idEmpleado = 0;
             try
             {
-                await _context.T000_PERSONA.AddAsync(new T000_PERSONA()
+                await _context.PERSONA.AddAsync(new PERSONA()
                 {
                     apePaterno = persona.apellidoPaterno,
                     apeMaterno = persona.apellidoMaterno,
@@ -135,7 +131,7 @@ namespace HistClinica.Repositories.Repositories
                     tpPersona = persona.tpPersona
                 });
                 await Save();
-                idPersona = (await _context.T000_PERSONA
+                idPersona = (await _context.PERSONA
                     .FirstOrDefaultAsync(p => p.dniPersona == persona.numeroDocumento)).idPersona;
                 if (persona.personal != null)
                 {
@@ -161,7 +157,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                _context.Update(new T000_PERSONA()
+                _context.Update(new PERSONA()
                 {
                     idPersona = (int)persona.idPersona,
                     apePaterno = persona.apellidoPaterno,
@@ -232,8 +228,8 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task<List<PersonaDTO>> GetAllPersonal()
         {
-            List<PersonaDTO> Personas = await (from p in _context.T000_PERSONA
-                                               join e in _context.T120_EMPLEADO on p.idPersona equals e.idPersona
+            List<PersonaDTO> Personas = await (from p in _context.PERSONA
+                                               join e in _context.EMPLEADO on p.idPersona equals e.idPersona
                                                where e.idtpEmpleado != null
                                                select new PersonaDTO
                                                {
@@ -246,7 +242,7 @@ namespace HistClinica.Repositories.Repositories
 
             for (int i = 0; i < Personas.Count; i++)
             {
-                Personas[i].personal = await (from e in _context.T120_EMPLEADO
+                Personas[i].personal = await (from e in _context.EMPLEADO
                                               where e.idPersona == Personas[i].idPersona
                                               select new PersonalDTO
                                               {
@@ -261,8 +257,8 @@ namespace HistClinica.Repositories.Repositories
             List<PersonaDTO> Personas;
             if (dni != null && dni != 0)
             {
-                Personas = await (from p in _context.T000_PERSONA
-                                                   join e in _context.T120_EMPLEADO on p.idPersona equals e.idPersona
+                Personas = await (from p in _context.PERSONA
+                                                   join e in _context.EMPLEADO on p.idPersona equals e.idPersona
                                                    where e.idtpEmpleado != null && p.dniPersona == dni
                                                    select new PersonaDTO
                                                    {
@@ -275,7 +271,7 @@ namespace HistClinica.Repositories.Repositories
 
                 for (int i = 0; i < Personas.Count; i++)
                 {
-                    Personas[i].personal = await (from e in _context.T120_EMPLEADO
+                    Personas[i].personal = await (from e in _context.EMPLEADO
                                                   where e.idPersona == Personas[i].idPersona
                                                   select new PersonalDTO
                                                   {
@@ -286,8 +282,8 @@ namespace HistClinica.Repositories.Repositories
             }
             else
             {
-                Personas = await (from p in _context.T000_PERSONA
-                                  join e in _context.T120_EMPLEADO on p.idPersona equals e.idPersona
+                Personas = await (from p in _context.PERSONA
+                                  join e in _context.EMPLEADO on p.idPersona equals e.idPersona
                                   where e.idtpEmpleado != null &&
                                   (p.apePaterno + " " + p.apeMaterno).Trim().Contains(apellidos)
                                   select new PersonaDTO
@@ -301,7 +297,7 @@ namespace HistClinica.Repositories.Repositories
 
                 for (int i = 0; i < Personas.Count; i++)
                 {
-                    Personas[i].personal = await (from e in _context.T120_EMPLEADO
+                    Personas[i].personal = await (from e in _context.EMPLEADO
                                                   where e.idPersona == Personas[i].idPersona
                                                   select new PersonalDTO
                                                   {
@@ -317,8 +313,8 @@ namespace HistClinica.Repositories.Repositories
         public async Task<PersonaDTO> GetById(int? id)
         {
             PersonaDTO Persona = new PersonaDTO();
-            Persona = await (from p in _context.T000_PERSONA
-                             join e in _context.T120_EMPLEADO on p.idPersona equals e.idPersona
+            Persona = await (from p in _context.PERSONA
+                             join e in _context.EMPLEADO on p.idPersona equals e.idPersona
                              where p.idPersona == id
                              select new PersonaDTO
                              {
@@ -331,7 +327,7 @@ namespace HistClinica.Repositories.Repositories
                                  numeroDocumento = (int)p.dniPersona,
                                  ruc = p.nroRuc
                              }).FirstOrDefaultAsync();
-            Persona.personal = await (from e in _context.T120_EMPLEADO
+            Persona.personal = await (from e in _context.EMPLEADO
                                       where e.idPersona == Persona.idPersona
                                       select new PersonalDTO
                                       {
@@ -345,11 +341,11 @@ namespace HistClinica.Repositories.Repositories
             if (Persona.personal.idTipoEmpleado == (int)await _detalleRepository.GetIdDetalleByDescripcion("MEDICA/O"))
             {
                 PersonalDTO personaTemporal = new PersonalDTO();
-                personaTemporal = await (from m in _context.T212_MEDICO
+                personaTemporal = await (from m in _context.MEDICO
                                              where m.idEmpleado == Persona.personal.idEmpleado
                                              select new PersonalDTO
                                              {
-                                                 idEspecialidad = (from tb in _context.D00_TBDETALLE
+                                                 idEspecialidad = (from tb in _context.TABLA_DETALLE
                                                                    where m.idEspecialidad == tb.idDet
                                                                    select m.idEspecialidad).FirstOrDefault(),
                                                  idMedico = m.idMedico,

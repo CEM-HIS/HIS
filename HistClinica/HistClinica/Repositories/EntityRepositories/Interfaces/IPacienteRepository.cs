@@ -7,7 +7,7 @@ namespace HistClinica.Repositories.Interfaces
 {
     public interface IPacienteRepository
     {
-        Task<List<T001_PACIENTE>> GetAllPacientes();
+        Task<List<PACIENTE>> GetAllPacientes();
         Task<PersonaDTO> GetById(int? id);
         Task<PersonaDTO> GetByDnioNombresyApellidos(int? Dni, string nombres, string apellidos);
         //Operaciones Transaccionales

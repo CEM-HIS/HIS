@@ -9,11 +9,12 @@ namespace HistClinica.Repositories.Interfaces
 {
     public interface ICajaRepository
     {
-        Task<List<D024_CAJA>> GetAllCajas();
-        Task<D024_CAJA> GetById(int? Id);
+        Task<List<CAJA>> GetAllCajas();
+        Task<CAJA> GetById(int? Id);
         //Operaciones Transaccionales
-        Task<string> InsertCaja(D024_CAJA Caja);
-        Task<string> AsignaCaja(PersonaDTO persona);
+        Task<string> InsertCaja(CAJA Caja);
+        Task<string> AperturaCaja(CAJA_ASIGNADA cajaAsignada);
+        Task<string> CierreCaja(CAJA_ASIGNADA cajaAsignada);
         Task DeleteCaja(int CajaID);
         Task<bool> CajaExists(int? id);
         Task Save();

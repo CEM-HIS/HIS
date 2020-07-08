@@ -42,26 +42,33 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<bool> CajaExists(int? id)
         {
-            return await _context.D024_CAJA.AnyAsync(e => e.idCaja == id);
+            return await _context.CAJA.AnyAsync(e => e.idCaja == id);
         }
 
-        public async Task<bool> AsignaCajaExists(int? idcaja, int? idEmpleado)
+        public async Task<bool> AsignaCajaExists(int? idcaja, string fechaApertura, string turno)
         {
-            return await _context.D025_ASIGNACAJA.AnyAsync(e => e.idCaja == idcaja && e.idEmpleado == idEmpleado);
+            return await _context.CAJA_ASIGNADA.AnyAsync( e => e.idCaja == idcaja && 
+                                                            e.fechaApertura == fechaApertura &&
+                                                            e.turno == turno);
         }
 
         public async Task DeleteCaja(int CajaID)
         {
-            D024_CAJA Caja = await _context.D024_CAJA.FindAsync(CajaID);
-            Caja.estado = "2";
+            CAJA Caja = await _context.CAJA.FindAsync(CajaID);
+            Caja.estado = 2;
             _context.Update(Caja);
             await Save();
         }
-        public async Task<string> InsertCaja(D024_CAJA Caja)
+        public async Task<string> InsertCaja(CAJA Caja)
         {
             try
             {
-                await _context.D024_CAJA.AddAsync(Caja);
+                await _context.CAJA.AddAsync(new CAJA()
+                {
+                    descripcion = Caja.descripcion,
+                    tipo = Caja.tipo,
+                    estado = Caja.estado
+                });
                 await Save();
                 return "Ingreso Exitoso";
             }
@@ -70,31 +77,58 @@ namespace HistClinica.Repositories.Repositories
                 return "Error en el guardado " + ex.StackTrace;
             }
         }
-        public async Task<List<D024_CAJA>> GetAllCajas()
+        public async Task<List<CAJA>> GetAllCajas()
         {
-            List<D024_CAJA> Cajas = await (from c in _context.D024_CAJA
+            List<CAJA> Cajas = await (from c in _context.CAJA
                                            select c).ToListAsync();
 
             return Cajas;
         }
-        public async Task<D024_CAJA> GetById(int? Id)
+        public async Task<CAJA> GetById(int? Id)
         {
-            D024_CAJA Caja = await (from c in _context.D024_CAJA
+            CAJA Caja = await (from c in _context.CAJA
                                   where c.idCaja == Id
                                   select c).FirstOrDefaultAsync();
             return Caja;
         }
 
-        public async Task<string> AsignaCaja(PersonaDTO persona)
+        public string Calcularturno(DateTime ahora)
+        {
+            if (ahora.Hour >= 6)
+            {
+                return "Mañana";
+            }
+            else if (ahora.Hour >= 14)
+            {
+                return "Tarde";
+            }
+            else return "Noche";
+        }
+
+        public async Task<string> AperturaCaja(CAJA_ASIGNADA cajaAsignada)
         {
             try
             {
-                if(!await AsignaCajaExists(persona.asignacion.idCaja, persona.personal.idEmpleado))
+                //ToDO:Diferenciar usuario GAF de Usuario Principal de Caja
+                if(!await AsignaCajaExists(cajaAsignada.idCaja, cajaAsignada.fechaApertura, cajaAsignada.turno))
                 {
-                    await _context.D025_ASIGNACAJA.AddAsync(new D025_ASIGNACAJA()
+                    await _context.CAJA_ASIGNADA.AddAsync(new CAJA_ASIGNADA()
                     {
-                        idEmpleado = (int)persona.personal.idEmpleado,
-                        idCaja = (int)persona.asignacion.idCaja
+                        idEmpleado = cajaAsignada.idEmpleado,
+                        idCaja = cajaAsignada.idCaja,
+                        fechaApertura = DateTime.Now.ToShortDateString(),
+                        horaApertura = DateTime.Now.ToShortTimeString(),
+                        fechaCierre = null,
+                        horaCierre = null,
+                        turno = Calcularturno(DateTime.Now),
+                        pos = cajaAsignada.pos,
+                        montoSolesApertura = cajaAsignada.montoSolesApertura,
+                        montoDolaresApertura = cajaAsignada.montoDolaresApertura,
+                        montoEurosApertura = cajaAsignada.montoEurosApertura,
+                        montoSolesCierre = cajaAsignada.montoSolesCierre,
+                        montoDolaresCierre = cajaAsignada.montoDolaresCierre,
+                        montoEurosCierre = cajaAsignada.montoEurosCierre,
+                        glosa = cajaAsignada.glosa
                     });
                     await Save();
                     return "Ingreso Exitoso";
@@ -105,6 +139,18 @@ namespace HistClinica.Repositories.Repositories
             {
                 return "Error en el guardado " + ex.Message;
             }
+        }
+
+        public async Task<string> CierreCaja(CAJA_ASIGNADA cajaAsignada)
+        {
+            CAJA_ASIGNADA CajaAsignada =    await (from c in _context.CAJA_ASIGNADA
+                                            where c.idCaja == cajaAsignada.idCaja
+                                            && c.fechaApertura == cajaAsignada.fechaApertura
+                                            && c.turno == cajaAsignada.turno
+                                            select c).FirstOrDefaultAsync();
+            _context.Update(CajaAsignada);
+            await Save();
+            return "Cierre de caja exitoso";
         }
     }
 }

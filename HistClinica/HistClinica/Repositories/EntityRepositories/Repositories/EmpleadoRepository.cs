@@ -41,12 +41,12 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<bool> EmpleadoExists(int? id)
         {
-            return await _context.T120_EMPLEADO.AnyAsync(e => e.idEmpleado == id);
+            return await _context.EMPLEADO.AnyAsync(e => e.idEmpleado == id);
         }
 
         public async Task DeleteEmpleado(int EmpleadoID)
         {
-            T120_EMPLEADO Empleado = await _context.T120_EMPLEADO.FindAsync(EmpleadoID);
+            EMPLEADO Empleado = await _context.EMPLEADO.FindAsync(EmpleadoID);
             Empleado.estado = 2;
             Empleado.fechabaja = DateTime.Now.ToString();
             _context.Update(Empleado);
@@ -57,7 +57,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T120_EMPLEADO Empleado = new T120_EMPLEADO
+                EMPLEADO Empleado = new EMPLEADO
                 {
                     idPersona = idPersona,
                     codEmpleado = persona.personal.codEmpleado,
@@ -72,7 +72,7 @@ namespace HistClinica.Repositories.Repositories
                 };
                 if (persona.personal.genero != null) Empleado.genero = persona.personal.genero;
                 if (persona.personal.fechaIngreso != null) Empleado.fecIngreso = DateTime.Parse(persona.personal.fechaIngreso);
-                await _context.T120_EMPLEADO.AddAsync(Empleado);
+                await _context.EMPLEADO.AddAsync(Empleado);
                 await Save();
                 return "Ingreso Exitoso Empleado";
             }
@@ -85,7 +85,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T120_EMPLEADO Empleado = new T120_EMPLEADO
+                EMPLEADO Empleado = new EMPLEADO
                 {
                     idPersona = persona.idPersona,
                     idEmpleado = (int)persona.personal.idEmpleado,
@@ -111,7 +111,7 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task<int> GetIdEmpleado(int? id)
         {
-            int idEmpleado = await (from p in _context.T120_EMPLEADO
+            int idEmpleado = await (from p in _context.EMPLEADO
                                     where p.idPersona == id
                                     select p.idEmpleado).FirstOrDefaultAsync();
             return idEmpleado;
@@ -119,8 +119,8 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<PersonaDTO> GetById(int? id)
         {
-            PersonaDTO personaDTO = await (from p in _context.T000_PERSONA
-                                     join e in _context.T120_EMPLEADO on p.idPersona equals e.idPersona
+            PersonaDTO personaDTO = await (from p in _context.PERSONA
+                                     join e in _context.EMPLEADO on p.idPersona equals e.idPersona
                                      where p.idPersona == id
                                      select new PersonaDTO
                                      {
