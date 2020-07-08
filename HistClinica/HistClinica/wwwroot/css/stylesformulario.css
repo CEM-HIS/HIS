@@ -40,6 +40,13 @@ body .nav-sidebar > .nav-item:hover {
 	border: 0;
 	margin-top: 3rem;
 }
+@media (min-width:1200px){
+	body .container {
+		max-width: 96%;
+	}
+}
+
+
 body .btn-primary {
 	background-color: #00aee5;
 	border-color: #00aee5;
@@ -47,6 +54,14 @@ body .btn-primary {
 body aside .nav-link {
 	padding: 0.8rem 1rem;
 }
+.table td, .table th {
+	padding: .65rem;
+}
+.table-bordered td, .table-bordered th {
+	border: 1px solid #dee2e6;
+	font-size: 12.5px;
+}
+
 .agregar {
 	padding-top:30px;
 }
