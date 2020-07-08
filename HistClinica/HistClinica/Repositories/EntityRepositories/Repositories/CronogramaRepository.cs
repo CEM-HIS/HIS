@@ -41,7 +41,7 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task DeleteCronograma(int? CronoID)
 		{
-			D012_CRONOMEDICO D012_CRONOMEDICO = await _context.D012_CRONOMEDICO.FindAsync(CronoID);
+			CRONOGRAMA_MEDICO D012_CRONOMEDICO = await _context.D012_CRONOMEDICO.FindAsync(CronoID);
 			_context.D012_CRONOMEDICO.Remove(D012_CRONOMEDICO);
 			await Save();
 		}
@@ -82,11 +82,11 @@ namespace HistClinica.Repositories.Repositories
 			return D012_CRONOMEDICOs;
 		}
 
-		public async Task<string> InsertCronograma(D012_CRONOMEDICO cronograma)
+		public async Task<string> InsertCronograma(CRONOGRAMA_MEDICO cronograma)
 		{
 			try
 			{
-				await _context.D012_CRONOMEDICO.AddAsync(new D012_CRONOMEDICO()
+				await _context.D012_CRONOMEDICO.AddAsync(new CRONOGRAMA_MEDICO()
 				{
 					idEspecialidad = cronograma.idEspecialidad,
 					idMedico = cronograma.idMedico,
@@ -111,7 +111,7 @@ namespace HistClinica.Repositories.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<string> UpdateCronograma(D012_CRONOMEDICO cronograma)
+		public async Task<string> UpdateCronograma(CRONOGRAMA_MEDICO cronograma)
 		{
 			try
 			{

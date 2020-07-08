@@ -48,7 +48,7 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task DeletePaciente(int PacienteID)
         {
-            T001_PACIENTE Paciente = await _context.T001_PACIENTE.FindAsync(PacienteID);
+            PACIENTE Paciente = await _context.T001_PACIENTE.FindAsync(PacienteID);
             Paciente.estado = 2;
             Paciente.fechabaja = DateTime.Now.ToString();
             _context.Update(Paciente);
@@ -56,10 +56,10 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task<string> InsertPaciente(PersonaDTO persona, int idPersona)
         {
-            T001_PACIENTE Paciente;
+            PACIENTE Paciente;
             try
             {
-                Paciente = new T001_PACIENTE()
+                Paciente = new PACIENTE()
                 {
                     codPaciente = persona.paciente.codPaciente,
                     descripcion = persona.paciente.descripcion,
@@ -127,7 +127,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                _context.Update(new T001_PACIENTE()
+                _context.Update(new PACIENTE()
                 {
                     idPaciente = (int)persona.paciente.idPaciente,
                     codPaciente = persona.paciente.codPaciente,
@@ -190,9 +190,9 @@ namespace HistClinica.Repositories.Repositories
                 return "Error en el guardado " + ex.StackTrace;
             }
         }
-        public async Task<List<T001_PACIENTE>> GetAllPacientes()
+        public async Task<List<PACIENTE>> GetAllPacientes()
         {
-            List<T001_PACIENTE> Pacientes = await (from p in _context.T001_PACIENTE
+            List<PACIENTE> Pacientes = await (from p in _context.T001_PACIENTE
                                                    join o in _context.T000_PERSONA on p.idPersona equals o.idPersona
                                                    select p).ToListAsync();
 

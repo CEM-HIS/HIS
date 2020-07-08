@@ -49,7 +49,7 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task DeleteCita(int CitaID)
         {
-            T068_CITA Cita = await _context.T068_CITA.FindAsync(CitaID);
+            CITA Cita = await _context.T068_CITA.FindAsync(CitaID);
             _context.T068_CITA.Remove(Cita);
             await Save();
         }
@@ -58,7 +58,7 @@ namespace HistClinica.Repositories.Repositories
             int idCita = 0;
             try
             {
-                await _context.T068_CITA.AddAsync(new T068_CITA()
+                await _context.T068_CITA.AddAsync(new CITA()
                 {
                     idEmpleado = Cita.idEmpleado,
                     idPaciente = Cita.idPaciente,
@@ -79,7 +79,7 @@ namespace HistClinica.Repositories.Repositories
                           where c.idPaciente == Cita.idPaciente
                           && c.idProgramMedica == Cita.idProgramMedica
                           select c.idCita).FirstOrDefault();
-                await _context.D015_PAGO.AddAsync(new D015_PAGO()
+                await _context.D015_PAGO.AddAsync(new PAGO()
                 {
                     monto = Cita.total,
                     fecRegistro = DateTime.Now,
@@ -98,7 +98,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T068_CITA Cita = (from c in _context.T068_CITA
+                CITA Cita = (from c in _context.T068_CITA
                                   where c.idCita == CitaID
                                   select c).FirstOrDefault();
                 Cita.idEstadoCita = (from ec in _context.T109_ESTADOCITA
@@ -118,7 +118,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T068_CITA Cita = (from c in _context.T068_CITA
+                CITA Cita = (from c in _context.T068_CITA
                                   where c.idCita == cita.idCita
                                   select c).FirstOrDefault();
                 Cita.idProgramMedica = cita.idProgramMedica;
@@ -246,7 +246,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T068_CITA Cita = (from c in _context.T068_CITA
+                CITA Cita = (from c in _context.T068_CITA
                                   where c.idCita == cita.idCita
                                   select c).FirstOrDefault();
                 Cita.idEstadoCita = cita.estado;

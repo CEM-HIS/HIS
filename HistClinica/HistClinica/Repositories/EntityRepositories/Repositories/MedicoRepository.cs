@@ -45,7 +45,7 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task DeleteMedico(int MedicoID)
         {
-            T212_MEDICO Medico = await _context.T212_MEDICO.FindAsync(MedicoID);
+            MEDICO Medico = await _context.T212_MEDICO.FindAsync(MedicoID);
             Medico.estado = 2;
             Medico.fechabaja = DateTime.Now.ToString();
             _context.Update(Medico);
@@ -55,7 +55,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T212_MEDICO Medico = new T212_MEDICO()
+                MEDICO Medico = new MEDICO()
                 {
                     codMedico = persona.personal.codMedico,
                     nroColegio = persona.personal.numeroColegio,
@@ -82,7 +82,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                T212_MEDICO Medico = new T212_MEDICO()
+                MEDICO Medico = new MEDICO()
                 {
                     idMedico = (int)persona.personal.idMedico,
                     codMedico = persona.personal.codMedico,

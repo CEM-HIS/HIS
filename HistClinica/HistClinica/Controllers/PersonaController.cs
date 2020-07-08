@@ -172,37 +172,37 @@ namespace HistClinica.Controllers
             var tipoEmpleados = await _utilrepository.GetTipo("Tipo Empleado");
             ViewBag.lsttipoempleado = tipoEmpleados;
 
-            List<D024_CAJA> cajas = await _utilrepository.getCajas();
+            List<CAJA> cajas = await _utilrepository.getCajas();
             ViewBag.lscaja = cajas;
 
             PersonaDTO persona = await _empleadorepository.GetById(id);
             return PartialView(persona);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Asignar(PersonaDTO personaDTO)
-        {
-            if (personaDTO.personal.idEmpleado != null)
-            {
-                try
-                {
-                    if (personaDTO.asignacion != null) await _cajaRepository.AsignaCaja(personaDTO);
-                    TempData["mensajepersona"] = await _usuarioRepository.InsertUsuario(personaDTO);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (await _usuarioRepository.UsuarioExists(personaDTO.personal.idEmpleado))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Asignar(PersonaDTO personaDTO)
+        //{
+        //    if (personaDTO.personal.idEmpleado != null)
+        //    {
+        //        try
+        //        {
+        //            if (personaDTO.asignacion != null) await _cajaRepository.AsignaCaja(personaDTO);
+        //            TempData["mensajepersona"] = await _usuarioRepository.InsertUsuario(personaDTO);
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (await _usuarioRepository.UsuarioExists(personaDTO.personal.idEmpleado))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //    }
+        //    return RedirectToAction(nameof(Index));
+        //}
     }
 }

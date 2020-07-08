@@ -47,7 +47,7 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task DeleteUsuario(int? UsuarioID)
         {
-            D001_USUARIO Usuario = await _context.D001_USUARIO.FindAsync(UsuarioID);
+            USUARIO Usuario = await _context.D001_USUARIO.FindAsync(UsuarioID);
             Usuario.estado = "2";
           //  Usuario.fechaBaja = DateTime.Now.ToString();
             _context.Update(Usuario);
@@ -55,7 +55,7 @@ namespace HistClinica.Repositories.Repositories
         }
         public async Task<string> InsertUsuario(PersonaDTO persona)
         {
-            T000_PERSONA _Persona = await (from p in _context.T000_PERSONA
+            PERSONA _Persona = await (from p in _context.T000_PERSONA
                                         join e in _context.T120_EMPLEADO on p.idPersona equals e.idPersona
                                         where e.idEmpleado == persona.personal.idEmpleado
                                             select p).FirstOrDefaultAsync();
@@ -63,7 +63,7 @@ namespace HistClinica.Repositories.Repositories
             {
                 if (await UsuarioExists(persona.personal.idEmpleado))
                 {
-                    D001_USUARIO Usuario = await (from u in _context.D001_USUARIO where u.idEmpleado == persona.personal.idEmpleado select u).FirstOrDefaultAsync();
+                    USUARIO Usuario = await (from u in _context.D001_USUARIO where u.idEmpleado == persona.personal.idEmpleado select u).FirstOrDefaultAsync();
                     Usuario.fechaMod = DateTime.Now.ToString();
                     Usuario.usuMod = ""; //ToDo: Agregar usuario de sesiones
                     _context.Update(Usuario);
@@ -90,7 +90,7 @@ namespace HistClinica.Repositories.Repositories
                         diaNacimiento = Convert.ToDateTime(_Persona.fecNace).Day.ToString();
                     }
                     else return "No se pudo crear usuario por que falta fecha de nacimiento";
-                    await _context.D001_USUARIO.AddAsync(new D001_USUARIO()
+                    await _context.D001_USUARIO.AddAsync(new USUARIO()
                     {
                         idEmpleado = persona.personal.idEmpleado,
                         loginUser = (primeraletraapellido + primernombre + diaNacimiento).ToLower(),
