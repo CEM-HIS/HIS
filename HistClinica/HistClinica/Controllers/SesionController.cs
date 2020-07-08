@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HistClinica.Controllers
 {
-    public class PanelController : Controller
+    public class SesionController : Controller
     {
         public IActionResult Index()
         {
-            string name = "xd";
-            ViewBag.nombre = name;
             return View();
         }
     }
