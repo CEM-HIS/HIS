@@ -118,77 +118,87 @@
         -->
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
-                        <li class="hidden-sm-up">
-                            <a href="#" class="nav-link ">
-                                <img style="width:35px;border-radius:50%;border:2px solid white;margin-right:9px;" src="~/images/profile.png" /><span style="font-weight: bold;
+					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+						<!-- Add icons to the links using the .nav-icon class
+	with font-awesome or any other icon font library -->
+						<li class="hidden-sm-up">
+							<a href="#" class="nav-link ">
+								<img style="width:35px;border-radius:50%;border:2px solid white;margin-right:9px;" src="~/images/profile.png" /><span style="font-weight: bold;
     color: #545454;"> Rafael Sanchez</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-action="Index" asp-controller="Persona" class="nav-link ">
-                                <i class="nav-icon fas fa-user-injured"></i>
-                                <p>
-                                    Gestionar Personal
+							</a>
+						</li>
+						<li class="nav-item">
+							<a asp-action="Index" asp-controller="Persona" class="nav-link ">
+								<i class="nav-icon fas fa-user-injured"></i>
+								<p>
+									Gestionar Personal
 
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-action="Index" asp-controller="Cronograma" class="nav-link ">
-                                <i class="nav-icon fas fa-user-injured"></i>
-                                <p>
-                                    Cronograma de medicos
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a asp-action="Index" asp-controller="Cronograma" class="nav-link ">
+								<i class="nav-icon fas fa-user-injured"></i>
+								<p>
+									Cronograma de medicos
 
-                                </p>
-                            </a>
-                        </li>
+								</p>
+							</a>
+						</li>
 
-                        <li class="nav-item">
-                            <a asp-action="Index" asp-controller="Paciente" class="nav-link ">
-                                <i class="nav-icon fas fa-notes-medical"></i>
-                                <p>
-                                    Reserva de Citas
+						<li class="nav-item">
+							<a asp-action="Index" asp-controller="Licencia" class="nav-link ">
+								<i class="nav-icon fas fa-user-injured"></i>
+								<p>
+									Licencias
 
-                                </p>
-                            </a>
-                        </li>
+								</p>
+							</a>
+						</li>
 
-                        <li class="nav-item">
-                            <a asp-action="AdmicionMedico" asp-controller="Paciente" class="nav-link ">
-                                <i class="nav-icon fas fa-notes-medical"></i>
-                                <p>
-                                    Listado de Citas
+						<li class="nav-item">
+							<a asp-action="Index" asp-controller="Paciente" class="nav-link ">
+								<i class="nav-icon fas fa-notes-medical"></i>
+								<p>
+									Reserva de Citas
 
-                                </p>
-                            </a>
-                        </li>
+								</p>
+							</a>
+						</li>
 
+						<li class="nav-item">
+							<a asp-action="AdmicionMedico" asp-controller="Paciente" class="nav-link ">
+								<i class="nav-icon fas fa-notes-medical"></i>
+								<p>
+									Listado de Citas
 
-                        <li class="nav-item">
-                            <a asp-controller="Tablas" asp-action="Index" class="nav-link ">
-                                <i class="nav-icon far fa-calendar-alt"></i>
-                                <p>
-                                    Gestion de tablas
-
-                                </p>
-                            </a>
-                        </li>
-                        <li class="hidden-sm-up">
-                            <a href="#" class="nav-link ">
-                                <img style=" width: 20px;margin-left: 3px; margin-right: 5px;"  src="~/images/back-gray.png" /><span class="bold "> Ir a Panel</span>
-                            </a>
-                        </li>
-                        <li class="hidden-sm-up">
-                            <a href="#" class="nav-link ">
-                                <img style="width: 20px;margin-left: 3px; margin-right: 5px;" src="~/images/off-gray.png" /><span class="bold "> Cerrar Sesion</span>
-                            </a>
-                        </li>
+								</p>
+							</a>
+						</li>
 
 
-                    </ul>
+						<li class="nav-item">
+							<a asp-controller="Tablas" asp-action="Index" class="nav-link ">
+								<i class="nav-icon far fa-calendar-alt"></i>
+								<p>
+									Gestion de tablas
+
+								</p>
+							</a>
+						</li>
+						<li class="hidden-sm-up">
+							<a href="#" class="nav-link ">
+								<img style=" width: 20px;margin-left: 3px; margin-right: 5px;" src="~/images/back-gray.png" /><span class="bold "> Ir a Panel</span>
+							</a>
+						</li>
+						<li class="hidden-sm-up">
+							<a href="#" class="nav-link ">
+								<img style="width: 20px;margin-left: 3px; margin-right: 5px;" src="~/images/off-gray.png" /><span class="bold "> Cerrar Sesion</span>
+							</a>
+						</li>
+
+
+					</ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

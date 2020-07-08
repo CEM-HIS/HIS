@@ -332,6 +332,25 @@ $(document).on('change', '#cboafilia', function (event) {
     }
 });
 
+function cargarModalCrearLicencia() {
+		$.ajax({
+			type: "GET",
+			url: "/Licencia/Registro",
+			//data: { id: id },
+			contentType: "application/json; charset=utf-8",
+			dataType: "html",
+			success: function (response) {
+				$('#modalagregarlicencia').html(response);
+				$('#modalagregarlicencia').modal('show');
+			},
+			failure: function (response) {
+				alert(response.responseText);
+			},
+			error: function (response) {
+				alert(response.responseText);
+			}
+		});
+}
 
 function cargarmodalCrearTipo() {
 	$.ajax({

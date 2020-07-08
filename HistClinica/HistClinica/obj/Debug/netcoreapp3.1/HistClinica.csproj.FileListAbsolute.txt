@@ -1928,3 +1928,5 @@ C:\Users\FABRICIO\Documents\GitHub\HIS\HistClinica\HistClinica\obj\Debug\netcore
 C:\Users\FABRICIO\Documents\GitHub\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.csproj.CopyComplete
 C:\Users\FABRICIO\Documents\GitHub\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.dll
 C:\Users\FABRICIO\Documents\GitHub\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.pdb
+C:\Users\FABRICIO\Documents\GitHub\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\Index.cshtml.g.cs
+C:\Users\FABRICIO\Documents\GitHub\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\Registro.cshtml.g.cs

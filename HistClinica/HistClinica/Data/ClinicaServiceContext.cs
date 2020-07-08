@@ -26,6 +26,7 @@ namespace HistClinica.Data
         public DbSet<D00_TBDETALLE> D00_TBDETALLE { get; set; }
         public DbSet<D024_CAJA> D024_CAJA { get; set; }
         public DbSet<D025_ASIGNACAJA> D025_ASIGNACAJA { get; set; }
+        public DbSet<LICENCIA> LICENCIA { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<D025_ASIGNACAJA>()

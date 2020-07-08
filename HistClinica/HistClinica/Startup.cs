@@ -1,6 +1,8 @@
 using HistClinica.Data;
 using HistClinica.Interfaces;
 using HistClinica.Repositories;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Repositories;
 using HistClinica.Repositories.Interfaces;
 using HistClinica.Repositories.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +41,7 @@ namespace HistClinica
             services.AddTransient<ICajaRepository,CajaRepository>();
             services.AddTransient<IDetalleRepository, DetalleRepository>();
             services.AddTransient<IGeneralRepository, GeneralRepository>();
+            services.AddTransient<ILicenciaRepository, LicenciaRepository>();
             IServiceCollection serviceCollection =
                 services.AddDbContext<ClinicaServiceContext>(options => options.UseSqlServer(Configuration["Connection:ClinicaServiceConnection"]));
             services.AddCors(opciones =>
