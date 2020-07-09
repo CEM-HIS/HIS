@@ -9,7 +9,7 @@
 	{
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		<div class="col-sm-12 text-center pt-2 pb-4">
+		<div class="col-sm-12 text-center pt-2 pb-4 card-height">
 			<div class="card card-primary card-his">
 				<div class="card-header card-shadow">
 					<h1>Datos del paciente</h1>
@@ -23,13 +23,11 @@
 						<div class="col-sm-4">
 							<div class="col-sm-12">
 								<div class="row">
-									<div class="col-sm-5">
-										<label>*Tipo de paciente</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
-										@Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
-									</div>
+                                    <div class="col-sm-7">
+                                        <label>*Tipo de paciente</label>
+                                        @Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
+                                        @Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
+                                    </div>
 								</div>
 							</div>
 						</div>
@@ -49,187 +47,166 @@
 					<div class="row pb-2">
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="apepatpac">*Apellido paterno</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.apellidoPaterno, new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.apellidoPaterno, "", new { @class = "text-danger" })
-								</div>
+								
+                                <div class="col-sm-8">
+                                    <label for="apepatpac">*Apellido paterno</label>
+                                    @Html.TextBoxFor(m => m.apellidoPaterno, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.apellidoPaterno, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="apematpac">*Apellido Materno</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.apellidoMaterno, new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.apellidoMaterno, "", new { @class = "text-danger" })
-								</div>
+								
+                                <div class="col-sm-8">
+                                    <label for="apematpac">*Apellido Materno</label>
+                                    @Html.TextBoxFor(m => m.apellidoMaterno, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.apellidoMaterno, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="firstname">*Primer nombre</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.nombres, new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.nombres, "", new { @class = "text-danger" })
-								</div>
+							
+                                <div class="col-sm-8">
+                                    <label for="firstname">*Primer nombre</label>
+                                    @Html.TextBoxFor(m => m.nombres, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.nombres, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 					</div>
 					<div class="row pb-2">
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="cbosexo">*Sexo</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idSexo, new SelectList(ViewBag.lssexo, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.idSexo, "", new { @class = "text-danger" })
-								</div>
+							
+                                <div class="col-sm-8">
+                                    <label for="cbosexo">*Sexo</label>
+                                    @Html.DropDownListFor(m => m.idSexo, new SelectList(ViewBag.lssexo, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.idSexo, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="fechdate">*Fecha de nacimiento</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.fecNacimiento, new { @class = "form-control", @type = "Date" })
-									@Html.ValidationMessageFor(m => m.fecNacimiento, "", new { @class = "text-danger" })
-								</div>
+								
+                                <div class="col-sm-8">
+                                    <label for="fechdate">*Fecha de nacimiento</label>
+                                    @Html.TextBoxFor(m => m.fecNacimiento, new { @class = "form-control", @type = "Date" })
+                                    @Html.ValidationMessageFor(m => m.fecNacimiento, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="edadpac">*Edad</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.edad, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-									@Html.ValidationMessageFor(m => m.edad, "", new { @class = "text-danger" })
-								</div>
+							
+                                <div class="col-sm-8">
+                                    <label for="edadpac">*Edad</label>
+                                    @Html.TextBoxFor(m => m.edad, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                    @Html.ValidationMessageFor(m => m.edad, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="cboocupacion">*Ocupación</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idOcupacion, new SelectList(ViewBag.locupacion, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.idOcupacion, "", new { @class = "text-danger" })
-								</div>
+							
+                                <div class="col-sm-8">
+                                    <label for="cboocupacion">*Ocupación</label>
+                                    @Html.DropDownListFor(m => m.idOcupacion, new SelectList(ViewBag.locupacion, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.idOcupacion, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 					</div>
 					<div class="row pb-2">
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="cbogrdinstruccion">*Grado de instruccion</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idGrdInstruc, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.idGrdInstruc, "", new { @class = "text-danger" })
-								</div>
+								
+                                <div class="col-sm-8">
+                                    <label for="cbogrdinstruccion">*Grado de instruccion</label>
+                                    @Html.DropDownListFor(m => m.idGrdInstruc, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.idGrdInstruc, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="estcivil">*Estado civil</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idEstCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.idEstCivil, "", new { @class = "text-danger" })
-								</div>
+								
+                                <div class="col-sm-8">
+                                    <label for="estcivil">*Estado civil</label>
+                                    @Html.DropDownListFor(m => m.idEstCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.idEstCivil, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="emailpac">*Email</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.correo, new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.correo, "", new { @class = "text-danger" })
-								</div>
+                                <div class="col-sm-8">
+                                    <label for="emailpac">*Email</label>
+                                    @Html.TextBoxFor(m => m.correo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.correo, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="celularpac">*Celular</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.celular, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-									@Html.ValidationMessageFor(m => m.celular, "", new { @class = "text-danger" })
+								
+                                <div class="col-sm-8">
+                                    <label for="celularpac">*Celular</label>
+                                    @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                    @Html.ValidationMessageFor(m => m.celular, "", new { @class = "text-danger" })
 
-								</div>
+                                </div>
 							</div>
 						</div>
 					</div>
 					<div class="row pb-3">
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="cbodoc">*Tipo de Doc</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idTipoDocumento, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.idTipoDocumento, "", new { @class = "text-danger" })
-								</div>
+                                <div class="col-sm-8">
+                                    <label for="cbodoc">*Tipo de Doc</label>
+                                    @Html.DropDownListFor(m => m.idTipoDocumento, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.idTipoDocumento, "", new { @class = "text-danger" })
+                                </div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="row">								
+                                <div class="col-sm-8">
+                                    <label for="nrodoc">*Nro. Doc.</label>
+                                    @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                    @Html.ValidationMessageFor(m => m.numeroDocumento, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="nrodoc">*Nro. Doc.</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-									@Html.ValidationMessageFor(m => m.numeroDocumento, "", new { @class = "text-danger" })
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-								<div class="col-sm-4">
-									<label for="cboparentesco">*Parentesco</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.paciente.idParentescoPaciente, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.paciente.idParentescoPaciente, "", new { @class = "text-danger" })
-								</div>
+                                <div class="col-sm-8">
+                                    <label for="cboparentesco">*Parentesco</label>
+                                    @Html.DropDownListFor(m => m.paciente.idParentescoPaciente, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.paciente.idParentescoPaciente, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="row" id="divpacconv" style="display:none;">
-								<div class="col-sm-4">
-									<label for="factor_rh">*Factor RH</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.paciente.idFactorRrh, new SelectList(ViewBag.lfh, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.paciente.idFactorRrh, "", new { @class = "text-danger" })
-								</div>
+                                <div class="col-sm-8">
+                                    <label for="factor_rh">*Factor RH</label>
+                                    @Html.DropDownListFor(m => m.paciente.idFactorRrh, new SelectList(ViewBag.lfh, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.paciente.idFactorRrh, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 					</div>
 					<div class="row pb-2">
 						<div class="col-sm-3">
 							<div class="row" id="divpaccomp" style="display:none;">
-								<div class="col-sm-4">
-									<label for="cbogruposanguineo">*Grupo sanguineo</label>
-								</div>
-								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.paciente.idGrupoSanguineo, new SelectList(ViewBag.lgpsangre, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.paciente.idGrupoSanguineo, "", new { @class = "text-danger" })
-								</div>
+								
+                                <div class="col-sm-8">
+                                    <label for="cbogruposanguineo">*Grupo sanguineo</label>
+                                    @Html.DropDownListFor(m => m.paciente.idGrupoSanguineo, new SelectList(ViewBag.lgpsangre, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.paciente.idGrupoSanguineo, "", new { @class = "text-danger" })
+                                </div>
 							</div>
 						</div>
 						<div class="col-sm-3">

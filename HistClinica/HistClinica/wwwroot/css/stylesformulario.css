@@ -34,7 +34,7 @@ body .nav-sidebar > .nav-item:hover {
 
 .card-cem {
 	background: white;
-	padding: 2rem;
+	padding: 0;
 	border-radius: 10px;
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 	border: 0;
@@ -123,13 +123,15 @@ body .table-bordered {
 }
 
 .table-title {
-	color: #0f5493;
+	color: #03a2d4;
 }
 .table-title th {
-	font-weight:400;
+	font-weight:600;
 }
 
-
+body .card-primary:not(.card-outline) .card-header {
+	background: #00aee5;
+}
 
 @media (max-width:710px) {
 	.card-height {
