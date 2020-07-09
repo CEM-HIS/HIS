@@ -1,13 +1,13 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
     public class EmpleadoRepository : IEmpleadoRepository
     {
@@ -47,8 +47,8 @@ namespace HistClinica.Repositories.Repositories
         public async Task DeleteEmpleado(int EmpleadoID)
         {
             EMPLEADO Empleado = await _context.EMPLEADO.FindAsync(EmpleadoID);
-            Empleado.estado = 2;
-            Empleado.fechabaja = DateTime.Now.ToString();
+            Empleado.idEstado = 2;
+            Empleado.fechaBaja = DateTime.Now.ToString();
             _context.Update(Empleado);
             await Save();
         }
@@ -60,18 +60,18 @@ namespace HistClinica.Repositories.Repositories
                 EMPLEADO Empleado = new EMPLEADO
                 {
                     idPersona = idPersona,
-                    codEmpleado = persona.personal.codEmpleado,
-                    descArea = persona.personal.descArea,
+                    codigoEmpleado = persona.personal.codigoEmpleado,
+                    descripcionArea = persona.personal.descripcionArea,
                     cargo = persona.personal.cargo,
-                    fecIngreso = null,
+                    fechaIngreso = null,
                     salario = persona.personal.salario,
-                    genero = null,
-                    idtpEmpleado = persona.personal.idTipoEmpleado,
-                    estado = 1,
-                    fechabaja = null
+                    idGenero = null,
+                    idTipoEmpleado = persona.personal.idTipoEmpleado,
+                    idEstado = 1,
+                    fechaBaja = null
                 };
-                if (persona.personal.genero != null) Empleado.genero = persona.personal.genero;
-                if (persona.personal.fechaIngreso != null) Empleado.fecIngreso = DateTime.Parse(persona.personal.fechaIngreso);
+                if (persona.personal.idGenero != null) Empleado.idGenero = persona.personal.idGenero;
+                if (persona.personal.fechaIngreso != null) Empleado.fechaIngreso = DateTime.Parse(persona.personal.fechaIngreso);
                 await _context.EMPLEADO.AddAsync(Empleado);
                 await Save();
                 return "Ingreso Exitoso Empleado";
@@ -89,15 +89,15 @@ namespace HistClinica.Repositories.Repositories
                 {
                     idPersona = persona.idPersona,
                     idEmpleado = (int)persona.personal.idEmpleado,
-                    codEmpleado = persona.personal.codEmpleado,
-                    descArea = persona.personal.descArea,
+                    codigoEmpleado = persona.personal.codigoEmpleado,
+                    descripcionArea = persona.personal.descripcionArea,
                     cargo = persona.personal.cargo,
-                    fecIngreso = DateTime.Parse(persona.personal.fechaIngreso),
+                    fechaIngreso = DateTime.Parse(persona.personal.fechaIngreso),
                     salario = persona.personal.salario,
-                    genero = persona.personal.genero,
-                    idtpEmpleado = persona.personal.idTipoEmpleado,
-                    estado = persona.personal.estadoEmpleado,
-                    fechabaja = persona.personal.fechaBaja
+                    idGenero = persona.personal.idGenero,
+                    idTipoEmpleado = persona.personal.idTipoEmpleado,
+                    idEstado = persona.personal.estadoEmpleado,
+                    fechaBaja = persona.personal.fechaBaja
                 };
                 _context.Update(Empleado);
                 await Save();
@@ -129,7 +129,7 @@ namespace HistClinica.Repositories.Repositories
                                          personal = new PersonalDTO
                                          {
                                              idEmpleado = e.idEmpleado,
-                                             idTipoEmpleado = e.idtpEmpleado
+                                             idTipoEmpleado = e.idTipoEmpleado
                                          }
                                      }).FirstOrDefaultAsync(); 
             return personaDTO;

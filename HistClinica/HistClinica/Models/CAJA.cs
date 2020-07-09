@@ -11,7 +11,7 @@ namespace HistClinica.Models
 		[Key]
 		public int idCaja { get; set; }
 		public string descripcion { get; set; }	
-		public int tipo { get; set; }
-		public int estado { get; set; }
+		public int? idTipoCaja { get; set; }
+		public int? idEstado { get; set; }
 	}
 }

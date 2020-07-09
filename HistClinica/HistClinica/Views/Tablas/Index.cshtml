@@ -74,14 +74,14 @@
 				@foreach (var item in Model)
 				{
 					<tr>
-						<td style="visibility:hidden;">@item.idTab</td>
-						<td>@item.codTab</td>
+						<td style="visibility:hidden;">@item.idTablaGeneral</td>
+						<td>@item.codigoTablaGeneral</td>
 						<td>@item.descripcion</td>
 						<td>
 							<a type="submit" style="color:white;" class="edit btn btn-primary" aria-hidden="true">
 								<i class="fas fa-edit"></i>
 							</a>
-							@Html.ActionLink("Detalle", "VistaDetalle", new { id = item.idTab }, new { @class = "btn btn-primary fas fa-search" })
+							@Html.ActionLink("Detalle", "VistaDetalle", new { id = item.idTablaGeneral }, new { @class = "btn btn-primary fas fa-search" })
 							<a type="submit" style="color:white;" class="delete btn btn-danger" aria-hidden="true">
 								<i class="fas fa-minus"></i>
 							</a>

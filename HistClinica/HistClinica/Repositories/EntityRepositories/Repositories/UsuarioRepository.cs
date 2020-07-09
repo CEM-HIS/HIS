@@ -1,14 +1,14 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
@@ -48,7 +48,7 @@ namespace HistClinica.Repositories.Repositories
         public async Task DeleteUsuario(int? UsuarioID)
         {
             USUARIO Usuario = await _context.USUARIO.FindAsync(UsuarioID);
-            Usuario.estado = "2";
+            Usuario.idEstado = 2;
           //  Usuario.fechaBaja = DateTime.Now.ToString();
             _context.Update(Usuario);
             await Save();
@@ -72,7 +72,7 @@ namespace HistClinica.Repositories.Repositories
                 }
                 else
                 {
-                    string primeraletraapellido = _Persona.apePaterno.Substring(0, 1).Trim();
+                    string primeraletraapellido = _Persona.apellidoPaterno.Substring(0, 1).Trim();
                     string primernombre="";
                     string diaNacimiento = "";
                     if(_Persona.nombres.Trim().IndexOf(" ") != -1)
@@ -85,9 +85,9 @@ namespace HistClinica.Repositories.Repositories
                     {
                         primernombre = _Persona.nombres.Trim();
                     }
-                    if (_Persona.fecNace != null)
+                    if (_Persona.fechaNacimiento != null)
                     {
-                        diaNacimiento = Convert.ToDateTime(_Persona.fecNace).Day.ToString();
+                        diaNacimiento = Convert.ToDateTime(_Persona.fechaNacimiento).Day.ToString();
                     }
                     else return "No se pudo crear usuario por que falta fecha de nacimiento";
                     await _context.USUARIO.AddAsync(new USUARIO()
@@ -97,7 +97,7 @@ namespace HistClinica.Repositories.Repositories
                         fechaCrea = DateTime.Now.ToString(),
                         claveUser = persona.numeroDocumento.ToString(),
                         usuCrea = "",//ToDo: Agregar usuario de sesiones
-                        estado = "1",
+                        idEstado = 1,
                         usuMod = "",
                         fechaMod = ""
                     });

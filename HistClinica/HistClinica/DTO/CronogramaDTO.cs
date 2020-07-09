@@ -14,7 +14,7 @@ namespace HistClinica.DTO
 		public string dia { get; set; }
 
 		[Required(ErrorMessage = "Seleccione la fecha de inicio")]
-		public string fechaIni { get; set; }
+		public string fechaInicio { get; set; }
 
 		[Required(ErrorMessage = "Seleccione la fecha de fin")]
 		public string fechaFin { get; set; }
@@ -29,12 +29,12 @@ namespace HistClinica.DTO
 		public int? idConsultorio { get; set; }
 
 		[Required(ErrorMessage = "Seleccione una hora de inicio")]
-		public string hrInicio { get; set; }
+		public string horaInicio { get; set; }
 
 		[Required(ErrorMessage = "Seleccione una hora de fin")]
-		public string hrFin { get; set; }
+		public string horaFin { get; set; }
 		public int? idEstado { get; set; }
-		public string desEstado { get; set; }
+		public string descripcionEstado { get; set; }
         public string medico { get; set; }
 
 		public string especialidad { get; set; }

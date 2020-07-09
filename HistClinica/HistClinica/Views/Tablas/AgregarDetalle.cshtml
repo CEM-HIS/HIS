@@ -13,7 +13,7 @@
 		{
 			@Html.AntiForgeryToken()
 			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-			@Html.HiddenFor(m => m.idTab)
+			@Html.HiddenFor(m => m.idTablaGeneral)
 			<div class="modal-body">
 
 				<div class="row">
@@ -23,8 +23,8 @@
 						<div class="form-group">
 
 							<label>Codigo</label>
-							@Html.TextBoxFor(m => m.coddetTab, new { @class = "form-control" })
-							@Html.ValidationMessageFor(m => m.coddetTab, "", new { @class = "text-danger" })
+							@Html.TextBoxFor(m => m.codigoTablaDetalle, new { @class = "form-control" })
+							@Html.ValidationMessageFor(m => m.codigoTablaDetalle, "", new { @class = "text-danger" })
 							<span class="text-danger"></span>
 						</div>
 

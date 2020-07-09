@@ -1,7 +1,7 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -242,14 +242,14 @@ namespace HistClinica.Controllers
         public async Task<IActionResult> AnularCita(CitaDTO cita)
         {
             TempData["dni"] = cita.dniPaciente;
-            TempData["mensajecita"] = await _repository.AnularCita(cita.idCita, cita.motivoanulacion);
+            TempData["mensajecita"] = await _repository.AnularCita(cita.idCita, cita.motivoAnulacion);
             return RedirectToAction("Index", "Paciente");
         }
 
         public async Task<IActionResult> CambiarEstadoCita(int id)
         {
             var estado = await _utilrepository.getEstadoCita();
-            ViewBag.estado = estado;
+            ViewBag.idEstado = estado;
             CitaDTO cita = await _repository.GetById(id);
             return PartialView(cita);
         }

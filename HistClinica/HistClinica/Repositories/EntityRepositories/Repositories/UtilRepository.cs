@@ -1,14 +1,14 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
 	public class UtilRepository : IUtilRepository
 	{
@@ -45,14 +45,14 @@ namespace HistClinica.Repositories.Repositories
 
 			foreach (var item in cronograma)
 			{
-				intervalofecha = item.fechaFin.Value.DayOfYear - item.fechaIni.Value.DayOfYear;
-				intervalohora = int.Parse(item.hrFin.Split(":")[0]) - int.Parse(item.hrInicio.Split(":")[0]);
+				intervalofecha = item.fechaFin.Value.DayOfYear - item.fechaInicio.Value.DayOfYear;
+				intervalohora = int.Parse(item.horaFin.Split(":")[0]) - int.Parse(item.horaInicio.Split(":")[0]);
 				for (int i = 0; i <= intervalofecha; i++)
 				{
 					Fecha fecha = new Fecha()
 					{
 						idprogramMed = item.idProgramMedica,
-						fecprogram = item.fechaIni.Value.AddDays(i).ToShortDateString()
+						fecprogram = item.fechaInicio.Value.AddDays(i).ToShortDateString()
 					};
 					fechas.Add(fecha);
 				}
@@ -83,11 +83,11 @@ namespace HistClinica.Repositories.Repositories
 		{
 			var combo = await(	from td in _context.TABLA_DETALLE
 								join med in _context.MEDICO
-								on td.idDet equals med.idEspecialidad
+								on td.idTablaDetalle equals med.idEspecialidad
 								where med.idMedico == id
 								select new
 								{
-									idtab = td.idDet,
+									idtab = td.idTablaDetalle,
 									descripcion = td.descripcion
 								}).ToListAsync();
 			return combo;
@@ -115,13 +115,13 @@ namespace HistClinica.Repositories.Repositories
 			var cronograma = await (from cro in _context.CRONOGRAMA_MEDICO
                                where cro.idProgramMedica == id
                                select cro).FirstOrDefaultAsync();
-			intervalohora = int.Parse(cronograma.hrFin.Split(":")[0]) - int.Parse(cronograma.hrInicio.Split(":")[0]);
+			intervalohora = int.Parse(cronograma.horaFin.Split(":")[0]) - int.Parse(cronograma.horaInicio.Split(":")[0]);
 
 			for (int j = 0; j < intervalohora; j++)
 			{
 				hora = new Hora{
 					id = cronograma.idProgramMedica,
-					hora = (int.Parse(cronograma.hrInicio.Split(":")[0]) + j).ToString() + ":00"
+					hora = (int.Parse(cronograma.horaInicio.Split(":")[0]) + j).ToString() + ":00"
 				};
 				horas.Add(hora);
 			}
@@ -132,14 +132,14 @@ namespace HistClinica.Repositories.Repositories
 		{
 			var medico = await (from td in _context.TABLA_DETALLE
 								join med in _context.MEDICO
-                                on td.idDet equals med.idEspecialidad
+                                on td.idTablaDetalle equals med.idEspecialidad
 								join per in _context.PERSONA
                                 on med.idPersona equals per.idPersona
-								where td.idDet == id
+								where td.idTablaDetalle == id
 								select new
 								{
 									idMedico = med.idMedico,
-									nombres = per.nombres + " "  + per.apePaterno + " " + per.apeMaterno
+									nombres = per.nombres + " "  + per.apellidoPaterno + " " + per.apellidoMaterno
 								}).ToListAsync();
 			return medico;
 		}
@@ -153,7 +153,7 @@ namespace HistClinica.Repositories.Repositories
 						 select new
 						 {
 							 idMedico = med.idMedico,
-							 nombres = per.nombres +  " " + per.apePaterno + " " + per.apeMaterno
+							 nombres = per.nombres +  " " + per.apellidoPaterno + " " + per.apellidoMaterno
 						 }).ToListAsync();
 			return medico;
 		}
@@ -161,11 +161,11 @@ namespace HistClinica.Repositories.Repositories
 		public async Task<object> GetTipo(string nombretipo)
 		{
 			var combo = await (from tg in _context.TABLA_GENERAL
-								 join td in _context.TABLA_DETALLE on tg.idTab equals td.idTab
+								 join td in _context.TABLA_DETALLE on tg.idTablaGeneral equals td.idTablaGeneral
 								 where tg.descripcion == nombretipo
 								 select new
 								 {
-									 idtab = td.idDet,
+									 idtab = td.idTablaDetalle,
 									 descripcion = td.descripcion
 								 }).ToListAsync();
 			return combo;
@@ -174,7 +174,7 @@ namespace HistClinica.Repositories.Repositories
 		public async Task<List<TABLA_DETALLE>> getServicios()
 		{
 			List<TABLA_DETALLE> servicios = await (from s in _context.TABLA_DETALLE
-													   where s.idTab == 16
+													   where s.idTablaGeneral == 16
 													   select s
 													   ).ToListAsync();
 			return servicios;

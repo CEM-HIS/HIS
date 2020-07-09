@@ -1,5 +1,8 @@
 ﻿using HistClinica.Data;
+<<<<<<< HEAD
 using HistClinica.DTO;
+=======
+>>>>>>> master
 using HistClinica.Models;
 using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +13,11 @@ using System.Threading.Tasks;
 
 namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
+<<<<<<< HEAD
 	public class LicenciaRepository : ILicenciaRepository
+=======
+	public class LicenciaRepository: ILicenciaRepository
+>>>>>>> master
 	{
 		private readonly ClinicaServiceContext _context;
 
@@ -19,6 +26,7 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 			_context = contexto;
 		}
 
+<<<<<<< HEAD
 		public async Task<List<licenciaDTO>> getAll()
 		{
 			List<licenciaDTO> licencia = await (from l in _context.LICENCIA
@@ -33,6 +41,12 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 													estado = det.descripcion,
 													medico = per.nombres + " " + per.apePaterno + " " + per.apeMaterno
 												}).ToListAsync();
+=======
+		public async Task<List<LICENCIA>> getAll()
+		{
+			List<LICENCIA> licencia = await (from l in _context.LICENCIA
+											 select l).ToListAsync();
+>>>>>>> master
 			return licencia;
 		}
 
@@ -40,6 +54,7 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 		{
 			try
 			{
+<<<<<<< HEAD
 				await _context.LICENCIA.AddAsync(new LICENCIA()
 				{
 					horaIni = licencia.horaIni,
@@ -48,6 +63,15 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 					fechaFin = licencia.fechaFin,
 					idMedico = licencia.idMedico,
 					estado = 173
+=======
+				await _context.LICENCIA.AddAsync(new LICENCIA() { 
+					horaInicio = licencia.horaInicio,
+					horaFin = licencia.horaFin,
+					fechaInicio = licencia.fechaInicio,
+					fechaFin = licencia.fechaFin,
+					idMedico = licencia.idMedico,
+					idEstado = 1
+>>>>>>> master
 				});
 				await Save();
 				return "Se registro licencia correctamente";

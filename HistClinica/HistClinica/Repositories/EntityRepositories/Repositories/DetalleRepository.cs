@@ -1,7 +1,7 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
     public class DetalleRepository:IDetalleRepository
     {
@@ -45,20 +45,20 @@ namespace HistClinica.Repositories.Repositories
 
         public async Task<bool> DetalleExists(int? id)
         {
-            return await _context.TABLA_DETALLE.AnyAsync(e => e.idDet == id);
+            return await _context.TABLA_DETALLE.AnyAsync(e => e.idTablaDetalle == id);
         }
 
         public async Task<TABLA_DETALLE> GetById(int? Id)
         {
             TABLA_DETALLE listaDetalle = new TABLA_DETALLE();
             listaDetalle = await (from detalle in _context.TABLA_DETALLE
-                                 where detalle.idDet == Id
+                                 where detalle.idTablaDetalle == Id
                                  select new TABLA_DETALLE
                                  {
-                                     idDet = detalle.idDet,
-                                     coddetTab = detalle.coddetTab,
+                                     idTablaDetalle = detalle.idTablaDetalle,
+                                     codigoTablaDetalle = detalle.codigoTablaDetalle,
                                      descripcion = detalle.descripcion,
-                                     idTab = detalle.idTab
+                                     idTablaGeneral = detalle.idTablaGeneral
                                  }).FirstOrDefaultAsync();
             return listaDetalle;
         }
@@ -69,9 +69,9 @@ namespace HistClinica.Repositories.Repositories
             {
                 await _context.TABLA_DETALLE.AddAsync(new TABLA_DETALLE()
                 {
-                    coddetTab = Detalle.coddetTab,
+                    codigoTablaDetalle = Detalle.codigoTablaDetalle,
                     descripcion = Detalle.descripcion,
-                    idTab = Detalle.idTab
+                    idTablaGeneral = Detalle.idTablaGeneral
             });
                 await Save();
                 return "Ingreso Exitoso";
@@ -101,7 +101,7 @@ namespace HistClinica.Repositories.Repositories
         {
             try
             {
-                _context.Entry(Detalle).Property(x => x.coddetTab).IsModified = true;
+                _context.Entry(Detalle).Property(x => x.codigoTablaDetalle).IsModified = true;
                 _context.Entry(Detalle).Property(x => x.descripcion).IsModified = true;
                 await Save();
                 return "Actualizacion Exitosa";
@@ -117,9 +117,9 @@ namespace HistClinica.Repositories.Repositories
         {
             DetalleDTO dto = new DetalleDTO();
             TABLA_GENERAL general = await generalRepository.GetById(id);
-            dto.idTab = general.idTab;
-            dto.codTab = general.codTab;
-            dto.ldetalle = await GetDetalleByIdGeneral(id);
+            dto.idTablaGeneral = general.idTablaGeneral;
+            dto.codigoTablaGeneral = general.codigoTablaGeneral;
+            dto.detalles = await GetDetalleByIdGeneral(id);
             return dto;
         }
 
@@ -127,13 +127,13 @@ namespace HistClinica.Repositories.Repositories
         {
             return await (from det in _context.TABLA_DETALLE
                           where det.descripcion == descripcion
-                          select det.idDet).FirstOrDefaultAsync();
+                          select det.idTablaDetalle).FirstOrDefaultAsync();
         }
 
         public async Task<List<TABLA_DETALLE>> GetDetalleByIdGeneral(int? id)
         {
             List<TABLA_DETALLE> general = await (from p in _context.TABLA_DETALLE join g in _context.TABLA_GENERAL
-                                           on p.idTab equals g.idTab where g.idTab == id select p).ToListAsync();
+                                           on p.idTablaGeneral equals g.idTablaGeneral where g.idTablaGeneral == id select p).ToListAsync();
             return general;
         }
     }

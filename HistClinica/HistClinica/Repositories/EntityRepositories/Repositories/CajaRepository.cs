@@ -1,14 +1,14 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
     public class CajaRepository:ICajaRepository
     {
@@ -55,7 +55,7 @@ namespace HistClinica.Repositories.Repositories
         public async Task DeleteCaja(int CajaID)
         {
             CAJA Caja = await _context.CAJA.FindAsync(CajaID);
-            Caja.estado = 2;
+            Caja.idEstado = 2;
             _context.Update(Caja);
             await Save();
         }
@@ -66,8 +66,8 @@ namespace HistClinica.Repositories.Repositories
                 await _context.CAJA.AddAsync(new CAJA()
                 {
                     descripcion = Caja.descripcion,
-                    tipo = Caja.tipo,
-                    estado = Caja.estado
+                    idTipoCaja = Caja.idTipoCaja,
+                    idEstado = Caja.idEstado
                 });
                 await Save();
                 return "Ingreso Exitoso";
@@ -128,7 +128,8 @@ namespace HistClinica.Repositories.Repositories
                         montoSolesCierre = cajaAsignada.montoSolesCierre,
                         montoDolaresCierre = cajaAsignada.montoDolaresCierre,
                         montoEurosCierre = cajaAsignada.montoEurosCierre,
-                        glosa = cajaAsignada.glosa
+                        glosaApertura = cajaAsignada.glosaApertura,
+                        glosaCierre = cajaAsignada.glosaCierre
                     });
                     await Save();
                     return "Ingreso Exitoso";

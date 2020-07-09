@@ -389,7 +389,7 @@ INSERT [dbo].[TABLA_GENERAL] ([idTab], [codTab], [descripcion], [tipo], [fechaCr
 GO
 INSERT [dbo].[TABLA_GENERAL] ([idTab], [codTab], [descripcion], [tipo], [fechaCreate], [usuCreate], [estado], [fechabaja]) VALUES (5, N'5', N'Ocupacion', N'ocu001', CAST(N'1900-01-01' AS Date), N'', NULL, NULL)
 GO
-INSERT [dbo].[TABLA_GENERAL] ([idTab], [codTab], [descripcion], [tipo], [fechaCreate], [usuCreate], [estado], [fechabaja]) VALUES (6, N'6', N'Grupo Sangre', N'sang001', CAST(N'1900-01-01' AS Date), N'', NULL, NULL)
+INSERT [dbo].[TABLA_GENERAL] ([idTab], [codTab], [descripcion], [tipo], [fechaCreate], [usuCreate], [estado], [fechabaja]) VALUES (6, N'6', N'Grupo Sanguineo', N'sang001', CAST(N'1900-01-01' AS Date), N'', NULL, NULL)
 GO
 INSERT [dbo].[TABLA_GENERAL] ([idTab], [codTab], [descripcion], [tipo], [fechaCreate], [usuCreate], [estado], [fechabaja]) VALUES (7, N'7', N'Factor RH', N'fh001', CAST(N'1900-01-01' AS Date), N'', NULL, NULL)
 GO

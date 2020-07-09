@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using HistClinica.DTO;
 using HistClinica.Models;
 
-namespace HistClinica.Repositories.Interfaces
+namespace HistClinica.Repositories.EntityRepositories.Interfaces
 {
     public interface IDetalleRepository
     {

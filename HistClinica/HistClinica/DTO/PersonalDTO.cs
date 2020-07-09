@@ -11,10 +11,10 @@ namespace HistClinica.DTO
         #region Personal
         public int? idEmpleado { get; set; }
         public int? idMedico { get; set; }
-        public string codMedico { get; set; }
+        public string codigoMedico { get; set; }
         public string condicion { get; set; }
-        public string nroRne { get; set; }
-        public int? nroRucMedico { get; set; }
+        public string numeroRne { get; set; }
+        public int? numeroRuc { get; set; }
         public int? idTipoEmpleado { get; set; }
 
         [Required(ErrorMessage = "Ingrese fecha de ingreso")]
@@ -26,13 +26,13 @@ namespace HistClinica.DTO
         [Required(ErrorMessage = "Ingrese cargo")]
         public string cargo { get; set; }
         public int? idEspecialidad { get; set; }
-        public string codEmpleado { get; set; }
+        public string codigoEmpleado { get; set; }
 
         [Required(ErrorMessage = "Ingrese area")]
-        public string descArea { get; set; }
+        public string descripcionArea { get; set; }
         public int? estadoEmpleado { get; set; }
-        public int? estadoMedico { get; set; }
-        public int? genero { get; set; }
+        public int? idEstado { get; set; }
+        public int? idGenero { get; set; }
         public double? precio { get; set; }
         public int? salario { get; set; }
         public string fechaBaja { get; set; }

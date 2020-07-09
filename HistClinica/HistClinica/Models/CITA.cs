@@ -7,30 +7,29 @@ namespace HistClinica.Models
 	{
 		[Key]
 		public int idCita { get; set; }
-		public int? codCita { get; set; }
-		public int? nroCita { get; set; }
+		public int? codigoCita { get; set; }
+		public int? numeroCita { get; set; }
 		public string descripcion { get; set; }
 		public DateTime? fechaCita { get; set; }
 		public string ultCie10 { get; set; }
-		public int? tpAtencion { get; set; }
-		public string nroHC { get; set; }
+		public int? idTipoAtencion { get; set; }
+		public string numeroHC { get; set; }
 		public string ejecutado { get; set; }
 		public string prioridad { get; set; }
 		public double? precio { get; set; }
 		public double? descuento { get; set; }
 		public double? coa { get; set; }
 		public double? igv { get; set; }
-		public string estadoReprogram { get; set; }
-		public int? tipoCita { get; set; }
-		public string motivoRepro { get; set; }
-		public string motivoAnula { get; set; }
+		public string estadoReprogramacion { get; set; }
+		public int? idtipoCita { get; set; }
+		public string motivoReprogramacion { get; set; }
+		public string motivoAnulacion { get; set; }
 		public int? idEstadoCita { get; set; }
 		public int? idPaciente { get; set; }
 		public int? idEmpleado { get; set; }
 		public int? idConsultorio { get; set; }
-		public int? idProgramMedica { get; set; }
-		public int? idservicioCli { get; set; }
-		public int? estado { get; set; }
-		public DateTime? fechabaja { get; set; }
+		public int? idProgramacionMedica { get; set; }
+		public int? idServicioClinica { get; set; }
+		public DateTime? fechaBaja { get; set; }
 	}
 }

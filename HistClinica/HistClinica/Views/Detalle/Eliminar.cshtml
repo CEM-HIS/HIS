@@ -13,10 +13,10 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.coddetTab)
+            @Html.DisplayNameFor(model => model.codigoTablaDetalle)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.coddetTab)
+            @Html.DisplayFor(model => model.codigoTablaDetalle)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.descripcion)
@@ -25,10 +25,10 @@
             @Html.DisplayFor(model => model.descripcion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.abrev)
+            @Html.DisplayNameFor(model => model.abreviatura)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.abrev)
+            @Html.DisplayFor(model => model.abreviatura)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.fuente)
@@ -37,21 +37,21 @@
             @Html.DisplayFor(model => model.fuente)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.estado)
+            @Html.DisplayNameFor(model => model.idEstado)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.estado)
+            @Html.DisplayFor(model => model.idEstado)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.idTab)
+            @Html.DisplayNameFor(model => model.idTablaGeneral)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.idTab)
+            @Html.DisplayFor(model => model.idTablaGeneral)
         </dd>
     </dl>
     
     <form asp-action="Eliminar">
-        <input type="hidden" asp-for="idDet" />
+        <input type="hidden" asp-for="idTablaDetalle" />
         <input type="submit" value="Eliminar" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

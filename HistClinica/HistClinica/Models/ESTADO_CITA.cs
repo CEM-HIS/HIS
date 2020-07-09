@@ -6,7 +6,7 @@ namespace HistClinica.Models
 	{
 		[Key]
 		public int idEstadoCita { get; set; }
-		public string codEstadoCita { get; set; }
+		public string codigoEstadoCita { get; set; }
 		public string estado { get; set; }
 		public string origen { get; set; }
 	}

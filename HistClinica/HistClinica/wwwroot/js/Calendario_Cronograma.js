@@ -20,7 +20,7 @@
                         idconsultorio: moment(v.idconsultorio),
                         horhrInicio: moment(v.horhrInicio),
                         hrFin: moment(v.hrFin),
-                        estado: moment(v.estado)
+                        estado: moment(v.idEstado)
                     });
                 })
 

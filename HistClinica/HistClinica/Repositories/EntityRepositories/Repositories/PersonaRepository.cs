@@ -1,7 +1,7 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
+
 {
     public class PersonaRepository : IPersonaRepository
     {
@@ -57,14 +58,14 @@ namespace HistClinica.Repositories.Repositories
         {
             return await (from d in _context.TABLA_DETALLE
                           where d.descripcion == descripcion
-                         select d.idDet
+                         select d.idTablaDetalle
                          ).FirstOrDefaultAsync();
         }
         public async Task DeletePersona(int? PersonaID)
         {
             PERSONA Persona = await _context.PERSONA.FindAsync(PersonaID);
-            Persona.estado = "2";
-            Persona.fechabaja = DateTime.Now.ToString();
+            Persona.idEstado = 2;
+            Persona.fechaBaja = DateTime.Now.ToString();
             _context.Update(Persona);
             await Save();
             int idEmpleado = (from e in _context.EMPLEADO
@@ -85,50 +86,48 @@ namespace HistClinica.Repositories.Repositories
             {
                 await _context.PERSONA.AddAsync(new PERSONA()
                 {
-                    apePaterno = persona.apellidoPaterno,
-                    apeMaterno = persona.apellidoMaterno,
+                    apellidoPaterno = persona.apellidoPaterno,
+                    apellidoMaterno = persona.apellidoMaterno,
                     nombres = persona.nombres,
-                    idtpDocumento = persona.idTipoDocumento,
+                    idTipoDocumento = persona.idTipoDocumento,
                     dniPersona = persona.numeroDocumento,
                     idSexo = persona.idSexo,
-                    fecNace = persona.fecNacimiento,
-                    idEstCivil = persona.idEstCivil,
+                    fechaNacimiento = persona.fechaNacimiento,
+                    idEstadoCivil = persona.idEstadoCivil,
                     idOcupacion = persona.idOcupacion,
-                    domiFiscal = persona.domiFiscal,
+                    domicioFiscal = persona.domicioFiscal,
                     telefono = persona.telefono,
                     celular = persona.celular,
                     correo = persona.correo,
-                    estado = "1",
-                    centroEduca = persona.centroEduca,
+                    idEstado = 1,
+                    centroEducativo = persona.centroEducativo,
                     condicionRuc = persona.condicionRuc,
                     edad = persona.edad,
                     estadoRuc = persona.estadoRuc,
                     fotografia = persona.fotografia,
-                    idciaSeguro = persona.idciaSeguro,
-                    iddatoSiteds = persona.iddatoSiteds,
-                    idemprConvenio = persona.idemprConvenio,
+                    idCompañiaSeguro = persona.idCompañiaSeguro,
+                    idDatoSiteds = persona.idDatoSiteds,
+                    idEmpresaConvenio = persona.idEmpresaConvenio,
                     idEtnico = persona.idEtnico,
-                    idFactorrh = persona.idFactorrh,
-                    idgpoSangre = persona.idgpoSangre,
-                    idGrdInstruc = persona.idGradoInstruccion,
+                    idGradoInstruccion = persona.idGradoInstruccion,
                     idParentesco = persona.idParentesco,
                     idReligion = persona.idReligion,
-                    idtipoIafa = persona.idtipoIafa,
-                    idtipoVia = persona.idtipoVia,
-                    idUbigeoNace = persona.idUbigeoNace,
-                    idUbigeoResi = persona.idUbigeoResi,
+                    idTipoIafa = persona.idTipoIafa,
+                    idtipoVia = persona.idTipoVia,
+                    idUbigeoNacimiento = persona.idUbigeoNacimiento,
+                    idUbigeoResidencia = persona.idUbigeoResidencia,
                     interior = persona.interior,
                     manzana = persona.manzana,
                     nombreVia = persona.nombreVia,
-                    nroBlock = persona.nroBlock,
-                    nroDpto = persona.nroDpto,
-                    nroEtapa = persona.nroEtapa,
-                    nroKm = persona.nroKm,
-                    nroLote = persona.nroLote,
-                    nroRuc = persona.ruc,
-                    nroVia = persona.nroVia,
+                    numeroBloque = persona.numeroBloque,
+                    numeroDepartamento = persona.numeroDepartamento,
+                    numeroEtapa = persona.numeroEtapa,
+                    numeroKilometro = persona.numeroKilometro,
+                    numeroLote = persona.numeroLote,
+                    numeroRuc = persona.numeroRuc,
+                    numeroVia = persona.numeroVia,
                     razonSocial = persona.razonSocial,
-                    tpPersona = persona.tpPersona
+                    fechaBaja = null
                 });
                 await Save();
                 idPersona = (await _context.PERSONA
@@ -160,50 +159,48 @@ namespace HistClinica.Repositories.Repositories
                 _context.Update(new PERSONA()
                 {
                     idPersona = (int)persona.idPersona,
-                    apePaterno = persona.apellidoPaterno,
-                    apeMaterno = persona.apellidoMaterno,
+                    apellidoPaterno = persona.apellidoPaterno,
+                    apellidoMaterno = persona.apellidoMaterno,
                     nombres = persona.nombres,
-                    idtpDocumento = persona.idTipoDocumento,
+                    idTipoDocumento = persona.idTipoDocumento,
                     dniPersona = persona.numeroDocumento,
                     idSexo = persona.idSexo,
-                    fecNace = persona.fecNacimiento,
-                    idEstCivil = persona.idEstCivil,
+                    fechaNacimiento = persona.fechaNacimiento,
+                    idEstadoCivil = persona.idEstadoCivil,
                     idOcupacion = persona.idOcupacion,
-                    domiFiscal = persona.domiFiscal,
+                    domicioFiscal = persona.domicioFiscal,
                     telefono = persona.telefono,
                     celular = persona.celular,
                     correo = persona.correo,
-                    estado = "1",
-                    centroEduca = persona.centroEduca,
+                    idEstado = persona.idEstado,
+                    centroEducativo = persona.centroEducativo,
                     condicionRuc = persona.condicionRuc,
                     edad = persona.edad,
                     estadoRuc = persona.estadoRuc,
                     fotografia = persona.fotografia,
-                    idciaSeguro = persona.idciaSeguro,
-                    iddatoSiteds = persona.iddatoSiteds,
-                    idemprConvenio = persona.idemprConvenio,
+                    idCompañiaSeguro = persona.idCompañiaSeguro,
+                    idDatoSiteds = persona.idDatoSiteds,
+                    idEmpresaConvenio = persona.idEmpresaConvenio,
                     idEtnico = persona.idEtnico,
-                    idFactorrh = persona.idFactorrh,
-                    idgpoSangre = persona.idgpoSangre,
-                    idGrdInstruc = persona.idGradoInstruccion,
+                    idGradoInstruccion = persona.idGradoInstruccion,
                     idParentesco = persona.idParentesco,
                     idReligion = persona.idReligion,
-                    idtipoIafa = persona.idtipoIafa,
-                    idtipoVia = persona.idtipoVia,
-                    idUbigeoNace = persona.idUbigeoNace,
-                    idUbigeoResi = persona.idUbigeoResi,
+                    idTipoIafa = persona.idTipoIafa,
+                    idtipoVia = persona.idTipoVia,
+                    idUbigeoNacimiento = persona.idUbigeoNacimiento,
+                    idUbigeoResidencia = persona.idUbigeoResidencia,
                     interior = persona.interior,
                     manzana = persona.manzana,
                     nombreVia = persona.nombreVia,
-                    nroBlock = persona.nroBlock,
-                    nroDpto = persona.nroDpto,
-                    nroEtapa = persona.nroEtapa,
-                    nroKm = persona.nroKm,
-                    nroLote = persona.nroLote,
-                    nroRuc = persona.ruc,
-                    nroVia = persona.nroVia,
+                    numeroBloque = persona.numeroBloque,
+                    numeroDepartamento = persona.numeroDepartamento,
+                    numeroEtapa = persona.numeroEtapa,
+                    numeroKilometro = persona.numeroKilometro,
+                    numeroLote = persona.numeroLote,
+                    numeroRuc = persona.numeroRuc,
+                    numeroVia = persona.numeroVia,
                     razonSocial = persona.razonSocial,
-                    tpPersona = persona.tpPersona
+                    fechaBaja = null
                 });
                 await Save();
                 if (persona.personal != null)
@@ -230,13 +227,13 @@ namespace HistClinica.Repositories.Repositories
         {
             List<PersonaDTO> Personas = await (from p in _context.PERSONA
                                                join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                               where e.idtpEmpleado != null
+                                               where e.idTipoEmpleado != null
                                                select new PersonaDTO
                                                {
                                                    idPersona = p.idPersona,
                                                    nombres = p.nombres,
-                                                   apellidoPaterno = p.apePaterno,
-                                                   apellidoMaterno = p.apeMaterno,
+                                                   apellidoPaterno = p.apellidoPaterno,
+                                                   apellidoMaterno = p.apellidoMaterno,
                                                    telefono = p.telefono
                                                }).ToListAsync();
 
@@ -246,7 +243,7 @@ namespace HistClinica.Repositories.Repositories
                                               where e.idPersona == Personas[i].idPersona
                                               select new PersonalDTO
                                               {
-                                                  fechaIngreso = e.fecIngreso.Value.ToString("yyyy-MM-dd"),
+                                                  fechaIngreso = e.fechaIngreso.Value.ToString("yyyy-MM-dd"),
                                                   cargo = e.cargo
                                               }).FirstOrDefaultAsync();
             }
@@ -259,13 +256,13 @@ namespace HistClinica.Repositories.Repositories
             {
                 Personas = await (from p in _context.PERSONA
                                                    join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                                   where e.idtpEmpleado != null && p.dniPersona == dni
+                                                   where e.idTipoEmpleado != null && p.dniPersona == dni
                                                    select new PersonaDTO
                                                    {
                                                        idPersona = p.idPersona,
                                                        nombres = p.nombres,
-                                                       apellidoPaterno = p.apePaterno,
-                                                       apellidoMaterno = p.apeMaterno,
+                                                       apellidoPaterno = p.apellidoPaterno,
+                                                       apellidoMaterno = p.apellidoMaterno,
                                                        telefono = p.telefono
                                                    }).ToListAsync();
 
@@ -275,7 +272,7 @@ namespace HistClinica.Repositories.Repositories
                                                   where e.idPersona == Personas[i].idPersona
                                                   select new PersonalDTO
                                                   {
-                                                      fechaIngreso = e.fecIngreso.Value.ToString("yyyy-MM-dd"),
+                                                      fechaIngreso = e.fechaIngreso.Value.ToString("yyyy-MM-dd"),
                                                       cargo = e.cargo
                                                   }).FirstOrDefaultAsync();
                 }
@@ -284,14 +281,14 @@ namespace HistClinica.Repositories.Repositories
             {
                 Personas = await (from p in _context.PERSONA
                                   join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                  where e.idtpEmpleado != null &&
-                                  (p.apePaterno + " " + p.apeMaterno).Trim().Contains(apellidos)
+                                  where e.idTipoEmpleado != null &&
+                                  (p.apellidoPaterno + " " + p.apellidoMaterno).Trim().Contains(apellidos)
                                   select new PersonaDTO
                                   {
                                       idPersona = p.idPersona,
                                       nombres = p.nombres,
-                                      apellidoPaterno = p.apePaterno,
-                                      apellidoMaterno = p.apeMaterno,
+                                      apellidoPaterno = p.apellidoPaterno,
+                                      apellidoMaterno = p.apellidoMaterno,
                                       telefono = p.telefono
                                   }).ToListAsync();
 
@@ -301,7 +298,7 @@ namespace HistClinica.Repositories.Repositories
                                                   where e.idPersona == Personas[i].idPersona
                                                   select new PersonalDTO
                                                   {
-                                                      fechaIngreso = e.fecIngreso.Value.ToString("yyyy-MM-dd"),
+                                                      fechaIngreso = e.fechaIngreso.Value.ToString("yyyy-MM-dd"),
                                                       cargo = e.cargo
                                                   }).FirstOrDefaultAsync();
                 }
@@ -320,22 +317,22 @@ namespace HistClinica.Repositories.Repositories
                              {
                                  idPersona = p.idPersona,
                                  nombres = p.nombres,
-                                 apellidoPaterno = p.apePaterno,
-                                 apellidoMaterno = p.apeMaterno,
-                                 fecNacimiento = p.fecNace,
+                                 apellidoPaterno = p.apellidoPaterno,
+                                 apellidoMaterno = p.apellidoMaterno,
+                                 fechaNacimiento = p.fechaNacimiento,
                                  telefono = p.telefono,
                                  numeroDocumento = (int)p.dniPersona,
-                                 ruc = p.nroRuc
+                                 numeroRuc = p.numeroRuc
                              }).FirstOrDefaultAsync();
             Persona.personal = await (from e in _context.EMPLEADO
                                       where e.idPersona == Persona.idPersona
                                       select new PersonalDTO
                                       {
                                           idEmpleado = e.idEmpleado,
-                                          idTipoEmpleado = e.idtpEmpleado,
-                                          fechaIngreso = e.fecIngreso.Value.ToString("yyyy-MM-dd"),
+                                          idTipoEmpleado = e.idTipoEmpleado,
+                                          fechaIngreso = e.fechaIngreso.Value.ToString("yyyy-MM-dd"),
                                           cargo = e.cargo,
-                                          descArea = e.descArea
+                                          descripcionArea = e.descripcionArea
                                       }).FirstOrDefaultAsync();
             //Tipo de Empleado verificar
             if (Persona.personal.idTipoEmpleado == (int)await _detalleRepository.GetIdDetalleByDescripcion("MEDICA/O"))
@@ -346,10 +343,10 @@ namespace HistClinica.Repositories.Repositories
                                              select new PersonalDTO
                                              {
                                                  idEspecialidad = (from tb in _context.TABLA_DETALLE
-                                                                   where m.idEspecialidad == tb.idDet
+                                                                   where m.idEspecialidad == tb.idTablaDetalle
                                                                    select m.idEspecialidad).FirstOrDefault(),
                                                  idMedico = m.idMedico,
-                                                 numeroColegio = m.nroColegio
+                                                 numeroColegio = m.numeroColegio
                                              }).FirstOrDefaultAsync();
                 Persona.personal.idEspecialidad = personaTemporal.idEspecialidad;
                 Persona.personal.idMedico = personaTemporal.idMedico;
