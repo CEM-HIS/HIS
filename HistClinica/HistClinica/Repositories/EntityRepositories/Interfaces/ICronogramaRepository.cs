@@ -17,6 +17,6 @@ namespace HistClinica.Repositories.Interfaces
 		Task<List<CronogramaDTO>> GetAllCronogramasConsulta();
 		Task DeleteCronograma(int? CronoID);
 		Task Save();
-		Task<List<CronogramaDTO>> GetCronogramaByMedico(int idmedico);
+		Task<List<CronogramaDTO>> GetCronogramaByMedico(string nombre,string apellido, int especialidad);
 	}
 }
