@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HistClinica.Migrations
 {
-    public partial class nuevamigracion : Migration
+    public partial class his : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -131,6 +131,19 @@ namespace HistClinica.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EMPRESA",
+                columns: table => new
+                {
+                    idempresa = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EMPRESA", x => x.idempresa);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ESTADO_CITA",
                 columns: table => new
                 {
@@ -166,6 +179,33 @@ namespace HistClinica.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MEDICO", x => x.idMedico);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MENU",
+                columns: table => new
+                {
+                    IdMenu = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombreMenu = table.Column<string>(nullable: true),
+                    linkMenu = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MENU", x => x.IdMenu);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MODULO",
+                columns: table => new
+                {
+                    idModulo = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MODULO", x => x.idModulo);
                 });
 
             migrationBuilder.CreateTable(
@@ -325,6 +365,32 @@ namespace HistClinica.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ROL",
+                columns: table => new
+                {
+                    idRol = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ROL", x => x.idRol);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SEDE",
+                columns: table => new
+                {
+                    idSede = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    descripcion = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SEDE", x => x.idSede);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TABLA_DETALLE",
                 columns: table => new
                 {
@@ -400,10 +466,19 @@ namespace HistClinica.Migrations
                 name: "EMPLEADO");
 
             migrationBuilder.DropTable(
+                name: "EMPRESA");
+
+            migrationBuilder.DropTable(
                 name: "ESTADO_CITA");
 
             migrationBuilder.DropTable(
                 name: "MEDICO");
+
+            migrationBuilder.DropTable(
+                name: "MENU");
+
+            migrationBuilder.DropTable(
+                name: "MODULO");
 
             migrationBuilder.DropTable(
                 name: "PACIENTE");
@@ -416,6 +491,12 @@ namespace HistClinica.Migrations
 
             migrationBuilder.DropTable(
                 name: "PERSONA");
+
+            migrationBuilder.DropTable(
+                name: "ROL");
+
+            migrationBuilder.DropTable(
+                name: "SEDE");
 
             migrationBuilder.DropTable(
                 name: "TABLA_DETALLE");

@@ -276,6 +276,21 @@ namespace HistClinica.Migrations
                     b.ToTable("EMPLEADO");
                 });
 
+            modelBuilder.Entity("HistClinica.Models.EMPRESA", b =>
+                {
+                    b.Property<int?>("idempresa")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idempresa");
+
+                    b.ToTable("EMPRESA");
+                });
+
             modelBuilder.Entity("HistClinica.Models.ESTADO_CITA", b =>
                 {
                     b.Property<int>("idEstadoCita")
@@ -340,6 +355,39 @@ namespace HistClinica.Migrations
                     b.HasKey("idMedico");
 
                     b.ToTable("MEDICO");
+                });
+
+            modelBuilder.Entity("HistClinica.Models.MENU", b =>
+                {
+                    b.Property<int?>("IdMenu")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("linkMenu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nombreMenu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdMenu");
+
+                    b.ToTable("MENU");
+                });
+
+            modelBuilder.Entity("HistClinica.Models.MODULO", b =>
+                {
+                    b.Property<int?>("idModulo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idModulo");
+
+                    b.ToTable("MODULO");
                 });
 
             modelBuilder.Entity("HistClinica.Models.PACIENTE", b =>
@@ -545,7 +593,7 @@ namespace HistClinica.Migrations
 
             modelBuilder.Entity("HistClinica.Models.PERFIL", b =>
                 {
-                    b.Property<int>("idPerfil")
+                    b.Property<int?>("idPerfil")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -712,6 +760,36 @@ namespace HistClinica.Migrations
                     b.HasKey("idPersona");
 
                     b.ToTable("PERSONA");
+                });
+
+            modelBuilder.Entity("HistClinica.Models.ROL", b =>
+                {
+                    b.Property<int?>("idRol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idRol");
+
+                    b.ToTable("ROL");
+                });
+
+            modelBuilder.Entity("HistClinica.Models.SEDE", b =>
+                {
+                    b.Property<int?>("idSede")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idSede");
+
+                    b.ToTable("SEDE");
                 });
 
             modelBuilder.Entity("HistClinica.Models.TABLA_DETALLE", b =>

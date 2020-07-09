@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HistClinica.Controllers
 {
-    public class SesionController : Controller
+    public class AccesoController : Controller
     {
         public IActionResult Index()
         {
