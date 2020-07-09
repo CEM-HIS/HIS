@@ -125,13 +125,14 @@ namespace HistClinica.Repositories.Repositories
 			}
 		}
 
-		public async Task<List<CronogramaDTO>> GetCronogramaByMedico(int idmedico)
+		public async Task<List<CronogramaDTO>> GetCronogramaByMedico(string nombre,string apellido, int especialidad)
 		{
 			List<CronogramaDTO> cronogramas = await (from c in _context.CRONOGRAMA_MEDICO 
 													 join td in _context.TABLA_DETALLE on c.idEstado equals td.idDet
+													 join tde in _context.TABLA_DETALLE on c.idEspecialidad equals tde.idDet
 													 join med in _context.MEDICO on c.idMedico equals med.idMedico
 													 join pe in _context.PERSONA on med.idPersona equals pe.idPersona
-													 where c.idMedico == idmedico
+													 where pe.nombres.Contains(nombre) || pe.apePaterno.Contains(apellido) || tde.idDet == especialidad
 														select new CronogramaDTO {
 															idProgramMedica = c.idProgramMedica,
 															fechaIni = c.fechaIni.Value.ToString("yyyy-MM-dd"),
@@ -139,7 +140,8 @@ namespace HistClinica.Repositories.Repositories
 															hrInicio = c.hrInicio,
 															hrFin = c.hrFin,
 															desEstado = td.descripcion,
-															medico = pe.nombres + ' ' + pe.apePaterno + ' ' + pe.apeMaterno
+															medico = pe.nombres + ' ' + pe.apePaterno + ' ' + pe.apeMaterno,
+															especialidad = tde.descripcion
 														}
 														).ToListAsync();
 			return cronogramas;
@@ -150,6 +152,7 @@ namespace HistClinica.Repositories.Repositories
 			List<CronogramaDTO> D012_CRONOMEDICOs = await(from c in _context.CRONOGRAMA_MEDICO
 														  join td in _context.TABLA_DETALLE on c.idEstado equals td.idDet join med in _context.MEDICO 
 														  on c.idMedico equals med.idMedico join pe in _context.PERSONA on med.idPersona equals pe.idPersona
+														  join tde in _context.TABLA_DETALLE on c.idEspecialidad equals tde.idDet
 														  select new CronogramaDTO
 														  {
 															  idProgramMedica = c.idProgramMedica,
@@ -158,7 +161,8 @@ namespace HistClinica.Repositories.Repositories
 															  hrInicio = c.hrInicio,
 															  hrFin = c.hrFin,
 															  desEstado = td.descripcion,
-															  medico = pe.nombres + ' ' + pe.apePaterno + ' ' + pe.apeMaterno
+															  medico = pe.nombres + ' ' + pe.apePaterno + ' ' + pe.apeMaterno,
+															  especialidad = tde.descripcion
 														  }).ToListAsync();
 			return D012_CRONOMEDICOs;
 		}

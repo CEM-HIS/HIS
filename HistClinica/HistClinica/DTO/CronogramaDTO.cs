@@ -36,5 +36,7 @@ namespace HistClinica.DTO
 		public int? idEstado { get; set; }
 		public string desEstado { get; set; }
         public string medico { get; set; }
+
+		public string especialidad { get; set; }
 	}
 }

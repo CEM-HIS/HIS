@@ -143,22 +143,31 @@ namespace HistClinica.Controllers
         {
             List<CronogramaDTO> cronograma = new List<CronogramaDTO>();
             cronograma = await cronogramaRepository.GetAllCronogramasConsulta();
+            var lespecialidads = await _utilrepository.GetTipo("Especialidad");
+            ViewBag.listaespecialidades = lespecialidads;
 
             //filtro de medico
-            var medico = await _utilrepository.GetMedicos();
-            ViewBag.listamedicos = medico;
+            //var medico = await _utilrepository.GetMedicos();
+            // ViewBag.listamedicos = medico;
 
             return PartialView(cronograma);
         }
         
-        public async Task<IActionResult> ConsultarCronogramapost(int id)
+        [HttpGet]
+        public async Task<IActionResult> ConsultarCronogramapost(FiltroCronoDTO model)
         {
-            var medico = await _utilrepository.GetMedicos();
-            ViewBag.listamedicos = medico;
+            if (model.idespecialidad == null && model.nombre == null && model.apellido == null)
+            {
+               return RedirectToAction("ConsultarCronograma");
+            } else
+            {
+                var lespecialidads = await _utilrepository.GetTipo("Especialidad");
+                ViewBag.listaespecialidades = lespecialidads;
 
-            List<CronogramaDTO> cronograma = new List<CronogramaDTO>();
-            cronograma = await cronogramaRepository.GetCronogramaByMedico(id);
-            return PartialView("ConsultarCronograma", cronograma);
+                List<CronogramaDTO> cronograma = new List<CronogramaDTO>();
+                cronograma = await cronogramaRepository.GetCronogramaByMedico(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
+                return RedirectToAction("ConsultarCronograma", cronograma);
+            }
         }
     }
 }

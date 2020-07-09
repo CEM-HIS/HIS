@@ -11,7 +11,7 @@ namespace HistClinica.Controllers
     {
         public IActionResult Index()
         {
-            string name = "xd";
+            string name = "xdd";
             ViewBag.nombre = name;
             return View();
         }

@@ -21,6 +21,7 @@ namespace HistClinica.Data
         public DbSet<TABLA_GENERAL> TABLA_GENERAL { get; set; }
         public DbSet<TABLA_DETALLE> TABLA_DETALLE { get; set; }
         public DbSet<CAJA> CAJA { get; set; }
+        public DbSet<LICENCIA> LICENCIA { get; set; }
         public DbSet<CAJA_ASIGNADA> CAJA_ASIGNADA { get; set; }
 
 

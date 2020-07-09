@@ -394,12 +394,17 @@ function CargaConsultaCronograma() {
 	});
 }
 
+
 function BuscarCronograma() {
-	var idmedico = $("#idmedico option:selected").val();
+
+	var idespecialidad = $("#especialidad option:selected").val();
+	var nombre = $("#nombremedico").val();
+	var apellido = $("#apellidomedico").val(); ''
+
 	$.ajax({
-		type: "GET",
 		url: "/Cronograma/ConsultarCronogramapost",
-		data: { id: idmedico },
+		data: { idespecialidad: idespecialidad, nombre: nombre, apellido: apellido },
+		type: "GET",
 		contentType: "application/json; charset=utf-8",
 		dataType: "html",
 		success: function (response) {
@@ -416,6 +421,7 @@ function BuscarCronograma() {
 		}
 	});
 }
+
 
 function CargaModalCitas() {
 	var dni = $("#numeroDocumento").val()
