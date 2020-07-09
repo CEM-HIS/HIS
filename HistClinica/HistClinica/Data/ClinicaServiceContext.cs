@@ -22,6 +22,15 @@ namespace HistClinica.Data
         public DbSet<TABLA_DETALLE> TABLA_DETALLE { get; set; }
         public DbSet<CAJA> CAJA { get; set; }
         public DbSet<CAJA_ASIGNADA> CAJA_ASIGNADA { get; set; }
+
+
+        /// AGREGANDO LOS MODELS FREDY JOHEL
+        public DbSet<EMPRESA> EMPRESA { get; set; }
+        public DbSet<MENU> MENU { get; set; }
+        public DbSet<MODULO> MODULO { get; set; }
+        public DbSet<ROL> ROL { get; set; }
+        public DbSet<SEDE> SEDE { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CAJA_ASIGNADA>()
