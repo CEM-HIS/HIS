@@ -10,12 +10,12 @@ namespace HistClinica.Models
 	{
 		[Key]
 		public int idPago { get; set; }
-		public string codTransaccion { get; set; }
-		public string codTransacRetorno { get; set; }
+		public string codigoTransaccion { get; set; }
+		public string codigoTransacccionRetorno { get; set; }
 		public int? idFormaPago { get; set; }
 		public double? monto { get; set; }
-		public DateTime? fecRegistro { get; set; }
-		public DateTime? fecOkPasarela { get; set; }
+		public DateTime? fechaRegistro { get; set; }
+		public DateTime? fechaOkPasarela { get; set; }
 		public int? idCita { get; set; }
 		public string estado { get; set; }
 		public string fechaBaja { get; set; }

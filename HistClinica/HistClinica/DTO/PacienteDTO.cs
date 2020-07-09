@@ -25,24 +25,25 @@ namespace HistClinica.DTO
 
         [Required(ErrorMessage = "Seleccione el grupo sanguineo")]
         public int? idGrupoSanguineo { get; set; }
-        public string codPaciente { get; set; }
+        public string codigoPaciente { get; set; }
         public string descripcion { get; set; }
-        public string nrohc { get; set; }
-        public int? idestado { get; set; }
+        public string numeroHc { get; set; }
+        public int? idEstado { get; set; }
         public int? estadoPaciente { get; set; }
-        public string codPaConvenio { get; set; }
-        public string dsPacConv { get; set; }
-        public string statPaconv { get; set; }
-        public string codPacSoat { get; set; }
-        public string dsPacSoat { get; set; }
-        public string statPacSoat { get; set; }
-        public string codpacExterno { get; set; }
-        public string dspacExter { get; set; }
-        public string stapacexter { get; set; }
+        public string codigoPacienteConvenio { get; set; }
+        public string descripcionPacienteConvenio { get; set; }
+        public string estadoPacienteConvenio { get; set; }
+        public string codigoPacienteSoat { get; set; }
+        public string descripcionPacienteSoat { get; set; }
+        public string estadoPacienteSoat { get; set; }
+        public string codigoPacienteExterno { get; set; }
+        public string descripcionPacienteExterno { get; set; }
+        public string estadoPacienteExterno { get; set; }
         public bool? hojafiliacion { get; set; }
         public bool? concienteDato { get; set; }
         public string fechabaja { get; set; }
-        
+        public List<CitaDTO> cita { get; set; }
+
         #region Ubicacion
         public int? idDepartamentoUbicacion { get; set; }
         public int? idProvinciaUbicacion { get; set; }
@@ -52,7 +53,7 @@ namespace HistClinica.DTO
         public int? numeroDepartamentoUbicacion { get; set; }
         public int? interiorUbicacion { get; set; }
         public int? numeroLoteUbicacion { get; set; }
-        public List<CitaDTO> cita { get; set; }
+        
         #endregion
         #region Nacimiento
         public int? idPaisOrigenNacimiento { get; set; }
@@ -69,23 +70,23 @@ namespace HistClinica.DTO
         public string coberturaCompañia { get; set; }
         public string ordenAtencionMedicaCompañia { get; set; }
         public string nombreAseguradoraCompañia { get; set; }
-        public string codAseguradoCompañia { get; set; }
+        public string codigoAseguradoCompañia { get; set; }
         public string polizaCompañia { get; set; }
         public int? idParentescoCompañia { get; set; }
         public DateTime? inicioVigenciaCompañia { get; set; }
         public DateTime? finVigenciaCompañia { get; set; }
         public int? tipoPlanSaludCompañia { get; set; }
         public int? numeroPlanSaludCompañia { get; set; }
-        public string tpPlanSalud { get; set; }
+        public string tipoPlanSalud { get; set; }
         public int? estadoSeguro { get; set; }
-        public int? tpAfiliacion { get; set; }
-        public string fecAfiliacion { get; set; }
-        public int? codTitular { get; set; }
+        public int? idtipoAfiliacion { get; set; }
+        public string fechaAfiliacion { get; set; }
+        public int? codigoTitular { get; set; }
         public string moneda { get; set; }
-        public string nomContratante { get; set; }
+        public string nombreContratante { get; set; }
         public int? dniContratante { get; set; }
         public string planSalud { get; set; }
-        public int? codCobertura { get; set; }
+        public int? codigoCobertura { get; set; }
         public string beneficio { get; set; }
         public string restriccion { get; set; }
         public int? copagoFijo { get; set; }
@@ -101,7 +102,6 @@ namespace HistClinica.DTO
         public int? idParentesoConvenio { get; set; }
         public DateTime? inicioVigenciaConvenio { get; set; }
         public DateTime? finVigenciaConvenio { get; set; }
-        public int? estadoConven { get; set; }
         public int? estadoConvenio { get; set; }
         #endregion
         #region Acompañante

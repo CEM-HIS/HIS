@@ -55,7 +55,7 @@ namespace HistClinica.Repositories.Repositories
         public async Task DeleteCaja(int CajaID)
         {
             CAJA Caja = await _context.CAJA.FindAsync(CajaID);
-            Caja.estado = 2;
+            Caja.idEstado = 2;
             _context.Update(Caja);
             await Save();
         }
@@ -66,8 +66,8 @@ namespace HistClinica.Repositories.Repositories
                 await _context.CAJA.AddAsync(new CAJA()
                 {
                     descripcion = Caja.descripcion,
-                    tipo = Caja.tipo,
-                    estado = Caja.estado
+                    idTipoCaja = Caja.idTipoCaja,
+                    idEstado = Caja.idEstado
                 });
                 await Save();
                 return "Ingreso Exitoso";
@@ -128,7 +128,8 @@ namespace HistClinica.Repositories.Repositories
                         montoSolesCierre = cajaAsignada.montoSolesCierre,
                         montoDolaresCierre = cajaAsignada.montoDolaresCierre,
                         montoEurosCierre = cajaAsignada.montoEurosCierre,
-                        glosa = cajaAsignada.glosa
+                        glosaApertura = cajaAsignada.glosaApertura,
+                        glosaCierre = cajaAsignada.glosaCierre
                     });
                     await Save();
                     return "Ingreso Exitoso";

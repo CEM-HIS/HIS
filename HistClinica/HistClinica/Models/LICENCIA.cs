@@ -11,11 +11,11 @@ namespace HistClinica.Models
 		[Key]
 		public int idLicencia { get; set; }
 		public int idMedico { get; set; }
-		public string horaIni { get; set; }
+		public string horaInicio { get; set; }
 		public string horaFin { get; set; }
 
-		public DateTime? fechaIni { get; set; }
+		public DateTime? fechaInicio { get; set; }
 		public DateTime? fechaFin { get; set; }
-		public int estado { get; set; }
+		public int? idEstado { get; set; }
 	}
 }

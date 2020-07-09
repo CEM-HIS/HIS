@@ -24,6 +24,7 @@ namespace HistClinica.Models
         public double? montoSolesCierre { get; set; }
         public double? montoDolaresCierre { get; set; }
         public double? montoEurosCierre { get; set; }
-        public string glosa { get; set; }
+        public string glosaApertura { get; set; }
+        public string glosaCierre { get; set; }
     }                                       
 }

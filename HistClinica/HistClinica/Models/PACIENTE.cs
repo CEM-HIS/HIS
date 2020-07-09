@@ -7,34 +7,34 @@ namespace HistClinica.Models
 	{
 		[Key]
 		public int idPaciente { get; set; }
-		public string codPaciente { get; set; }
+		public string codigoPaciente { get; set; }
 		public string descripcion { get; set; }
-		public string nrohc { get; set; }
-		public string nombreAcom { get; set; }
-		public int? edadAcom { get; set; }
-		public int? dniAcom { get; set; }
-		public int? idgpoSangre { get; set; }
-		public int? idFactorrh { get; set; }
+		public string numeroHc { get; set; }
+		public string nombreAcompañante { get; set; }
+		public int? edadAcompañante { get; set; }
+		public int? dniAcompañante { get; set; }
+		public int? idGrupoSanguineo { get; set; }
+		public int? idFactorRh { get; set; }
 		public string cobertura { get; set; }
-		public string ordenAtenMed { get; set; }
-		public string nomAsegurado { get; set; }
-		public string codAsegurado { get; set; }
+		public string ordenAtenMedica { get; set; }
+		public string nombreAsegurado { get; set; }
+		public string codigoAsegurado { get; set; }
 		public string poliza { get; set; }
-		public int? parentesco { get; set; }
-		public DateTime? iniVigencia { get; set; }
+		public int? idParentesco { get; set; }
+		public DateTime? inicioVigencia { get; set; }
 		public DateTime? finVigencia { get; set; }
-		public int? tpPlanSalud { get; set; }
-		public int? nroPlanSalud { get; set; }
-		public int? estadoSeguro { get; set; }
-		public int? tpAfiliacion { get; set; }
-		public string fecAfiliacion { get; set; }
-		public int? codTitular { get; set; }
+		public int? idTipoPlanSalud { get; set; }
+		public int? numeroPlanSalud { get; set; }
+		public int? idEstadoSeguro { get; set; }
+		public int? idTipoAfiliacion { get; set; }
+		public string fechaAfiliacion { get; set; }
+		public int? codigoTitular { get; set; }
 		public string moneda { get; set; }
-		public string nomContratante { get; set; }
-		public int? tpDocumento { get; set; }
+		public string nombreContratante { get; set; }
+		public int? idTipoDocumento { get; set; }
 		public int? dniContratante { get; set; }
 		public string planSalud { get; set; }
-		public int? codCobertura { get; set; }
+		public int? codigoCobertura { get; set; }
 		public string beneficio { get; set; }
 		public string restriccion { get; set; }
 		public int? copagoFijo { get; set; }
@@ -42,20 +42,20 @@ namespace HistClinica.Models
 		public int? finCarencia { get; set; }
 		public string convenio { get; set; }
 		public double? descuento { get; set; }
-		public string codPaConvenio { get; set; }
-		public string dsPacConv { get; set; }
-		public string statPaconv { get; set; }
-		public string codPacSoat { get; set; }
-		public string dsPacSoat { get; set; }
-		public string statPacSoat { get; set; }
-		public string codpacExterno { get; set; }
-		public string dspacExter { get; set; }
-		public string stapacexter { get; set; }
-		public int? tpPaciente { get; set; }
+		public string codigoPacienteConvenio { get; set; }
+		public string descripcionPacienteConvenio { get; set; }
+		public string estadoPacienteConvenio { get; set; }
+		public string codigoPacienteSoat { get; set; }
+		public string descripcionPacienteSoat { get; set; }
+		public string estadoPacienteSoat { get; set; }
+		public string codigoPacienteExterno { get; set; }
+		public string descripcionPacienteExterno { get; set; }
+		public string estadoPacienteExterno { get; set; }
+		public int? idTipoPaciente { get; set; }
 		public int? idPersona { get; set; }
 		public bool? hojafiliacion { get; set; }
 		public bool? concienteDato { get; set; }
-		public int? estado { get; set; }
-		public string fechabaja { get; set; }
+		public int? idEstado { get; set; }
+		public string fechaBaja { get; set; }
 	}
 }

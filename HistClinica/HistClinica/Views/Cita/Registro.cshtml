@@ -68,7 +68,7 @@
 									<label>Fecha Atencion</label>
 								</div>
 								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idProgramMedica, new SelectList(ViewBag.lcronograma, "idprogramMed", "fecprogram"), "Seleccione", new
+									@Html.DropDownListFor(m => m.idProgramacionMedica, new SelectList(ViewBag.lcronograma, "idprogramMed", "fecprogram"), "Seleccione", new
 							   {
 								   @class = "form-control",
 								   data_cascade_combofec = "#horaate",
@@ -76,7 +76,7 @@
 								   data_cascade_combo_param_namefec = "id",
 								   @id = "fecate"
 							   })
-									@Html.ValidationMessageFor(model => model.idProgramMedica, "", new { @class = "text-danger" })
+									@Html.ValidationMessageFor(model => model.idProgramacionMedica, "", new { @class = "text-danger" })
 								</div>
 								<input type="hidden" id="desfecha" asp-for="fecha" />
 							</div>
@@ -131,8 +131,8 @@
 									<label>Servicios</label>
 								</div>
 								<div class="col-sm-8 form-inline">
-									@Html.DropDownListFor(m => m.idServicioCli, new SelectList(ViewBag.servicios, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(model => model.idServicioCli, "", new { @class = "text-danger" })
+									@Html.DropDownListFor(m => m.idServicioClinica, new SelectList(ViewBag.servicios, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+									@Html.ValidationMessageFor(model => model.idServicioClinica, "", new { @class = "text-danger" })
 								</div>
 							</div>
 						</div>

@@ -10,8 +10,8 @@ namespace HistClinica.DTO
     public class DetalleDTO
     {
       
-        public int idTab { get; set; }
-        public string codTab { get; set; }
-        public List<TABLA_DETALLE> ldetalle { get; set; }
+        public int idTablaGeneral { get; set; }
+        public string codigoTablaGeneral { get; set; }
+        public List<TABLA_DETALLE> detalles { get; set; }
     }
 }

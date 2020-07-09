@@ -99,8 +99,8 @@
 									<label for="fechdate">*Fecha de nacimiento</label>
 								</div>
 								<div class="col-sm-8">
-									@Html.TextBoxFor(m => m.fecNacimiento, new { @class = "form-control", @type = "Date" })
-									@Html.ValidationMessageFor(m => m.fecNacimiento, "", new { @class = "text-danger" })
+									@Html.TextBoxFor(m => m.fechaNacimiento, new { @class = "form-control", @type = "Date" })
+									@Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
 								</div>
 							</div>
 						</div>
@@ -134,8 +134,8 @@
 									<label for="cbogrdinstruccion">*Grado de instruccion</label>
 								</div>
 								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idGrdInstruc, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.idGrdInstruc, "", new { @class = "text-danger" })
+									@Html.DropDownListFor(m => m.idGradoInstruccion, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+									@Html.ValidationMessageFor(m => m.idGradoInstruccion, "", new { @class = "text-danger" })
 								</div>
 							</div>
 						</div>
@@ -145,8 +145,8 @@
 									<label for="estcivil">*Estado civil</label>
 								</div>
 								<div class="col-sm-8">
-									@Html.DropDownListFor(m => m.idEstCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									@Html.ValidationMessageFor(m => m.idEstCivil, "", new { @class = "text-danger" })
+									@Html.DropDownListFor(m => m.idEstadoCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+									@Html.ValidationMessageFor(m => m.idEstadoCivil, "", new { @class = "text-danger" })
 								</div>
 							</div>
 						</div>
@@ -482,7 +482,7 @@
 										<label for="codaseg">Cod. del asegurado</label>
 									</div>
 									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.codAseguradoCompañia, new { @class = "form-control" })
+										@Html.TextBoxFor(m => m.paciente.codigoAseguradoCompañia, new { @class = "form-control" })
 									</div>
 								</div>
 							</div>
@@ -644,7 +644,7 @@
 										<label for="nroruc">RUC</label>
 									</div>
 									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.ruc, new { @class = "form-control" })
+										@Html.TextBoxFor(m => m.numeroRuc, new { @class = "form-control" })
 									</div>
 								</div>
 							</div>

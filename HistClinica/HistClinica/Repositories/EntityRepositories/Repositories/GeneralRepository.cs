@@ -21,7 +21,7 @@ namespace HistClinica.Repositories.Repositories
 		{
 			try
 			{
-				TABLA_GENERAL general = await _context.TABLA_GENERAL.FindAsync(modelo.idTab);
+				TABLA_GENERAL general = await _context.TABLA_GENERAL.FindAsync(modelo.idTablaGeneral);
 				_context.TABLA_GENERAL.Remove(general);
 				await Save();
 				return "Registro eliminado correctamente";
@@ -34,7 +34,7 @@ namespace HistClinica.Repositories.Repositories
 
 		public async Task<bool> GeneralExists(int? id)
 		{
-			return await _context.TABLA_GENERAL.AnyAsync(e => e.idTab == id);
+			return await _context.TABLA_GENERAL.AnyAsync(e => e.idTablaGeneral == id);
 		}
 
 		public async Task<List<TABLA_GENERAL>> GetAllGeneral()
@@ -51,7 +51,7 @@ namespace HistClinica.Repositories.Repositories
 			try
 			{
 				 general = await (from p in _context.TABLA_GENERAL
-													 where p.codTab == codigo || p.descripcion.Contains(descripcion)
+													 where p.codigoTablaGeneral == codigo || p.descripcion.Contains(descripcion)
 													 select p).ToListAsync();
 			}
 			catch (Exception ex)
@@ -66,7 +66,7 @@ namespace HistClinica.Repositories.Repositories
 		{
 
 			TABLA_GENERAL general = await (from p in _context.TABLA_GENERAL
-										   where p.idTab == id
+										   where p.idTablaGeneral == id
 										   select p).FirstOrDefaultAsync();
 			return general;
 		}
@@ -77,9 +77,9 @@ namespace HistClinica.Repositories.Repositories
 			{
 				await _context.TABLA_GENERAL.AddAsync(new TABLA_GENERAL()
 				{
-					codTab = general.codTab,
+					codigoTablaGeneral = general.codigoTablaGeneral,
 					descripcion = general.descripcion,
-					fechaCreate = DateTime.Now
+					fechaCreacion = DateTime.Now
 				});
 				await Save();
 				return "Ingreso exitoso";
@@ -99,7 +99,7 @@ namespace HistClinica.Repositories.Repositories
 		{
 			try
 			{
-				_context.Entry(general).Property(x => x.codTab).IsModified = true;
+				_context.Entry(general).Property(x => x.codigoTablaGeneral).IsModified = true;
 				_context.Entry(general).Property(x => x.descripcion).IsModified = true;
 				await Save();
 				return "Actualizacion Exitosa";

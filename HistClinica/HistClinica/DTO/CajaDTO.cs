@@ -12,6 +12,6 @@ namespace HistClinica.DTO
         public string fecha { get; set; }
         public string tipo { get; set; }
         public string turno { get; set; }
-        public int estado { get; set; }
+        public int idEstado { get; set; }
     }
 }

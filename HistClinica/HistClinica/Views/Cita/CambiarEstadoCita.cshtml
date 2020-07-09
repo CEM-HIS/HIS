@@ -16,7 +16,7 @@
 				</div>
 				<div class="col-sm-12 pt-2 pb-3">
 					<label>Motivo</label>
-					@Html.DropDownListFor(m => m.estado, new SelectList(ViewBag.estado, "idEstadoCita", "estado"), "Seleccione", new { @class = "form-control" })
+					@Html.DropDownListFor(m => m.idEstado, new SelectList(ViewBag.idEstado, "idEstadoCita", "estado"), "Seleccione", new { @class = "form-control" })
 				</div>
 				<div class="col-sm-12 pb-3">
 					<div class="row">

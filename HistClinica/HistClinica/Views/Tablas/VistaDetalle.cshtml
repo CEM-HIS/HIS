@@ -15,8 +15,8 @@
 		<div class="row">
 			<div class="col-sm-6 form-inline">
 				<label> Codigo:</label>
-				@Html.HiddenFor(m => m.idTab)
-				@Html.EditorFor(m => m.codTab, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+				@Html.HiddenFor(m => m.idTablaGeneral)
+				@Html.EditorFor(m => m.codigoTablaGeneral, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
 			</div>
 			<div class="col-sm-6">
 
@@ -58,11 +58,11 @@
 				</tr>
 			</thead>
 			<tbody class="tbody">
-				@foreach (var item in Model.ldetalle)
+				@foreach (var item in Model.detalles)
 				{
 					<tr>
-						<td style="visibility:hidden;">@item.idDet</td>
-						<td>@item.coddetTab</td>
+						<td style="visibility:hidden;">@item.idTablaDetalle</td>
+						<td>@item.codigoTablaDetalle</td>
 						<td>@item.descripcion</td>
 						<td>
 							<a style="color:white;" type="submit" class="edit btn btn-primary" aria-hidden="true">

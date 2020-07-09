@@ -6,18 +6,16 @@ namespace HistClinica.Models
 	public class TABLA_GENERAL
 	{
 		[Key]
-		public int idTab { get; set; }
-
+		public int idTablaGeneral { get; set; }
 		[Required(ErrorMessage = "Seleccione el codigo de tipo")]
-		public string codTab { get; set; }
-
+		public string codigoTablaGeneral { get; set; }
 		[Required(ErrorMessage = "Seleccione la descripcion")]
 		public string descripcion { get; set; }
 		public string tipo { get; set; }
-		public DateTime? fechaCreate { get; set; }
-		public string usuCreate { get; set; }
+		public DateTime? fechaCreacion { get; set; }
+		public string usuarioCreacion { get; set; }
 		public string estado { get; set; } 
-        public DateTime? fechabaja { get; set; }
+        public DateTime? fechaBaja { get; set; }
 	}
 
 }

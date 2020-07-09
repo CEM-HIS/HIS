@@ -49,8 +49,8 @@ namespace HistClinica.Repositories.Repositories
         public async Task DeletePaciente(int PacienteID)
         {
             PACIENTE Paciente = await _context.PACIENTE.FindAsync(PacienteID);
-            Paciente.estado = 2;
-            Paciente.fechabaja = DateTime.Now.ToString();
+            Paciente.idEstado = 2;
+            Paciente.fechaBaja = DateTime.Now.ToString();
             _context.Update(Paciente);
             await Save();
         }
@@ -61,33 +61,33 @@ namespace HistClinica.Repositories.Repositories
             {
                 Paciente = new PACIENTE()
                 {
-                    codPaciente = persona.paciente.codPaciente,
+                    codigoPaciente = persona.paciente.codigoPaciente,
                     descripcion = persona.paciente.descripcion,
-                    nrohc = persona.paciente.nrohc,
-                    nombreAcom = persona.paciente.NombreAcompañante,
-                    edadAcom = persona.paciente.edadAcompañante,
-                    dniAcom = persona.paciente.numeroDocumentoAcompañante,
-                    idgpoSangre = persona.paciente.idGrupoSanguineo,
-                    idFactorrh = persona.paciente.idFactorRrh,
+                    numeroHc = persona.paciente.numeroHc,
+                    nombreAcompañante = persona.paciente.NombreAcompañante,
+                    edadAcompañante = persona.paciente.edadAcompañante,
+                    dniAcompañante = persona.paciente.numeroDocumentoAcompañante,
+                    idGrupoSanguineo = persona.paciente.idGrupoSanguineo,
+                    idFactorRh = persona.paciente.idFactorRrh,
                     cobertura = persona.paciente.coberturaCompañia ?? persona.paciente.coberturaConvenio,
-                    ordenAtenMed = persona.paciente.ordenAtencionMedicaCompañia ?? persona.paciente.ordenAtencionMedicaConvenio,
-                    nomAsegurado = persona.paciente.nombreAseguradoraCompañia,
-                    codAsegurado = persona.paciente.codAseguradoCompañia,
+                    ordenAtenMedica = persona.paciente.ordenAtencionMedicaCompañia ?? persona.paciente.ordenAtencionMedicaConvenio,
+                    nombreAsegurado = persona.paciente.nombreAseguradoraCompañia,
+                    codigoAsegurado = persona.paciente.codigoAseguradoCompañia,
                     poliza = persona.paciente.polizaCompañia,
-                    parentesco = persona.paciente.idParentescoPaciente,
-                    iniVigencia = persona.paciente.inicioVigenciaCompañia ?? persona.paciente.inicioVigenciaConvenio,
+                    idParentesco = persona.paciente.idParentescoPaciente,
+                    inicioVigencia = persona.paciente.inicioVigenciaCompañia ?? persona.paciente.inicioVigenciaConvenio,
                     finVigencia = persona.paciente.finVigenciaCompañia ?? persona.paciente.finVigenciaConvenio,
-                    tpPlanSalud = persona.paciente.tipoPlanSaludCompañia,
-                    nroPlanSalud = persona.paciente.numeroPlanSaludCompañia,
-                    tpAfiliacion = persona.paciente.tpAfiliacion,
-                    fecAfiliacion = persona.paciente.fecAfiliacion,
-                    codTitular = persona.paciente.codTitular,
+                    idTipoPlanSalud = persona.paciente.tipoPlanSaludCompañia,
+                    numeroPlanSalud = persona.paciente.numeroPlanSaludCompañia,
+                    idTipoAfiliacion = persona.paciente.idtipoAfiliacion,
+                    fechaAfiliacion = persona.paciente.fechaAfiliacion,
+                    codigoTitular = persona.paciente.codigoTitular,
                     moneda = persona.paciente.moneda,
-                    nomContratante = persona.paciente.nomContratante,
-                    tpDocumento = persona.paciente.idTipoDocumentoAcompañante,
+                    nombreContratante = persona.paciente.nombreContratante,
+                    idTipoDocumento = persona.paciente.idTipoDocumentoAcompañante,
                     dniContratante = persona.paciente.dniContratante,
                     planSalud = persona.paciente.planSalud,
-                    codCobertura = persona.paciente.codCobertura,
+                    codigoCobertura = persona.paciente.codigoCobertura,
                     beneficio = persona.paciente.beneficio,
                     restriccion = persona.paciente.restriccion,
                     copagoFijo = persona.paciente.copagoFijo,
@@ -95,25 +95,25 @@ namespace HistClinica.Repositories.Repositories
                     finCarencia = persona.paciente.finCarencia,
                     convenio = persona.paciente.convenio,
                     descuento = persona.paciente.descuento,
-                    codPaConvenio = persona.paciente.codPaConvenio,
-                    dsPacConv = persona.paciente.dsPacConv,
-                    statPaconv = persona.paciente.statPaconv,
-                    codPacSoat = persona.paciente.codPacSoat,
-                    dsPacSoat = persona.paciente.dsPacSoat,
-                    statPacSoat = persona.paciente.statPacSoat,
-                    codpacExterno = persona.paciente.codpacExterno,
-                    dspacExter = persona.paciente.dspacExter,
-                    stapacexter = persona.paciente.stapacexter,
+                    codigoPacienteConvenio = persona.paciente.codigoPacienteConvenio,
+                    descripcionPacienteConvenio = persona.paciente.descripcionPacienteConvenio,
+                    estadoPacienteConvenio = persona.paciente.estadoPacienteConvenio,
+                    codigoPacienteSoat = persona.paciente.codigoPacienteSoat,
+                    descripcionPacienteSoat = persona.paciente.descripcionPacienteSoat,
+                    estadoPacienteSoat = persona.paciente.estadoPacienteSoat,
+                    codigoPacienteExterno = persona.paciente.codigoPacienteExterno,
+                    descripcionPacienteExterno = persona.paciente.descripcionPacienteExterno,
+                    estadoPacienteExterno = persona.paciente.estadoPacienteExterno,
                     idPersona = idPersona,
                     hojafiliacion = persona.paciente.hojafiliacion,
                     concienteDato = persona.paciente.concienteDato,
-                    estado = 1,
-                    fechabaja = persona.paciente.fechabaja,
-                    estadoSeguro = null,
-                    tpPaciente = null
+                    idEstado = 1,
+                    fechaBaja = persona.paciente.fechabaja,
+                    idEstadoSeguro = null,
+                    idTipoPaciente = null
                 };
-                if (persona.paciente.estadoSeguro != null) Paciente.estadoSeguro = (int)persona.paciente.estadoSeguro;
-                if (persona.paciente.idTipoPaciente != null) Paciente.tpPaciente = (int)persona.paciente.idTipoPaciente;
+                if (persona.paciente.estadoSeguro != null) Paciente.idEstadoSeguro = (int)persona.paciente.estadoSeguro;
+                if (persona.paciente.idTipoPaciente != null) Paciente.idTipoPaciente = (int)persona.paciente.idTipoPaciente;
                 await _context.PACIENTE.AddAsync(Paciente);
                 await Save();
                 return "Ingreso Exitoso Paciente";
@@ -130,34 +130,32 @@ namespace HistClinica.Repositories.Repositories
                 _context.Update(new PACIENTE()
                 {
                     idPaciente = (int)persona.paciente.idPaciente,
-                    codPaciente = persona.paciente.codPaciente,
                     descripcion = persona.paciente.descripcion,
-                    nrohc = persona.paciente.nrohc,
-                    nombreAcom = persona.paciente.NombreAcompañante,
-                    edadAcom = persona.paciente.edadAcompañante,
-                    dniAcom = persona.paciente.numeroDocumentoAcompañante,
-                    idgpoSangre = persona.paciente.idGrupoSanguineo,
-                    idFactorrh = persona.paciente.idFactorRrh,
+                    numeroHc = persona.paciente.numeroHc,
+                    nombreAcompañante = persona.paciente.NombreAcompañante,
+                    edadAcompañante = persona.paciente.edadAcompañante,
+                    dniAcompañante = persona.paciente.numeroDocumentoAcompañante,
+                    idGrupoSanguineo = persona.paciente.idGrupoSanguineo,
+                    idFactorRh = persona.paciente.idFactorRrh,
                     cobertura = persona.paciente.coberturaCompañia ?? persona.paciente.coberturaConvenio,
-                    ordenAtenMed = persona.paciente.ordenAtencionMedicaCompañia ?? persona.paciente.ordenAtencionMedicaConvenio,
-                    nomAsegurado = persona.paciente.nombreAseguradoraCompañia,
-                    codAsegurado = persona.paciente.codAseguradoCompañia,
+                    ordenAtenMedica = persona.paciente.ordenAtencionMedicaCompañia ?? persona.paciente.ordenAtencionMedicaConvenio,
+                    nombreAsegurado = persona.paciente.nombreAseguradoraCompañia,
+                    codigoAsegurado = persona.paciente.codigoAseguradoCompañia,
                     poliza = persona.paciente.polizaCompañia,
-                    parentesco = persona.paciente.idParentescoPaciente,
-                    iniVigencia = persona.paciente.inicioVigenciaCompañia ?? persona.paciente.inicioVigenciaConvenio,
+                    idParentesco = persona.paciente.idParentescoPaciente,
+                    inicioVigencia = persona.paciente.inicioVigenciaCompañia ?? persona.paciente.inicioVigenciaConvenio,
                     finVigencia = persona.paciente.finVigenciaCompañia ?? persona.paciente.finVigenciaConvenio,
-                    tpPlanSalud = persona.paciente.tipoPlanSaludCompañia,
-                    nroPlanSalud = persona.paciente.numeroPlanSaludCompañia,
-                    estadoSeguro = persona.paciente.estadoSeguro,
-                    tpAfiliacion = persona.paciente.tpAfiliacion,
-                    fecAfiliacion = persona.paciente.fecAfiliacion,
-                    codTitular = persona.paciente.codTitular,
+                    idTipoPlanSalud = persona.paciente.tipoPlanSaludCompañia,
+                    numeroPlanSalud = persona.paciente.numeroPlanSaludCompañia,
+                    idTipoAfiliacion = persona.paciente.idtipoAfiliacion,
+                    fechaAfiliacion = persona.paciente.fechaAfiliacion,
+                    codigoTitular = persona.paciente.codigoTitular,
                     moneda = persona.paciente.moneda,
-                    nomContratante = persona.paciente.nomContratante,
-                    tpDocumento = persona.paciente.idTipoDocumentoAcompañante,
+                    nombreContratante = persona.paciente.nombreContratante,
+                    idTipoDocumento = persona.paciente.idTipoDocumentoAcompañante,
                     dniContratante = persona.paciente.dniContratante,
                     planSalud = persona.paciente.planSalud,
-                    codCobertura = persona.paciente.codCobertura,
+                    codigoCobertura = persona.paciente.codigoCobertura,
                     beneficio = persona.paciente.beneficio,
                     restriccion = persona.paciente.restriccion,
                     copagoFijo = persona.paciente.copagoFijo,
@@ -165,21 +163,22 @@ namespace HistClinica.Repositories.Repositories
                     finCarencia = persona.paciente.finCarencia,
                     convenio = persona.paciente.convenio,
                     descuento = persona.paciente.descuento,
-                    codPaConvenio = persona.paciente.codPaConvenio,
-                    dsPacConv = persona.paciente.dsPacConv,
-                    statPaconv = persona.paciente.statPaconv,
-                    codPacSoat = persona.paciente.codPacSoat,
-                    dsPacSoat = persona.paciente.dsPacSoat,
-                    statPacSoat = persona.paciente.statPacSoat,
-                    codpacExterno = persona.paciente.codpacExterno,
-                    dspacExter = persona.paciente.dspacExter,
-                    stapacexter = persona.paciente.stapacexter,
+                    codigoPacienteConvenio = persona.paciente.codigoPacienteConvenio,
+                    descripcionPacienteConvenio = persona.paciente.descripcionPacienteConvenio,
+                    estadoPacienteConvenio = persona.paciente.estadoPacienteConvenio,
+                    codigoPacienteSoat = persona.paciente.codigoPacienteSoat,
+                    descripcionPacienteSoat = persona.paciente.descripcionPacienteSoat,
+                    estadoPacienteSoat = persona.paciente.estadoPacienteSoat,
+                    codigoPacienteExterno = persona.paciente.codigoPacienteExterno,
+                    descripcionPacienteExterno = persona.paciente.descripcionPacienteExterno,
+                    estadoPacienteExterno = persona.paciente.estadoPacienteExterno,
                     idPersona = persona.idPersona,
                     hojafiliacion = persona.paciente.hojafiliacion,
                     concienteDato = persona.paciente.concienteDato,
-                    estado = 1,
-                    fechabaja = persona.paciente.fechabaja,
-                    tpPaciente = persona.paciente.idTipoPaciente
+                    idEstado = persona.paciente.idEstado,
+                    fechaBaja = persona.paciente.fechabaja,
+                    idTipoPaciente = persona.paciente.idTipoPaciente,
+                    idEstadoSeguro = persona.paciente.estadoSeguro
                 });
 
                 await Save();
@@ -210,12 +209,12 @@ namespace HistClinica.Repositories.Repositories
                                  select new PersonaDTO
                                  {   
                                      nombres = p.nombres,
-                                     apellidoPaterno = p.apePaterno,
-                                     apellidoMaterno = p.apeMaterno,
+                                     apellidoPaterno = p.apellidoPaterno,
+                                     apellidoMaterno = p.apellidoMaterno,
                                      numeroDocumento = p.dniPersona,
                                      correo = p.correo,
                                      edad = p.edad,
-                                     descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idDet == p.idOcupacion select det.descripcion).FirstOrDefault(),
+                                     descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idOcupacion select det.descripcion).FirstOrDefault(),
                                      paciente = new PacienteDTO()
                                      {
                                          idPaciente = (from pa in _context.PACIENTE
@@ -231,33 +230,33 @@ namespace HistClinica.Repositories.Repositories
                                              select new CitaDTO
                                              {
                                                  idCita = c.idCita,
-                                                 nroCita = c.nroCita,
-                                                 idTipoCita = c.tipoCita,
+                                                 numeroCita = c.numeroCita,
+                                                 idTipoCita = c.idtipoCita,
                                                  TipoCita = (from tb in _context.TABLA_DETALLE
-                                                             where tb.idDet == c.tipoCita
+                                                             where tb.idTablaDetalle == c.idtipoCita
                                                              select tb.descripcion).FirstOrDefault(),
                                                  fecha = (c.fechaCita).Value.Date.ToString(),
                                                  hora = (c.fechaCita).Value.ToString("H:mm"),
                                                  consultorio = (from de in _context.TABLA_DETALLE
-                                                                where de.idDet == c.idConsultorio
+                                                                where de.idTablaDetalle == c.idConsultorio
                                                                 select de.descripcion).FirstOrDefault(),
                                                  descripcion = (from sc in _context.TABLA_DETALLE
-                                                                where sc.idDet == c.idservicioCli
+                                                                where sc.idTablaDetalle == c.idServicioClinica
                                                                 select sc.descripcion).FirstOrDefault(),
-                                                 medico = (from cm in _context.CRONOGRAMA_MEDICO
+                                                 Medico = (from cm in _context.CRONOGRAMA_MEDICO
                                                            join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                                            join p in _context.PERSONA on m.idPersona equals p.idPersona
-                                                           where cm.idProgramMedica == c.idProgramMedica
-                                                           select (p.nombres + " " + p.apePaterno + " " + p.apeMaterno)).FirstOrDefault(),
+                                                           where cm.idProgramMedica == c.idProgramacionMedica
+                                                           select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
                                                  especialidad = (from tb in _context.TABLA_DETALLE
-                                                                 join cm in _context.CRONOGRAMA_MEDICO on c.idProgramMedica equals cm.idProgramMedica
+                                                                 join cm in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cm.idProgramMedica
                                                                  join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                                 where tb.idDet == m.idEspecialidad
+                                                                 where tb.idTablaDetalle == m.idEspecialidad
                                                                  select tb.descripcion).FirstOrDefault(),
                                                  precio = c.precio,
                                                  igv = c.igv,
-                                                 descEstado = (from ec in _context.ESTADO_CITA where ec.idEstadoCita == c.idEstadoCita select ec.estado).FirstOrDefault(),
-                                                 descEstadoPago = (from ep in _context.PAGO
+                                                 descripcionEstado = (from ec in _context.ESTADO_CITA where ec.idEstadoCita == c.idEstadoCita select ec.estado).FirstOrDefault(),
+                                                 descripcionEstadoPago = (from ep in _context.PAGO
                                                                    where ep.idCita == c.idCita
                                                                    select ep.estado).FirstOrDefault()
                                              }).ToList();
@@ -275,16 +274,16 @@ namespace HistClinica.Repositories.Repositories
             PersonaDTO Persona = await (from p in _context.PERSONA
                                         join pa in _context.PACIENTE on p.idPersona equals pa.idPersona
                                         where (p.nombres).Contains(nombre.Trim()) && 
-                                        (p.apePaterno + " " + p.apeMaterno).Trim().Contains(apellidos)
+                                        (p.apellidoPaterno + " " + p.apellidoMaterno).Trim().Contains(apellidos)
                                         select new PersonaDTO
                                         {
                                             nombres = p.nombres,
-                                            apellidoPaterno = p.apePaterno,
-                                            apellidoMaterno = p.apeMaterno,
+                                            apellidoPaterno = p.apellidoPaterno,
+                                            apellidoMaterno = p.apellidoMaterno,
                                             numeroDocumento = p.dniPersona,
                                             correo = p.correo,
                                             edad = p.edad,
-                                            descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idDet == p.idOcupacion select det.descripcion).FirstOrDefault(),
+                                            descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idOcupacion select det.descripcion).FirstOrDefault(),
                                             paciente = new PacienteDTO()
                                             {
                                                 idPaciente = (from pa in _context.PACIENTE
@@ -300,33 +299,33 @@ namespace HistClinica.Repositories.Repositories
                                          select new CitaDTO
                                          {
                                              idCita = c.idCita,
-                                             nroCita = c.nroCita,
-                                             idTipoCita = c.tipoCita,
+                                             numeroCita = c.numeroCita,
+                                             idTipoCita = c.idtipoCita,
                                              TipoCita = (from tb in _context.TABLA_DETALLE
-                                                         where tb.idDet == c.tipoCita
+                                                         where tb.idTablaDetalle == c.idtipoCita
                                                          select tb.descripcion).FirstOrDefault(),
                                              fecha = (c.fechaCita).Value.Date.ToString(),
                                              hora = (c.fechaCita).Value.ToString("H:mm"),
                                              consultorio = (from de in _context.TABLA_DETALLE
-                                                            where de.idDet == c.idConsultorio
+                                                            where de.idTablaDetalle == c.idConsultorio
                                                             select de.descripcion).FirstOrDefault(),
                                              descripcion = (from sc in _context.TABLA_DETALLE
-                                                            where sc.idDet == c.idservicioCli
+                                                            where sc.idTablaDetalle == c.idServicioClinica
                                                             select sc.descripcion).FirstOrDefault(),
-                                             medico = (from cm in _context.CRONOGRAMA_MEDICO
+                                             Medico = (from cm in _context.CRONOGRAMA_MEDICO
                                                        join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                                        join p in _context.PERSONA on m.idPersona equals p.idPersona
-                                                       where cm.idProgramMedica == c.idProgramMedica
-                                                       select (p.nombres + " " + p.apePaterno + " " + p.apeMaterno)).FirstOrDefault(),
+                                                       where cm.idProgramMedica == c.idProgramacionMedica
+                                                       select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
                                              especialidad = (from tb in _context.TABLA_DETALLE
-                                                             join cm in _context.CRONOGRAMA_MEDICO on c.idProgramMedica equals cm.idProgramMedica
+                                                             join cm in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cm.idProgramMedica
                                                              join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                             where tb.idDet == m.idEspecialidad
+                                                             where tb.idTablaDetalle == m.idEspecialidad
                                                              select tb.descripcion).FirstOrDefault(),
                                              precio = c.precio,
                                              igv = c.igv,
-                                             descEstado = (from ec in _context.ESTADO_CITA where ec.idEstadoCita == c.idEstadoCita select ec.estado).FirstOrDefault(),
-                                             descEstadoPago = (from ep in _context.PAGO
+                                             descripcionEstado = (from ec in _context.ESTADO_CITA where ec.idEstadoCita == c.idEstadoCita select ec.estado).FirstOrDefault(),
+                                             descripcionEstadoPago = (from ep in _context.PAGO
                                                                where ep.idCita == c.idCita
                                                                select ep.estado).FirstOrDefault()
                                          }).ToList();
@@ -346,20 +345,20 @@ namespace HistClinica.Repositories.Repositories
                                         select new PersonaDTO
                                         {
                                             nombres = p.nombres,
-                                            apellidoPaterno = p.apePaterno,
-                                            apellidoMaterno = p.apeMaterno,
+                                            apellidoPaterno = p.apellidoPaterno,
+                                            apellidoMaterno = p.apellidoMaterno,
                                             numeroDocumento = p.dniPersona,
                                             correo = p.correo,
                                             edad = p.edad,
                                             idSexo = p.idSexo,
-                                            fecNacimiento = p.fecNace,
+                                            fechaNacimiento = p.fechaNacimiento,
                                             idOcupacion = p.idOcupacion,
-                                            idGradoInstruccion = p.idGrdInstruc,
-                                            idEstCivil = p.idEstCivil,
+                                            idGradoInstruccion = p.idGradoInstruccion,
+                                            idEstadoCivil = p.idEstadoCivil,
                                             celular = p.celular,
                                             idParentesco = p.idParentesco,
-                                            idTipoDocumento = p.idtpDocumento,
-                                            descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idDet == p.idOcupacion select det.descripcion).FirstOrDefault(),
+                                            idTipoDocumento = p.idTipoDocumento,
+                                            descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idOcupacion select det.descripcion).FirstOrDefault(),
                                             idPersona = p.idPersona,
                                             paciente = new PacienteDTO()
                                             {
@@ -368,9 +367,9 @@ namespace HistClinica.Repositories.Repositories
                                                               select pa.idPaciente).FirstOrDefault(),
                                                 idTipoPaciente = (from pa in _context.PACIENTE
                                                                   where pa.idPersona == p.idPersona
-                                                                  select pa.tpPaciente).FirstOrDefault(),
+                                                                  select pa.idTipoPaciente).FirstOrDefault(),
                                                 idParentescoPaciente = p.idParentesco,
-                                                estadoPaciente = pa.estado,
+                                                estadoPaciente = pa.idEstado,
                                                 cita = new List<CitaDTO>()
                                             }
                                         }).FirstOrDefaultAsync();
@@ -381,33 +380,33 @@ namespace HistClinica.Repositories.Repositories
                                          select new CitaDTO
                                          {
                                              idCita = c.idCita,
-                                             nroCita = c.nroCita,
-                                             idTipoCita = c.tipoCita,
+                                             numeroCita = c.numeroCita,
+                                             idTipoCita = c.idtipoCita,
                                              TipoCita = (from tb in _context.TABLA_DETALLE
-                                                         where tb.idDet == c.tipoCita
+                                                         where tb.idTablaDetalle == c.idtipoCita
                                                          select tb.descripcion).FirstOrDefault(),
                                              fecha = (c.fechaCita).Value.Date.ToString(),
                                              hora = (c.fechaCita).Value.ToString("H:mm"),
                                              consultorio = (from de in _context.TABLA_DETALLE
-                                                            where de.idDet == c.idConsultorio
+                                                            where de.idTablaDetalle == c.idConsultorio
                                                             select de.descripcion).FirstOrDefault(),
                                              descripcion = (from sc in _context.TABLA_DETALLE
-                                                            where sc.idDet == c.idservicioCli
+                                                            where sc.idTablaDetalle == c.idServicioClinica
                                                             select sc.descripcion).FirstOrDefault(),
-                                             medico = (from cm in _context.CRONOGRAMA_MEDICO
+                                             Medico = (from cm in _context.CRONOGRAMA_MEDICO
                                                        join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                                        join p in _context.PERSONA on m.idPersona equals p.idPersona
-                                                       where cm.idProgramMedica == c.idProgramMedica
-                                                       select (p.nombres + " " + p.apePaterno + " " + p.apeMaterno)).FirstOrDefault(),
+                                                       where cm.idProgramMedica == c.idProgramacionMedica
+                                                       select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
                                              especialidad = (from tb in _context.TABLA_DETALLE
-                                                             join cm in _context.CRONOGRAMA_MEDICO on c.idProgramMedica equals cm.idProgramMedica
+                                                             join cm in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cm.idProgramMedica
                                                              join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                             where tb.idDet == m.idEspecialidad
+                                                             where tb.idTablaDetalle == m.idEspecialidad
                                                              select tb.descripcion).FirstOrDefault(),
                                              precio = c.precio,
                                              igv = c.igv,
-                                             descEstado = (from ec in _context.ESTADO_CITA where ec.idEstadoCita == c.idEstadoCita select ec.estado).FirstOrDefault(),
-                                             descEstadoPago = (from ep in _context.PAGO
+                                             descripcionEstado = (from ec in _context.ESTADO_CITA where ec.idEstadoCita == c.idEstadoCita select ec.estado).FirstOrDefault(),
+                                             descripcionEstadoPago = (from ep in _context.PAGO
                                                                where ep.idCita == c.idCita
                                                                select ep.estado).FirstOrDefault()
                                          }).ToList();

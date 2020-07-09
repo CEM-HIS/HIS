@@ -1860,7 +1860,6 @@ D:\CEM-HIS\HistClinica\HistClinica\bin\Debug\netcoreapp3.1\runtimes\unix\lib\net
 D:\CEM-HIS\HistClinica\HistClinica\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\CEM-HIS\HistClinica\HistClinica\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\CEM-HIS\HistClinica\HistClinica\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
-D:\CEM-HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.csprojAssemblyReference.cache
 D:\CEM-HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.AssemblyInfoInputs.cache
 D:\CEM-HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.AssemblyInfo.cs
 D:\CEM-HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.csproj.CoreCompileInputs.cache

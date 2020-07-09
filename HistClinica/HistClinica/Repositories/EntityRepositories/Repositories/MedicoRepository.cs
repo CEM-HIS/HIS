@@ -46,8 +46,8 @@ namespace HistClinica.Repositories.Repositories
         public async Task DeleteMedico(int MedicoID)
         {
             MEDICO Medico = await _context.MEDICO.FindAsync(MedicoID);
-            Medico.estado = 2;
-            Medico.fechabaja = DateTime.Now.ToString();
+            Medico.idEstado = 2;
+            Medico.fechaBaja = DateTime.Now.ToString();
             _context.Update(Medico);
             await Save();
         }
@@ -57,17 +57,17 @@ namespace HistClinica.Repositories.Repositories
             {
                 MEDICO Medico = new MEDICO()
                 {
-                    codMedico = persona.personal.codMedico,
-                    nroColegio = persona.personal.numeroColegio,
-                    nroRne = persona.personal.nroRne,
-                    nroRuc = persona.personal.nroRucMedico,
-                    idtpDocumento = persona.personal.idTipoEmpleado,
+                    codigoMedico = persona.personal.codigoMedico,
+                    numeroColegio = persona.personal.numeroColegio,
+                    numeroRne = persona.personal.numeroRne,
+                    numeroRuc = persona.personal.numeroRuc,
+                    idTipoDocumento = persona.personal.idTipoEmpleado,
                     condicion = persona.personal.condicion,
                     idEmpleado = idEmpleado,
                     idEspecialidad = persona.personal.idEspecialidad,
                     idPersona = idPersona,
-                    estado = 1,
-                    fechabaja = null
+                    idEstado = 1,
+                    fechaBaja = null
                 };
                 await _context.MEDICO.AddAsync(Medico);
                 await Save();
@@ -85,17 +85,17 @@ namespace HistClinica.Repositories.Repositories
                 MEDICO Medico = new MEDICO()
                 {
                     idMedico = (int)persona.personal.idMedico,
-                    codMedico = persona.personal.codMedico,
-                    nroColegio = persona.personal.numeroColegio,
-                    nroRne = persona.personal.nroRne,
-                    nroRuc = persona.personal.nroRucMedico,
-                    idtpDocumento = persona.personal.idTipoEmpleado,
+                    codigoMedico = persona.personal.codigoMedico,
+                    numeroColegio = persona.personal.numeroColegio,
+                    numeroRne = persona.personal.numeroRne,
+                    numeroRuc = persona.personal.numeroRuc,
+                    idTipoDocumento = persona.personal.idTipoEmpleado,
                     condicion = persona.personal.condicion,
                     idEmpleado = persona.personal.idEmpleado,
                     idEspecialidad = persona.personal.idEspecialidad,
                     idPersona = persona.idPersona,
-                    estado = (int)persona.personal.estadoMedico,
-                    fechabaja = persona.personal.fechaBaja
+                    idEstado = (int)persona.personal.idEstado,
+                    fechaBaja = persona.personal.fechaBaja
                 };
                 _context.Update(Medico);
                 await Save();

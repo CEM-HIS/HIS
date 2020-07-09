@@ -15,7 +15,7 @@ namespace HistClinica.Models
 		public string dia { get; set; }
 
 		[Required(ErrorMessage = "Seleccione la fecha de inicio")]
-		public DateTime? fechaIni { get; set; }
+		public DateTime? fechaInicio { get; set; }
 
 		[Required(ErrorMessage = "Seleccione la fecha de fin")]
 		public DateTime? fechaFin { get; set; }
@@ -30,10 +30,10 @@ namespace HistClinica.Models
 		public int? idConsultorio { get; set; }
 
 		[Required(ErrorMessage = "Seleccione una hora de inicio")]
-		public string hrInicio { get; set; }
+		public string horaInicio { get; set; }
 
 		[Required(ErrorMessage = "Seleccione una hora de fin")]
-		public string hrFin { get; set; }
+		public string horaFin { get; set; }
 		public int? idEstado { get; set; }
 		public string fechaBaja { get; set; }
 	}

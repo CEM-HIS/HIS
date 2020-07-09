@@ -103,7 +103,7 @@ namespace HistClinica.Controllers
         {
             var model = await _generalRepository.GetById(id);
             TABLA_DETALLE detalle = new TABLA_DETALLE();
-            detalle.idTab = model.idTab;
+            detalle.idTablaGeneral = model.idTablaGeneral;
             return PartialView(detalle);
         }
 
@@ -111,7 +111,7 @@ namespace HistClinica.Controllers
         public async Task<IActionResult> AgregarDetalle(TABLA_DETALLE modelo)
         {
             TempData["mensajedetalle"] = await _detalleRepository.InsertDetalle(modelo);
-            return RedirectToAction("VistaDetalle", new { id = modelo.idTab });
+            return RedirectToAction("VistaDetalle", new { id = modelo.idTablaGeneral });
         }
 
         public async Task<IActionResult> EditarDetalle(int? id)
@@ -129,7 +129,7 @@ namespace HistClinica.Controllers
         {
             var mensaje = await _detalleRepository.UpdateDetalle(modelo);
             TempData["mensajedetalle"] = mensaje;
-            return RedirectToAction("VistaDetalle", new { id = modelo.idTab });
+            return RedirectToAction("VistaDetalle", new { id = modelo.idTablaGeneral });
         }
 
         // GET: Detalle/Delete/5
@@ -167,9 +167,9 @@ namespace HistClinica.Controllers
         {
             try
             {
-                TempData["mensajedetalle"] = await _detalleRepository.DeleteDetalle(modelo.idDet);
+                TempData["mensajedetalle"] = await _detalleRepository.DeleteDetalle(modelo.idTablaDetalle);
 
-                return RedirectToAction("VistaDetalle", new { id = modelo.idTab });
+                return RedirectToAction("VistaDetalle", new { id = modelo.idTablaGeneral });
             }
             catch
             {
