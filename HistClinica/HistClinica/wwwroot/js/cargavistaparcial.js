@@ -16,7 +16,7 @@
 
 	//evento click radio button filtro de pacientes
 	$("input[name=radiofiltro]").click(function () {
-
+		
 		var id = $(this).val();
 		if (id == 1) {
 			$('#dni').prop('disabled', false);
@@ -26,7 +26,7 @@
 			$('#dni').prop('disabled', true);
 			$('#nombre').prop('disabled', false);
 			$('#apellidos').prop('disabled', false);
-		}
+        }
 	});
 
 
@@ -326,31 +326,12 @@ $(document).on('change', '#cboafilia', function (event) {
 
 	var id = $("#cboafilia option:selected").val();
 	if (id == 1) {
-		$("#caja").prop('disabled', false);
+		$("#caja").prop('disabled',false);
 	} else {
 		$("#caja").prop('disabled', true);
-	}
+    }
 });
 
-function cargarModalCrearLicencia() {
-	$.ajax({
-		type: "GET",
-		url: "/Licencia/Registro",
-		//data: { id: id },
-		contentType: "application/json; charset=utf-8",
-		dataType: "html",
-		success: function (response) {
-			$('#modalagregarlicencia').html(response);
-			$('#modalagregarlicencia').modal('show');
-		},
-		failure: function (response) {
-			alert(response.responseText);
-		},
-		error: function (response) {
-			alert(response.responseText);
-		}
-	});
-}
 
 function cargarmodalCrearTipo() {
 	$.ajax({
@@ -413,15 +394,16 @@ function CargaConsultaCronograma() {
 	});
 }
 
+
 function BuscarCronograma() {
 
-	var idespecialidad= $("#especialidad option:selected").val();
-	var nombre= $("#nombremedico").val();
-	var apellido= $("#apellidomedico").val();''
+	var idespecialidad = $("#especialidad option:selected").val();
+	var nombre = $("#nombremedico").val();
+	var apellido = $("#apellidomedico").val(); ''
 
 	$.ajax({
 		url: "/Cronograma/ConsultarCronogramapost",
-		data: {idespecialidad: idespecialidad, nombre: nombre, apellido: apellido},
+		data: { idespecialidad: idespecialidad, nombre: nombre, apellido: apellido },
 		type: "GET",
 		contentType: "application/json; charset=utf-8",
 		dataType: "html",
@@ -439,6 +421,7 @@ function BuscarCronograma() {
 		}
 	});
 }
+
 
 function CargaModalCitas() {
 	var dni = $("#numeroDocumento").val()
