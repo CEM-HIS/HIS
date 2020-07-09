@@ -37,6 +37,7 @@ namespace HistClinica
             services.AddTransient<ICajaRepository,CajaRepository>();
             services.AddTransient<IDetalleRepository, DetalleRepository>();
             services.AddTransient<IGeneralRepository, GeneralRepository>();
+            services.AddTransient<ILicenciaRepository, LicenciaRepository>();
             IServiceCollection serviceCollection =
                 services.AddDbContext<ClinicaServiceContext>(options => options.UseSqlServer(Configuration["Connection:ClinicaServiceConnection"]));
             services.AddCors(opciones =>
