@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HistClinica.Migrations
 {
-    public partial class his : Migration
+    public partial class his2020 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -156,6 +156,24 @@ namespace HistClinica.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ESTADO_CITA", x => x.idEstadoCita);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LICENCIA",
+                columns: table => new
+                {
+                    idLicencia = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idMedico = table.Column<int>(nullable: false),
+                    horaIni = table.Column<string>(nullable: true),
+                    horaFin = table.Column<string>(nullable: true),
+                    fechaIni = table.Column<DateTime>(nullable: true),
+                    fechaFin = table.Column<DateTime>(nullable: true),
+                    estado = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LICENCIA", x => x.idLicencia);
                 });
 
             migrationBuilder.CreateTable(
@@ -470,6 +488,9 @@ namespace HistClinica.Migrations
 
             migrationBuilder.DropTable(
                 name: "ESTADO_CITA");
+
+            migrationBuilder.DropTable(
+                name: "LICENCIA");
 
             migrationBuilder.DropTable(
                 name: "MEDICO");

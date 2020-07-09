@@ -21,7 +21,7 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 
 		public async Task<List<licenciaDTO>> getAll()
 		{
-			List<licenciaDTO> licencia = await (from l in _context.LICENCIA
+			List<licenciaDTO> licencia = await (from l in _context.LICENCIA	
 												join det in _context.TABLA_DETALLE on l.estado equals det.idDet
 												join med in _context.MEDICO on l.idMedico equals med.idMedico
 												join per in _context.PERSONA on med.idPersona equals per.idPersona

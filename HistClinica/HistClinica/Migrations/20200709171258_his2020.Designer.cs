@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HistClinica.Migrations
 {
     [DbContext(typeof(ClinicaServiceContext))]
-    [Migration("20200709153706_his")]
-    partial class his
+    [Migration("20200709171258_his2020")]
+    partial class his2020
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -312,6 +312,36 @@ namespace HistClinica.Migrations
                     b.HasKey("idEstadoCita");
 
                     b.ToTable("ESTADO_CITA");
+                });
+
+            modelBuilder.Entity("HistClinica.Models.LICENCIA", b =>
+                {
+                    b.Property<int>("idLicencia")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("estado")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("fechaFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("fechaIni")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("horaFin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("horaIni")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("idMedico")
+                        .HasColumnType("int");
+
+                    b.HasKey("idLicencia");
+
+                    b.ToTable("LICENCIA");
                 });
 
             modelBuilder.Entity("HistClinica.Models.MEDICO", b =>
