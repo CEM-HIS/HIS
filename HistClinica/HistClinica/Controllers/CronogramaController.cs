@@ -156,14 +156,18 @@ namespace HistClinica.Controllers
         [HttpGet]
         public async Task<IActionResult> ConsultarCronogramapost(FiltroCronoDTO model)
         {
-            /*var medico = await _utilrepository.GetMedicos();
-            ViewBag.listamedicos = medico;*/
-            var lespecialidads = await _utilrepository.GetTipo("Especialidad");
-            ViewBag.listaespecialidades = lespecialidads;
+            if (model.idespecialidad == null && model.nombre == null && model.apellido == null)
+            {
+               return RedirectToAction("ConsultarCronograma");
+            } else
+            {
+                var lespecialidads = await _utilrepository.GetTipo("Especialidad");
+                ViewBag.listaespecialidades = lespecialidads;
 
-            List<CronogramaDTO> cronograma = new List<CronogramaDTO>();
-            cronograma = await cronogramaRepository.GetCronogramaByMedico(model.nombre, model.apellido,Convert.ToInt32(model.idespecialidad));
-            return RedirectToAction("ConsultarCronograma", cronograma);
+                List<CronogramaDTO> cronograma = new List<CronogramaDTO>();
+                cronograma = await cronogramaRepository.GetCronogramaByMedico(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
+                return RedirectToAction("ConsultarCronograma", cronograma);
+            }
         }
     }
 }
