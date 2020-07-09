@@ -12,18 +12,30 @@
 		@using (Html.BeginForm())
 		{
 			<div class="row">
-				<div class="col-sm-8 form-inline">
-					<label class="pr-2">Codigo:</label>
-					<input type="text" id="codigo" class="form form-control" name="codigo" />
+                <div class="col-sm-12 col-md-9 col-lg-9 ">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="input-style">
+                                <label class="pr-2 form-label">Codigo:</label>
+                                <input type="text" id="codigo" class="form form-control" name="codigo" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <div class="input-style">
+                                <label class=" form-label">Descripcion:</label>
+                                <input type="text" id="descripcion" class="form form-control" name="descripcion" />
 
-					<label class="pl-3 pr-2">Descripcion:</label>
-					<input type="text" id="descripcion" class="form form-control" name="descripcion" />
-					<input type="submit" value="Buscar" class="pl-2 btn btn-primary" />
-				</div>
-				<div class="col-sm-4">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="submit" value="Buscar" class="pl-2 btn btn-primary" style="    margin-top: 2.3rem;"/>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-sm-3">
 
-				</div>
-			</div>
+                    </div>
+                </div>
 		}
 	</div>
 </div>

@@ -13,13 +13,14 @@
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top:20px;">
+    <div class="row mb-5" style="padding-top:20px;">
         <div class="col-sm-12 pb-3">
             <span style="font-size: 18px;">Buscar por:</span>
             <div class="pl-3 form-check form-check-inline">
                 <input class="form-check-input" type="radio" checked name="radiofiltro" id="inlineRadio1" value="1">
                 <label class="form-check-label" for="inlineRadio1">Por Dni</label>
             </div>
+
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="radiofiltro" id="inlineRadio2" value="2">
                 <label class="form-check-label" for="inlineRadio2">Por Nombre y apellido</label>
@@ -31,18 +32,18 @@
 <div class="row">
     @Html.HiddenFor(m => m.paciente.idPaciente)
     <div class="col-sm-2">
-        <select class="form-control">
+        <select class="form-control  small-input">
             <option value="value">DNI</option>
         </select>
     </div>
     <div class="col-sm-2">
-        <input type="text" id="dni" name="dni" class="form-control" />
+        <input type="text" id="dni" name="dni" class="form-control small-input" />
     </div>
     <div class="col-sm-2">
-        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese nombre" />
+        <input type="text" id="nombre" name="nombre" class="form-control  small-input" placeholder="Ingrese nombre" />
     </div>
     <div class="col-sm-2">
-        <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Ingrese apellidos" />
+        <input type="text" id="apellidos" name="apellidos" class="form-control  small-input" placeholder="Ingrese apellidos" />
     </div>
     <div class="col-sm-4">
         <button class="btn btn-info" type="submit" id="btnBuscar"><i class="fas fa-search"></i></button>
@@ -54,7 +55,7 @@
 </div>}
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-2">
         <div class="col-sm-4">
             <div class="row pt-3">
                 <div class="col-sm-4">
@@ -71,7 +72,7 @@
                     <label>DNI</label>
                 </div>
                 <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", @disabled = "true" })
+                    @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control  small-input", @disabled = "true" })
                 </div>
             </div>
             <div class="row" style="padding-top: 10px;">
@@ -79,7 +80,7 @@
                     <label>Correo</label>
                 </div>
                 <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.correo, new { @class = "form-control", @disabled = "true" })
+                    @Html.TextBoxFor(m => m.correo, new { @class = "form-control  small-input", @disabled = "true" })
                 </div>
             </div>
             <div class="row" style="padding-top: 10px;">
@@ -87,7 +88,7 @@
                     <label>Edad</label>
                 </div>
                 <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.edad, new { @class = "form-control", @disabled = "true" })
+                    @Html.TextBoxFor(m => m.edad, new { @class = "form-control  small-input", @disabled = "true" })
                 </div>
             </div>
             <div class="row pb-2" style="padding-top: 10px;">
@@ -95,7 +96,7 @@
                     <label>Ocupación</label>
                 </div>
                 <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.descripcionOcupacion, new { @class = "form-control", @disabled = "true" })
+                    @Html.TextBoxFor(m => m.descripcionOcupacion, new { @class = "form-control  small-input", @disabled = "true" })
                 </div>
             </div>
         </div>

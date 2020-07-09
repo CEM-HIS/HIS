@@ -31,6 +31,10 @@ body .nav-sidebar > .nav-item:hover {
 	body .nav-sidebar > .nav-item:hover a {
 		color: #00aee5 !important;
 	}
+body .form-control.small-input {
+	padding: 0.3rem 1rem;
+	height: calc(2.25rem + 2px);
+}
 
 .card-cem {
 	background: white;
