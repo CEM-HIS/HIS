@@ -1,7 +1,7 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
 	public class CronogramaRepository : ICronogramaRepository
 	{

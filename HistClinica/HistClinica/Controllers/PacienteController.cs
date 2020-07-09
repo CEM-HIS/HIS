@@ -1,5 +1,5 @@
 ﻿using HistClinica.DTO;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -30,12 +30,12 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 			try
 			{
 				await _context.LICENCIA.AddAsync(new LICENCIA() { 
-					horaIni = licencia.horaIni,
+					horaInicio = licencia.horaInicio,
 					horaFin = licencia.horaFin,
-					fechaIni = licencia.fechaIni,
+					fechaInicio = licencia.fechaInicio,
 					fechaFin = licencia.fechaFin,
 					idMedico = licencia.idMedico,
-					estado = 0
+					idEstado = 1
 				});
 				await Save();
 				return "Se registro licencia correctamente";

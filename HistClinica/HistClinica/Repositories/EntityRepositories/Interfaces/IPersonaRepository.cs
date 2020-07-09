@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Interfaces
+namespace HistClinica.Repositories.EntityRepositories.Interfaces
 {
     public interface IPersonaRepository
     {

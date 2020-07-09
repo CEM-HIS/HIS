@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HistClinica.Controllers

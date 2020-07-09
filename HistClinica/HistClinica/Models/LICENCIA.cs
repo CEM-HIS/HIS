@@ -13,13 +13,8 @@ namespace HistClinica.Models
 		public int idMedico { get; set; }
 		public string horaInicio { get; set; }
 		public string horaFin { get; set; }
-
 		public DateTime? fechaInicio { get; set; }
 		public DateTime? fechaFin { get; set; }
 		public int? idEstado { get; set; }
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master

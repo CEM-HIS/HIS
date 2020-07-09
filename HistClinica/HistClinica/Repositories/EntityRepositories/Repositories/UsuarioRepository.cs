@@ -1,14 +1,14 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Repositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
