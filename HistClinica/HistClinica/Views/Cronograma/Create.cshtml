@@ -52,8 +52,8 @@
                 <div class="col-sm-11">
                     <div class="input-style">
                         <label class="form-label">Fecha Inicio</label>
-                        @Html.TextBoxFor(m => m.fechaIni, new { @class = "form-control", @type = "Date" })
-                        @Html.ValidationMessageFor(model => model.fechaIni, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.fechaInicio, new { @class = "form-control", @type = "Date" })
+                        @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
 
                     </div>
                   
@@ -76,8 +76,8 @@
                 <div class="col-sm-11">
                     <div class="input-style">
                         <label  class="form-label">Hora Inicio</label>
-                        @Html.DropDownListFor(m => m.hrInicio, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.hrInicio, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => m.horaInicio, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.horaInicio, "", new { @class = "text-danger" })
                     </div>
                     </div>
                 </div>
@@ -87,8 +87,8 @@
                 <div class="col-sm-11">
                     <div class="input-style">
                         <label  class="form-label">Hora Fin</label>
-                        @Html.DropDownListFor(m => m.hrFin, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.hrFin, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => m.horaFin, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.horaFin, "", new { @class = "text-danger" })
                     </div>
                     </div>
                 </div>

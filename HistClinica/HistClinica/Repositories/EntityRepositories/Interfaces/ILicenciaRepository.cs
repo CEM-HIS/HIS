@@ -1,9 +1,6 @@
-<<<<<<< HEAD
+
 ﻿using HistClinica.DTO;
 using HistClinica.Models;
-=======
-﻿using HistClinica.Models;
->>>>>>> master
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +12,6 @@ namespace HistClinica.Repositories.EntityRepositories.Interfaces
 	{
 		Task Save();
 		Task<string> insertLicencia(LICENCIA licencia);
-<<<<<<< HEAD
 		Task<List<licenciaDTO>> getAll();
-=======
-		Task<List<LICENCIA>> getAll();
->>>>>>> master
 	}
 }

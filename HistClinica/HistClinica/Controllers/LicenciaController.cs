@@ -4,10 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using HistClinica.Models;
 using HistClinica.Repositories.EntityRepositories.Interfaces;
-<<<<<<< HEAD
-using HistClinica.Repositories.Interfaces;
-=======
->>>>>>> master
 using Microsoft.AspNetCore.Mvc;
 
 namespace HistClinica.Controllers

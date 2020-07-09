@@ -103,8 +103,8 @@
                                 <div class="col-sm-8">
                                     <div class="input-style">
                                         <label for="fechdate" class="form-label">*Fecha de nacimiento</label>
-                                        @Html.TextBoxFor(m => m.fecNacimiento, new { @class = "form-control", @type = "Date" })
-                                        @Html.ValidationMessageFor(m => m.fecNacimiento, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.fechaNacimiento, new { @class = "form-control", @type = "Date" })
+                                        @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
 									</div>
                                     </div>
                                 </div>
@@ -141,8 +141,8 @@
                                 <div class="col-sm-8">
                                     <div class="input-style">
                                         <label for="cbogrdinstruccion" class="form-label">*Grado de instruccion</label>
-                                        @Html.DropDownListFor(m => m.idGrdInstruc, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.idGrdInstruc, "", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(m => m.idGradoInstruccion, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.idGradoInstruccion, "", new { @class = "text-danger" })
 										</div>
                                     </div>
                                 </div>
@@ -153,8 +153,8 @@
                                 <div class="col-sm-8">
                                     <div class="input-style">
                                         <label for="estcivil" class="form-label">*Estado civil</label>
-                                        @Html.DropDownListFor(m => m.idEstCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.idEstCivil, "", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(m => m.idEstadoCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.idEstadoCivil, "", new { @class = "text-danger" })
 										</div>
                                     </div>
                                 </div>
@@ -493,7 +493,7 @@
 										<label for="codaseg">Cod. del asegurado</label>
 									</div>
 									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.codAseguradoCompañia, new { @class = "form-control small-input" })
+										@Html.TextBoxFor(m => m.paciente.codigoAseguradoCompañia, new { @class = "form-control small-input" })
 									</div>
 								</div>
 							</div>
@@ -655,7 +655,7 @@
 										<label for="nroruc">RUC</label>
 									</div>
 									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.ruc, new { @class = "form-control small-input" })
+										@Html.TextBoxFor(m => m.numeroRuc, new { @class = "form-control small-input" })
 									</div>
 								</div>
 							</div>

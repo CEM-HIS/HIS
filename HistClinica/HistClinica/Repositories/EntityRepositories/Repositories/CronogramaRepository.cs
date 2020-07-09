@@ -1,7 +1,7 @@
 ﻿using HistClinica.Data;
 using HistClinica.DTO;
 using HistClinica.Models;
-using HistClinica.Repositories.Interfaces;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -52,12 +52,12 @@ namespace HistClinica.Repositories.Repositories
 															select new CronogramaDTO
 															{
 																idProgramMedica = c.idProgramMedica,
-																fechaIni = c.fechaIni.Value.ToString("yyyy-MM-dd"),
+																fechaInicio = c.fechaInicio.Value.ToString("yyyy-MM-dd"),
 																fechaFin = c.fechaFin.Value.ToString("yyyy-MM-dd"),
-																hrInicio = c.hrInicio,
-																hrFin = c.hrFin,
-																desEstado = (from det in _context.TABLA_DETALLE
-																			 where det.idDet == c.idEstado
+																horaInicio = c.horaInicio,
+																horaFin = c.horaFin,
+																descripcionEstado = (from det in _context.TABLA_DETALLE
+																			 where det.idTablaDetalle == c.idEstado
 																			 select det.descripcion).FirstOrDefault()
 															}).ToListAsync();
 			return D012_CRONOMEDICOs;
@@ -73,10 +73,10 @@ namespace HistClinica.Repositories.Repositories
 												  idEspecialidad = c.idEspecialidad,
 												  idEstado = c.idEstado,
 												  idProgramMedica = c.idProgramMedica,
-												  fechaIni = c.fechaIni.Value.ToString("yyyy-MM-dd"),
+												  fechaInicio = c.fechaInicio.Value.ToString("yyyy-MM-dd"),
 												  fechaFin = c.fechaFin.Value.ToString("yyyy-MM-dd"),
-												  hrInicio = c.hrInicio,
-												  hrFin = c.hrFin,
+												  horaInicio = c.horaInicio,
+												  horaFin = c.horaFin,
 												  idMedico = c.idMedico
 											  }).FirstOrDefaultAsync();
 			return D012_CRONOMEDICOs;
@@ -90,10 +90,10 @@ namespace HistClinica.Repositories.Repositories
 				{
 					idEspecialidad = cronograma.idEspecialidad,
 					idMedico = cronograma.idMedico,
-					hrInicio = cronograma.hrInicio,
-					hrFin = cronograma.hrFin,
+					horaInicio = cronograma.horaFin,
+					horaFin = cronograma.horaFin,
 					idConsultorio = cronograma.idConsultorio,
-					fechaIni = cronograma.fechaIni,
+					fechaInicio = cronograma.fechaInicio,
 					fechaFin = cronograma.fechaFin,
 					idEstado = 171
 				});
@@ -128,19 +128,19 @@ namespace HistClinica.Repositories.Repositories
 		public async Task<List<CronogramaDTO>> GetCronogramaByMedico(string nombre,string apellido, int especialidad)
 		{
 			List<CronogramaDTO> cronogramas = await (from c in _context.CRONOGRAMA_MEDICO 
-													 join td in _context.TABLA_DETALLE on c.idEstado equals td.idDet
-													 join tde in _context.TABLA_DETALLE on c.idEspecialidad equals tde.idDet
+													 join td in _context.TABLA_DETALLE on c.idEstado equals td.idTablaDetalle
+													 join tde in _context.TABLA_DETALLE on c.idEspecialidad equals tde.idTablaDetalle
 													 join med in _context.MEDICO on c.idMedico equals med.idMedico
 													 join pe in _context.PERSONA on med.idPersona equals pe.idPersona
-													 where pe.nombres.Contains(nombre) || pe.apePaterno.Contains(apellido) || tde.idDet == especialidad
+													 where pe.nombres.Contains(nombre) || pe.apellidoPaterno.Contains(apellido) || tde.idTablaDetalle == especialidad
 														select new CronogramaDTO {
 															idProgramMedica = c.idProgramMedica,
-															fechaIni = c.fechaIni.Value.ToString("yyyy-MM-dd"),
+															fechaInicio = c.fechaInicio.Value.ToString("yyyy-MM-dd"),
 															fechaFin = c.fechaFin.Value.ToString("yyyy-MM-dd"),
-															hrInicio = c.hrInicio,
-															hrFin = c.hrFin,
-															desEstado = td.descripcion,
-															medico = pe.nombres + ' ' + pe.apePaterno + ' ' + pe.apeMaterno,
+															horaInicio = c.horaInicio,
+															horaFin = c.horaFin,
+															descripcionEstado = td.descripcion,
+															medico = pe.nombres + ' ' + pe.apellidoPaterno + ' ' + pe.apellidoMaterno,
 															especialidad = tde.descripcion
 														}
 														).ToListAsync();
@@ -150,18 +150,18 @@ namespace HistClinica.Repositories.Repositories
 		public async Task<List<CronogramaDTO>> GetAllCronogramasConsulta()
 		{
 			List<CronogramaDTO> D012_CRONOMEDICOs = await(from c in _context.CRONOGRAMA_MEDICO
-														  join td in _context.TABLA_DETALLE on c.idEstado equals td.idDet join med in _context.MEDICO 
+														  join td in _context.TABLA_DETALLE on c.idEstado equals td.idTablaDetalle join med in _context.MEDICO 
 														  on c.idMedico equals med.idMedico join pe in _context.PERSONA on med.idPersona equals pe.idPersona
-														  join tde in _context.TABLA_DETALLE on c.idEspecialidad equals tde.idDet
+														  join tde in _context.TABLA_DETALLE on c.idEspecialidad equals tde.idTablaDetalle
 														  select new CronogramaDTO
 														  {
 															  idProgramMedica = c.idProgramMedica,
-															  fechaIni = c.fechaIni.Value.ToString("yyyy-MM-dd"),
+															  fechaInicio = c.fechaInicio.Value.ToString("yyyy-MM-dd"),
 															  fechaFin = c.fechaFin.Value.ToString("yyyy-MM-dd"),
-															  hrInicio = c.hrInicio,
-															  hrFin = c.hrFin,
-															  desEstado = td.descripcion,
-															  medico = pe.nombres + ' ' + pe.apePaterno + ' ' + pe.apeMaterno,
+															  horaInicio = c.horaInicio,
+															  horaFin = c.horaFin,
+															  descripcionEstado = td.descripcion,
+															  medico = pe.nombres + ' ' + pe.apellidoPaterno + ' ' + pe.apellidoMaterno,
 															  especialidad = tde.descripcion
 														  }).ToListAsync();
 			return D012_CRONOMEDICOs;

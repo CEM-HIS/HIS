@@ -31,6 +31,5 @@ namespace HistClinica.Data
                 .HasKey(c => new { c.idEmpleado, c.loginUser });
         }
         public DbSet<PAGO> PAGO { get; set; }
-        public DbSet<LICENCIA> LICENCIA { get; set; }
     }
 }

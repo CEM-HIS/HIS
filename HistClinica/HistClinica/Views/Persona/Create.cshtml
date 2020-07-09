@@ -77,8 +77,8 @@
                             <div class="col-sm-12">
                                 <div class="input-style">
                                     <label for="txtarea"  class="form-label">AREA</label>
-                                    @Html.TextBoxFor(m => m.personal.descArea, new { @class = "form-control", tabindex = 1 })
-                                    @Html.ValidationMessageFor(m => m.personal.descArea, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(m => m.personal.descripcionArea, new { @class = "form-control", tabindex = 1 })
+                                    @Html.ValidationMessageFor(m => m.personal.descripcionArea, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -98,8 +98,8 @@
                             <div class="col-sm-12">
                                 <div class="input-style">
                                     <label id="txtfecingresopersonal"  class="form-label">FECHA NACIMIENTO</label>
-                                    @Html.TextBoxFor(m => m.fecNacimiento, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "Date", tabindex = 8, @Value = @DateTime.Now.ToShortDateString() })
-                                    @Html.ValidationMessageFor(m => m.fecNacimiento, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(m => m.fechaNacimiento, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "Date", tabindex = 8, @Value = @DateTime.Now.ToShortDateString() })
+                                    @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -113,8 +113,8 @@
                                     <label for="txtruc">N° DE RUC</label>
                                 </div>
                                 <div id="ruc2" class="form-group" style="display:none;">
-                                    @Html.TextBoxFor(m => m.ruc, new { @class = "form-control", tabindex = 11, @onkeypress = "return isNumberKey(event);" })
-                                    @Html.ValidationMessageFor(m => m.ruc, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(m => m.numeroRuc, new { @class = "form-control", tabindex = 11, @onkeypress = "return isNumberKey(event);" })
+                                    @Html.ValidationMessageFor(m => m.numeroRuc, "", new { @class = "text-danger" })
                                 </div>
                                 <div id="col1" class="form-group" style="display:none;">
                                     <label for="txtNroColegio">N° DE COLEGIO</label>

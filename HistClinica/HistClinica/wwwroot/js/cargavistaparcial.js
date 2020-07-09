@@ -373,7 +373,7 @@ function cargarmodalCrearTipo() {
 }
 
 function cargarmodalCrearDetalle() {
-	var id = $('#idTab').val();
+	var id = $('#idTablaGeneral').val();
 	$.ajax({
 		type: "GET",
 		url: "/Tablas/AgregarDetalle",

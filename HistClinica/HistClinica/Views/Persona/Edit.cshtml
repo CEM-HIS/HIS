@@ -65,8 +65,8 @@
 								
                                     <div class="form-group">
                                         <label for="txtarea">AREA</label>
-                                        @Html.EditorFor(m => m.personal.descArea, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.personal.descArea, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(m => m.personal.descripcionArea, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.personal.descripcionArea, "", new { @class = "text-danger" })
                                     </div>
 									
                                     <div class="form-group">
@@ -83,8 +83,8 @@
 								
                                     <div class="form-group">
                                         <label id="txtfecingresopersonal">FECHA NACIMIENTO</label>
-                                        @Html.EditorFor(m => m.fecNacimiento, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
-                                        @Html.ValidationMessageFor(model => model.fecNacimiento, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(m => m.fechaNacimiento, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
+                                        @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
                                         <label id="txtfecingresopersonal">FECHA INGRESO</label>
@@ -96,8 +96,8 @@
 										
                                         <div class="form-group">
                                             <label for="txtruc">N° DE RUC</label>
-                                            @Html.EditorFor(m => m.ruc, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.ruc, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(m => m.numeroRuc, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.numeroRuc, "", new { @class = "text-danger" })
                                         </div>
 										
                                         <div class="form-group">
