@@ -2419,3 +2419,6 @@ C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.csproj.CopyComplete
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.dll
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.pdb
+D:\CEM-HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\Index.cshtml.g.cs
+D:\CEM-HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\Registro.cshtml.g.cs
+D:\CEM-HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\ValidateCorrect.cshtml.g.cs
