@@ -1,0 +1,31 @@
+﻿
+<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title text-center" id="exampleModalLabel">Confirmaciòn</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		@using (Html.BeginForm("Registro", "Licencia", FormMethod.Post, new { @id = "frmregistrartipo" }))
+		{
+
+			<div class="modal-body">
+
+				<div class="col-sm-12">
+					El sistema encontro errores en la validacion de cruce de horarios
+				</div>
+				<div class="col-sm-12">
+					¿Desea rechazar la solicitud?
+				</div>
+
+				<div class="modal-footer">
+					<button style="width: 80px;" type="submit" class="btn btn-primary">Rechazar</button>
+					<button style="width: 80px;" type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+
+		}
+
+	</div>
+</div>

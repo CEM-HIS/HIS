@@ -2419,3 +2419,4 @@ C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.csproj.CopyComplete
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.dll
 C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\HistClinica.pdb
+C:\Users\FABRICIO\Desktop\HIs\HIS\HistClinica\HistClinica\obj\Debug\netcoreapp3.1\Razor\Views\Licencia\ValidateIncorrect.cshtml.g.cs

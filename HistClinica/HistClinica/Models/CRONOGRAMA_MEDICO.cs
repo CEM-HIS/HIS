@@ -36,5 +36,6 @@ namespace HistClinica.Models
 		public string horaFin { get; set; }
 		public int? idEstado { get; set; }
 		public string fechaBaja { get; set; }
+		public string intervalo { get; set; }
 	}
 }
