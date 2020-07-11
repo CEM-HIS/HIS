@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Clinica2._0.-6DFB3059-B27E-4662-8A82-2800C3042FCB</UserSecretsId>
-    <RootNamespace>Clinica2._0.</RootNamespace>
+    <RootNamespace>Clinica2._0</RootNamespace>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
 
