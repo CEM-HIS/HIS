@@ -1,0 +1,36 @@
+﻿
+@model Clinica2._0.DTO.CitaDTO	
+<div class="modal-dialog modal-md" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2 class="modal-title text-center" id="exampleModalLabel1">¡Aviso!</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		@using (Html.BeginForm())
+		{
+			<div class="container">
+				<div class="col-sm-12 pt-2 pb-3">
+					¿Esta seguro que desea anular la cita?
+				</div>
+				<div class="col-sm-12 pt-2 pb-3">
+					<label>Motivo</label>
+					@Html.TextAreaFor(m => m.motivoAnulacion, new { @class = "form-control",  @style="width:356px" })
+				</div>
+				<div class="col-sm-12 pb-3">
+					<div class="row">
+						<div class="col-sm-6 text-center">
+							@Html.HiddenFor(m => m.idCita)
+							@Html.HiddenFor(m => m.dniPaciente)
+							<button style="width:100px;" asp-action="AnularCita" class="btn btn-success">Si</button>
+						</div>
+						<div class="col-sm-6 text-center">
+							<a style="width:100px;" class="btn btn-primary" data-dismiss="modal">No</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+	</div>

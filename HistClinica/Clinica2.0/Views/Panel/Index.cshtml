@@ -1,0 +1,75 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+	<div class="panel-container">
+		<div class="container-fluid">
+			<div class="row pt-5 ">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="offset-lg-1"></div>
+						<div class="col-sm-6 col-md-6 col-lg-2 pd-0">
+							<a asp-controller="Home" asp-action="Index">
+								<div class="item-panel color-1 ambulatoria">
+
+									<img src="~/Images/doctor.png" />
+									<h2>Atencion ambulatoria</h2>
+
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-2 pd-0">
+							<a asp-controller="Home" asp-action="Index">
+								<div class="item-panel color-2 hospital">
+
+									<img src="~/Images/hospital.png" />
+									<h2>Atencion hospitalaria</h2>
+
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-2 pd-0">
+							<a asp-controller="Home" asp-action="Index">
+								<div class="item-panel color-1 image inverse-1 emergencia">
+									<div>
+
+										<img src="~/Images/corazon.png" />
+										<h2>Atencion emergencia</h2>
+									</div>
+								</div>
+							</a>
+						</div>
+
+
+						<div class="col-sm-6 col-md-6  col-lg-2 pd-0">
+							<div class="item-panel color-2 inverse-2 caja">
+
+								<img src="~/Images/dinero.png" />
+								<h2>Caja</h2>
+
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-6  col-lg-2 pd-0">
+							<div class="item-panel color-1 reportes ">
+
+								<img src="~/Images/diagnostico.png" />
+								<h2>Reportes</h2>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

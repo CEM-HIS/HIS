@@ -1,0 +1,93 @@
+﻿@model Clinica2._0.DTO.PersonaDTO
+<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2 class="modal-title text-center" id="exampleModalLabel1">Asignar Usuario</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		@using (Html.BeginForm())
+		{
+			<div class="container">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="box box-primary">
+								<div class="box-body">
+									<div class="form-group">
+										<label>CODIGO</label>
+									</div>
+									<div class="form-group">
+										@Html.EditorFor(m => m.personal.idEmpleado, new { htmlAttributes = new { @class = "form-control" } })
+									</div>
+									<div class="form-group">
+										<label>TIPO</label>
+									</div>
+									<div class="form-group">
+										@Html.DropDownListFor(m => m.personal.idTipoEmpleado, new SelectList(ViewBag.lsttipoempleado, "idtab", "descripcion"), new { @class = "form-control", @disabled="true" })
+									</div>
+									<div class="form-group">
+										<label>AFILIA EN CAJA</label>
+									</div>
+									<div class="form-group">
+										<select id="cboafilia" class="form-control">
+											<option value="1">Si</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<!--	<button class="btn btn-primary">Asignar modulo</button>-->
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="box box-primary">
+								<div class="box-body">
+									<div class="form-group">
+										<label>NOMBRE USUARIO</label>
+									</div>
+									<div class="form-group">
+										@Html.EditorFor(m => m.nombres, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+									</div>
+									<div class="form-group">
+										<label>NUMERO DE DOCUMENTO</label>
+									</div>
+									<div class="form-group">
+										@Html.EditorFor(m => m.numeroDocumento, new { htmlAttributes = new { @class = "form-control",@disabled="true" } })
+									</div>
+									<div class="form-group">
+										<label>CAJA </label>
+									</div>
+									<div class="form-group">
+										@*@Html.DropDownListFor(m => m.asignacion.idCaja, new SelectList(ViewBag.lscaja, "idCaja", "nroCaja"), new { @class = "form-control", @id="caja"})*@
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div align="right" style="padding-bottom: 20px;">
+					<table>
+						<tr>
+							<td>
+								<button type="submit" class="btn btn-primary" style="width: 112px;font-size: 16px;">Guardar </button>
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+							<td>
+								<button type="button" class="btn btn-dark" style="width: 112px;font-size: 16px;" data-dismiss="modal">Salir</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		}
+
+	</div>
+</div>
