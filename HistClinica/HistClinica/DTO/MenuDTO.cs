@@ -12,4 +12,4 @@ namespace HistClinica.DTO
         public string linkMenu { get; set; }
     }
 }
-}
+
