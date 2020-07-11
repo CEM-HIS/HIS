@@ -1,2 +1,0 @@
-# HIS
-Proyecto HIS
