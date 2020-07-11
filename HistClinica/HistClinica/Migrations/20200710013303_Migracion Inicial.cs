@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HistClinica.Migrations
 {
-    public partial class migracion : Migration
+    public partial class MigracionInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -385,10 +385,10 @@ namespace HistClinica.Migrations
                     loginUser = table.Column<string>(nullable: false),
                     claveUser = table.Column<string>(nullable: true),
                     idEstado = table.Column<int>(nullable: true),
-                    usuCrea = table.Column<string>(nullable: true),
-                    fechaCrea = table.Column<string>(nullable: true),
-                    usuMod = table.Column<string>(nullable: true),
-                    fechaMod = table.Column<string>(nullable: true),
+                    usuarioCreacion = table.Column<string>(nullable: true),
+                    fechaCreacion = table.Column<string>(nullable: true),
+                    usuarioModifica = table.Column<string>(nullable: true),
+                    fechaModifica = table.Column<string>(nullable: true),
                     fechaBaja = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

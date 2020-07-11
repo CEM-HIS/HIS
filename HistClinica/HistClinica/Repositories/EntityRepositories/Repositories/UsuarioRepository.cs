@@ -64,8 +64,8 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
                 if (await UsuarioExists(persona.personal.idEmpleado))
                 {
                     USUARIO Usuario = await (from u in _context.USUARIO where u.idEmpleado == persona.personal.idEmpleado select u).FirstOrDefaultAsync();
-                    Usuario.fechaMod = DateTime.Now.ToString();
-                    Usuario.usuMod = ""; //ToDo: Agregar usuario de sesiones
+                    Usuario.fechaModifica = DateTime.Now.ToString();
+                    Usuario.usuarioModifica = ""; //ToDo: Agregar usuario de sesiones
                     _context.Update(Usuario);
                     await Save();
                     return "Usuario ya asignado";
@@ -94,12 +94,12 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
                     {
                         idEmpleado = persona.personal.idEmpleado,
                         loginUser = (primeraletraapellido + primernombre + diaNacimiento).ToLower(),
-                        fechaCrea = DateTime.Now.ToString(),
+                        fechaCreacion = DateTime.Now.ToString(),
                         claveUser = persona.numeroDocumento.ToString(),
-                        usuCrea = "",//ToDo: Agregar usuario de sesiones
+                        usuarioCreacion = "",//ToDo: Agregar usuario de sesiones
                         idEstado = 1,
-                        usuMod = "",
-                        fechaMod = ""
+                        usuarioModifica = "",
+                        fechaModifica = ""
                     });
                     await Save();
                     return "Se asigno usuario correctamente";   

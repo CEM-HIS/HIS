@@ -819,19 +819,19 @@ namespace HistClinica.Migrations
                     b.Property<string>("fechaBaja")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("fechaCrea")
+                    b.Property<string>("fechaCreacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("fechaMod")
+                    b.Property<string>("fechaModifica")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("idEstado")
                         .HasColumnType("int");
 
-                    b.Property<string>("usuCrea")
+                    b.Property<string>("usuarioCreacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("usuMod")
+                    b.Property<string>("usuarioModifica")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idEmpleado", "loginUser");

@@ -8,10 +8,10 @@ namespace HistClinica.Models
 		public string loginUser { get; set; }
 		public string claveUser { get; set; }
 		public int? idEstado { get; set; }
-		public string usuCrea { get; set; }
-		public string fechaCrea { get; set; }
-		public string usuMod { get; set; }
-		public string fechaMod { get; set; }
+		public string usuarioCreacion { get; set; }
+		public string fechaCreacion { get; set; }
+		public string usuarioModifica { get; set; }
+		public string fechaModifica { get; set; }
 		public string fechaBaja { get; set; }
 	}
 }
