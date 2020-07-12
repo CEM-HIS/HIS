@@ -15,57 +15,74 @@
 						<div class="col-md-6">
 							<div class="box box-primary">
 								<div class="box-body">
-									<div class="form-group">
-										<label>CODIGO</label>
-									</div>
-									<div class="form-group">
-										@Html.EditorFor(m => m.personal.idEmpleado, new { htmlAttributes = new { @class = "form-control" } })
-									</div>
-									<div class="form-group">
-										<label>TIPO</label>
-									</div>
-									<div class="form-group">
-										@Html.DropDownListFor(m => m.personal.idTipoEmpleado, new SelectList(ViewBag.lsttipoempleado, "idtab", "descripcion"), new { @class = "form-control", @disabled="true" })
-									</div>
-									<div class="form-group">
-										<label>AFILIA EN CAJA</label>
-									</div>
-									<div class="form-group">
-										<select id="cboafilia" class="form-control">
-											<option value="1">Si</option>
-											<option value="2">No</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<!--	<button class="btn btn-primary">Asignar modulo</button>-->
+									
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-style">
+                                                <label class="form-label">CODIGO</label>
+                                                @Html.EditorFor(m => m.personal.idEmpleado, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+										</div>
 									</div>
 
-								</div>
-							</div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-style">
+                                                <label  class="form-label">TIPO</label>
+                                                @Html.DropDownListFor(m => m.personal.idTipoEmpleado, new SelectList(ViewBag.lsttipoempleado, "idtab", "descripcion"), new { @class = "form-control", @disabled = "true" })
+                                            </div>
+										</div>
+									</div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-style">
+                                                <label  class="form-label">AFILIA EN CAJA</label>
+                                                <select id="cboafilia" class="form-control">
+                                                    <option value="1">Si</option>
+                                                    <option value="2">No</option>
+                                                </select>
+                                            </div>
+										</div>
+									</div>
+                                            <div class="form-group">
+                                                <!--	<button class="btn btn-primary">Asignar modulo</button>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
 						</div>
 						<div class="col-md-6">
 							<div class="box box-primary">
 								<div class="box-body">
-									<div class="form-group">
-										<label>NOMBRE USUARIO</label>
+								
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-style">
+                                                <label  class="form-label">NOMBRE USUARIO</label>
+                                                @Html.EditorFor(m => m.nombres, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                                            </div>
+										</div>
 									</div>
-									<div class="form-group">
-										@Html.EditorFor(m => m.nombres, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-style">
+                                                <label  class="form-label">NUMERO DE DOCUMENTO</label>
+                                                @Html.EditorFor(m => m.numeroDocumento, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                                            </div>
+										</div>
 									</div>
-									<div class="form-group">
-										<label>NUMERO DE DOCUMENTO</label>
-									</div>
-									<div class="form-group">
-										@Html.EditorFor(m => m.numeroDocumento, new { htmlAttributes = new { @class = "form-control",@disabled="true" } })
-									</div>
-									<div class="form-group">
-										<label>CAJA </label>
-									</div>
-									<div class="form-group">
-										@Html.DropDownListFor(m => m.asignacion.idCaja, new SelectList(ViewBag.lscaja, "idCaja", "nroCaja"), new { @class = "form-control", @id="caja"})
-									</div>
-								</div>
-							</div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-style">
+                                                <label class="form-label">CAJA </label>
+                                                @Html.DropDownListFor(m => m.asignacion.idCaja, new SelectList(ViewBag.lscaja, "idCaja", "nroCaja"), new { @class = "form-control", @id = "caja" })
+                                            </div>
+											</div>
+										</div>
+                                        </div>
+                                    </div>
 						</div>
 					</div>
 				</div>
