@@ -32,6 +32,7 @@ namespace Clinica2._0.Controllers
             return View(await _repository.GetAllCitas());
         }
 
+
         // GET: Cita/Details/5
         public async Task<IActionResult> Details(int? id)
         {
