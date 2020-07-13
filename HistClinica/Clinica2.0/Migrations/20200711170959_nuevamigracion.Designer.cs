@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(ClinicaServiceContext))]
-    [Migration("20200711001714_InicialMigracion")]
-    partial class InicialMigracion
+    [Migration("20200711170959_nuevamigracion")]
+    partial class nuevamigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,6 +224,9 @@ namespace Clinica2._0.Migrations
                     b.Property<int?>("idMedico")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("intervalo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("mes")
                         .HasColumnType("nvarchar(max)");

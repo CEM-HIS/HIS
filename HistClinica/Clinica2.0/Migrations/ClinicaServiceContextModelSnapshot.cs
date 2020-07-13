@@ -223,6 +223,9 @@ namespace HistClinica.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<string>("intervalo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("mes")
                         .HasColumnType("nvarchar(max)");
 
