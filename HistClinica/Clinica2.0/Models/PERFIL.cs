@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HistClinica.Models
+namespace Clinica2._0.Models
 {
 	public class PERFIL
 	{

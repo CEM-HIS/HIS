@@ -1,7 +1,7 @@
-﻿using HistClinica.Models;
+﻿using Clinica2._0.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-namespace HistClinica.Data
+namespace Clinica2._0.Data
 {
     public class ClinicaServiceContext:DbContext
     {
@@ -37,7 +37,7 @@ namespace HistClinica.Data
             modelBuilder.Entity<CAJA_ASIGNADA>()
                 .HasKey(o => new { o.idCaja,o.fechaApertura,o.turno});
             modelBuilder.Entity<USUARIO>()
-                .HasKey(c => new { c.idEmpleado, c.loginUser });
+                .HasKey(c => new { c.Id});
         }
         public DbSet<PAGO> PAGO { get; set; }
     }

@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Clinica2._0.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +8,8 @@ using Clinica2._0.Repositories.EntityRepositories.Repositories;
 using Clinica2._0.Repositories.Repositories;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Clinica2._0.Models;
+using HistClinica.Repositories.EntityRepositories.Repositories;
+using Clinica2._0.Data;
 
 namespace Clinica2._0
 {
