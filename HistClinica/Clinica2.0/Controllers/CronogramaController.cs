@@ -6,11 +6,13 @@ using Clinica2._0.Data;
 using Clinica2._0.DTO;
 using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clinica2._0.Controllers
 {
+    [Authorize]
     public class CronogramaController : Controller
     {
         private readonly ClinicaServiceContext _context;
