@@ -10,7 +10,6 @@ using Clinica2._0.Repositories.EntityRepositories.Repositories;
 using Clinica2._0.Repositories.Repositories;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Clinica2._0.Models;
-using HistClinica.Data;
 using HistClinica.Repositories.EntityRepositories.Repositories;
 
 namespace Clinica2._0
