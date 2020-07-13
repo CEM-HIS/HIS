@@ -1,6 +1,7 @@
 ﻿using Clinica2._0.Data;
 using Clinica2._0.DTO;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
+using HistClinica.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
