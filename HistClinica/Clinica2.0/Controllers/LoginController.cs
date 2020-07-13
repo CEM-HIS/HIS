@@ -89,7 +89,7 @@ namespace Clinica2._0.Controllers
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return View();
                 }
-            }
+            } 
 
             // If we got this far, something failed, redisplay form
             return View();
