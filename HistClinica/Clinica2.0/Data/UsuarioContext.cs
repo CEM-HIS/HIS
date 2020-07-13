@@ -12,7 +12,7 @@ namespace Clinica2._0.Data
     {
         public UsuarioContext(DbContextOptions<UsuarioContext> options)
             : base(options)
-        {}
+        { }
         public DbSet<USUARIO> USUARIO { get; set; }
         public DbSet<IdentityRole> ROL { get; set; }
         public DbSet<IdentityUserRole<string>> USUARIOROL { get; set; }
