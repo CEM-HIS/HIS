@@ -1,18 +1,16 @@
-﻿using Clinica2._0.Data;
-using Clinica2._0.DTO;
-using Clinica2._0.Models;
-using Clinica2._0.Repositories.EntityRepositories.Interfaces;
+﻿using HistClinica.Data;
+using HistClinica.DTO;
+using HistClinica.Models;
+using HistClinica.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinica2._0.Repositories.EntityRepositories.Repositories
+namespace HistClinica.Repositories.EntityRepositories.Repositories
 {
-
-	public class LicenciaRepository: ILicenciaRepository
-
+	public class LicenciaRepository : ILicenciaRepository
 	{
 		private readonly ClinicaServiceContext _context;
 
@@ -23,33 +21,33 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
 		public async Task<List<licenciaDTO>> getAll()
 		{
-			List<licenciaDTO> licencia = await (from l in _context.LICENCIA
-												join det in _context.TABLA_DETALLE on l.idEstado equals det.idTablaDetalle
+			List<licenciaDTO> licencia = await (from l in _context.LICENCIA	
+												join det in _context.TABLA_DETALLE on l.estado equals det.idDet
 												join med in _context.MEDICO on l.idMedico equals med.idMedico
 												join per in _context.PERSONA on med.idPersona equals per.idPersona
 												select new licenciaDTO
 												{
 													idLicencia = l.idLicencia,
-													fechaIni = l.fechaInicio.Value.ToShortDateString(),
+													fechaIni = l.fechaIni.Value.ToShortDateString(),
 													fechaFin = l.fechaFin.Value.ToShortDateString(),
 													estado = det.descripcion,
-													medico = per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno
+													medico = per.nombres + " " + per.apePaterno + " " + per.apeMaterno
 												}).ToListAsync();
-	return licencia;
+			return licencia;
 		}
 
 		public async Task<string> insertLicencia(LICENCIA licencia)
 		{
 			try
 			{
-
-				await _context.LICENCIA.AddAsync(new LICENCIA() { 
-					horaInicio = licencia.horaInicio,
+				await _context.LICENCIA.AddAsync(new LICENCIA()
+				{
+					horaIni = licencia.horaIni,
 					horaFin = licencia.horaFin,
-					fechaInicio = licencia.fechaInicio,
+					fechaIni = licencia.fechaIni,
 					fechaFin = licencia.fechaFin,
 					idMedico = licencia.idMedico,
-					idEstado = 173
+					estado = 173
 				});
 				await Save();
 				return "Se registro licencia correctamente";
