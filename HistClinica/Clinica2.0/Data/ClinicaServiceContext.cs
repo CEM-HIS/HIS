@@ -1,5 +1,4 @@
 ﻿using Clinica2._0.Models;
-using HistClinica.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;

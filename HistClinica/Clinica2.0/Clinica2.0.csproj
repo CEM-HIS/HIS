@@ -10,10 +10,6 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200710235453_InicialMigracion.cs" />
     <Compile Remove="Migrations\20200710235453_InicialMigracion.Designer.cs" />
-    <Compile Remove="Migrations\ClinicaService\20200713184500_Migracion Inicial Clinica.cs" />
-    <Compile Remove="Migrations\ClinicaService\20200713184500_Migracion Inicial Clinica.Designer.cs" />
-    <Compile Remove="Migrations\ClinicaService\20200713184910_Migracion Inicial Clinica.cs" />
-    <Compile Remove="Migrations\ClinicaService\20200713184910_Migracion Inicial Clinica.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +21,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
