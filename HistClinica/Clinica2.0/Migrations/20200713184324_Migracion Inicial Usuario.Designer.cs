@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Clinica2._0.Migrations.Usuario
+namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(UsuarioContext))]
-    [Migration("20200711171047_nuevamigracion2")]
-    partial class nuevamigracion2
+    [Migration("20200713184324_Migracion Inicial Usuario")]
+    partial class MigracionInicialUsuario
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

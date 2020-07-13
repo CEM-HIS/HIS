@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Clinica2._0.Migrations.Usuario
+namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(UsuarioContext))]
     partial class UsuarioContextModelSnapshot : ModelSnapshot

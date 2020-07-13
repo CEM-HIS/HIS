@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Clinica2._0.Migrations
+namespace Clinica2._0.Migrations.ClinicaService
 {
-    public partial class nuevamigracion : Migration
+    public partial class MigracionInicialClinica : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -132,6 +132,19 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EMPRESA",
+                columns: table => new
+                {
+                    idempresa = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EMPRESA", x => x.idempresa);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ESTADO_CITA",
                 columns: table => new
                 {
@@ -185,6 +198,33 @@ namespace Clinica2._0.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MEDICO", x => x.idMedico);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MENU",
+                columns: table => new
+                {
+                    IdMenu = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombreMenu = table.Column<string>(nullable: true),
+                    linkMenu = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MENU", x => x.IdMenu);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MODULO",
+                columns: table => new
+                {
+                    idModulo = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MODULO", x => x.idModulo);
                 });
 
             migrationBuilder.CreateTable(
@@ -276,7 +316,7 @@ namespace Clinica2._0.Migrations
                 {
                     idPerfil = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    codigoPerfil = table.Column<string>(nullable: true),
+                    codPerfil = table.Column<string>(nullable: true),
                     nombrePerfil = table.Column<string>(nullable: true),
                     idUsuario = table.Column<int>(nullable: false),
                     estado = table.Column<string>(nullable: true)
@@ -341,6 +381,19 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SEDE",
+                columns: table => new
+                {
+                    idSede = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    descripcion = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SEDE", x => x.idSede);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TABLA_DETALLE",
                 columns: table => new
                 {
@@ -397,6 +450,9 @@ namespace Clinica2._0.Migrations
                 name: "EMPLEADO");
 
             migrationBuilder.DropTable(
+                name: "EMPRESA");
+
+            migrationBuilder.DropTable(
                 name: "ESTADO_CITA");
 
             migrationBuilder.DropTable(
@@ -404,6 +460,12 @@ namespace Clinica2._0.Migrations
 
             migrationBuilder.DropTable(
                 name: "MEDICO");
+
+            migrationBuilder.DropTable(
+                name: "MENU");
+
+            migrationBuilder.DropTable(
+                name: "MODULO");
 
             migrationBuilder.DropTable(
                 name: "PACIENTE");
@@ -416,6 +478,9 @@ namespace Clinica2._0.Migrations
 
             migrationBuilder.DropTable(
                 name: "PERSONA");
+
+            migrationBuilder.DropTable(
+                name: "SEDE");
 
             migrationBuilder.DropTable(
                 name: "TABLA_DETALLE");

@@ -16,7 +16,6 @@ namespace Clinica2._0.Data
         public DbSet<MEDICO> MEDICO { get; set; }
         public DbSet<CITA> CITA { get; set; }
         public DbSet<ESTADO_CITA> ESTADO_CITA { get; set; }
-        public DbSet<USUARIO> USUARIO { get; set; }
         public DbSet<PERFIL> PERFIL { get; set; }
         public DbSet<TABLA_GENERAL> TABLA_GENERAL { get; set; }
         public DbSet<TABLA_DETALLE> TABLA_DETALLE { get; set; }
@@ -29,15 +28,12 @@ namespace Clinica2._0.Data
         public DbSet<EMPRESA> EMPRESA { get; set; }
         public DbSet<MENU> MENU { get; set; }
         public DbSet<MODULO> MODULO { get; set; }
-        public DbSet<ROL> ROL { get; set; }
         public DbSet<SEDE> SEDE { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CAJA_ASIGNADA>()
                 .HasKey(o => new { o.idCaja,o.fechaApertura,o.turno});
-            modelBuilder.Entity<USUARIO>()
-                .HasKey(c => new { c.Id});
         }
         public DbSet<PAGO> PAGO { get; set; }
     }

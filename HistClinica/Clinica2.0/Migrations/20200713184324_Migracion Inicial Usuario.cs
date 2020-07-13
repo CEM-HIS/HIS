@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Clinica2._0.Migrations.Usuario
+namespace Clinica2._0.Migrations
 {
-    public partial class nuevamigracion2 : Migration
+    public partial class MigracionInicialUsuario : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
