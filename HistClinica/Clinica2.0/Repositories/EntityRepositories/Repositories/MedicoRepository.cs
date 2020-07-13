@@ -2,6 +2,7 @@
 using Clinica2._0.DTO;
 using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
+using HistClinica.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
