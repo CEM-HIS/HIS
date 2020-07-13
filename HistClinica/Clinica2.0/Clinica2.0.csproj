@@ -10,9 +10,14 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200710235453_InicialMigracion.cs" />
     <Compile Remove="Migrations\20200710235453_InicialMigracion.Designer.cs" />
+    <Compile Remove="Migrations\ClinicaService\20200713184500_Migracion Inicial Clinica.cs" />
+    <Compile Remove="Migrations\ClinicaService\20200713184500_Migracion Inicial Clinica.Designer.cs" />
+    <Compile Remove="Migrations\ClinicaService\20200713184910_Migracion Inicial Clinica.cs" />
+    <Compile Remove="Migrations\ClinicaService\20200713184910_Migracion Inicial Clinica.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.4" />

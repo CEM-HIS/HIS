@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Clinica2._0.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +9,8 @@ using Clinica2._0.Repositories.Repositories;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Clinica2._0.Models;
 using HistClinica.Repositories.EntityRepositories.Repositories;
+using Clinica2._0.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Clinica2._0
 {
@@ -27,8 +27,7 @@ namespace Clinica2._0
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSession();
-            services.AddRazorPages()
-           .AddRazorRuntimeCompilation();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
             services.AddTransient<ICronogramaRepository, CronogramaRepository>();
             services.AddTransient<IPacienteRepository, PacienteRepository>();
@@ -51,6 +50,7 @@ namespace Clinica2._0
                 opciones.AddPolicy("AllowMyOrigin",
                 constructor => constructor.AllowAnyOrigin().AllowAnyHeader());
             });
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

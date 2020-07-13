@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HistClinica.Models
+namespace Clinica2._0.Models
 {
     public class MENU
     {
