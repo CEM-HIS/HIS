@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinica2._0.Controllers
 {
+
+    [Authorize]
     public class LicenciaController : Controller
     {
         private readonly ILicenciaRepository licenciarepository;

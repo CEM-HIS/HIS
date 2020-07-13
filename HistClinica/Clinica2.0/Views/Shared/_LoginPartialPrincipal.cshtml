@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<USUARIO> SignInManager
+@inject UserManager<USUARIO> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+	
+	<button type="button" class="btn btn-secondary dropdown-toggle hidden-sm-down" style="background: none;
+    border: none;color: #0f5493;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<img style="width:24px;border-radius:50%;border:2px solid #0f5493;margin-right:9px;" src="~/images/profile.png" /><span class="bold" style="color:#0f5493">Bienvenido, @User.Identity.Name!</span>
+	</button>
+	<div class="dropdown-menu dropdown-menu-right">
+		<button class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/back.png" /><span> Panel </span></button>
+		<button asp-area="" asp-controller="Login" asp-action="Index" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/off.png" /><span> Cerrar Sesion </span></button>
+
+	</div>
+}
+else
+{
+	
+}

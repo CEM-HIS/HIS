@@ -2,6 +2,7 @@
 using Clinica2._0.DTO;
 using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Clinica2._0.Controllers
 {
+    [Authorize]
     public class CitaController : Controller
     {
         private readonly IPacienteRepository _pacienteRepository;
