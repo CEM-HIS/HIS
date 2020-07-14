@@ -100,5 +100,11 @@ namespace Clinica2._0.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Panel()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index","Panel");
+        }
     }
 }

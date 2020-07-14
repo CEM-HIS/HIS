@@ -1,4 +1,5 @@
 ﻿using Clinica2._0.Data;
+using Clinica2._0.DTO;
 using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -76,11 +77,21 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 return "Error en el guardado " + ex.StackTrace;
             }
         }
-        public async Task<List<CAJA>> GetAllCajas()
+        public async Task<List<CajaDTO>> GetAllCajas()
         {
-            List<CAJA> Cajas = await (from c in _context.CAJA
-                                           select c).ToListAsync();
-
+            List<CajaDTO> Cajas = await (from c in _context.CAJA
+                                select new CajaDTO()
+                                {
+                                    fecha = "",
+                                    idCaja = c.idCaja,
+                                    idEmpleado = null,
+                                    empleado = "",
+                                    tipo = "",
+                                    turno = "",
+                                    idEstado = c.idEstado,
+                                    estado = ""
+                                }
+                                ).ToListAsync();
             return Cajas;
         }
         public async Task<CAJA> GetById(int? Id)
@@ -124,11 +135,11 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                         montoSolesApertura = cajaAsignada.montoSolesApertura,
                         montoDolaresApertura = cajaAsignada.montoDolaresApertura,
                         montoEurosApertura = cajaAsignada.montoEurosApertura,
-                        montoSolesCierre = cajaAsignada.montoSolesCierre,
-                        montoDolaresCierre = cajaAsignada.montoDolaresCierre,
-                        montoEurosCierre = cajaAsignada.montoEurosCierre,
+                        montoSolesCierre = null,
+                        montoDolaresCierre = null,
+                        montoEurosCierre = null,
                         glosaApertura = cajaAsignada.glosaApertura,
-                        glosaCierre = cajaAsignada.glosaCierre
+                        glosaCierre = null
                     });
                     await Save();
                     return "Ingreso Exitoso";
@@ -143,11 +154,30 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
         public async Task<string> CierreCaja(CAJA_ASIGNADA cajaAsignada)
         {
-            CAJA_ASIGNADA CajaAsignada =    await (from c in _context.CAJA_ASIGNADA
-                                            where c.idCaja == cajaAsignada.idCaja
-                                            && c.fechaApertura == cajaAsignada.fechaApertura
-                                            && c.turno == cajaAsignada.turno
-                                            select c).FirstOrDefaultAsync();
+            CAJA_ASIGNADA CajaAsignada = await (from c in _context.CAJA_ASIGNADA
+                                                where c.idCaja == cajaAsignada.idCaja
+                                                && c.fechaApertura == cajaAsignada.fechaApertura
+                                                && c.turno == cajaAsignada.turno
+                                                select new CAJA_ASIGNADA()
+                                                {
+                                                    idEmpleado = c.idEmpleado,
+                                                    idCaja = c.idCaja,
+                                                    fechaApertura = c.fechaApertura,
+                                                    horaApertura = c.horaApertura,
+                                                    turno = c.turno,
+                                                    pos = c.pos,
+                                                    montoSolesApertura = c.montoSolesApertura,
+                                                    montoDolaresApertura = c.montoDolaresApertura,
+                                                    montoEurosApertura = c.montoEurosApertura,
+                                                    fechaCierre = DateTime.Now.ToShortDateString(),
+                                                    horaCierre = DateTime.Now.ToShortTimeString(),
+                                                    montoSolesCierre = cajaAsignada.montoSolesCierre,
+                                                    montoDolaresCierre = cajaAsignada.montoDolaresCierre,
+                                                    montoEurosCierre = cajaAsignada.montoEurosCierre,
+                                                    glosaApertura = cajaAsignada.glosaApertura,
+                                                    glosaCierre = cajaAsignada.glosaCierre
+                                                }).FirstOrDefaultAsync();
+            
             _context.Update(CajaAsignada);
             await Save();
             return "Cierre de caja exitoso";

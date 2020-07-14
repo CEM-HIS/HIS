@@ -9,7 +9,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 {
     public interface ICajaRepository
     {
-        Task<List<CAJA>> GetAllCajas();
+        Task<List<CajaDTO>> GetAllCajas();
         Task<CAJA> GetById(int? Id);
         //Operaciones Transaccionales
         Task<string> InsertCaja(CAJA Caja);

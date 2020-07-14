@@ -15,7 +15,7 @@
         <img style="width:24px;border-radius:50%;border:2px solid #0f5493;margin-right:9px;" src="~/images/profile.png" /><span class="bold" style="color:#0f5493">Bienvenido, @person.nombres @person.apellidoPaterno @person.apellidoMaterno!</span>
     </button>
     <div class="dropdown-menu dropdown-menu-right">
-        <button class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/back.png" /><span> Panel </span></button>
+        <button asp-area="" asp-controller="Login" asp-action="Panel" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/back.png" /><span> Panel </span></button>
         <a asp-area="" asp-controller="Login" asp-action="Logout" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/off.png" /><span> Cerrar Sesion </span></a>
     </div>
 }
