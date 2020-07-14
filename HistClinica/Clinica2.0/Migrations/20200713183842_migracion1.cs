@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Clinica2._0.Migrations
 {
-    public partial class nuevamigracion : Migration
+    public partial class migracion1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -276,7 +276,7 @@ namespace Clinica2._0.Migrations
                 {
                     idPerfil = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    codigoPerfil = table.Column<string>(nullable: true),
+                    codPerfil = table.Column<string>(nullable: true),
                     nombrePerfil = table.Column<string>(nullable: true),
                     idUsuario = table.Column<int>(nullable: false),
                     estado = table.Column<string>(nullable: true)
