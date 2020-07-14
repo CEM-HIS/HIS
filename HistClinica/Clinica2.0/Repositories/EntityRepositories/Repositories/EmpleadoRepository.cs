@@ -125,6 +125,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                      select new PersonaDTO
                                      {
                                          nombres = p.nombres,
+                                         apellidoPaterno = p.apellidoPaterno,
+                                         apellidoMaterno = p.apellidoPaterno,
                                          numeroDocumento = p.dniPersona,
                                          personal = new PersonalDTO
                                          {
