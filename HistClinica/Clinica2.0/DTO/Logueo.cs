@@ -9,8 +9,7 @@ namespace Clinica2._0.DTO
     public class Logueo
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

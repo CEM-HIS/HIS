@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [Clinica]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Database [Clinica]    Script Date: 13/07/2020 02:05:50 PM ******/
 CREATE DATABASE [Clinica]
 GO
 ALTER DATABASE [Clinica] SET COMPATIBILITY_LEVEL = 130
@@ -84,7 +84,7 @@ ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
 GO
 USE [Clinica]
 GO
-/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ CREATE TABLE [dbo].[__EFMigrationsHistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CAJA]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[CAJA]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -114,7 +114,7 @@ CREATE TABLE [dbo].[CAJA](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CAJA_ASIGNADA]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[CAJA_ASIGNADA]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -144,7 +144,7 @@ CREATE TABLE [dbo].[CAJA_ASIGNADA](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CITA]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[CITA]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +181,7 @@ CREATE TABLE [dbo].[CITA](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CRONOGRAMA_MEDICO]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[CRONOGRAMA_MEDICO]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -200,13 +200,14 @@ CREATE TABLE [dbo].[CRONOGRAMA_MEDICO](
 	[horaFin] [nvarchar](max) NOT NULL,
 	[idEstado] [int] NULL,
 	[fechaBaja] [nvarchar](max) NULL,
+	[intervalo] [nvarchar](max) NULL,
  CONSTRAINT [PK_CRONOGRAMA_MEDICO] PRIMARY KEY CLUSTERED 
 (
 	[idProgramMedica] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EMPLEADO]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[EMPLEADO]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -229,7 +230,21 @@ CREATE TABLE [dbo].[EMPLEADO](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ESTADO_CITA]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[EMPRESA]    Script Date: 13/07/2020 02:05:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EMPRESA](
+	[idempresa] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [nvarchar](max) NULL,
+ CONSTRAINT [PK_EMPRESA] PRIMARY KEY CLUSTERED 
+(
+	[idempresa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ESTADO_CITA]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,7 +260,7 @@ CREATE TABLE [dbo].[ESTADO_CITA](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LICENCIA]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[LICENCIA]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -264,7 +279,7 @@ CREATE TABLE [dbo].[LICENCIA](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MEDICO]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[MEDICO]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -288,7 +303,36 @@ CREATE TABLE [dbo].[MEDICO](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PACIENTE]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[MENU]    Script Date: 13/07/2020 02:05:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MENU](
+	[IdMenu] [int] IDENTITY(1,1) NOT NULL,
+	[nombreMenu] [nvarchar](max) NULL,
+	[linkMenu] [nvarchar](max) NULL,
+ CONSTRAINT [PK_MENU] PRIMARY KEY CLUSTERED 
+(
+	[IdMenu] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MODULO]    Script Date: 13/07/2020 02:05:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MODULO](
+	[idModulo] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [nvarchar](max) NULL,
+ CONSTRAINT [PK_MODULO] PRIMARY KEY CLUSTERED 
+(
+	[idModulo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PACIENTE]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -351,7 +395,7 @@ CREATE TABLE [dbo].[PACIENTE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PAGO]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[PAGO]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -373,14 +417,14 @@ CREATE TABLE [dbo].[PAGO](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PERFIL]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[PERFIL]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PERFIL](
 	[idPerfil] [int] IDENTITY(1,1) NOT NULL,
-	[codigoPerfil] [nvarchar](max) NULL,
+	[codPerfil] [nvarchar](max) NULL,
 	[nombrePerfil] [nvarchar](max) NULL,
 	[idUsuario] [int] NOT NULL,
 	[estado] [nvarchar](max) NULL,
@@ -390,7 +434,7 @@ CREATE TABLE [dbo].[PERFIL](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PERSONA]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[PERSONA]    Script Date: 13/07/2020 02:05:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -445,7 +489,53 @@ CREATE TABLE [dbo].[PERSONA](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TABLA_DETALLE]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[ROL]    Script Date: 13/07/2020 02:05:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROL](
+	[Id] [nvarchar](450) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[NormalizedName] [nvarchar](max) NULL,
+	[ConcurrencyStamp] [nvarchar](max) NULL,
+ CONSTRAINT [PK_ROL] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ROLCLAIM]    Script Date: 13/07/2020 02:05:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROLCLAIM](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [nvarchar](max) NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+ CONSTRAINT [PK_ROLCLAIM] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SEDE]    Script Date: 13/07/2020 02:05:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SEDE](
+	[idSede] [int] IDENTITY(1,1) NOT NULL,
+	[descripcion] [nvarchar](max) NULL,
+ CONSTRAINT [PK_SEDE] PRIMARY KEY CLUSTERED 
+(
+	[idSede] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TABLA_DETALLE]    Script Date: 13/07/2020 02:05:51 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -465,7 +555,7 @@ CREATE TABLE [dbo].[TABLA_DETALLE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TABLA_GENERAL]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[TABLA_GENERAL]    Script Date: 13/07/2020 02:05:51 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -485,15 +575,29 @@ CREATE TABLE [dbo].[TABLA_GENERAL](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USUARIO]    Script Date: 09/07/2020 07:33:35 PM ******/
+/****** Object:  Table [dbo].[USUARIO]    Script Date: 13/07/2020 02:05:51 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[USUARIO](
-	[idEmpleado] [int] NOT NULL,
-	[loginUser] [nvarchar](450) NOT NULL,
-	[claveUser] [nvarchar](max) NULL,
+	[Id] [nvarchar](450) NOT NULL,
+	[UserName] [nvarchar](max) NULL,
+	[NormalizedUserName] [nvarchar](max) NULL,
+	[Email] [nvarchar](max) NULL,
+	[NormalizedEmail] [nvarchar](max) NULL,
+	[EmailConfirmed] [bit] NOT NULL,
+	[PasswordHash] [nvarchar](max) NULL,
+	[SecurityStamp] [nvarchar](max) NULL,
+	[ConcurrencyStamp] [nvarchar](max) NULL,
+	[PhoneNumber] [nvarchar](max) NULL,
+	[PhoneNumberConfirmed] [bit] NOT NULL,
+	[TwoFactorEnabled] [bit] NOT NULL,
+	[LockoutEnd] [datetimeoffset](7) NULL,
+	[LockoutEnabled] [bit] NOT NULL,
+	[AccessFailedCount] [int] NOT NULL,
+	[Discriminator] [nvarchar](max) NOT NULL,
+	[idEmpleado] [int] NULL,
 	[idEstado] [int] NULL,
 	[usuarioCreacion] [nvarchar](max) NULL,
 	[fechaCreacion] [nvarchar](max) NULL,
@@ -502,8 +606,73 @@ CREATE TABLE [dbo].[USUARIO](
 	[fechaBaja] [nvarchar](max) NULL,
  CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED 
 (
-	[idEmpleado] ASC,
-	[loginUser] ASC
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[USUARIOCLAIM]    Script Date: 13/07/2020 02:05:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USUARIOCLAIM](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](max) NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+ CONSTRAINT [PK_USUARIOCLAIM] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[USUARIOLOGIN]    Script Date: 13/07/2020 02:05:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USUARIOLOGIN](
+	[LoginProvider] [nvarchar](450) NOT NULL,
+	[ProviderKey] [nvarchar](450) NOT NULL,
+	[ProviderDisplayName] [nvarchar](max) NULL,
+	[UserId] [nvarchar](max) NULL,
+ CONSTRAINT [PK_USUARIOLOGIN] PRIMARY KEY CLUSTERED 
+(
+	[LoginProvider] ASC,
+	[ProviderKey] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[USUARIOROL]    Script Date: 13/07/2020 02:05:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USUARIOROL](
+	[UserId] [nvarchar](450) NOT NULL,
+	[RoleId] [nvarchar](450) NOT NULL,
+ CONSTRAINT [PK_USUARIOROL] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[USUARIOTOKEN]    Script Date: 13/07/2020 02:05:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USUARIOTOKEN](
+	[UserId] [nvarchar](450) NOT NULL,
+	[LoginProvider] [nvarchar](450) NOT NULL,
+	[Name] [nvarchar](450) NOT NULL,
+	[Value] [nvarchar](max) NULL,
+ CONSTRAINT [PK_USUARIOTOKEN] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[LoginProvider] ASC,
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO

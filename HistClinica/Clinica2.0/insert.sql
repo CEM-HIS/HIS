@@ -824,20 +824,12 @@ GO
 SET IDENTITY_INSERT [dbo].[TABLA_GENERAL] OFF
 GO
 
-INSERT INTO [dbo].[USUARIO] ([idEmpleado],[loginUser],[claveUser],[usuarioCreacion],[idEstado],[fechaCreacion],[usuarioModifica],[fechaModifica],[fechaBaja])  
-VALUES (1,N'admin', N'admin', 1, 1, NULL, NULL, NULL, NULL)
-GO								
-INSERT INTO [dbo].[USUARIO] ([idEmpleado],[loginUser],[claveUser],[usuarioCreacion],[idEstado],[fechaCreacion],[usuarioModifica],[fechaModifica],[fechaBaja])  
-VALUES (2,N'sa', N'sa', 2, 1, NULL, NULL, NULL, NULL)
-GO								
-INSERT INTO [dbo].[USUARIO] ([idEmpleado],[loginUser],[claveUser],[usuarioCreacion],[idEstado],[fechaCreacion],[usuarioModifica],[fechaModifica],[fechaBaja])  
-VALUES (1,N'demo', N'demo', 3, 1, NULL, NULL, NULL, NULL)
-GO								
-INSERT INTO [dbo].[USUARIO] ([idEmpleado],[loginUser],[claveUser],[usuarioCreacion],[idEstado],[fechaCreacion],[usuarioModifica],[fechaModifica],[fechaBaja])   
-VALUES (2,N'test', N'test123', 4, 1, NULL, NULL, NULL, CAST(N'2020-06-27' AS Date))
-GO								
-INSERT INTO [dbo].[USUARIO] ([idEmpleado],[loginUser],[claveUser],[usuarioCreacion],[idEstado],[fechaCreacion],[usuarioModifica],[fechaModifica],[fechaBaja])  
-VALUES (1,N'vlarosa20', N'123456', 1, 1, N'', N'', N'', N'')
+INSERT [dbo].[USUARIO] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], 
+[PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount], [Discriminator], [idEmpleado], [idEstado], [usuarioCreacion], 
+[fechaCreacion], [usuarioModifica], [fechaModifica], [fechaBaja]) 
+VALUES (N'a684b692-7395-4cf4-833c-8be938d3f853', N'victor_379_1@hotmail.com', N'VICTOR_379_1@HOTMAIL.COM', N'victor_379_1@hotmail.com', N'VICTOR_379_1@HOTMAIL.COM', 1, 
+N'AQAAAAEAACcQAAAAEF+Iq21aTbOYqFCe4bsQp2R6xL/exUYQbx5fZC7Wnaq0RB+KVrtkhs8L+H9dxNsWnA==', N'5HJFKOG775KYE3SNDV34PYKL7MJTMBTH', N'8e142c07-4be7-4d0a-9915-992583da010e', NULL, 0,
+0, NULL, 1, 0, N'USUARIO', NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 GO
 
 SET IDENTITY_INSERT [dbo].[CRONOGRAMA_MEDICO] ON 

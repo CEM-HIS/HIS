@@ -1,22 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNet.Identity
 @inject SignInManager<USUARIO> SignInManager
-@inject UserManager<USUARIO> UserManager
+@inject Microsoft.AspNetCore.Identity.UserManager<USUARIO> UserManager
+@inject Clinica2._0.Repositories.EntityRepositories.Interfaces.IPersonaRepository PersonaRepository
+@inject Clinica2._0.Repositories.EntityRepositories.Interfaces.IEmpleadoRepository EmpleadoRepository
 
 
 @if (SignInManager.IsSignedIn(User))
 {
-	
-	<button type="button" class="btn btn-secondary dropdown-toggle hidden-sm-down" style="background: none;
+    USUARIO user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+    Clinica2._0.DTO.PersonaDTO person = await EmpleadoRepository.GetById(user.idEmpleado);
+    <button type="button" class="btn btn-secondary dropdown-toggle hidden-sm-down" style="background: none;
     border: none;color: #0f5493;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		<img style="width:24px;border-radius:50%;border:2px solid #0f5493;margin-right:9px;" src="~/images/profile.png" /><span class="bold" style="color:#0f5493">Bienvenido, @User.Identity.Name!</span>
-	</button>
-	<div class="dropdown-menu dropdown-menu-right">
-		<button class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/back.png" /><span> Panel </span></button>
-		<button asp-area="" asp-controller="Login" asp-action="Index" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/off.png" /><span> Cerrar Sesion </span></button>
-
-	</div>
+        <img style="width:24px;border-radius:50%;border:2px solid #0f5493;margin-right:9px;" src="~/images/profile.png" /><span class="bold" style="color:#0f5493">Bienvenido, @person.nombres @person.apellidoPaterno @person.apellidoMaterno!</span>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+        <button asp-area="" asp-controller="Login" asp-action="Panel" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/back.png" /><span> Panel </span></button>
+        <a asp-area="" asp-controller="Login" asp-action="Logout" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/off.png" /><span> Cerrar Sesion </span></a>
+    </div>
 }
 else
 {
-	
+
 }
