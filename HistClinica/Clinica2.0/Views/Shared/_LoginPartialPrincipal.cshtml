@@ -16,7 +16,7 @@
     </button>
     <div class="dropdown-menu dropdown-menu-right">
         <button class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/back.png" /><span> Panel </span></button>
-        <button asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/off.png" /><span> Cerrar Sesion </span></button>
+        <a asp-area="" asp-controller="Login" asp-action="Logout" class="dropdown-item" type="button"><img style="margin-right: 9px;" src="~/images/off.png" /><span> Cerrar Sesion </span></a>
     </div>
 }
 else
