@@ -262,5 +262,10 @@ namespace Clinica2._0.Controllers
             TempData["msjcita"] = await _repository.CambiarEstadoCita(cita);
             return RedirectToAction("AdmicionMedico", "Paciente");
         }
+
+        public IActionResult RegistroCita()
+        {
+            return View();
+        }
     }
 }

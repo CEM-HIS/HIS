@@ -222,5 +222,15 @@ namespace Clinica2._0.Controllers
             return View();
         }
 
+        public IActionResult Listado()
+        {
+            return View();
+        }
+        public IActionResult CrearPaciente()
+        {
+            return View();
+        }
+
+
     }
 }
