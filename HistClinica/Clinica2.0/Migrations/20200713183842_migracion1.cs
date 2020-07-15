@@ -56,19 +56,6 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAMPUS",
-                columns: table => new
-                {
-                    idCampus = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CAMPUS", x => x.idCampus);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CITA",
                 columns: table => new
                 {
@@ -102,19 +89,6 @@ namespace Clinica2._0.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CITA", x => x.idCita);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "COMPANY",
-                columns: table => new
-                {
-                    idCompany = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_COMPANY", x => x.idCompany);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,6 +136,19 @@ namespace Clinica2._0.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EMPLEADO", x => x.idEmpleado);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EMPRESA",
+                columns: table => new
+                {
+                    idempresa = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EMPRESA", x => x.idempresa);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,8 +213,8 @@ namespace Clinica2._0.Migrations
                 {
                     IdMenu = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    menuName = table.Column<string>(nullable: true),
-                    menuLink = table.Column<string>(nullable: true)
+                    nombreMenu = table.Column<string>(nullable: true),
+                    linkMenu = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,16 +222,16 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MODULE",
+                name: "MODULO",
                 columns: table => new
                 {
-                    idModule = table.Column<int>(nullable: false)
+                    idModulo = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(nullable: true)
+                    nombre = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MODULE", x => x.idModule);
+                    table.PrimaryKey("PK_MODULO", x => x.idModulo);
                 });
 
             migrationBuilder.CreateTable(
@@ -331,6 +318,22 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PERFIL",
+                columns: table => new
+                {
+                    idPerfil = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    codPerfil = table.Column<string>(nullable: true),
+                    nombrePerfil = table.Column<string>(nullable: true),
+                    idUsuario = table.Column<int>(nullable: false),
+                    estado = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PERFIL", x => x.idPerfil);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PERSONA",
                 columns: table => new
                 {
@@ -385,19 +388,16 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PROFILE",
+                name: "SEDE",
                 columns: table => new
                 {
-                    idProfile = table.Column<int>(nullable: false)
+                    idSede = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    profileCode = table.Column<string>(nullable: true),
-                    profileName = table.Column<string>(nullable: true),
-                    idUser = table.Column<int>(nullable: true),
-                    idState = table.Column<int>(nullable: true)
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PROFILE", x => x.idProfile);
+                    table.PrimaryKey("PK_SEDE", x => x.idSede);
                 });
 
             migrationBuilder.CreateTable(
@@ -439,6 +439,21 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ROL",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    NormalizedName = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ROL", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ROLCLAIM",
                 schema: "dbo",
                 columns: table => new
@@ -455,22 +470,7 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ROLE",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    NormalizedName = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ROLE", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "USER",
+                name: "USUARIO",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -490,21 +490,21 @@ namespace Clinica2._0.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
-                    idEmployee = table.Column<int>(nullable: true),
-                    idState = table.Column<int>(nullable: true),
-                    creationUser = table.Column<string>(nullable: true),
-                    creationDate = table.Column<string>(nullable: true),
-                    modifyUser = table.Column<string>(nullable: true),
-                    modifyDate = table.Column<string>(nullable: true),
-                    DropDate = table.Column<string>(nullable: true)
+                    idEmpleado = table.Column<int>(nullable: true),
+                    idEstado = table.Column<int>(nullable: true),
+                    usuarioCreacion = table.Column<string>(nullable: true),
+                    fechaCreacion = table.Column<string>(nullable: true),
+                    usuarioModifica = table.Column<string>(nullable: true),
+                    fechaModifica = table.Column<string>(nullable: true),
+                    fechaBaja = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USER", x => x.Id);
+                    table.PrimaryKey("PK_USUARIO", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERCLAIM",
+                name: "USUARIOCLAIM",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -516,11 +516,11 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERCLAIM", x => x.Id);
+                    table.PrimaryKey("PK_USUARIOCLAIM", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERLOGIN",
+                name: "USUARIOLOGIN",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -531,24 +531,11 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERLOGIN", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_USUARIOLOGIN", x => new { x.LoginProvider, x.ProviderKey });
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERPROFILE",
-                schema: "dbo",
-                columns: table => new
-                {
-                    idUser = table.Column<int>(nullable: false),
-                    idProfile = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_USERPROFILE", x => new { x.idUser, x.idProfile });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "USERROL",
+                name: "USUARIOROL",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -557,11 +544,11 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERROL", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_USUARIOROL", x => new { x.UserId, x.RoleId });
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERTOKEN",
+                name: "USUARIOTOKEN",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -572,7 +559,7 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERTOKEN", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_USUARIOTOKEN", x => new { x.UserId, x.LoginProvider, x.Name });
                 });
         }
 
@@ -585,19 +572,16 @@ namespace Clinica2._0.Migrations
                 name: "CAJA_ASIGNADA");
 
             migrationBuilder.DropTable(
-                name: "CAMPUS");
-
-            migrationBuilder.DropTable(
                 name: "CITA");
-
-            migrationBuilder.DropTable(
-                name: "COMPANY");
 
             migrationBuilder.DropTable(
                 name: "CRONOGRAMA_MEDICO");
 
             migrationBuilder.DropTable(
                 name: "EMPLEADO");
+
+            migrationBuilder.DropTable(
+                name: "EMPRESA");
 
             migrationBuilder.DropTable(
                 name: "ESTADO_CITA");
@@ -612,7 +596,7 @@ namespace Clinica2._0.Migrations
                 name: "MENU");
 
             migrationBuilder.DropTable(
-                name: "MODULE");
+                name: "MODULO");
 
             migrationBuilder.DropTable(
                 name: "PACIENTE");
@@ -621,10 +605,13 @@ namespace Clinica2._0.Migrations
                 name: "PAGO");
 
             migrationBuilder.DropTable(
+                name: "PERFIL");
+
+            migrationBuilder.DropTable(
                 name: "PERSONA");
 
             migrationBuilder.DropTable(
-                name: "PROFILE");
+                name: "SEDE");
 
             migrationBuilder.DropTable(
                 name: "TABLA_DETALLE");
@@ -633,35 +620,31 @@ namespace Clinica2._0.Migrations
                 name: "TABLA_GENERAL");
 
             migrationBuilder.DropTable(
+                name: "ROL",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "ROLCLAIM",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "ROLE",
+                name: "USUARIO",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USER",
+                name: "USUARIOCLAIM",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERCLAIM",
+                name: "USUARIOLOGIN",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERLOGIN",
+                name: "USUARIOROL",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERPROFILE",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "USERROL",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "USERTOKEN",
+                name: "USUARIOTOKEN",
                 schema: "dbo");
         }
     }
