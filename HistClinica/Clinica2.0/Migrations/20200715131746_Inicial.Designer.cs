@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(ClinicaServiceContext))]
-    [Migration("20200714234912_Inicial")]
+    [Migration("20200715131746_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,13 +99,16 @@ namespace Clinica2._0.Migrations
 
             modelBuilder.Entity("Clinica2._0.Models.CAMPUS", b =>
                 {
-                    b.Property<int?>("idCampus")
+                    b.Property<int>("idCampus")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("idCompany")
+                        .HasColumnType("int");
 
                     b.HasKey("idCampus");
 
@@ -789,9 +792,6 @@ namespace Clinica2._0.Migrations
                     b.Property<int?>("idState")
                         .HasColumnType("int");
 
-                    b.Property<int?>("idUser")
-                        .HasColumnType("int");
-
                     b.Property<string>("profileCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -875,8 +875,8 @@ namespace Clinica2._0.Migrations
 
             modelBuilder.Entity("Clinica2._0.Models.USERPROFILE", b =>
                 {
-                    b.Property<int>("idUser")
-                        .HasColumnType("int");
+                    b.Property<string>("idUser")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("idProfile")
                         .HasColumnType("int");

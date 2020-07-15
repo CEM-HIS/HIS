@@ -7,7 +7,7 @@ namespace Clinica2._0.Models
 {
     public class USERPROFILE
     {
-        public int idUser { get; set; }
+        public string idUser { get; set; }
         public int idProfile { get; set; }
     }
 }

@@ -9,7 +9,8 @@ namespace Clinica2._0.Models
     {
 
         [Key]
-        public int? idCampus { get; set; }
+        public int idCampus { get; set; }
         public string description { get; set; }
+        public int? idCompany { get; set; }
     }
 }
