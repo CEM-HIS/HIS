@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(ClinicaServiceContext))]
-    [Migration("20200714152559_Inicial")]
-    partial class Inicial
+    [Migration("20200715143425_migracion")]
+    partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -225,8 +225,8 @@ namespace Clinica2._0.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("intervalo")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("intervalo")
+                        .HasColumnType("int");
 
                     b.Property<string>("mes")
                         .HasColumnType("nvarchar(max)");

@@ -107,26 +107,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 			return horas;
 		}
 
-        public async Task<object> GetHorasByCronograma(int id)
-        {
-			int intervalohora;
-			Hora hora;
-			List<Hora> horas = new List<Hora>();
-			var cronograma = await (from cro in _context.CRONOGRAMA_MEDICO
-                               where cro.idProgramMedica == id
-                               select cro).FirstOrDefaultAsync();
-			intervalohora = int.Parse(cronograma.horaFin.Split(":")[0]) - int.Parse(cronograma.horaInicio.Split(":")[0]);
-
-			for (int j = 0; j < intervalohora; j++)
-			{
-				hora = new Hora{
-					id = cronograma.idProgramMedica,
-					hora = (int.Parse(cronograma.horaInicio.Split(":")[0]) + j).ToString() + ":00"
-				};
-				horas.Add(hora);
-			}
-			return horas;
-        }
 
         public async Task<object> GetMedicoByEspecialidad(int id)
 		{

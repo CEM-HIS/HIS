@@ -1,4 +1,5 @@
 ﻿using Clinica2._0.DTO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
@@ -12,6 +13,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         Task<string> UpdateMedico(PersonaDTO Medico);
         Task DeleteMedico(int MedicoID);
         Task<bool> MedicoExists(int? id);
+
+        Task<List<MedicoDTO>> getAllMedico();
         Task Save();
     }
 }

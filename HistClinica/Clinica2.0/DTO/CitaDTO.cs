@@ -15,8 +15,6 @@ namespace Clinica2._0.DTO
         public int? idTipoCita { get; set; }
         public string TipoCita { get; set; }
         public string fecha { get; set; }
-
-        [Required(ErrorMessage = "Seleccione la hora de cita")]
         public string hora { get; set; }
         public string consultorio { get; set; }
         public string descripcion { get; set; }
@@ -49,5 +47,7 @@ namespace Clinica2._0.DTO
         public string descripcionEstadoPago { get; set; }
         public string motivoReprogramacion { get; set; }
         public string motivoAnulacion { get; set; }
+
+
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Clinica2._0.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class migracion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -105,7 +105,7 @@ namespace Clinica2._0.Migrations
                     horaFin = table.Column<string>(nullable: false),
                     idEstado = table.Column<int>(nullable: true),
                     fechaBaja = table.Column<string>(nullable: true),
-                    intervalo = table.Column<string>(nullable: true)
+                    intervalo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

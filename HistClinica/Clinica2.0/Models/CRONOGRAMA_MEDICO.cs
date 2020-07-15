@@ -36,6 +36,6 @@ namespace Clinica2._0.Models
 		public string horaFin { get; set; }
 		public int? idEstado { get; set; }
 		public string fechaBaja { get; set; }
-		public string intervalo { get; set; }
+		public int intervalo { get; set; }
 	}
 }

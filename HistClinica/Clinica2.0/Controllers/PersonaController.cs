@@ -173,6 +173,11 @@ namespace Clinica2._0.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> ConsultarMedicouEspecialidad()
+        {
+            return PartialView();
+        }
+
         //public async Task<IActionResult> Asignar(int? id)
         //{
         //    var tipoEmpleados = await _utilrepository.GetTipo("Tipo Empleado");
