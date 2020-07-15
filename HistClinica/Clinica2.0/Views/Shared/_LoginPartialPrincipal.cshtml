@@ -1,15 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNet.Identity
-@inject SignInManager<USUARIO> SignInManager
-@inject Microsoft.AspNetCore.Identity.UserManager<USUARIO> UserManager
+@inject SignInManager<USER> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<USER> UserManager
 @inject Clinica2._0.Repositories.EntityRepositories.Interfaces.IPersonaRepository PersonaRepository
 @inject Clinica2._0.Repositories.EntityRepositories.Interfaces.IEmpleadoRepository EmpleadoRepository
 
 
 @if (SignInManager.IsSignedIn(User))
 {
-    USUARIO user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-    Clinica2._0.DTO.PersonaDTO person = await EmpleadoRepository.GetById(user.idEmpleado);
+    USER user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+    Clinica2._0.DTO.PersonaDTO person = await EmpleadoRepository.GetById(user.idEmployee);
     <button type="button" class="btn btn-secondary dropdown-toggle hidden-sm-down" style="background: none;
     border: none;color: #0f5493;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <img style="width:24px;border-radius:50%;border:2px solid #0f5493;margin-right:9px;" src="~/images/profile.png" /><span class="bold" style="color:#0f5493">Bienvenido, @person.nombres @person.apellidoPaterno @person.apellidoMaterno!</span>

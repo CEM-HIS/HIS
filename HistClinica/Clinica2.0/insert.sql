@@ -824,13 +824,16 @@ GO
 SET IDENTITY_INSERT [dbo].[TABLA_GENERAL] OFF
 GO
 
-INSERT [dbo].[USUARIO] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], 
-[PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount], [Discriminator], [idEmpleado], [idEstado], [usuarioCreacion], 
-[fechaCreacion], [usuarioModifica], [fechaModifica], [fechaBaja]) 
-VALUES (N'a684b692-7395-4cf4-833c-8be938d3f853', N'victor_379_1@hotmail.com', N'VICTOR_379_1@HOTMAIL.COM', N'victor_379_1@hotmail.com', N'VICTOR_379_1@HOTMAIL.COM', 1, 
-N'AQAAAAEAACcQAAAAEF+Iq21aTbOYqFCe4bsQp2R6xL/exUYQbx5fZC7Wnaq0RB+KVrtkhs8L+H9dxNsWnA==', N'5HJFKOG775KYE3SNDV34PYKL7MJTMBTH', N'8e142c07-4be7-4d0a-9915-992583da010e', NULL, 0,
-0, NULL, 1, 0, N'USUARIO', NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+USE [Clinica]
 GO
+INSERT [dbo].[USER] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], 
+[PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount], [Discriminator], [idEmployee], [idState], [creationUser], [creationDate], 
+[modifyUser], [modifyDate], [DropDate]) 
+VALUES (N'be108687-fdf0-447a-bb92-48520759d24d', N'victor_379_1@hotmail.com', N'VICTOR_379_1@HOTMAIL.COM', N'victor_379_1@hotmail.com', N'VICTOR_379_1@HOTMAIL.COM', 1, 
+N'AQAAAAEAACcQAAAAEF+opiX10tpf4E08UvzTIo5KCKubnHnBrRE8QorYAUy1g79UOsZ4kMZLQlKEQ5Qplw==', N'BWAZEM325SPCUDIW6NG553TONI7CGIM7', N'fbf6aee8-7215-4d1c-b4d5-0af139c87d18', NULL, 0,
+0, NULL, 1, 0, N'USER', 1, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+
 
 SET IDENTITY_INSERT [dbo].[CRONOGRAMA_MEDICO] ON 
 GO

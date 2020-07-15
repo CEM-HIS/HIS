@@ -42,7 +42,7 @@ namespace Clinica2._0
             services.AddTransient<IGeneralRepository, GeneralRepository>();
             services.AddTransient<ILicenciaRepository, LicenciaRepository>();
             services.AddDbContext<ClinicaServiceContext>(options => options.UseSqlServer(Configuration["Connection:ClinicaServiceConnection"]));
-            services.AddDefaultIdentity<USUARIO>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ClinicaServiceContext>();
+            services.AddDefaultIdentity<USER>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ClinicaServiceContext>();
             services.AddRazorPages();
             services.AddCors(opciones =>
             {
