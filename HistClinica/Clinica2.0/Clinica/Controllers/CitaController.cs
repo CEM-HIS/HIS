@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Clinica2._0.Controllers
@@ -28,7 +29,7 @@ namespace Clinica2._0.Controllers
         // GET: Cita
         public async Task<IActionResult> Index()
         {
-            return View(await _repository.GetAllCitas());
+            return View(/*await _repository.GetAllCitas()*/);
         }
 
 
@@ -75,7 +76,7 @@ namespace Clinica2._0.Controllers
         // GET: Cita/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+          /*  if (id == null)
             {
                 return NotFound();
             }
@@ -103,8 +104,8 @@ namespace Clinica2._0.Controllers
             if (t068_CITA == null)
             {
                 return NotFound();
-            }
-            return PartialView(t068_CITA);
+            }*/
+            return PartialView();
 
         }
 
@@ -182,11 +183,11 @@ namespace Clinica2._0.Controllers
             return Json(cronograma);
         }
 
-        public async Task<JsonResult> GetHorasByCronograma(int id)
+    /*    public async Task<JsonResult> GetHorasByCronograma(int id)
         {
             var horas = await _utilrepository.GetHorasByCronograma(id);
             return Json(horas);
-        }
+        }*/
 
         public async Task<IActionResult> Registro(int dni)
         {
@@ -231,14 +232,14 @@ namespace Clinica2._0.Controllers
         }
 
 
-        public async Task<IActionResult> AnularCita(int id)
+        public async Task<IActionResult> AnularCita(int? id)
         {
-            var t068_CITA = await _repository.GetById(id);
+         /*   var t068_CITA = await _repository.GetById(id);
             if (t068_CITA == null)
             {
                 return NotFound();
-            }
-            return PartialView(t068_CITA);
+            }*/
+            return PartialView();
         }
         [HttpPost]
         public async Task<IActionResult> AnularCita(CitaDTO cita)
@@ -263,9 +264,21 @@ namespace Clinica2._0.Controllers
             return RedirectToAction("AdmicionMedico", "Paciente");
         }
 
-        public IActionResult RegistroCita()
+        public async Task<IActionResult> RegistroCita(int idmedico, int idespecialidad, string fecha)
         {
-            return View();
+            var lespecialidads = new Object();
+            lespecialidads = await _utilrepository.GetTipo("Especialidad");
+            ViewBag.listaespecialidades = lespecialidads;
+
+            var medico = await _utilrepository.GetMedicos();
+            ViewBag.listamedicos = medico;
+            List<CitaDTO> cita = await _repository.GetAllCitas(idmedico, idespecialidad, fecha);
+            return View(cita);
+        }
+
+        public IActionResult ConfirmacionReprogramacion()
+        {
+            return PartialView();
         }
     }
 }

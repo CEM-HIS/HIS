@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Clinica2._0.DTO.CitaDTO>
 @{
 	ViewData["Title"] = "RegistroCita";
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -35,94 +35,61 @@
 				</div>
 
 			</div>
-			<form action="/Cronograma/Create" id="frmcrearcronograma" method="post" novalidate="novalidate">
-				<div class="row pb-2">
-					<div class="col-sm-3">
-						<div class="row">
-							<div class="col-sm-11">
-								<div class="input-style">
-									<label class="form-label">Medico</label>
+			@using (Html.BeginForm("RegistroCita","Cita"))
+			{
+		<div class="row pb-2">
+			<div class="col-sm-3">
+				<div class="row">
+					<div class="col-sm-11">
+						<div class="input-style">
+							<label class="form-label">Medico</label>
 
-									<select class="form-control" data-cascade-combo="#stypes" data-cascade-combo-param-name="id" data-cascade-combo-source="/Cronograma/GetEspecialidad" data-val="true" data-val-required="Seleccione un medico" id="idMedico" name="idMedico">
-										<option value="">Seleccionar</option>
-										<option value="1">xavi saens galvez</option>
-										<option value="2">john Mendoza Mendoza</option>
-										<option value="3">sophia Ruiz Ruiz</option>
-										<option value="4">Lady Hidalgo Hidalgo</option>
-										<option value="5">julius franco net</option>
-										<option value="6">bertol franco palacios</option>
-										<option value="7">erick palacios franco</option>
-										<option value="8">tom tomcat guerra</option>
-									</select>
-									<span class="field-validation-valid text-danger" data-valmsg-for="idMedico" data-valmsg-replace="true"></span>
-								</div>
-							</div>
+							@Html.DropDownList("idmedico", new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccionar", new { @class = "form-control" })
+							<span class="field-validation-valid text-danger" data-valmsg-for="idMedico" data-valmsg-replace="true"></span>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="row">
-							<div class="col-sm-11">
-								<div class="input-style">
-									<label class="form-label">Especialidad</label>
-									<select class="form-control" data-val="true" data-val-required="Seleccione una especialidad" id="stypes" name="idEspecialidad">
-										<option value="">Seleccionar</option>
-										<option value="126">ALERGIA E INMUNOLOGIA</option>
-										<option value="127">CARDIOLOGIA</option>
-										<option value="128">CIRUGIA ONCOLOGICA DE CABEZA Y CUELLO</option>
-										<option value="129">CIRUGIA DE TORAX Y CARDIOVASCULAR</option>
-										<option value="130">CIRUGIA GENERAL Y LAPAROSCOPICA</option>
-										<option value="131">CIRUGIA GENERAL Y ONCOLOGICA</option>
-										<option value="132">DERMATOLOGIA</option>
-										<option value="133">RADIOLOGIA</option>
-										<option value="134">ENDOCRINOLOGIA</option>
-										<option value="135">ENFERMERIA</option>
-										<option value="136">GASTROENTEROLOGIA</option>
-										<option value="137">GERIATRIA</option>
-										<option value="138">GINECOLOGIA Y OBSTETRICIA</option>
-										<option value="139">GINECOLOGIA ONCOLOGICA</option>
-										<option value="140">HEMATOLOGIA</option>
-										<option value="141">MASTOLOGIA </option>
-										<option value="142">MEDICINA FISICA Y REHABILITACION</option>
-										<option value="143">MEDICINA GENERAL</option>
-										<option value="144">MEDICINA INTERNA</option>
-										<option value="145">NEFROLOGIA</option>
-										<option value="146">NEUMOLOGIA</option>
-										<option value="147">NEUROCIRUGIA</option>
-										<option value="148">NEUROLOGIA</option>
-										<option value="149">NUTRICION Y DIETETICA</option>
-										<option value="150">ODONTOLOGIA INTEGRAL</option>
-									</select>
-									<span class="field-validation-valid text-danger" data-valmsg-for="idEspecialidad" data-valmsg-replace="true"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-3">
-						<div class="row">
-							<div class="col-sm-11">
-								<div class="input-style">
-									<label class="form-label">Fecha </label>
-									<input class="form-control" data-val="true" data-val-required="Seleccione la fecha de inicio" id="fechaIni" name="fechaIni" type="Date" value="">
-									<span class="field-validation-valid text-danger" data-valmsg-for="fechaIni" data-valmsg-replace="true"></span>
-
-								</div>
-
-							</div>
-						</div>
-					</div>
-
 				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="row">
+					<div class="col-sm-11">
+						<div class="input-style">
+							<label class="form-label">Especialidad</label>
+							@Html.DropDownList("idespecialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control" })
+							<span class="field-validation-valid text-danger" data-valmsg-for="idEspecialidad" data-valmsg-replace="true"></span>
+						</div>
+					</div>
+				</div>
+			</div>
 
-				<input name="__RequestVerificationToken" type="hidden" value="CfDJ8EZArBrd5jZLg1_sLSb7wTB3o5UTO2OevqZbEioNFohXYsrsXNItNJEpW_v1hsqkrCmhlCIjdGrLP9j5tPYSVFfdDqi7IWRsrd65fclg4eRx2ek5sQQH7DEUVTSY5DMc7Pk9L89Uo1VW7J9sT6Q3-k0">
-			</form>
-			<script src="/js/comboaninado.js"></script>
+			<div class="col-sm-3">
+				<div class="row">
+					<div class="col-sm-11">
+						<div class="input-style">
+							<label class="form-label">Fecha </label>
+							<input class="form-control" id="fechaIni" name="fecha" type="Date">
+							<span class="field-validation-valid text-danger" data-valmsg-for="fechaIni" data-valmsg-replace="true"></span>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3" style="height: 100px; display: flex; flex-direction: column; justify-content: center;">
+				<div class="col-sm-12" style="height: 100px; display: flex; flex-direction: column; justify-content: center;">
+					<button type="submit" class="btn btn-primary btn-buscar" style="width: 45px;"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-text">Buscar</span></button>
+				</div>
+			</div>
+
+		</div>
+			}
+
 
 
 
 			<div class="row pt-3">
 				<div class="col-sm-12">
-					<table class="table table-responsive table-bordered table-hover text-center" id="cronogramagrid">
+					<table class="table table-responsive table-bordered table-hover text-center" id="citagrid">
 						<thead>
 							<tr>
 								<th>N°</th>
@@ -139,70 +106,26 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>08:00:00</td>
-								<td>2345678</td>
-								<td>Rosa Herrera Cervantes</td>
-								<td>PENDIENTE</td>
-								<td>3:00</td>
-								<td>15421</td>
-								<td>0061</td>
-								<td>C-01</td>
-								<td>NO DEFINIDO</td>
-								<td>
-									<button type="submit" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
-									<button type="submit" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>08:00:00</td>
-								<td>2345678</td>
-								<td>Rosa Herrera Cervantes</td>
-								<td>PENDIENTE</td>
-								<td>3:00</td>
-								<td>15421</td>
-								<td>0061</td>
-								<td>C-01</td>
-								<td>NO DEFINIDO</td>
-								<td>
-									<button type="submit" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
-									<button type="submit" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
-								</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>08:00:00</td>
-								<td>2345678</td>
-								<td>Rosa Herrera Cervantes</td>
-								<td>PENDIENTE</td>
-								<td>3:00</td>
-								<td>15421</td>
-								<td>0061</td>
-								<td>C-01</td>
-								<td>NO DEFINIDO</td>
-								<td>
-									<button type="submit" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
-									<button type="submit" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
-								</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>08:00:00</td>
-								<td>2345678</td>
-								<td>Rosa Herrera Cervantes</td>
-								<td>PENDIENTE</td>
-								<td>3:00</td>
-								<td>15421</td>
-								<td>0061</td>
-								<td>C-01</td>
-								<td>NO DEFINIDO</td>
-								<td>
-									<button type="submit" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
-									<button type="submit" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
-								</td>
-							</tr>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td>@item.idCita</td>
+									<td>@item.hora</td>
+									<td></td>
+									<td>@item.nombrePaciente</td>
+									<td>@item.estadoPago</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>@item.consultorio</td>
+									<td></td>
+									<td>
+										<a asp-controller="Paciente" asp-action="CrearPaciente" type="submit" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></a>
+										<button type="submit" id="editar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></button>
+										<button type="submit" id="anular" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
+									</td>
+								</tr>
+							}
 						</tbody>
 					</table>
 				</div>
@@ -235,7 +158,7 @@
 							<div class="col-sm-8 text-right">
 
 								<button class="btn btn-info" type="button"><i class="fas fa-search"></i></button>
-								<a class="btn btn-primary" type="submit" asp-controller="Paciente" asp-action="CrearPaciente"><i class="fas fa-user-plus"></i></a>
+								<a class="btn btn-primary" type="submit" asp-controller="Paciente" asp-action="Create"><i class="fas fa-user-plus"></i></a>
 								<a class="btn btn-primary" type="submit" href="#"><i class="far fa-edit"></i></a>
 							</div>
 						</div>
@@ -262,10 +185,10 @@
 						</div>
 						<div class="row" style="padding-top: 10px;">
 							<div class="col-sm-4">
-								<label>Fecha Nac.</label>
+								<label>Correo</label>
 							</div>
 							<div class="col-sm-8">
-								<input class="form-control  small-input" data-val="true" data-val-regex="Correo no valido"  data-val-required="Ingrese el correo" disabled="true" id="correo" name="correo" type="text" value="">
+								<input class="form-control  small-input" data-val="true" data-val-regex="Correo no valido" data-val-required="Ingrese el correo" disabled="true" id="correo" name="correo" type="text" value="">
 							</div>
 						</div>
 						<div class="row" style="padding-top: 10px;">
@@ -531,3 +454,15 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="modalreprogramar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+</div>
+<div id="modalanular" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+</div>
+<div id="modalconfirmacion" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+</div>
+<script src="~/js/cargavistaparcial.js"></script>
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

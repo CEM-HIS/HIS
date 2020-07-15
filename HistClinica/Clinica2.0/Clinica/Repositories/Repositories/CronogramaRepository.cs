@@ -77,6 +77,7 @@ namespace Clinica2._0.Repositories.Repositories
 												  fechaFin = c.fechaFin.Value.ToString("yyyy-MM-dd"),
 												  horaInicio = c.horaInicio,
 												  horaFin = c.horaFin,
+												  intervalo = c.intervalo,
 												  idMedico = c.idMedico
 											  }).FirstOrDefaultAsync();
 			return D012_CRONOMEDICOs;
@@ -90,11 +91,12 @@ namespace Clinica2._0.Repositories.Repositories
 				{
 					idEspecialidad = cronograma.idEspecialidad,
 					idMedico = cronograma.idMedico,
-					horaInicio = cronograma.horaFin,
+					horaInicio = cronograma.horaInicio,
 					horaFin = cronograma.horaFin,
 					idConsultorio = cronograma.idConsultorio,
 					fechaInicio = cronograma.fechaInicio,
 					fechaFin = cronograma.fechaFin,
+					intervalo = cronograma.intervalo,
 					idEstado = 171
 				});
 				await Save();

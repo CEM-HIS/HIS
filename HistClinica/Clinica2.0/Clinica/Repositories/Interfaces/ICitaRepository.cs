@@ -1,5 +1,6 @@
 ﻿using Clinica2._0.DTO;
 using Clinica2._0.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 {
     public interface ICitaRepository
     {
-        Task<List<CitaDTO>> GetAllCitas();
+        Task<List<CitaDTO>> GetAllCitas(int idmedico, int idespecialidad, string fecha);
         Task<CitaDTO> GetById(int? Id);
         //Operaciones Transaccionales
         Task<string> InsertCita(CitaDTO Cita);

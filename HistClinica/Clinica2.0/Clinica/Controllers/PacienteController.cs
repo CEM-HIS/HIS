@@ -55,8 +55,8 @@ namespace Clinica2._0.Controllers
             {
                 ViewBag.message = TempData["msjcita"].ToString();
             }
-            List<CitaDTO> cita = await _citarepository.GetAllCitas();
-            return View(cita);
+           // List<CitaDTO> cita = await _citarepository.GetAllCitas();
+            return View();
         }
 
         // GET: Paciente/Details/5

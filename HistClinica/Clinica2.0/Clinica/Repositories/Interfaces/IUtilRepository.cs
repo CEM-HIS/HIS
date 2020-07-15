@@ -13,7 +13,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 		Task<object> GetMedicoByEspecialidad(int id);
 		Task<object> GetMedicos();
 		Task<object> GetCronogramaByMedico(int id);
-		Task<object> GetHorasByCronograma(int id);
+		//Task<object> GetHorasByCronograma(int id);
 		object GetHoras();
 		Task<object> GetCronograma();
 		Task<List<ESTADO_CITA>> getEstadoCita();

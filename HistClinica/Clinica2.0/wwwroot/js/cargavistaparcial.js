@@ -96,7 +96,7 @@
 		});
 	});
 
-	$("#citagrid .anular").click(function () {
+	$("#citagrid #anular").click(function () {
 		var id = $(this).closest("tr").find("td").eq(0).html();
 		$.ajax({
 			type: "GET",
@@ -118,7 +118,7 @@
 	});
 
 
-	$("#citagrid .edit").click(function () {
+	$("#citagrid #editar").click(function () {
 		var id = $(this).closest("tr").find("td").eq(0).html();
 		$.ajax({
 			type: "GET",
@@ -350,6 +350,26 @@ function cargarModalCrearLicencia() {
 				alert(response.responseText);
 			}
 		});
+}
+
+function cargarModalConfirmacion() {
+	$.ajax({
+		type: "GET",
+		url: "/Cita/ConfirmacionReprogramacion",
+		//data: { id: id },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalconfirmacion').html(response);
+			$('#modalconfirmacion').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
 }
 
 function cargarmodalCrearTipo() {

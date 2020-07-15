@@ -4,6 +4,7 @@ using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -114,6 +115,23 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                   where p.idPersona == id
                                   select p.idMedico).FirstOrDefaultAsync();
             return idMedico;
+        }
+
+        public async Task<List<MedicoDTO>> getAllMedico()
+        {
+            List<MedicoDTO> medicos = await (from p in _context.PERSONA
+                                             join med in _context.MEDICO on p.idPersona equals med.idPersona
+                                             join emp in _context.EMPLEADO on med.idEmpleado equals emp.idEmpleado
+                                             join td in _context.TABLA_DETALLE on med.idEspecialidad equals td.idTablaDetalle
+                                             select new MedicoDTO
+                                             {
+                                                 idmedico = med.idMedico,
+                                                 idespecialidad = med.idEspecialidad,
+                                                 nombres = p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno,
+                                                 fechaingreso = emp.fechaIngreso.Value.ToShortDateString(),
+                                                 especialidad = td.descripcion
+                                             }).ToListAsync();
+            return medicos;
         }
     }
 }

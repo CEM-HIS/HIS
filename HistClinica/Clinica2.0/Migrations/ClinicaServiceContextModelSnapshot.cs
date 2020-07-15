@@ -256,8 +256,8 @@ namespace Clinica2._0.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("intervalo")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("intervalo")
+                        .HasColumnType("int");
 
                     b.Property<string>("mes")
                         .HasColumnType("nvarchar(max)");

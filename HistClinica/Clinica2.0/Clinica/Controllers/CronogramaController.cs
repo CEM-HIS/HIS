@@ -24,13 +24,32 @@ namespace Clinica2._0.Controllers
             _utilrepository = utilRepository;
         }
 
+        public class Intervalos
+        {
+            public int intervalo { get; set; }
+            public string descripcion { get; set; }
+        }
+
 
         public async Task<IActionResult> Index()
         {
 
             string[] horas = new string[] {"1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","24:00"};
-            string[] intervalos = new string[] { "5 minutos", "10 minutos", "15 minutos", "20 minutos", "25 minutos", "30 minutos", "35 minutos", "40 minutos", "45 minutos", "50 minutos", "55 minutos", "60 minutos"};
-
+            List<Intervalos> intervalos = new List<Intervalos>
+            {
+                new Intervalos {  intervalo = 5, descripcion = "5 minutos"  },
+                new Intervalos {  intervalo = 15, descripcion = "15 minutos"  },
+                new Intervalos {  intervalo = 20, descripcion = "20 minutos"  },
+                new Intervalos {  intervalo = 25, descripcion = "25 minutos"  },
+                new Intervalos {  intervalo = 30, descripcion = "30 minutos"  },
+                new Intervalos {  intervalo = 35, descripcion = "35 minutos"  },
+                new Intervalos {  intervalo = 40, descripcion = "40 minutos"  },
+                new Intervalos {  intervalo = 45, descripcion = "45 minutos"  },
+                new Intervalos {  intervalo = 50, descripcion = "50 minutos"  },
+                new Intervalos {  intervalo = 55, descripcion = "55 minutos"  },
+                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  },
+            };
+        
 
             //combo consultorios
             var lconsultorio =  await _utilrepository.GetTipo("Consultorio");
@@ -103,8 +122,20 @@ namespace Clinica2._0.Controllers
         public async Task<IActionResult> Editar(int id)
         {
             string[] horas = new string[] { "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00" };
-            string[] intervalos = new string[] { "5 minutos", "10 minutos", "15 minutos", "20 minutos", "25 minutos", "30 minutos", "35 minutos", "40 minutos", "45 minutos", "50 minutos", "55 minutos", "60 minutos" };
-
+            List<Intervalos> intervalos = new List<Intervalos>
+            {
+                new Intervalos {  intervalo = 5, descripcion = "5 minutos"  },
+                new Intervalos {  intervalo = 15, descripcion = "15 minutos"  },
+                new Intervalos {  intervalo = 20, descripcion = "20 minutos"  },
+                new Intervalos {  intervalo = 25, descripcion = "25 minutos"  },
+                new Intervalos {  intervalo = 30, descripcion = "30 minutos"  },
+                new Intervalos {  intervalo = 35, descripcion = "35 minutos"  },
+                new Intervalos {  intervalo = 40, descripcion = "40 minutos"  },
+                new Intervalos {  intervalo = 45, descripcion = "45 minutos"  },
+                new Intervalos {  intervalo = 50, descripcion = "50 minutos"  },
+                new Intervalos {  intervalo = 55, descripcion = "55 minutos"  },
+                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  },
+            };
 
             //combo consultorios
             var lconsultorio = await _utilrepository.GetTipo("Consultorio");
