@@ -4,14 +4,21 @@ using Clinica2._0.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(ClinicaServiceContext))]
-    partial class ClinicaServiceContextModelSnapshot : ModelSnapshot
+<<<<<<< HEAD:HistClinica/Clinica2.0/Migrations/20200715131746_Inicial.Designer.cs
+    [Migration("20200715131746_Inicial")]
+    partial class Inicial
+=======
+    [Migration("20200715143425_migracion")]
+    partial class migracion
+>>>>>>> desarrollo-bertol:HistClinica/Clinica2.0/Migrations/20200715143425_migracion.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

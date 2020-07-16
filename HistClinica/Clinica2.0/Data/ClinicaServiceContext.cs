@@ -25,18 +25,19 @@ namespace Clinica2._0.Data
         public DbSet<PAGO> PAGO { get; set; }
         #endregion Tablas de Clinica
         #region Tablas de Sesion
-        public DbSet<USUARIO> USUARIO { get; set; }
-        public DbSet<IdentityRole> ROL { get; set; }
-        public DbSet<IdentityUserRole<string>> USUARIOROL { get; set; }
+        public DbSet<USER> USER { get; set; }
+        public DbSet<IdentityRole> ROLE { get; set; }
+        public DbSet<IdentityUserRole<string>> USEROL { get; set; }
         public DbSet<IdentityRoleClaim<string>> ROLCLAIM { get; set; }
-        public DbSet<IdentityUserClaim<string>> USUARIOCLAIM { get; set; }
-        public DbSet<IdentityUserLogin<string>> USUARIOLOGIN { get; set; }
-        public DbSet<IdentityUserToken<string>> USUARIOTOKEN { get; set; }
-        public DbSet<PERFIL> PERFIL { get; set; }
-        public DbSet<EMPRESA> EMPRESA { get; set; }
-        public DbSet<SEDE> SEDE { get; set; }
+        public DbSet<IdentityUserClaim<string>> USERCLAIM { get; set; }
+        public DbSet<IdentityUserLogin<string>> USERLOGIN { get; set; }
+        public DbSet<IdentityUserToken<string>> USERTOKEN { get; set; }
+        public DbSet<USERPROFILE> USERPROFILE { get; set; }
+        public DbSet<PROFILE> PROFILE { get; set; }
+        public DbSet<COMPANY> COMPANY { get; set; }
+        public DbSet<CAMPUS> CAMPUS { get; set; }
         public DbSet<MENU> MENU { get; set; }
-        public DbSet<MODULO> MODULO { get; set; }
+        public DbSet<MODULE> MODULE { get; set; }
         #endregion Tablas de Sesion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,13 +45,14 @@ namespace Clinica2._0.Data
             modelBuilder.Entity<CAJA_ASIGNADA>().HasKey(o => new { o.idCaja, o.fechaApertura, o.turno });
             #endregion Tablas de Clinica
             #region Tablas de Sesion
-            modelBuilder.Entity<IdentityUser>().ToTable("USUARIO", "dbo");
-            modelBuilder.Entity<IdentityRole>().ToTable("ROL", "dbo");
-            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("USUARIOROL", "dbo").HasKey(ur => new { ur.UserId, ur.RoleId });
+            modelBuilder.Entity<IdentityUser>().ToTable("USER", "dbo");
+            modelBuilder.Entity<IdentityRole>().ToTable("ROLE", "dbo");
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("USERROL", "dbo").HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("ROLCLAIM", "dbo");
-            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("USUARIOCLAIM", "dbo");
-            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("USUARIOLOGIN", "dbo").HasKey(c => new { c.LoginProvider, c.ProviderKey });
-            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("USUARIOTOKEN", "dbo").HasKey(ul => new { ul.UserId, ul.LoginProvider, ul.Name });
+            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("USERCLAIM", "dbo");
+            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("USERLOGIN", "dbo").HasKey(ul => new { ul.LoginProvider, ul.ProviderKey });
+            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("USERTOKEN", "dbo").HasKey(ut => new { ut.UserId, ut.LoginProvider, ut.Name });
+            modelBuilder.Entity<USERPROFILE>().ToTable("USERPROFILE", "dbo").HasKey(up => new { up.idUser, up.idProfile});
             #endregion Tablas de Sesion
         }
     }
