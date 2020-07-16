@@ -27,9 +27,9 @@ namespace Clinica2._0.Controllers
         }
 
         // GET: Cita
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(/*await _repository.GetAllCitas()*/);
+            return View();
         }
 
 
