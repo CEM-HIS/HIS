@@ -37,6 +37,8 @@ namespace Clinica2._0.DTO
 		public string descripcionEstado { get; set; }
         public string medico { get; set; }
 
+		public int? cmp { get; set; }
+
 		public string especialidad { get; set; }
 		public int intervalo { get; set; }
 	}

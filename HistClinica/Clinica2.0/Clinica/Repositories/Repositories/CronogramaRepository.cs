@@ -48,7 +48,9 @@ namespace Clinica2._0.Repositories.Repositories
 
 		public async Task<List<CronogramaDTO>> GetAllCronogramas()
 		{
-			List<CronogramaDTO> D012_CRONOMEDICOs = await (	from c in _context.CRONOGRAMA_MEDICO
+			List<CronogramaDTO> D012_CRONOMEDICOs = await (	from c in _context.CRONOGRAMA_MEDICO join med in _context.MEDICO
+															on c.idMedico equals med.idMedico join per in _context.PERSONA on med.idPersona
+															equals per.idPersona
 															select new CronogramaDTO
 															{
 																idProgramMedica = c.idProgramMedica,
@@ -56,6 +58,9 @@ namespace Clinica2._0.Repositories.Repositories
 																fechaFin = c.fechaFin.Value.ToString("yyyy-MM-dd"),
 																horaInicio = c.horaInicio,
 																horaFin = c.horaFin,
+																intervalo = c.intervalo,
+																medico = per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno,
+																cmp = med.numeroColegio,
 																descripcionEstado = (from det in _context.TABLA_DETALLE
 																			 where det.idTablaDetalle == c.idEstado
 																			 select det.descripcion).FirstOrDefault()

@@ -332,6 +332,52 @@ $(document).on('change', '#cboafilia', function (event) {
     }
 });
 
+
+
+function alerta1() {
+
+	var mensaje;
+
+	var opcion = confirm("Desea Cancelar");
+
+	if (opcion == true) {
+
+		mensaje = "Has clickado Si";
+
+	} else {
+
+		mensaje = "Has clickado No ,Cancelar";
+
+	}
+
+	document.getElementById("ejemplo").innerHTML = mensaje;
+
+}
+
+
+
+function alerta() {
+
+	var mensaje;
+
+	var opcion = confirm("Confirma Atencion del paciente");
+
+	if (opcion == true) {
+
+		mensaje = "Has clickado Si";
+
+	} else {
+
+		mensaje = "Has clickado No ,Cancelar";
+
+	}
+
+	document.getElementById("ejemplo").innerHTML = mensaje;
+
+}
+
+
+
 function cargarModalCrearLicencia() {
 		$.ajax({
 			type: "GET",
