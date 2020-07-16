@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Clinica2._0.Migrations
 {
-    public partial class migracion : Migration
+    public partial class nuevamigracion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

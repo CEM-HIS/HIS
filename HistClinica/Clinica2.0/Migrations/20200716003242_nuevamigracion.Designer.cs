@@ -10,13 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(ClinicaServiceContext))]
-<<<<<<< HEAD:HistClinica/Clinica2.0/Migrations/20200715131746_Inicial.Designer.cs
-    [Migration("20200715131746_Inicial")]
-    partial class Inicial
-=======
-    [Migration("20200715143425_migracion")]
-    partial class migracion
->>>>>>> desarrollo-bertol:HistClinica/Clinica2.0/Migrations/20200715143425_migracion.Designer.cs
+    [Migration("20200716003242_nuevamigracion")]
+    partial class nuevamigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

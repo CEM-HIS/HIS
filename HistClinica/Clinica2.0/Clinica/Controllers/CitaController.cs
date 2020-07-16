@@ -191,7 +191,7 @@ namespace Clinica2._0.Controllers
 
         public async Task<IActionResult> Registro(int dni)
         {
-            var lespecialidads = new Object();
+            /*var lespecialidads = new Object();
             lespecialidads = await _utilrepository.GetTipo("Especialidad");
             ViewBag.listaespecialidades = lespecialidads;
 
@@ -205,9 +205,9 @@ namespace Clinica2._0.Controllers
             ViewBag.servicios = servicios;
 
             var lhoras = _utilrepository.GetHoras();
-            ViewBag.lhoras = lhoras;
+            ViewBag.lhoras = lhoras;*/
 
-            CitaDTO cita = new CitaDTO();
+           /* CitaDTO cita = new CitaDTO();
 
             if (dni != 0)
             {
@@ -215,8 +215,8 @@ namespace Clinica2._0.Controllers
                 cita.dniPaciente = persona.numeroDocumento;
                 cita.nombrePaciente = persona.nombres + ' ' + persona.apellidoPaterno + ' ' + persona.apellidoMaterno;
                 cita.idPaciente = persona.paciente.idPaciente;
-            }
-            return PartialView(cita);
+            }*/
+            return PartialView();
         }
 
         [HttpPost]
@@ -225,8 +225,8 @@ namespace Clinica2._0.Controllers
             if (cita != null)
             {
                 TempData["dni"] = dni;
-                   TempData["mensajecita"] = await _repository.InsertCita(cita);
-                return RedirectToAction("Index","Paciente");
+                TempData["mensajecita"] = await _repository.InsertCita(cita);
+                return RedirectToAction("RegistroCita");
             }
             return View(cita);
         }

@@ -295,7 +295,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                   }).FirstOrDefaultAsync();
             return Cita;
         }
-
+        
         public async Task<string> CambiarEstadoCita(CitaDTO cita)
         {
             try
