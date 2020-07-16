@@ -867,20 +867,20 @@ GO
 SET IDENTITY_INSERT [dbo].[CRONOGRAMA_MEDICO] ON 
 GO
 INSERT INTO [dbo].[CRONOGRAMA_MEDICO]([idProgramMedica],[mes],[semana],[dia],[fechaInicio],[fechaFin],[idMedico],[idEspecialidad],[idConsultorio],[horaInicio],[horaFin],
-[idEstado],[fechaBaja]) 
-VALUES (1, N'junio', N'25', N'180', CAST(N'2020-06-20T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 1, 126, 1, N'07:00', N'07:20', 1, NULL)
+[idEstado],[fechaBaja],[intervalo]) 
+VALUES (1, N'junio', N'25', N'180', CAST(N'2020-06-20T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 1, 126, 1, N'07:00', N'07:20', 1, NULL,20)
 GO																																																																														
 INSERT INTO [dbo].[CRONOGRAMA_MEDICO]([idProgramMedica],[mes],[semana],[dia],[fechaInicio],[fechaFin],[idMedico],[idEspecialidad],[idConsultorio],[horaInicio],[horaFin],
-[idEstado],[fechaBaja]) 
-VALUES (2, N'junio', N'25', N'181', CAST(N'2020-06-25T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 2, 127, 2, N'14:20', N'14:40', 1, NULL)
+[idEstado],[fechaBaja],[intervalo]) 
+VALUES (2, N'junio', N'25', N'181', CAST(N'2020-06-25T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 2, 127, 2, N'14:20', N'14:40', 1, NULL,20)
 GO
 INSERT INTO [dbo].[CRONOGRAMA_MEDICO]([idProgramMedica],[mes],[semana],[dia],[fechaInicio],[fechaFin],[idMedico],[idEspecialidad],[idConsultorio],[horaInicio],[horaFin],
-[idEstado],[fechaBaja]) 
-VALUES (3, N'mayo', N'20', N'190', CAST(N'2020-06-25T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 3, 128, 3, N'09:00', N'10:00', 1, NULL)
+[idEstado],[fechaBaja],[intervalo]) 
+VALUES (3, N'mayo', N'20', N'190', CAST(N'2020-06-25T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 3, 128, 3, N'09:00', N'10:00', 1, NULL,20)
 GO																																																																													   
 INSERT INTO [dbo].[CRONOGRAMA_MEDICO]([idProgramMedica],[mes],[semana],[dia],[fechaInicio],[fechaFin],[idMedico],[idEspecialidad],[idConsultorio],[horaInicio],[horaFin],
-[idEstado],[fechaBaja]) 
-VALUES (4, N'julio', N'28', N'195', CAST(N'2020-07-20T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 4, 129, 4, N'13:20', N'13:40',1, NULL)
+[idEstado],[fechaBaja],[intervalo]) 
+VALUES (4, N'julio', N'28', N'195', CAST(N'2020-07-20T00:00:00.000' AS DateTime), CAST(N'2020-06-20T10:00:00.000' AS DateTime), 4, 129, 4, N'13:20', N'13:40',1, NULL,20)
 GO
 SET IDENTITY_INSERT [dbo].[CRONOGRAMA_MEDICO] OFF
 GO
