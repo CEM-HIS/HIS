@@ -189,7 +189,7 @@ namespace Clinica2._0.Controllers
             return Json(horas);
         }*/
 
-        public async Task<IActionResult> Registro(int dni)
+        public async Task<IActionResult> Registro()
         {
             /*var lespecialidads = new Object();
             lespecialidads = await _utilrepository.GetTipo("Especialidad");
