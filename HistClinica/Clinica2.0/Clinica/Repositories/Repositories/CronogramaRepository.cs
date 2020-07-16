@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace Clinica2._0.Repositories.Repositories
@@ -15,10 +14,12 @@ namespace Clinica2._0.Repositories.Repositories
 	public class CronogramaRepository : ICronogramaRepository
 	{
 		private readonly ClinicaServiceContext _context;
+		private readonly ICitaRepository _citaRepository;
 
-		public CronogramaRepository(ClinicaServiceContext clinicaService)
+		public CronogramaRepository(ClinicaServiceContext clinicaService, ICitaRepository citaRepository)
 		{
 			_context = clinicaService;
+			_citaRepository = citaRepository;
 		}
 
 		private bool disposed = false;
@@ -88,7 +89,106 @@ namespace Clinica2._0.Repositories.Repositories
 			return D012_CRONOMEDICOs;
 		}
 
-		public async Task<string> InsertCronograma(CRONOGRAMA_MEDICO cronograma)
+		public List<FechaHora> ObtenerFechaHora(List<CRONOGRAMA_MEDICO> cronograma)
+		{
+			int intervalofecha, intervalohora;
+			List<FechaHora> fechas = new List<FechaHora>();
+
+			foreach (var item in cronograma)
+			{
+				int horainicio = int.Parse(item.horaInicio.Split(":")[0]);
+				int horafin = int.Parse(item.horaFin.Split(":")[0]);
+				intervalofecha = item.fechaFin.Value.DayOfYear - item.fechaInicio.Value.DayOfYear;
+				intervalohora = horafin - horainicio;
+				for (int i = 0; i <= intervalofecha; i++)
+				{
+					for (int j = 0; j < intervalohora; j++)
+					{
+						fechas.Add(new FechaHora()
+						{
+							fecha = item.fechaInicio.Value.AddDays(i).ToShortDateString(),
+							hora = (horainicio + j)
+						});
+					}
+				}
+			}
+			return fechas;
+		}
+
+		public class FechaHora
+		{
+			public string fecha { get; set; }
+			public int hora { get; set; }
+		}
+
+        public List<CitaDTO> GetCitas(int? id, int? idespecialidad,DateTime? fechaInicio
+			//,string fechacro List<CITA> fechasocupadas
+			)
+        {
+            string hora = "";
+            List<FechaHora> horarios = new List<FechaHora>();
+            CitaDTO cita = new CitaDTO();
+            List<CitaDTO> citaDTOs = new List<CitaDTO>();
+            DateTime fecha;
+            List<CRONOGRAMA_MEDICO> cronograma = (from cro in _context.CRONOGRAMA_MEDICO
+                                                  where cro.idMedico == id && cro.idEspecialidad == idespecialidad && cro.fechaInicio == fechaInicio
+                                                  select cro).ToList();
+            horarios = ObtenerFechaHora(cronograma);
+            string minutos;
+            foreach (var item in cronograma)
+            {
+                for (int j = 0; j < horarios.Count; j++)
+                {
+                    //if (String.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(horarios[j].fecha)) == String.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(fechacro)))
+                    //{
+                    int intervalo = 60 / item.intervalo;
+                    for (int i = 0; i < intervalo; i++)
+                    {
+
+                        if (i == 0 || i == intervalo)
+                        {
+                            minutos = "00";
+                        }
+                        else
+                        {
+                            minutos = (i * item.intervalo).ToString();
+                        }
+                        //if (i != intervalo) 
+							hora = horarios[j].hora.ToString();
+                        //else hora = (horarios[j].hora + 1).ToString();
+                        hora += ":" + minutos;
+                        fecha = Convert.ToDateTime(horarios[j].fecha + " " + hora);
+                        //if (fechasocupadas.Any(c => c.fechaCita == fecha))
+                        //{
+                        //	cita = await GetById(fechasocupadas.Find(c => c.fechaCita == fecha).idCita);
+                        //}
+                        //else
+                        //{
+                        cita = new CitaDTO()
+                        {
+                            fecha = horarios[j].fecha,
+                            hora = hora,
+                            consultorio = (from de in _context.TABLA_DETALLE
+                                           where de.idTablaDetalle == item.idConsultorio
+                                           select de.descripcion).FirstOrDefault(),
+                            Medico = (from med in _context.MEDICO
+                                      join per in _context.PERSONA on med.idPersona equals per.idPersona
+                                      where med.idMedico == item.idMedico
+                                      select (per.nombres + " " + per.apellidoPaterno + per.apellidoMaterno)).FirstOrDefault(),
+							idProgramacionMedica = item.idProgramMedica,
+                            CMP = (from med in _context.MEDICO where med.idMedico == item.idMedico select med.numeroColegio).FirstOrDefault()
+                        };
+                        //}
+                        citaDTOs.Add(cita);
+                    }
+                    //}
+                }
+            }
+
+            return citaDTOs;
+        }
+
+        public async Task<string> InsertCronograma(CRONOGRAMA_MEDICO cronograma)
 		{
 			try
 			{
@@ -105,6 +205,10 @@ namespace Clinica2._0.Repositories.Repositories
 					idEstado = 171
 				});
 				await Save();
+                foreach (var item in GetCitas(cronograma.idMedico, cronograma.idEspecialidad,cronograma.fechaInicio))
+                {
+					await _citaRepository.InsertCita(item);
+				}
 				return "Ingreso exitoso";
 			}
 			catch (Exception ex)

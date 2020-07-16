@@ -20,17 +20,15 @@ namespace Clinica2._0.Controllers
         private readonly IUtilRepository _utilrepository;
         private readonly IEmpleadoRepository _empleadorepository;
         private readonly ICajaRepository _cajaRepository;
-        private readonly IUsuarioRepository _usuarioRepository;
 
         public PersonaController(IPersonaRepository personaRepository,ClinicaServiceContext contexto,IUtilRepository utilRepository,
-                                IEmpleadoRepository empleadoRepository, ICajaRepository cajaRepository, IUsuarioRepository usuarioRepository)
+                                IEmpleadoRepository empleadoRepository, ICajaRepository cajaRepository)
         {
             _context = contexto;
             _personaRepository = personaRepository;
             _utilrepository = utilRepository;
             _empleadorepository = empleadoRepository;
             _cajaRepository = cajaRepository;
-            _usuarioRepository = usuarioRepository;
         }
 
         // GET: Persona
@@ -93,10 +91,7 @@ namespace Clinica2._0.Controllers
             if (personaDTO != null)
             {
                 TempData["mensajepersona"] = await _personaRepository.InsertPersona(personaDTO);
-               /* if(personaDTO.personal != null)
-                {
-                    await _usuarioRepository.InsertUsuario(personaDTO);
-                }*/
+                
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction("Create");

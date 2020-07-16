@@ -121,12 +121,12 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             PersonaDTO personaDTO = await (from p in _context.PERSONA
                                      join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                     where p.idPersona == id
+                                     where e.idEmpleado == id
                                      select new PersonaDTO
                                      {
                                          nombres = p.nombres,
                                          apellidoPaterno = p.apellidoPaterno,
-                                         apellidoMaterno = p.apellidoPaterno,
+                                         apellidoMaterno = p.apellidoMaterno,
                                          numeroDocumento = p.dniPersona,
                                          personal = new PersonalDTO
                                          {
