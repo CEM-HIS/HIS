@@ -16,12 +16,14 @@ namespace Clinica2._0.Controllers
         private readonly ClinicaServiceContext _context;
         private readonly ICronogramaRepository cronogramaRepository;
         private readonly IUtilRepository _utilrepository;
+        private readonly IMedicoRepository _medicorepository;
 
-        public CronogramaController(ClinicaServiceContext clinicaService, ICronogramaRepository cronograma, IUtilRepository utilRepository)
+        public CronogramaController(ClinicaServiceContext clinicaService, ICronogramaRepository cronograma, IUtilRepository utilRepository, IMedicoRepository medicoRepository)
         {
             _context = clinicaService;
             cronogramaRepository = cronograma;
             _utilrepository = utilRepository;
+            _medicorepository = medicoRepository;
         }
 
         public class Intervalos
@@ -204,6 +206,21 @@ namespace Clinica2._0.Controllers
                 cronograma = await cronogramaRepository.GetCronogramaByMedico(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
                 return RedirectToAction("ConsultarCronograma", cronograma);
             }
+        }
+
+        public async Task<IActionResult> ConsultarMedEsp()
+        {
+            var lespecialidads = await _utilrepository.GetTipo("Especialidad");
+            ViewBag.listaespecialidades = lespecialidads;
+            List<MedicoDTO> medicos = await _medicorepository.getAllMedico();
+            return PartialView(medicos);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ConsultarMedEspPost(FiltroCronoDTO model)
+        {
+            List<MedicoDTO> medicos = await _medicorepository.getAllMedicoByMedEsp(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
+            return RedirectToAction("ConsultarMedEsp", medicos);
         }
     }
 }

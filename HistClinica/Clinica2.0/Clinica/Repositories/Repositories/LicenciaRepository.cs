@@ -47,7 +47,7 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 					fechaInicio = licencia.fechaInicio,
 					fechaFin = licencia.fechaFin,
 					idMedico = licencia.idMedico,
-					idEstado = 173
+					idEstado = 171
 				});
 				await Save();
 				return "Se registro licencia correctamente";

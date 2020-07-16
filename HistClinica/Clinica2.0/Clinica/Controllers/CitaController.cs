@@ -189,9 +189,9 @@ namespace Clinica2._0.Controllers
             return Json(horas);
         }*/
 
-        public async Task<IActionResult> Registro(int dni)
+        public async Task<IActionResult> Registro()
         {
-            var lespecialidads = new Object();
+         /*   var lespecialidads = new Object();
             lespecialidads = await _utilrepository.GetTipo("Especialidad");
             ViewBag.listaespecialidades = lespecialidads;
 
@@ -215,8 +215,8 @@ namespace Clinica2._0.Controllers
                 cita.dniPaciente = persona.numeroDocumento;
                 cita.nombrePaciente = persona.nombres + ' ' + persona.apellidoPaterno + ' ' + persona.apellidoMaterno;
                 cita.idPaciente = persona.paciente.idPaciente;
-            }
-            return PartialView(cita);
+            }*/
+            return PartialView();
         }
 
         [HttpPost]

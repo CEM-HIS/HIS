@@ -484,7 +484,7 @@ function BuscarCronograma() {
 
 	var idespecialidad = $("#especialidad option:selected").val();
 	var nombre = $("#nombremedico").val();
-	var apellido = $("#apellidomedico").val(); ''
+	var apellido = $("#apellidomedico").val();
 
 	$.ajax({
 		url: "/Cronograma/ConsultarCronogramapost",
@@ -520,6 +520,48 @@ function CargaModalCitas() {
 			$('#modalcitas').html(response);
 			$('#modalcitas').modal('show');
 			$.validator.unobtrusive.parse("#frmregistrarcita");
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
+function FiltroCronogramaMedEsp() {
+	$.ajax({
+		type: "GET",
+		url: "/Cronograma/ConsultarMedEsp",
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalconsultar').html(response);
+			$('#modalconsultar').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
+function FiltroCronogramaMedEspPost() {
+	var idespecialidad = $("#especialidad option:selected").val();
+	var nombre = $("#nombremedico").val();
+	var apellido = $("#apellidomedico").val();
+	$.ajax({
+		type: "GET",
+		url: "/Cronograma/ConsultarMedEspPost",
+		data: { idespecialidad: idespecialidad, nombre: nombre, apellido: apellido },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalconsultar').html(response);
+			$('#modalconsultar').modal('show');
 		},
 		failure: function (response) {
 			alert(response.responseText);

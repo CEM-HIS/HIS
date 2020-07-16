@@ -221,7 +221,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                          idPaciente = (from pa in _context.PACIENTE
                                                        where pa.idPersona == p.idPersona
                                                        select pa.idPaciente).FirstOrDefault(),
-                                         cita = new List<CitaDTO>()
+                                         cita = new List<CitaDTO>(),
+                                         idTipoPaciente = (from pan in _context.PACIENTE
+                                                           where pa.idPersona == p.idPersona
+                                                           select pa.idTipoDocumento).FirstOrDefault()
                                      }
                                  }).FirstOrDefaultAsync();
                 if (Persona != null)
