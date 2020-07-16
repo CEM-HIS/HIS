@@ -19,14 +19,17 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         private readonly IEmpleadoRepository _empleadoRepository;
         private readonly IPacienteRepository _pacienteRepository;
         private readonly IDetalleRepository _detalleRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         public PersonaRepository(ClinicaServiceContext context, IMedicoRepository medicorepository, 
-            IEmpleadoRepository empleadoRepository, IPacienteRepository pacienteRepository, IDetalleRepository detalleRepository)
+            IEmpleadoRepository empleadoRepository, IPacienteRepository pacienteRepository, IDetalleRepository detalleRepository
+            , IUsuarioRepository usuarioRepository)
         {
             _context = context;
             _medicoRepository = medicorepository;
             _empleadoRepository = empleadoRepository;
             _pacienteRepository = pacienteRepository;
             _detalleRepository = detalleRepository;
+            _usuarioRepository = usuarioRepository;
         }
 
         private bool disposed = false;
@@ -132,18 +135,24 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 await Save();
                 idPersona = (await _context.PERSONA
                     .FirstOrDefaultAsync(p => p.dniPersona == persona.numeroDocumento)).idPersona;
-                if (persona.personal != null)
+                if(persona.personal != null || persona.paciente != null)
                 {
-                    await _empleadoRepository.InsertEmpleado(persona, idPersona);
-                    idEmpleado = await _empleadoRepository.GetIdEmpleado(idPersona);
-                    if (persona.personal.idTipoEmpleado == (int)await _detalleRepository.GetIdDetalleByDescripcion("MEDICA/O"))
+                    if (persona.personal != null)
                     {
-                        await _medicoRepository.InsertMedico(persona, idPersona, idEmpleado);
+                        await _empleadoRepository.InsertEmpleado(persona, idPersona);
+                        idEmpleado = await _empleadoRepository.GetIdEmpleado(idPersona);
+                        if (persona.personal.idTipoEmpleado == (int)await _detalleRepository.GetIdDetalleByDescripcion("MEDICA/O"))
+                        {
+                            await _medicoRepository.InsertMedico(persona, idPersona, idEmpleado);
+                        }
                     }
-                }
-                else
-                {
-                    await _pacienteRepository.InsertPaciente(persona, idPersona);
+                    else
+                    {
+                        await _pacienteRepository.InsertPaciente(persona, idPersona);
+                    }
+                    persona.idPersona = idPersona;
+                    persona.personal.idEmpleado = idEmpleado;
+                    //await _usuarioRepository.InsertUsuario(persona);
                 }
                 return "Ingreso Exitoso Persona";
             }

@@ -2,7 +2,10 @@
 using Clinica2._0.DTO;
 using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +15,23 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
+        private readonly SignInManager<USER> _signInManager;
+        private readonly UserManager<USER> _userManager;
+        private readonly ILogger<USER> _logger;
+        private readonly IEmailSender _emailSender;
         private readonly ClinicaServiceContext _context;
-        public UsuarioRepository(ClinicaServiceContext context)
+
+        public UsuarioRepository(
+            UserManager<USER> userManager,
+            SignInManager<USER> signInManager,
+            ILogger<USER> logger,
+            IEmailSender emailSender,
+            ClinicaServiceContext context)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
+            _emailSender = emailSender;
             _context = context;
         }
 
@@ -49,23 +66,24 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             USER Usuario = await _context.USER.FindAsync(UsuarioID);
             Usuario.idState = 2;
-          //  Usuario.fechaBaja = DateTime.Now.ToString();
+            Usuario.DropDate = DateTime.Now.ToString();
             _context.Update(Usuario);
             await Save();
         }
+
         public async Task<string> InsertUsuario(PersonaDTO persona)
         {
             PERSONA _Persona = await (from p in _context.PERSONA
-                                        join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                        where e.idEmpleado == persona.personal.idEmpleado
-                                            select p).FirstOrDefaultAsync();
+                                      join e in _context.EMPLEADO on p.idPersona equals e.idPersona
+                                      where e.idEmpleado == persona.personal.idEmpleado
+                                      select p).FirstOrDefaultAsync();
             try
             {
                 if (await UsuarioExists(persona.personal.idEmpleado))
                 {
                     USER Usuario = await (from u in _context.USER where u.idEmployee == persona.personal.idEmpleado select u).FirstOrDefaultAsync();
                     Usuario.modifyDate = DateTime.Now.ToString();
-                    Usuario.modifyUser = ""; //ToDo: Agregar usuario de sesiones
+                    Usuario.modifyUser = ""; //ToDo: Agregar usuario de sesiones                                                    
                     _context.Update(Usuario);
                     await Save();
                     return "Usuario ya asignado";
@@ -73,13 +91,13 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 else
                 {
                     string primeraletraapellido = _Persona.apellidoPaterno.Substring(0, 1).Trim();
-                    string primernombre="";
+                    string primernombre = "";
                     string diaNacimiento = "";
-                    if(_Persona.nombres.Trim().IndexOf(" ") != -1)
+                    if (_Persona.nombres.Trim().IndexOf(" ") != -1)
                     {
                         int espacioencontrado = _Persona.nombres.Trim().IndexOf(" ");
                         int tamañocadena = _Persona.nombres.Length;
-                        primernombre = _Persona.nombres.Substring(0, tamañocadena - espacioencontrado).Trim();
+                        primernombre = _Persona.nombres.Substring(0, espacioencontrado).Trim();
                     }
                     else
                     {
@@ -90,24 +108,36 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                         diaNacimiento = Convert.ToDateTime(_Persona.fechaNacimiento).Day.ToString();
                     }
                     else return "No se pudo crear usuario por que falta fecha de nacimiento";
-                    await _context.USER.AddAsync(new USER()
+
+                    var user = new USER()
                     {
-                        idEmployee = persona.personal.idEmpleado,
                         UserName = (primeraletraapellido + primernombre + diaNacimiento).ToLower(),
-                        creationDate = DateTime.Now.ToString(),
-                        PasswordHash = persona.numeroDocumento.ToString(), //ToDo: Encriptar clave de usuario
-                        creationUser = "",//ToDo: Agregar usuario de sesiones
+                        Email = "userPrueba@gmail.com",
+                        PhoneNumber = _Persona.celular ?? _Persona.telefono,
+                        idEmployee = persona.personal.idEmpleado,
                         idState = 1,
-                        modifyUser = "",
-                        modifyDate = ""
-                    });
-                    await Save();
-                    return "Se asigno usuario correctamente";   
+                        creationUser = "",//ToDo: Agregar usuario de sesiones
+                        creationDate = DateTime.Now.ToString(),
+                        modifyUser = null,
+                        modifyDate = null,
+                        DropDate = null
+                    };
+
+                    var result = await _userManager.CreateAsync(user, primeraletraapellido.ToUpper() + primernombre.ToLower()  +"_"+ _Persona.dniPersona.ToString());
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User created a new account with password.");
+                        return "Se asigno usuario correctamente";
+                    }
+                    else
+                    {
+                        return "Error en registro de Usuario";
+                    }
                 }
             }
             catch (Exception ex)
             {
-                  return "Error en el guardado " + ex.Message;
+                return "Error en el guardado " + ex.Message;
             }
         }
     }
