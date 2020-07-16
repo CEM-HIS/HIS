@@ -215,7 +215,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                     hora = hora,
                                     consultorio = (from de in _context.TABLA_DETALLE
                                                    where de.idTablaDetalle == item.idConsultorio
-                                                   select de.descripcion).FirstOrDefault()
+                                                   select de.descripcion).FirstOrDefault(),
+                                    Medico = (from med in _context.MEDICO join per in _context.PERSONA on med.idPersona equals per.idPersona where med.idMedico == item.idMedico
+                                              select (per.nombres + " " + per.apellidoPaterno + per.apellidoMaterno)).FirstOrDefault(),
+                                    CMP = (from med in _context.MEDICO where med.idMedico == item.idMedico select med.numeroColegio).FirstOrDefault()
                                 };
                             }
                             citaDTOs.Add(cita);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace Clinica2._0.DTO
@@ -47,7 +48,7 @@ namespace Clinica2._0.DTO
         public string descripcionEstadoPago { get; set; }
         public string motivoReprogramacion { get; set; }
         public string motivoAnulacion { get; set; }
-
+        public int? CMP { get; set; }
 
     }
 }

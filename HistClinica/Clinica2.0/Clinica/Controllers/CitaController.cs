@@ -280,5 +280,23 @@ namespace Clinica2._0.Controllers
         {
             return PartialView();
         }
+
+        public async Task<IActionResult> BuscarPaciente()
+        {
+            if (TempData.ContainsKey("dni"))
+            {
+                var dni = TempData["dni"].ToString();
+                PersonaDTO personaDTO = await _pacienteRepository.GetByDnioNombresyApellidos(Convert.ToInt32(dni), "", "");
+                return PartialView(personaDTO);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BuscarPaciente(int dni)
+        {
+            var personaDTO = await _pacienteRepository.GetByDnioNombresyApellidos(dni, "", "");
+            return View(personaDTO);
+        }
     }
 }

@@ -8,7 +8,7 @@
         <div class="col-sm-12 left" style="height: 50px;">
             <div class="card card-primary card-his">
                 <div class="card-header card-shadow">
-                    <h2>Admision</h2>
+                    <h2>Pacientes</h2>
                 </div>
             </div>
         </div>
@@ -107,13 +107,13 @@
 
         </div>
     </div>
-    <div class="row" style="padding-top: 10px;">
-        <div class="col-sm-12">
-            <button style="width: 135px; font-size: 15px;" class="btn btn-primary" onclick="CargaModalCitas();">Citas</button>
-            <button style="width: 135px; font-size: 15px;" class="btn btn-primary mt-small-2">Orden</button>
-            <button onclick="CargaConsultaCronograma();" style="width: 135px; font-size: 15px;" class="btn btn-primary mt-small-2">Cronograma</button>
-        </div>
-    </div>
+	<div class="row" style="padding-top: 10px;">
+		@*  <div class="col-sm-12">
+			<button style="width: 135px; font-size: 15px;" class="btn btn-primary" onclick="CargaModalCitas();">Citas</button>
+			<button style="width: 135px; font-size: 15px;" class="btn btn-primary mt-small-2">Orden</button>
+			<button onclick="CargaConsultaCronograma();" style="width: 135px; font-size: 15px;" class="btn btn-primary mt-small-2">Cronograma</button>
+		</div>*@
+	</div>
     @if (ViewBag.message != null)
     {
 <div class="col-sm-12 alert alert-info alert-dismissible text-center" id="success-alert" role="alert" style="margin-top: 15px;">
@@ -122,79 +122,79 @@
     </button>
     @ViewBag.message
 </div>}
-    <div class="row" style="padding-top: 80px;">
-        <div class="col-sm-12">
-            <table class="table table-bordered table-responsive table-hover" style="font-size:14px;" id="citagrid">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>N°</th>
-                        <th>Tipo</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Producto</th>
-                        <th>Descripción</th>
-                        <th>Medico</th>
-                        <th>Especialidad</th>
-                        <th>Precio</th>
-                        <th>IGV</th>
-                        <th>Estado</th>
-                        <th>Est.Pago</th>
-                        <th>Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{ if (Model != null)
-                                    {
-                                        foreach (var item in Model.paciente.cita)
-                                        {
-                        <tr>
-                            <td>@item.idCita</td>
-                            <td>@item.numeroCita</td>
-                            <td>@item.TipoCita</td>
-                            <td nowrap>@item.fecha</td>
-                            <td>@item.hora</td>
-                            <td>@item.consultorio</td>
-                            <td>@item.descripcion</td>
-                            <td nowrap>@item.Medico</td>
-                            <td>@item.especialidad </td>
-                            <td nowrap>@item.precio</td>
-                            <td nowrap>@item.igv</td>
-                            <td>@item.descripcionEstado</td>
-                            <td>@item.descripcionEstadoPago</td>
-                            <td>@item.precio</td>
-                            <td nowrap>
-                                <button title="Reprogramar" class="edit btn btn-primary"><i class="fas fa-address-book"></i></button>
-                                <button title="Consultar" class="detail btn btn-primary">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                                <button title="Anular" class="anular btn btn-danger">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </td>
-                        </tr> }
-                                    } }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-12 text-right">
-            <span style="margin-right:10px;">TOTAL DE VALOR VENTA - OPERACION GRAVADA</span><span>300</span><br />
-            <span style="margin-right:10px;">IGV(18%)</span><span>54</span><br />
-            <span style="margin-right:10px;">IMPORTE TOTAL</span><span>354</span>
-        </div>
-        <div class="col-sm-12" style="padding-top: 10px;">
-            <div class="row">
-                <div class="col-sm-6">
+<div class="row" style="padding-top: 80px;">
+	<div class="col-sm-12">
+		@*  <table class="table table-bordered table-responsive table-hover" style="font-size:14px;" id="citagrid">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>N°</th>
+						<th>Tipo</th>
+						<th>Fecha</th>
+						<th>Hora</th>
+						<th>Producto</th>
+						<th>Descripción</th>
+						<th>Medico</th>
+						<th>Especialidad</th>
+						<th>Precio</th>
+						<th>IGV</th>
+						<th>Estado</th>
+						<th>Est.Pago</th>
+						<th>Total</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					@{ if (Model != null)
+									{
+										foreach (var item in Model.paciente.cita)
+										{
+						<tr>
+							<td>@item.idCita</td>
+							<td>@item.numeroCita</td>
+							<td>@item.TipoCita</td>
+							<td nowrap>@item.fecha</td>
+							<td>@item.hora</td>
+							<td>@item.consultorio</td>
+							<td>@item.descripcion</td>
+							<td nowrap>@item.Medico</td>
+							<td>@item.especialidad </td>
+							<td nowrap>@item.precio</td>
+							<td nowrap>@item.igv</td>
+							<td>@item.descripcionEstado</td>
+							<td>@item.descripcionEstadoPago</td>
+							<td>@item.precio</td>
+							<td nowrap>
+								<button title="Reprogramar" class="edit btn btn-primary"><i class="fas fa-address-book"></i></button>
+								<button title="Consultar" class="detail btn btn-primary">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+								<button title="Anular" class="anular btn btn-danger">
+									<i class="fa fa-minus" aria-hidden="true"></i>
+								</button>
+							</td>
+						</tr> }
+									} }
+				</tbody>
+			</table> *@
+	</div>
+	@*   <div class="col-sm-12 text-right">
+			<span style="margin-right:10px;">TOTAL DE VALOR VENTA - OPERACION GRAVADA</span><span>300</span><br />
+			<span style="margin-right:10px;">IGV(18%)</span><span>54</span><br />
+			<span style="margin-right:10px;">IMPORTE TOTAL</span><span>354</span>
+		</div>
+		<div class="col-sm-12" style="padding-top: 10px;">
+			<div class="row">
+				<div class="col-sm-6">
 
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a asp-action="Pago" asp-controller="Paciente" class="btn btn-primary" style="width: 112px;font-size: 16px;">Pagar</a>
-                </div>
-            </div>
+				</div>
+				<div class="col-sm-6 text-right">
+					<a asp-action="Pago" asp-controller="Paciente" class="btn btn-primary" style="width: 112px;font-size: 16px;">Pagar</a>
+				</div>
+			</div>
 
-        </div>
-    </div>
+		</div>*@
+</div>
 </div>
 
 <div class="modal fade" id="modalcitas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -9,7 +9,7 @@
 			<div class="col-sm-12 pt-2 pb-3" style="height:80px">
 				<div class="card card-primary card-his">
 					<div class="card-header card-shadow">
-						<h2>Horario de Medico</h2>
+						<h2>Horario de Medicos</h2>
 					</div>
 				</div>
 			</div>
@@ -34,6 +34,8 @@
 						<thead>
 							<tr>
 								<th>Id</th>
+								<th>Medico</th>
+								<th>CMP</th>
 								<th>Fecha Ini</th>
 								<th>Fecha Fin</th>
 								<th>Hora ini</th>
@@ -45,18 +47,20 @@
 						<tbody>
 							@foreach (var item in Model)
 							{
-								<tr>
-									<td>@item.idProgramMedica</td>
-									<td>@item.fechaInicio</td>
-									<td>@item.fechaFin</td>
-									<td>@item.horaInicio</td>
-									<td>@item.horaFin</td>
-									<td>20 minutos</td>
-									<td>
-										<button type="submit" class="edit btn btn-primary"><i class="fas fa-edit"></i></button>
-										<button type="submit" class="delete btn btn-danger"><i class="fas fa-minus"></i></button>
-									</td>
-								</tr>
+							<tr>
+								<td>@item.idProgramMedica</td>
+								<td>@item.medico</td>
+								<td>@item.cmp</td>
+								<td>@item.fechaInicio</td>
+								<td>@item.fechaFin</td>
+								<td>@item.horaInicio</td>
+								<td>@item.horaFin</td>
+								<td>@item.intervalo minutos</td>
+								<td>
+									<button type="submit" class="edit btn btn-primary"><i class="fas fa-edit"></i></button>
+									<button type="submit" class="delete btn btn-danger"><i class="fas fa-minus"></i></button>
+								</td>
+							</tr>
 							}
 						</tbody>
 					</table>
