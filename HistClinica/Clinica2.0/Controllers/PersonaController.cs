@@ -93,10 +93,10 @@ namespace Clinica2._0.Controllers
             if (personaDTO != null)
             {
                 TempData["mensajepersona"] = await _personaRepository.InsertPersona(personaDTO);
-                if(personaDTO.personal != null)
+               /* if(personaDTO.personal != null)
                 {
                     await _usuarioRepository.InsertUsuario(personaDTO);
-                }
+                }*/
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction("Create");
