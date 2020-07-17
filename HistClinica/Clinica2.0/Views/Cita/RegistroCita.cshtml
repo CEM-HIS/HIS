@@ -17,7 +17,7 @@
 	<div class="row">
 
 
-		<div class="col-sm-7" style="border: 1px solid rgba(128, 128, 128, 0.29);
+		<div class="col-sm-12" style="border: 1px solid rgba(128, 128, 128, 0.29);
             									border-radius: 9px;
             									margin-top: 1rem;
             								}">
@@ -98,6 +98,7 @@
 					<table class="table table-responsive table-bordered table-hover text-center" id="citagrid">
 						<thead>
 							<tr>
+								<th>Id</th>
 								<th>Hora</th>
 								<th>Medico</th>
 								<th>CMP</th>
@@ -116,6 +117,7 @@
 							@foreach (var item in Model)
 							{
 								<tr>
+									<td>@item.idCita</td>
 									<td>@item.hora</td>
 									<td nowrap>@item.Medico</td>
 									<td>@item.CMP</td>
@@ -128,7 +130,7 @@
 									<td>@item.consultorio</td>
 									<td></td>
 									<td>
-										<a data-toggle="modal" data-target=".bd-example-modal-xl" style="color:white;" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></a>
+										<a asp-controller="Cita" asp-action="Registro" asp-route-id="@item.idCita" style="color:white;" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></a>
 										<button type="submit" id="editar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></button>
 										<button type="submit" id="anular" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
 									</td>
@@ -139,110 +141,6 @@
 				</div>
 			</div>
 		</div>
-			<div class="col-sm-5" style="padding-left: 1.8rem;">
-					<div class="row mb-5" style="padding-top:20px;">
-						<div class="col-sm-12 pb-3" style="    border: 1px solid rgba(128, 128, 128, 0.29);
-														border-radius: 9px;
-														margin-top: -4px;
-														padding-top: 1rem;
-														padding-left: 21px;
-														padding-right: 21px;">
-
-							<h5 class="mt-3">Datos del paciente:</h5>
-
-							<form action="/Paciente" method="post">
-								<div class="row mt-3">
-									<input id="paciente_idPaciente" name="paciente.idPaciente" type="hidden" value="">
-									<div class="col-sm-6 mb-3">
-										<select class="form-control  small-input">
-											<option value="value">DNI</option>
-										</select>
-									</div>
-									<div class="col-sm-6 mb-3">
-										<input type="text" id="dnitest" name="dni" class="form-control small-input">
-									</div>
-
-									<div class="col-sm-4"><button class="btn btn-info" type="button" data-toggle="modal" data-target="#buscarModal">SITEDS</button></div>
-									<div class="col-sm-8 text-right">
-
-										<button class="btn btn-info" type="button"><i class="fas fa-search"></i></button>
-										<a class="btn btn-primary" type="submit" asp-controller="Paciente" asp-action="Create"><i class="fas fa-user-plus"></i></a>
-										<a class="btn btn-primary" type="submit" href="#"><i class="far fa-edit"></i></a>
-									</div>
-								</div>
-
-
-								<div class="col-sm-12">
-									<div class="row pt-3">
-										<div class="col-sm-4">
-											<label>Nombre</label>
-										</div>
-										<div class="col-sm-8">
-											<div class="divpac">
-												<label>   </label>
-											</div>
-										</div>
-									</div>
-									<div class="row" style="padding-top: 10px;">
-										<div class="col-sm-4">
-											<label>DNI</label>
-										</div>
-										<div class="col-sm-8">
-											<input class="form-control  small-input" data-val="true" data-val-required="Ingrese numero de documento" disabled="true" id="numeroDocumento" name="numeroDocumento" type="text" value="">
-										</div>
-									</div>
-									<div class="row" style="padding-top: 10px;">
-										<div class="col-sm-4">
-											<label>Correo</label>
-										</div>
-										<div class="col-sm-8">
-											<input class="form-control  small-input" data-val="true" data-val-regex="Correo no valido" data-val-required="Ingrese el correo" disabled="true" id="correo" name="correo" type="text" value="">
-										</div>
-									</div>
-									<div class="row" style="padding-top: 10px;">
-										<div class="col-sm-4">
-											<label>Edad</label>
-										</div>
-										<div class="col-sm-8">
-											<input class="form-control  small-input" data-val="true" data-val-required="Ingrese la edad" disabled="true" id="edad" name="edad" type="text" value="">
-										</div>
-									</div>
-									<div class="row pb-2" style="padding-top: 10px;">
-										<div class="col-sm-4">
-											<label>Telefono</label>
-										</div>
-										<div class="col-sm-8">
-											<input class="form-control  small-input" disabled="true" id="descripcionOcupacion" name="descripcionOcupacion" type="text" value="">
-
-										</div>
-									</div>
-									<div class="row pb-2" style="padding-top: 10px;">
-										<div class="col-sm-4">
-											<label>Sexo</label>
-										</div>
-										<div class="col-sm-8">
-											<input class="form-control  small-input" disabled="true" id="descripcionOcupacion" name="descripcionOcupacion" type="text" value="">
-
-										</div>
-									</div>
-									<div class="row pb-2" style="padding-top: 10px;">
-										<div class="col-sm-4">
-											<label>Tipo paciente</label>
-										</div>
-										<div class="col-sm-8">
-											<input class="form-control  small-input" disabled="true" id="descripcionOcupacion" name="descripcionOcupacion" type="text" value="">
-
-										</div>
-									</div>
-
-								</div>
-							</form>
-						</div>
-
-					</div>
-					<div class="col-sm-12">
-					</div>
-				</div>
 			</div>
 
 		</div>

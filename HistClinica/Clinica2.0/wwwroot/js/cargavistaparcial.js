@@ -573,8 +573,7 @@ function FiltroCronogramaMedEspPost() {
 }
 
 function BuscarPaciente() {
-	var id = $('#modalcitas #dni').val();
-	var idEmpleado = $("#modalcitas #medico option:selected").val();
+	var id = $('#dnipac').val();
 	$.ajax({
 		type: "GET",
 		url: "/Cita/BuscarDni",
@@ -583,9 +582,9 @@ function BuscarPaciente() {
 		dataType: "Json",
 		success: function (response) {
 			console.log(response);
-			$('#modalcitas #nombrepaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
+			$('#nombrepaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
 			console.log(response.paciente.idPaciente);
-			$('#modalcitas #idpaciente').val(response.paciente.idPaciente);
+			$('#idpaciente').val(response.paciente.idPaciente);
 
 		},
 		failure: function (response) {

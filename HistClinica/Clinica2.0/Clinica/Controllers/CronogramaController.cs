@@ -40,16 +40,11 @@ namespace Clinica2._0.Controllers
             List<Intervalos> intervalos = new List<Intervalos>
             {
                 new Intervalos {  intervalo = 5, descripcion = "5 minutos"  },
+                new Intervalos {  intervalo = 10, descripcion = "10 minutos"  },
                 new Intervalos {  intervalo = 15, descripcion = "15 minutos"  },
                 new Intervalos {  intervalo = 20, descripcion = "20 minutos"  },
-                new Intervalos {  intervalo = 25, descripcion = "25 minutos"  },
                 new Intervalos {  intervalo = 30, descripcion = "30 minutos"  },
-                new Intervalos {  intervalo = 35, descripcion = "35 minutos"  },
-                new Intervalos {  intervalo = 40, descripcion = "40 minutos"  },
-                new Intervalos {  intervalo = 45, descripcion = "45 minutos"  },
-                new Intervalos {  intervalo = 50, descripcion = "50 minutos"  },
-                new Intervalos {  intervalo = 55, descripcion = "55 minutos"  },
-                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  },
+                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  }
             };
         
 
@@ -127,16 +122,11 @@ namespace Clinica2._0.Controllers
             List<Intervalos> intervalos = new List<Intervalos>
             {
                 new Intervalos {  intervalo = 5, descripcion = "5 minutos"  },
+                new Intervalos {  intervalo = 10, descripcion = "10 minutos"  },
                 new Intervalos {  intervalo = 15, descripcion = "15 minutos"  },
                 new Intervalos {  intervalo = 20, descripcion = "20 minutos"  },
-                new Intervalos {  intervalo = 25, descripcion = "25 minutos"  },
                 new Intervalos {  intervalo = 30, descripcion = "30 minutos"  },
-                new Intervalos {  intervalo = 35, descripcion = "35 minutos"  },
-                new Intervalos {  intervalo = 40, descripcion = "40 minutos"  },
-                new Intervalos {  intervalo = 45, descripcion = "45 minutos"  },
-                new Intervalos {  intervalo = 50, descripcion = "50 minutos"  },
-                new Intervalos {  intervalo = 55, descripcion = "55 minutos"  },
-                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  },
+                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  }
             };
 
             //combo consultorios
@@ -216,11 +206,20 @@ namespace Clinica2._0.Controllers
             return PartialView(medicos);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> ConsultarMedEspPost(FiltroCronoDTO model)
         {
-            List<MedicoDTO> medicos = await _medicorepository.getAllMedicoByMedEsp(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
-            return RedirectToAction("ConsultarMedEsp", medicos);
+            if (model.idespecialidad == null && model.nombre == null && model.apellido == null)
+            {
+                return RedirectToAction("ConsultarMedEsp");
+            }
+            else
+            {
+                var lespecialidads = await _utilrepository.GetTipo("Especialidad");
+                ViewBag.listaespecialidades = lespecialidads;
+                List<MedicoDTO> medicos = await _medicorepository.getAllMedicoByMedEsp(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
+                return PartialView("ConsultarMedEsp", medicos);
+            }
         }
     }
 }

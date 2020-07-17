@@ -153,9 +153,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         //        {
         //            for (int j = 0; j < intervalohora; j++)
         //            {
-        //                fechas.Add(new FechaHora ()
-        //                { fecha = item.fechaInicio.Value.AddDays(i).ToShortDateString(), 
-        //                hora = (horainicio + j)
+        //                fechas.Add(new FechaHora()
+        //                {
+        //                    fecha = item.fechaInicio.Value.AddDays(i).ToShortDateString(),
+        //                    hora = (horainicio + j)
         //                });
         //            }
         //        }
@@ -171,13 +172,13 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
         //public async Task<List<CitaDTO>> GetCitas(int? id, int idespecialidad, string fechacro, List<CITA> fechasocupadas)
         //{
-        //    string hora="";
+        //    string hora = "";
         //    List<FechaHora> horarios = new List<FechaHora>();
         //    CitaDTO cita = new CitaDTO();
         //    List<CitaDTO> citaDTOs = new List<CitaDTO>();
         //    DateTime fecha;
         //    List<CRONOGRAMA_MEDICO> cronograma = (from cro in _context.CRONOGRAMA_MEDICO
-        //                            where cro.idMedico == id && cro.idEspecialidad == idespecialidad
+        //                                          where cro.idMedico == id && cro.idEspecialidad == idespecialidad
         //                                          select cro).ToList();
         //    horarios = ObtenerFechaHora(cronograma);
         //    string minutos;
@@ -216,7 +217,9 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         //                            consultorio = (from de in _context.TABLA_DETALLE
         //                                           where de.idTablaDetalle == item.idConsultorio
         //                                           select de.descripcion).FirstOrDefault(),
-        //                            Medico = (from med in _context.MEDICO join per in _context.PERSONA on med.idPersona equals per.idPersona where med.idMedico == item.idMedico
+        //                            Medico = (from med in _context.MEDICO
+        //                                      join per in _context.PERSONA on med.idPersona equals per.idPersona
+        //                                      where med.idMedico == item.idMedico
         //                                      select (per.nombres + " " + per.apellidoPaterno + per.apellidoMaterno)).FirstOrDefault(),
         //                            CMP = (from med in _context.MEDICO where med.idMedico == item.idMedico select med.numeroColegio).FirstOrDefault()
         //                        };
@@ -224,7 +227,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         //                    citaDTOs.Add(cita);
         //                }
         //            }
-                    
+
         //        }
         //    }
 
@@ -233,24 +236,32 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
         public async Task<List<CitaDTO>> GetAllCitas(int idmedico, int idespecialidad, string fecha)
         {
-            List<CitaDTO> Citas = await (from c in _context.CITA
-                                           select new CitaDTO()
-                                           {
-                                               fecha = (c.fechaCita).Value.Date.ToString(),
-                                               hora = (c.fechaCita).Value.ToString("H:mm"),
-                                               consultorio = (from de in _context.TABLA_DETALLE
-                                                              where de.idTablaDetalle == c.idConsultorio
-                                                              select de.descripcion).FirstOrDefault(),
-                                               Medico = (from cm in _context.CRONOGRAMA_MEDICO
-                                                         join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                         join p in _context.PERSONA on m.idPersona equals p.idPersona
-                                                         where cm.idProgramMedica == c.idProgramacionMedica
-                                                         select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
-                                               CMP = (from cm in _context.CRONOGRAMA_MEDICO
-                                                      join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                      where cm.idProgramMedica == c.idProgramacionMedica
-                                                      select m.numeroColegio).FirstOrDefault()
-                                           }).ToListAsync();
+            List<CitaDTO> Citas = await (from c in _context.CITA join cro in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cro.idProgramMedica
+                                         where cro.idMedico == idmedico && cro.idEspecialidad == idespecialidad && c.fechaCita.Value.Date.ToString() == fecha
+                                      //select c
+                                      select new CitaDTO()
+                                      {
+                                          idCita = c.idCita,
+                                          fecha = (c.fechaCita).Value.Date.ToString(),
+                                          hora = (c.fechaCita).Value.ToString("H:mm"),
+                                          consultorio = (from de in _context.TABLA_DETALLE
+                                                         where de.idTablaDetalle == c.idConsultorio
+                                                         select de.descripcion).FirstOrDefault(),
+                                          Medico = (from cm in _context.CRONOGRAMA_MEDICO
+                                                    join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                                    join p in _context.PERSONA on m.idPersona equals p.idPersona
+                                                    where cm.idProgramMedica == c.idProgramacionMedica
+                                                    select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
+                                          nombrePaciente = (from pac in _context.PACIENTE
+                                                            join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                            where pac.idPaciente == c.idPaciente
+                                                            select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
+                                          CMP = (from cm in _context.CRONOGRAMA_MEDICO
+                                                 join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                                 where cm.idProgramMedica == c.idProgramacionMedica
+                                                 select m.numeroColegio).FirstOrDefault()
+                                      }
+                                        ).ToListAsync();
             //return await GetCitas(idmedico, idespecialidad, fecha, Citas);
             return Citas;
         }
@@ -269,6 +280,9 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                   select tb.descripcion).FirstOrDefault(),
                                       fecha = (c.fechaCita).Value.Date.ToString(),
                                       hora = (c.fechaCita).Value.ToString("H:mm"),
+                                      idconsultorio = (from de in _context.TABLA_DETALLE
+                                                     where de.idTablaDetalle == c.idConsultorio
+                                                     select de.idTablaDetalle).FirstOrDefault(),
                                       consultorio = (from de in _context.TABLA_DETALLE
                                                      where de.idTablaDetalle == c.idConsultorio
                                                      select de.descripcion).FirstOrDefault(),
@@ -311,7 +325,11 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                         join ci in _context.CITA on pac.idPaciente equals ci.idPaciente
                                                         join per in _context.PERSONA on pac.idPersona equals per.idPersona
                                                         where pac.idPaciente == ci.idPaciente
-                                                        select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault()
+                                                        select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
+                                      CMP = (from cm in _context.CRONOGRAMA_MEDICO
+                                             join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                             where cm.idProgramMedica == c.idProgramacionMedica
+                                             select m.numeroColegio).FirstOrDefault()
                                   }).FirstOrDefaultAsync();
             return Cita;
         }
@@ -332,6 +350,48 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             catch (Exception ex)
             {
                 return "Error en el guardado " + ex.StackTrace;
+            }
+        }
+
+        public async Task<string> UpdateCita(CitaDTO model)
+        {
+            try
+            {
+                CITA cita = new CITA()
+                {
+                    idCita = model.idCita,
+                    idPaciente = model.idPaciente,
+                    fechaCita = DateTime.Parse(model.fecha + " " + model.hora),
+                    numeroCita = model.numeroCita,
+                    ultCie10 = null,
+                    codigoCita = null,
+                    idServicioClinica = null,
+                    idConsultorio = model.idconsultorio,
+                    idEstadoCita = null,
+                    idProgramacionMedica = model.idProgramacionMedica,
+                    idEmpleado = model.idEmpleado,
+                    idTipoAtencion = null,
+                    idtipoCita = model.idTipoCita,
+                    igv = null,
+                    coa = null,
+                    descripcion = null,
+                    descuento = null,
+                    ejecutado = null,
+                    estadoReprogramacion = null,
+                    fechaBaja = null,
+                    motivoAnulacion = null,
+                    motivoReprogramacion = null,
+                    numeroHC = null,
+                    precio = null,
+                    prioridad = null,
+                };
+                _context.Update(cita);
+                await Save();
+                return "Se registro cita correctamente";
+            }
+            catch (Exception ex)
+            {
+                return "Error al guardado" + ex.Message;
             }
         }
     }
