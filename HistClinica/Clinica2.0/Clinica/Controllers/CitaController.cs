@@ -1,7 +1,9 @@
-﻿using Clinica2._0.Data;
+﻿using Clinica2._0.Clinica.DTO;
+using Clinica2._0.Data;
 using Clinica2._0.DTO;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,9 +29,9 @@ namespace Clinica2._0.Controllers
         }
 
         // GET: Cita
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(/*await _repository.GetAllCitas()*/);
         }
 
 
@@ -76,10 +78,10 @@ namespace Clinica2._0.Controllers
         // GET: Cita/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-          /*  if (id == null)
-            {
-                return NotFound();
-            }
+            var idmedico = HttpContext.Session.GetInt32("idmedico");
+            var idespecialidad = HttpContext.Session.GetInt32("idespecialidad");
+            var fecha = HttpContext.Session.GetString("fecha");
+
 
             var lespecialidads = new Object();
             lespecialidads = await _utilrepository.GetTipo("Especialidad");
@@ -88,24 +90,14 @@ namespace Clinica2._0.Controllers
             var medico = await _utilrepository.GetMedicos();
             ViewBag.listamedicos = medico;
 
-            var lcronograma = await _utilrepository.GetCronograma();
-            ViewBag.lcronograma = lcronograma;
+            CitaDTO cita = await _repository.GetById(id);
+            List<CitaDTO> citas = await _repository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha);
 
-            var lhoras = _utilrepository.GetHoras();
-            ViewBag.lhoras = lhoras;
+            CitaCupoDTO citaCupo = new CitaCupoDTO();
+            citaCupo.citas = citas;
+            citaCupo.idcita = cita.idCita;
 
-            var lestado = await _utilrepository.getEstadoCita();
-            ViewBag.lestado = lestado;
-
-            var servicios = await _utilrepository.GetTipo("Servicio Clinica");
-            ViewBag.servicios = servicios;
-
-            var t068_CITA = await _repository.GetById(id);
-            if (t068_CITA == null)
-            {
-                return NotFound();
-            }*/
-            return PartialView();
+            return PartialView(citaCupo);
 
         }
 
@@ -114,9 +106,10 @@ namespace Clinica2._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(CitaDTO cita)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (cita.idCita != 0)
+           
+           /* if (cita.idCita != 0)
             {
                 try
                 {
@@ -135,7 +128,7 @@ namespace Clinica2._0.Controllers
                     }
                 }
                 return RedirectToAction("Index","Paciente");
-            }
+            }*/
             return View();
         }
 
@@ -189,43 +182,23 @@ namespace Clinica2._0.Controllers
             return Json(horas);
         }*/
 
-        public async Task<IActionResult> Registro()
+        public async Task<IActionResult> Registro(int? id)
         {
-            /*var lespecialidads = new Object();
-            lespecialidads = await _utilrepository.GetTipo("Especialidad");
-            ViewBag.listaespecialidades = lespecialidads;
-
-            var medico = await _utilrepository.GetMedicos();
-            ViewBag.listamedicos = medico;
-
-            var lcronograma = await _utilrepository.GetCronograma();
-            ViewBag.lcronograma = lcronograma;
-
-            var servicios = await _utilrepository.GetTipo("Servicio Clinica");
-            ViewBag.servicios = servicios;
-
-            var lhoras = _utilrepository.GetHoras();
-            ViewBag.lhoras = lhoras;*/
-
-           /* CitaDTO cita = new CitaDTO();
-
-            if (dni != 0)
+            if (id == null)
             {
-                PersonaDTO persona = await _pacienteRepository.GetByDnioNombresyApellidos(dni,"","");
-                cita.dniPaciente = persona.numeroDocumento;
-                cita.nombrePaciente = persona.nombres + ' ' + persona.apellidoPaterno + ' ' + persona.apellidoMaterno;
-                cita.idPaciente = persona.paciente.idPaciente;
-            }*/
-            return PartialView();
+                return NotFound();
+            }
+            CitaDTO cita = await _repository.GetById(id);
+            return View(cita);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Registro(CitaDTO cita,string dni)
+        public async Task<IActionResult> Registro(CitaDTO cita)
         {
             if (cita != null)
             {
-                TempData["dni"] = dni;
-                TempData["mensajecita"] = await _repository.InsertCita(cita);
+             //   TempData["dni"] = dni;
+                TempData["mensajecita"] = await _repository.UpdateCita(cita);
                 return RedirectToAction("RegistroCita");
             }
             return View(cita);
@@ -234,12 +207,12 @@ namespace Clinica2._0.Controllers
 
         public async Task<IActionResult> AnularCita(int? id)
         {
-         /*   var t068_CITA = await _repository.GetById(id);
+            var t068_CITA = await _repository.GetById(id);
             if (t068_CITA == null)
             {
                 return NotFound();
-            }*/
-            return PartialView();
+            }
+            return PartialView(t068_CITA);
         }
         [HttpPost]
         public async Task<IActionResult> AnularCita(CitaDTO cita)
@@ -266,6 +239,13 @@ namespace Clinica2._0.Controllers
 
         public async Task<IActionResult> RegistroCita(int idmedico, int idespecialidad, string fecha)
         {
+            if (idmedico != 0 && idespecialidad != 0 && fecha != null)
+            {
+                HttpContext.Session.SetInt32("idmedico", idmedico);
+                HttpContext.Session.SetInt32("idespecialidad", idespecialidad);
+                HttpContext.Session.SetString("fecha", fecha);
+            }
+
             var lespecialidads = new Object();
             lespecialidads = await _utilrepository.GetTipo("Especialidad");
             ViewBag.listaespecialidades = lespecialidads;

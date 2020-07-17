@@ -42,7 +42,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
         public async Task<bool> MedicoExists(int? id)
         {
-            return await _context.MEDICO.AnyAsync(e => e.idMedico == id);
+            return await _context.MEDICO.AnyAsync(e => e.idPersona == id);
         }
         public async Task DeleteMedico(int MedicoID)
         {
@@ -123,6 +123,24 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                              join med in _context.MEDICO on p.idPersona equals med.idPersona
                                              join emp in _context.EMPLEADO on med.idEmpleado equals emp.idEmpleado
                                              join td in _context.TABLA_DETALLE on med.idEspecialidad equals td.idTablaDetalle
+                                             select new MedicoDTO
+                                             {
+                                                 idmedico = med.idMedico,
+                                                 idespecialidad = med.idEspecialidad,
+                                                 nombres = p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno,
+                                                 fechaingreso = emp.fechaIngreso.Value.ToShortDateString(),
+                                                 especialidad = td.descripcion
+                                             }).ToListAsync();
+            return medicos;
+        }
+
+        public async Task<List<MedicoDTO>> getAllMedicoByMedEsp(string nombre, string apellido, int especialidad)
+        {
+            List<MedicoDTO> medicos = await (from p in _context.PERSONA
+                                             join med in _context.MEDICO on p.idPersona equals med.idPersona
+                                             join emp in _context.EMPLEADO on med.idEmpleado equals emp.idEmpleado
+                                             join td in _context.TABLA_DETALLE on med.idEspecialidad equals td.idTablaDetalle
+                                             where p.nombres.Contains(nombre) || p.apellidoPaterno.Contains(apellido) || td.idTablaDetalle == especialidad
                                              select new MedicoDTO
                                              {
                                                  idmedico = med.idMedico,

@@ -12,12 +12,14 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         Task<CitaDTO> GetById(int? Id);
         //Operaciones Transaccionales
         Task<string> InsertCita(CitaDTO Cita);
+        Task<string> ReservaCupoCita(CitaDTO Cita);
         Task<string> AnularCita(int? CitaID,string motivoAnula);
         Task<string> ReprogramarCita(CitaDTO cita);
         Task DeleteCita(int CitaID);
         Task<bool> CitaExists(int? id);
         Task Save();
 
+        Task<string> UpdateCita(CitaDTO cita);
         Task<string> CambiarEstadoCita(CitaDTO cita);
     }
 }

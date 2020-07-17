@@ -824,13 +824,13 @@ GO
 SET IDENTITY_INSERT [dbo].[TABLA_GENERAL] OFF
 GO
 
-INSERT [dbo].[USER] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], 
+/*INSERT [dbo].[USER] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], 
 [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount], [Discriminator], [idEmployee], [idState], [creationUser], [creationDate], 
 [modifyUser], [modifyDate], [DropDate]) 
 VALUES (N'be108687-fdf0-447a-bb92-48520759d24d', N'vlarosa', N'VLAROSA', N'victor_379_1@hotmail.com', N'VICTOR_379_1@HOTMAIL.COM', 1, 
 N'AQAAAAEAACcQAAAAEF+opiX10tpf4E08UvzTIo5KCKubnHnBrRE8QorYAUy1g79UOsZ4kMZLQlKEQ5Qplw==', N'BWAZEM325SPCUDIW6NG553TONI7CGIM7', N'fbf6aee8-7215-4d1c-b4d5-0af139c87d18', NULL, 0,
 0, NULL, 1, 0, N'USER', 1, NULL, NULL, NULL, NULL, NULL, NULL)
-GO
+GO*/
 
 INSERT INTO [dbo].[ROLE] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
 VALUES (N'be108687-fdf0-447a-bb92-48520759d24d',N'total',N'TOTAL',NULL)
@@ -848,11 +848,11 @@ INSERT INTO [dbo].[PROFILE] ([profileCode],[profileName],[idState])
 VALUES (N'Adm',N'Admicionista',1)
 GO
 
-INSERT INTO [dbo].[USERROL] ([UserId],[RoleId])
+INSERT INTO [dbo].[USER_ROL] ([UserId],[RoleId])
 VALUES (N'be108687-fdf0-447a-bb92-48520759d24d',N'be108687-fdf0-447a-bb92-48520759d24d')
 GO
 
-INSERT INTO [dbo].[USERPROFILE] ([idUser],[idProfile])
+INSERT INTO [dbo].[USER_PROFILE] ([idUser],[idProfile])
 VALUES (N'be108687-fdf0-447a-bb92-48520759d24d',1)
 GO
 

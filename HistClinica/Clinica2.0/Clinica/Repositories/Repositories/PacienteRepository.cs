@@ -45,7 +45,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
         public async Task<bool> PacienteExists(int? id)
         {
-            return await _context.PACIENTE.AnyAsync(e => e.idPaciente == id);
+            return await _context.PACIENTE.AnyAsync(e => e.idPersona == id);
         }
         public async Task DeletePaciente(int PacienteID)
         {

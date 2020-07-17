@@ -15,7 +15,7 @@ namespace Clinica2._0.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4")
+                .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -181,6 +181,12 @@ namespace Clinica2._0.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("numeroHC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("observacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("observacionAfiliacion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("precio")
@@ -881,7 +887,7 @@ namespace Clinica2._0.Migrations
 
                     b.HasKey("idUser", "idProfile");
 
-                    b.ToTable("USERPROFILE","dbo");
+                    b.ToTable("USER_PROFILE","dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -921,7 +927,7 @@ namespace Clinica2._0.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ROLCLAIM","dbo");
+                    b.ToTable("ROL_CLAIM","dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -1000,7 +1006,7 @@ namespace Clinica2._0.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("USERCLAIM","dbo");
+                    b.ToTable("USER_CLAIM","dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -1019,7 +1025,7 @@ namespace Clinica2._0.Migrations
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.ToTable("USERLOGIN","dbo");
+                    b.ToTable("USER_LOGIN","dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -1032,7 +1038,7 @@ namespace Clinica2._0.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.ToTable("USERROL","dbo");
+                    b.ToTable("USER_ROL","dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -1051,7 +1057,7 @@ namespace Clinica2._0.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("USERTOKEN","dbo");
+                    b.ToTable("USER_TOKEN","dbo");
                 });
 
             modelBuilder.Entity("Clinica2._0.Models.USER", b =>

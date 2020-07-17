@@ -15,6 +15,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         Task<bool> MedicoExists(int? id);
 
         Task<List<MedicoDTO>> getAllMedico();
+        Task<List<MedicoDTO>> getAllMedicoByMedEsp(string nombre, string apellido, int especialidad);
         Task Save();
     }
 }

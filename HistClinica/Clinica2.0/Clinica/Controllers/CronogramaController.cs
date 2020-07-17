@@ -16,12 +16,14 @@ namespace Clinica2._0.Controllers
         private readonly ClinicaServiceContext _context;
         private readonly ICronogramaRepository cronogramaRepository;
         private readonly IUtilRepository _utilrepository;
+        private readonly IMedicoRepository _medicorepository;
 
-        public CronogramaController(ClinicaServiceContext clinicaService, ICronogramaRepository cronograma, IUtilRepository utilRepository)
+        public CronogramaController(ClinicaServiceContext clinicaService, ICronogramaRepository cronograma, IUtilRepository utilRepository, IMedicoRepository medicoRepository)
         {
             _context = clinicaService;
             cronogramaRepository = cronograma;
             _utilrepository = utilRepository;
+            _medicorepository = medicoRepository;
         }
 
         public class Intervalos
@@ -38,16 +40,11 @@ namespace Clinica2._0.Controllers
             List<Intervalos> intervalos = new List<Intervalos>
             {
                 new Intervalos {  intervalo = 5, descripcion = "5 minutos"  },
+                new Intervalos {  intervalo = 10, descripcion = "10 minutos"  },
                 new Intervalos {  intervalo = 15, descripcion = "15 minutos"  },
                 new Intervalos {  intervalo = 20, descripcion = "20 minutos"  },
-                new Intervalos {  intervalo = 25, descripcion = "25 minutos"  },
                 new Intervalos {  intervalo = 30, descripcion = "30 minutos"  },
-                new Intervalos {  intervalo = 35, descripcion = "35 minutos"  },
-                new Intervalos {  intervalo = 40, descripcion = "40 minutos"  },
-                new Intervalos {  intervalo = 45, descripcion = "45 minutos"  },
-                new Intervalos {  intervalo = 50, descripcion = "50 minutos"  },
-                new Intervalos {  intervalo = 55, descripcion = "55 minutos"  },
-                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  },
+                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  }
             };
         
 
@@ -125,16 +122,11 @@ namespace Clinica2._0.Controllers
             List<Intervalos> intervalos = new List<Intervalos>
             {
                 new Intervalos {  intervalo = 5, descripcion = "5 minutos"  },
+                new Intervalos {  intervalo = 10, descripcion = "10 minutos"  },
                 new Intervalos {  intervalo = 15, descripcion = "15 minutos"  },
                 new Intervalos {  intervalo = 20, descripcion = "20 minutos"  },
-                new Intervalos {  intervalo = 25, descripcion = "25 minutos"  },
                 new Intervalos {  intervalo = 30, descripcion = "30 minutos"  },
-                new Intervalos {  intervalo = 35, descripcion = "35 minutos"  },
-                new Intervalos {  intervalo = 40, descripcion = "40 minutos"  },
-                new Intervalos {  intervalo = 45, descripcion = "45 minutos"  },
-                new Intervalos {  intervalo = 50, descripcion = "50 minutos"  },
-                new Intervalos {  intervalo = 55, descripcion = "55 minutos"  },
-                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  },
+                new Intervalos {  intervalo = 60, descripcion = "60 minutos"  }
             };
 
             //combo consultorios
@@ -203,6 +195,30 @@ namespace Clinica2._0.Controllers
                 List<CronogramaDTO> cronograma = new List<CronogramaDTO>();
                 cronograma = await cronogramaRepository.GetCronogramaByMedico(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
                 return RedirectToAction("ConsultarCronograma", cronograma);
+            }
+        }
+
+        public async Task<IActionResult> ConsultarMedEsp()
+        {
+            var lespecialidads = await _utilrepository.GetTipo("Especialidad");
+            ViewBag.listaespecialidades = lespecialidads;
+            List<MedicoDTO> medicos = await _medicorepository.getAllMedico();
+            return PartialView(medicos);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConsultarMedEspPost(FiltroCronoDTO model)
+        {
+            if (model.idespecialidad == null && model.nombre == null && model.apellido == null)
+            {
+                return RedirectToAction("ConsultarMedEsp");
+            }
+            else
+            {
+                var lespecialidads = await _utilrepository.GetTipo("Especialidad");
+                ViewBag.listaespecialidades = lespecialidads;
+                List<MedicoDTO> medicos = await _medicorepository.getAllMedicoByMedEsp(model.nombre, model.apellido, Convert.ToInt32(model.idespecialidad));
+                return PartialView("ConsultarMedEsp", medicos);
             }
         }
     }

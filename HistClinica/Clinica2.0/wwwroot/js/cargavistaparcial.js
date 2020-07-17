@@ -139,29 +139,6 @@
 			}
 		});
 	});
-	//*********Registro de Citas***********
-	$("#citagrid #agregar").click(function () {
-		var id = $(this).closest("tr").find("td").eq(0).html();
-		$.ajax({
-			type: "GET",
-			url: "/Cita/Registro",
-			//data: { id: id },
-			contentType: "application/json; charset=utf-8",
-			dataType: "html",
-			success: function (response) {
-				$('#Registrocita').html(response);
-				$('#Registrocita').modal('show');
-				$.validator.unobtrusive.parse("#frmregistrarcita");
-			},
-			failure: function (response) {
-				alert(response.responseText);
-			},
-			error: function (response) {
-				alert(response.responseText);
-			}
-		});
-	});
-
 
 	$("#citagrid .detail").click(function () {
 		var id = $(this).closest("tr").find("td").eq(0).html();
@@ -507,7 +484,7 @@ function BuscarCronograma() {
 
 	var idespecialidad = $("#especialidad option:selected").val();
 	var nombre = $("#nombremedico").val();
-	var apellido = $("#apellidomedico").val(); ''
+	var apellido = $("#apellidomedico").val();
 
 	$.ajax({
 		url: "/Cronograma/ConsultarCronogramapost",
@@ -531,8 +508,72 @@ function BuscarCronograma() {
 }
 
 
+function CargaModalCitas() {
+	var dni = $("#numeroDocumento").val()
+	$.ajax({
+		type: "GET",
+		url: "/Cita/Registro",
+		data: { dni: dni },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalcitas').html(response);
+			$('#modalcitas').modal('show');
+			$.validator.unobtrusive.parse("#frmregistrarcita");
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
+function FiltroCronogramaMedEsp() {
+	$.ajax({
+		type: "GET",
+		url: "/Cronograma/ConsultarMedEsp",
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalconsultar').html(response);
+			$('#modalconsultar').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
+function FiltroCronogramaMedEspPost() {
+	var idespecialidad = $("#especialidad option:selected").val();
+	var nombre = $("#nombremedico").val();
+	var apellido = $("#apellidomedico").val();
+	$.ajax({
+		type: "GET",
+		url: "/Cronograma/ConsultarMedEspPost",
+		data: { idespecialidad: idespecialidad, nombre: nombre, apellido: apellido },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalconsultar').html(response);
+			$('#modalconsultar').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
 function BuscarPaciente() {
-	var id = $('#Registrocita #dni').val();
+	var id = $('#dnipac').val();
 	$.ajax({
 		type: "GET",
 		url: "/Cita/BuscarDni",
@@ -541,9 +582,9 @@ function BuscarPaciente() {
 		dataType: "Json",
 		success: function (response) {
 			console.log(response);
-			$('#Registrocita #nombrepaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
+			$('#nombrepaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
 			console.log(response.paciente.idPaciente);
-			$('#Registrocita #idpaciente').val(response.paciente.idPaciente);
+			$('#idpaciente').val(response.paciente.idPaciente);
 
 		},
 		failure: function (response) {
