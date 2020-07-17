@@ -47,70 +47,76 @@
 			</div>
 		</div>
 	</div>
-	<div class="row pb-2">
-		<div class="col-sm-4">
-			<div class="row">
-				<div class="col-sm-11">
-					<div class="input-style">
-						<label class="form-label">Fecha Inicio</label>
-						@Html.TextBoxFor(m => m.fechaInicio, new { @class = "form-control", @type = "Date" })
-						@Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+    <div class="row pb-2">
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="input-style">
+                        <label class="form-label">Fecha Inicio</label>
+                        @Html.TextBoxFor(m => m.fechaInicio, new { @class = "form-control", @type = "Date" })
+                        @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
 
-					</div>
+                    </div>
 
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="row">
-				<div class="col-sm-11">
-					<div class="input-style">
-						<label class="form-label">Fecha Fin</label>
-						@Html.TextBoxFor(m => m.fechaFin, new { @class = "form-control", @type = "Date" })
-						@Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="row">
-				<div class="col-sm-11">
-					<div class="input-style">
-						<label class="form-label">Hora Inicio</label>
-						@Html.DropDownListFor(m => m.horaInicio, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
-						@Html.ValidationMessageFor(model => model.horaInicio, "", new { @class = "text-danger" })
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4 pt-2">
-			<div class="row">
-				<div class="col-sm-11">
-					<div class="input-style">
-						<label class="form-label">Hora Fin</label>
-						@Html.DropDownListFor(m => m.horaFin, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
-						@Html.ValidationMessageFor(model => model.horaFin, "", new { @class = "text-danger" })
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4 pt-2">
-			<div class="row">
-				<div class="col-sm-11">
-					<div class="input-style">
-						<label class="form-label">Intervalo</label>
-						@Html.DropDownListFor(m => m.intervalo, new SelectList(ViewBag.intervalos, "intervalo", "descripcion"), "Seleccione", new { @class = "form-control" })
-						@Html.ValidationMessageFor(model => model.intervalo, "", new { @class = "text-danger" })
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row pb-2 text-right">
-		<div class="col-sm-12">
-			<button class="btn btn-primary" id="Crear">Guardar</button>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="input-style">
+                        <label class="form-label">Fecha Fin</label>
+                        @Html.TextBoxFor(m => m.fechaFin, new { @class = "form-control", @type = "Date" })
+                        @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="input-style">
+                        <label class="form-label">Hora Inicio</label>
+                        @Html.DropDownListFor(m => m.horaInicio, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.horaInicio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 pt-2">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="input-style">
+                        <label class="form-label">Hora Fin</label>
+                        @Html.DropDownListFor(m => m.horaFin, new SelectList(ViewBag.listahoras), "Seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.horaFin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 pt-2">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="input-style">
+                        <label class="form-label">Intervalo</label>
+                        @Html.DropDownListFor(m => m.intervalo, new SelectList(ViewBag.intervalos, "intervalo", "descripcion"), "Seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.intervalo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 pt-2">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="input-style">
+                        <button class="btn btn-primary" id="Crear">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
 }
 <script src="~/js/comboaninado.js"></script>
 @section Scripts {

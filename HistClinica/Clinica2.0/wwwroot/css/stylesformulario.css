@@ -9,7 +9,12 @@
 	border-radius: .25rem;
 	background-color: #e9ecef;
 }
-
+body {
+	background: rgb(244, 246, 249);
+	height: auto;
+	position: fixed;
+	width: 100%;
+}
 body .elevation-4 {
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) !important;
 }
@@ -40,9 +45,11 @@ body .nav-sidebar > .nav-item:hover {
 
 body .form-control.small-input {
 	padding: 0.3rem 1rem;
-	height: calc(2.25rem + 2px);
+	height: calc(2.1rem + 2px);
 }
-
+nav {
+	margin-top: -22px;
+}
 .card-cem {
 	background: white;
 	padding: 0;
@@ -94,12 +101,12 @@ body input[type="text"], textarea {
 }
 
 .input-style {
-	margin-top: 30px;
+	margin-top: 15px;
 }
 
 .form-label {
 	position: absolute;
-	bottom: 23px;
+	bottom: 17px;
 	left: 24px;
 	font-weight: 600;
 	font-size: 13.5px;
@@ -107,8 +114,8 @@ body input[type="text"], textarea {
 }
 
 body .form-control {
-	padding: 0.1rem 1rem;
-	height: calc(2.5rem + 2px);
+	padding: 0.1rem 0.7rem;
+	height: calc(2.1rem + 2px);
 	font-size: 13px;
 }
 
@@ -158,6 +165,17 @@ body .table-bordered {
 		font-weight: 600;
 	}
 
+table, th, td {
+	border: 1px solid red;
+	border-collapse: collapse;
+}
+
+table {
+	width: 100%;
+	table-layout: fixed;
+	overflow-wrap: break-word;
+}
+
 body .card-primary:not(.card-outline) .card-header {
 	background: #00aee5;
 }
@@ -174,21 +192,28 @@ button.edit, button.delete {
 	height: calc(1.75rem + 2px) !important;
 }
 
-
-.nav-link[data-toggle].collapsed:after {
-	content: " ▾";
-	font-size: 19px;
-	position: relative;
-	top: 2px;
+.opciones i {
+	font-size: 16px !important;
+	margin-right: 0.4rem;
+	color: #5d5c5c;
 }
 
-.nav-link[data-toggle]:not(.collapsed):after {
-	content: " ▴";
-	font-size: 19px;
-	position: relative;
-	top: 2px;
+.opciones .trash:hover {
+	color: red;
 }
 
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+	bottom: .5em;
+}
 
 @media (max-width:710px) {
 	.card-height {
