@@ -183,6 +183,12 @@ namespace Clinica2._0.Migrations
                     b.Property<string>("numeroHC")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("observacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("observacionAfiliacion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double?>("precio")
                         .HasColumnType("float");
 

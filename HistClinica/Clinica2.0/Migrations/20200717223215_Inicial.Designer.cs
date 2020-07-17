@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clinica2._0.Migrations
 {
     [DbContext(typeof(ClinicaServiceContext))]
-    [Migration("20200717162027_Inicial")]
+    [Migration("20200717223215_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,6 +183,12 @@ namespace Clinica2._0.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("numeroHC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("observacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("observacionAfiliacion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("precio")

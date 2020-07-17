@@ -94,7 +94,9 @@ namespace Clinica2._0.Migrations
                     idConsultorio = table.Column<int>(nullable: true),
                     idProgramacionMedica = table.Column<int>(nullable: true),
                     idServicioClinica = table.Column<int>(nullable: true),
-                    fechaBaja = table.Column<DateTime>(nullable: true)
+                    fechaBaja = table.Column<DateTime>(nullable: true),
+                    observacion = table.Column<string>(nullable: true),
+                    observacionAfiliacion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
