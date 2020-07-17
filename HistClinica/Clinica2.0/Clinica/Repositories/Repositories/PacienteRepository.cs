@@ -208,7 +208,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                  join pa in _context.PACIENTE on p.idPersona equals pa.idPersona
                                  where p.dniPersona == Dni
                                  select new PersonaDTO
-                                 {   
+                                 {
                                      nombres = p.nombres,
                                      apellidoPaterno = p.apellidoPaterno,
                                      apellidoMaterno = p.apellidoMaterno,
@@ -261,8 +261,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                  igv = c.igv,
                                                  descripcionEstado = (from ec in _context.ESTADO_CITA where ec.idEstadoCita == c.idEstadoCita select ec.estado).FirstOrDefault(),
                                                  descripcionEstadoPago = (from ep in _context.PAGO
-                                                                   where ep.idCita == c.idCita
-                                                                   select ep.estado).FirstOrDefault()
+                                                                          where ep.idCita == c.idCita
+                                                                          select ep.estado).FirstOrDefault()
                                              }).ToList();
                 }
             }
