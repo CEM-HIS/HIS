@@ -9,7 +9,7 @@ namespace Clinica2._0.DTO
 {
     public class CitaDTO
     {
-        public int? idCita { get; set; }
+        public int idCita { get; set; }
         public int? numeroCita { get; set; }
 
         [Required(ErrorMessage = "Seleccione el tipo de cita")]
@@ -51,6 +51,7 @@ namespace Clinica2._0.DTO
         public int? CMP { get; set; }
         public string observacion { get; set; }
         public string observacionAfiliacion { get; set; }
+        public int? idconsultorio { get; set; }
 
     }
 }

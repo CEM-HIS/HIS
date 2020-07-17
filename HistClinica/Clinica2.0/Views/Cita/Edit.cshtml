@@ -1,5 +1,5 @@
-﻿@model Clinica2._0.DTO.CitaDTO
-<div class="modal-dialog modal-lg" style="max-width: 1250px!important;" role="document">
+﻿@model Clinica2._0.Clinica.DTO.CitaCupoDTO
+<div class="modal-dialog modal-lg" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
 			<h2 class="modal-title text-center" id="exampleModalLabel1">Reprogramacion de cita ambulatoria</h2>
@@ -9,122 +9,13 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 pr-4">
-					<div class="row">
-						<div class="col-sm-12 pr-2" style="border: 1px solid rgba(128, 128, 128, 0.29);
-            									border-radius: 9px;
-            									margin-top: 1rem;
-												">
-							<div class="row">
-								<div class="col-sm-12">
-									<span>Datos del medico a transferir sus Citas</span>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="input-style">
-										<label for="txtNroDocumento" class="form-label">Fecha</label>
-										<input type="date" name="name" value="" class="form-control" />
-									</div>
-								</div>
-								<div class="col-sm-8">
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-5">
-									<div class="input-style">
-										<label for="txtNroDocumento" class="form-label">Especialidad</label>
-										<input type="text" name="name" value="" class="form-control" />
-									</div>
-								</div>
-								<div class="col-sm-7">
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-5">
-									<div class="input-style">
-										<label for="txtNroDocumento" class="form-label">Medico</label>
-										<input type="text" name="name" value="" class="form-control" />
-									</div>
-								</div>
-								<div class="col-sm-7">
-
-								</div>
-							</div>
-							<div class="row pt-3">
-								<div class="col-sm-12">
-									<table class="table table-bordered table-hover table-responsive">
-										<thead>
-											<tr>
-												<th>N°</th>
-												<th>Hora</th>
-												<th>Historia</th>
-												<th>Paciente</th>
-												<th>Confirmado</th>
-												<th>Hora registro</th>
-												<th>N°Cuenta</th>
-												<th>N°Orden</th>
-												<th>Consultorio</th>
-												<th>Tipo Afiliado</th>
-												<th>Acciones</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td>8:30</td>
-												<td>000111</td>
-												<td>Arenas Choque Asuncion</td>
-												<td>Si</td>
-												<td>9:50</td>
-												<td>001</td>
-												<td>005</td>
-												<td>C-05</td>
-												<td>NO DEFINIDO</td>
-												<td><a onclick="cargarModalConfirmacion();" style="font-size: 12px; color:white;" class="btn btn-primary">Seleccionar</a></td>
-											</tr>
-											<tr>
-												<td>1</td>
-												<td>8:30</td>
-												<td>000111</td>
-												<td>Arenas Choque Asuncion</td>
-												<td>Si</td>
-												<td>9:50</td>
-												<td>001</td>
-												<td>005</td>
-												<td>C-05</td>
-												<td>NO DEFINIDO</td>
-												<td><a onclick="cargarModalConfirmacion();" style="font-size: 12px; color:white;" class="btn btn-primary">Seleccionar</a></td>
-											</tr>
-											<tr>
-												<td>1</td>
-												<td>8:30</td>
-												<td>000111</td>
-												<td>Arenas Choque Asuncion</td>
-												<td>Si</td>
-												<td>9:50</td>
-												<td>001</td>
-												<td>005</td>
-												<td>C-05</td>
-												<td>NO DEFINIDO</td>
-												<td><a onclick="cargarModalConfirmacion();" style="font-size: 12px; color:white;" class="btn btn-primary">Seleccionar</a></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-sm-6 pl-4">
+				<div class="col-sm-12 pl-4">
 					<div class="row">
 						<div class="col-sm-12 pl-2" style="border: 1px solid rgba(128, 128, 128, 0.29);
             									border-radius: 9px;
             									margin-top: 1rem;
             			">
+							<input type="hidden" id="cita" name="name" asp-for="idcita"/>
 							<div class="row">
 								<div class="col-sm-12">
 									<span class="text-red">Elija fecha y medico, a quien le transferira los pacientes citados</span>
@@ -134,7 +25,7 @@
 								<div class="col-sm-4">
 									<div class="input-style">
 										<label for="txtNroDocumento" class="form-label">Fecha</label>
-										<input type="date" name="name" value="" class="form-control" />
+										<input type="date" name="fecha" value="" class="form-control" />
 									</div>
 								</div>
 								<div class="col-sm-8">
@@ -144,8 +35,14 @@
 							<div class="row">
 								<div class="col-sm-5">
 									<div class="input-style">
-										<label for="txtNroDocumento" class="form-label">Especialidad</label>
-										<input type="text" name="name" value="" class="form-control" />
+										<label for="txtNroDocumento" class="form-label">Medico</label>
+										@Html.DropDownList("idmedico", new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccionar", new
+									{
+								   @class = "form-control",
+								   data_cascade_combo = "#stypes",
+								   data_cascade_combo_source = Url.Action("GetEspecialidad", "Cronograma"),
+								   data_cascade_combo_param_name = "id"
+							   })
 									</div>
 								</div>
 								<div class="col-sm-7">
@@ -155,68 +52,62 @@
 							<div class="row">
 								<div class="col-sm-5">
 									<div class="input-style">
-										<label for="txtNroDocumento" class="form-label">Medico</label>
-										<input type="text" name="name" value="" class="form-control" />
+										<label for="txtNroDocumento" class="form-label">Especialidad</label>
+										@Html.DropDownList("idespecialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "stypes" })
 									</div>
 								</div>
 								<div class="col-sm-7">
 
 								</div>
 							</div>
+							<div class="row pt-2">
+								<div class="col-sm-12">
+									<button class="btn btn-primary">Buscar</button>
+								</div>
+							</div>
+
+
 							<div class="row pt-3">
 								<div class="col-sm-12">
-									<table class="table table-bordered table-hover table-responsive">
+									<table class="table table-responsive table-bordered table-hover text-center" id="citagrid">
 										<thead>
 											<tr>
-												<th>N°</th>
+												<th>Id</th>
 												<th>Hora</th>
+												<th>Medico</th>
+												<th>CMP</th>
 												<th>Historia</th>
 												<th>Paciente</th>
 												<th>Confirmado</th>
-												<th>Hora registro</th>
-												<th>N°Cuenta</th>
-												<th>N°Orden</th>
+												<th>Hora <br> Registro</th>
+												<th>N° <br>cuenta</th>
+												<th>N° Orden</th>
 												<th>Consultorio</th>
 												<th>Tipo Afiliado</th>
+												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>8:30</td>
-												<td>000111</td>
-												<td>Arenas Choque Asuncion</td>
-												<td>Si</td>
-												<td>9:50</td>
-												<td>001</td>
-												<td>005</td>
-												<td>C-05</td>
-												<td>NO DEFINIDO</td>
-											</tr>
-											<tr>
-												<td>1</td>
-												<td>8:30</td>
-												<td>000111</td>
-												<td>Arenas Choque Asuncion</td>
-												<td>Si</td>
-												<td>9:50</td>
-												<td>001</td>
-												<td>005</td>
-												<td>C-05</td>
-												<td>NO DEFINIDO</td>
-											</tr>
-											<tr>
-												<td>1</td>
-												<td>8:30</td>
-												<td>000111</td>
-												<td>Arenas Choque Asuncion</td>
-												<td>Si</td>
-												<td>9:50</td>
-												<td>001</td>
-												<td>005</td>
-												<td>C-05</td>
-												<td>NO DEFINIDO</td>
-											</tr>
+											@foreach (var item in Model.citas)
+											{
+												<tr>
+													<td>@item.idCita</td>
+													<td>@item.hora</td>
+													<td nowrap>@item.Medico</td>
+													<td>@item.CMP</td>
+													<td></td>
+													<td>@item.nombrePaciente</td>
+													<td>@item.estadoPago</td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td>@item.consultorio</td>
+													<td></td>
+													<td>
+														<a asp-controller="Cita" asp-action="Edit" asp-route-id="@item.idCita" type="submit" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></a>
+													</td>
+												</tr>
+											}
 										</tbody>
 									</table>
 								</div>
