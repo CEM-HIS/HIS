@@ -435,7 +435,7 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ROLCLAIM",
+                name: "ROL_CLAIM",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -447,7 +447,7 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ROLCLAIM", x => x.Id);
+                    table.PrimaryKey("PK_ROL_CLAIM", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -500,7 +500,7 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERCLAIM",
+                name: "USER_CLAIM",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -512,11 +512,11 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERCLAIM", x => x.Id);
+                    table.PrimaryKey("PK_USER_CLAIM", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERLOGIN",
+                name: "USER_LOGIN",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -527,11 +527,11 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERLOGIN", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_USER_LOGIN", x => new { x.LoginProvider, x.ProviderKey });
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERPROFILE",
+                name: "USER_PROFILE",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -540,11 +540,11 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERPROFILE", x => new { x.idUser, x.idProfile });
+                    table.PrimaryKey("PK_USER_PROFILE", x => new { x.idUser, x.idProfile });
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERROL",
+                name: "USER_ROL",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -553,11 +553,11 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERROL", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_USER_ROL", x => new { x.UserId, x.RoleId });
                 });
 
             migrationBuilder.CreateTable(
-                name: "USERTOKEN",
+                name: "USER_TOKEN",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -568,7 +568,7 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USERTOKEN", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_USER_TOKEN", x => new { x.UserId, x.LoginProvider, x.Name });
                 });
         }
 
@@ -629,7 +629,7 @@ namespace Clinica2._0.Migrations
                 name: "TABLA_GENERAL");
 
             migrationBuilder.DropTable(
-                name: "ROLCLAIM",
+                name: "ROL_CLAIM",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -641,23 +641,23 @@ namespace Clinica2._0.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERCLAIM",
+                name: "USER_CLAIM",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERLOGIN",
+                name: "USER_LOGIN",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERPROFILE",
+                name: "USER_PROFILE",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERROL",
+                name: "USER_ROL",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USERTOKEN",
+                name: "USER_TOKEN",
                 schema: "dbo");
         }
     }

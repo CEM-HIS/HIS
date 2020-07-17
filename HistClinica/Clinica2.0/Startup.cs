@@ -11,6 +11,8 @@ using Clinica2._0.Models;
 using HistClinica.Repositories.EntityRepositories.Repositories;
 using Clinica2._0.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Clinica2._0
 {
@@ -50,6 +52,8 @@ namespace Clinica2._0
                 constructor => constructor.AllowAnyOrigin().AllowAnyHeader());
             });
             services.ConfigureApplicationCookie(options => options.LoginPath = "/login");
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

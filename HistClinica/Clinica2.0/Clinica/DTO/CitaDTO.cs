@@ -49,6 +49,8 @@ namespace Clinica2._0.DTO
         public string motivoReprogramacion { get; set; }
         public string motivoAnulacion { get; set; }
         public int? CMP { get; set; }
+        public string observacion { get; set; }
+        public string observacionAfiliacion { get; set; }
 
     }
 }

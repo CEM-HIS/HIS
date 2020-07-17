@@ -55,7 +55,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         }
         public async Task<bool> PersonaExists(int? id)
         {
-            return await _context.PERSONA.AnyAsync(e => e.idPersona == id);
+            return await _context.PERSONA.AnyAsync(e => e.dniPersona == id);
         }
         public async Task<int> getIdTpEmpleado(string descripcion)
         {
@@ -85,81 +85,91 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             int idPersona = 0;
             int idEmpleado = 0;
+            string mensaje;
             try
             {
-                await _context.PERSONA.AddAsync(new PERSONA()
+                if (!await PersonaExists(persona.numeroDocumento))
                 {
-                    apellidoPaterno = persona.apellidoPaterno,
-                    apellidoMaterno = persona.apellidoMaterno,
-                    nombres = persona.nombres,
-                    idTipoDocumento = persona.idTipoDocumento,
-                    dniPersona = persona.numeroDocumento,
-                    idSexo = persona.idSexo,
-                    fechaNacimiento = persona.fechaNacimiento,
-                    idEstadoCivil = persona.idEstadoCivil,
-                    idOcupacion = persona.idOcupacion,
-                    domicioFiscal = persona.domicioFiscal,
-                    telefono = persona.telefono,
-                    celular = persona.celular,
-                    correo = persona.correo,
-                    idEstado = 1,
-                    centroEducativo = persona.centroEducativo,
-                    condicionRuc = persona.condicionRuc,
-                    edad = persona.edad,
-                    estadoRuc = persona.estadoRuc,
-                    fotografia = persona.fotografia,
-                    idCompañiaSeguro = persona.idCompañiaSeguro,
-                    idDatoSiteds = persona.idDatoSiteds,
-                    idEmpresaConvenio = persona.idEmpresaConvenio,
-                    idEtnico = persona.idEtnico,
-                    idGradoInstruccion = persona.idGradoInstruccion,
-                    idParentesco = persona.idParentesco,
-                    idReligion = persona.idReligion,
-                    idTipoIafa = persona.idTipoIafa,
-                    idtipoVia = persona.idTipoVia,
-                    idUbigeoNacimiento = persona.idUbigeoNacimiento,
-                    idUbigeoResidencia = persona.idUbigeoResidencia,
-                    interior = persona.interior,
-                    manzana = persona.manzana,
-                    nombreVia = persona.nombreVia,
-                    numeroBloque = persona.numeroBloque,
-                    numeroDepartamento = persona.numeroDepartamento,
-                    numeroEtapa = persona.numeroEtapa,
-                    numeroKilometro = persona.numeroKilometro,
-                    numeroLote = persona.numeroLote,
-                    numeroRuc = persona.numeroRuc,
-                    numeroVia = persona.numeroVia,
-                    razonSocial = persona.razonSocial,
-                    fechaBaja = null
-                });
-                await Save();
+                    await _context.PERSONA.AddAsync(new PERSONA()
+                    {
+                        apellidoPaterno = persona.apellidoPaterno,
+                        apellidoMaterno = persona.apellidoMaterno,
+                        nombres = persona.nombres,
+                        idTipoDocumento = persona.idTipoDocumento,
+                        dniPersona = persona.numeroDocumento,
+                        idSexo = persona.idSexo,
+                        fechaNacimiento = persona.fechaNacimiento,
+                        idEstadoCivil = persona.idEstadoCivil,
+                        idOcupacion = persona.idOcupacion,
+                        domicioFiscal = persona.domicioFiscal,
+                        telefono = persona.telefono,
+                        celular = persona.celular,
+                        correo = persona.correo,
+                        idEstado = 1,
+                        centroEducativo = persona.centroEducativo,
+                        condicionRuc = persona.condicionRuc,
+                        edad = persona.edad,
+                        estadoRuc = persona.estadoRuc,
+                        fotografia = persona.fotografia,
+                        idCompañiaSeguro = persona.idCompañiaSeguro,
+                        idDatoSiteds = persona.idDatoSiteds,
+                        idEmpresaConvenio = persona.idEmpresaConvenio,
+                        idEtnico = persona.idEtnico,
+                        idGradoInstruccion = persona.idGradoInstruccion,
+                        idParentesco = persona.idParentesco,
+                        idReligion = persona.idReligion,
+                        idTipoIafa = persona.idTipoIafa,
+                        idtipoVia = persona.idTipoVia,
+                        idUbigeoNacimiento = persona.idUbigeoNacimiento,
+                        idUbigeoResidencia = persona.idUbigeoResidencia,
+                        interior = persona.interior,
+                        manzana = persona.manzana,
+                        nombreVia = persona.nombreVia,
+                        numeroBloque = persona.numeroBloque,
+                        numeroDepartamento = persona.numeroDepartamento,
+                        numeroEtapa = persona.numeroEtapa,
+                        numeroKilometro = persona.numeroKilometro,
+                        numeroLote = persona.numeroLote,
+                        numeroRuc = persona.numeroRuc,
+                        numeroVia = persona.numeroVia,
+                        razonSocial = persona.razonSocial,
+                        fechaBaja = null
+                    });
+                    await Save();
+                    mensaje = "Ingreso Exitoso Persona";
+                }
+                else
+                {
+                    mensaje = "Ya existe una Persona con ese dni";
+                }
                 idPersona = (await _context.PERSONA
-                    .FirstOrDefaultAsync(p => p.dniPersona == persona.numeroDocumento)).idPersona;
-                if(persona.personal != null || persona.paciente != null)
+                        .FirstOrDefaultAsync(p => p.dniPersona == persona.numeroDocumento)).idPersona;
+                if (persona.personal != null || persona.paciente != null)
                 {
                     if (persona.personal != null)
                     {
-                        await _empleadoRepository.InsertEmpleado(persona, idPersona);
+                        if(!await _empleadoRepository.EmpleadoExists(idPersona)) await _empleadoRepository.InsertEmpleado(persona, idPersona);
                         idEmpleado = await _empleadoRepository.GetIdEmpleado(idPersona);
                         if (persona.personal.idTipoEmpleado == (int)await _detalleRepository.GetIdDetalleByDescripcion("MEDICA/O"))
                         {
-                            await _medicoRepository.InsertMedico(persona, idPersona, idEmpleado);
+                            if (!await _medicoRepository.MedicoExists(idPersona)) await _medicoRepository.InsertMedico(persona, idPersona, idEmpleado);
                         }
                     }
                     else
                     {
-                        await _pacienteRepository.InsertPaciente(persona, idPersona);
+                        if (!await _pacienteRepository.PacienteExists(idPersona)) await _pacienteRepository.InsertPaciente(persona, idPersona);
                     }
                     persona.idPersona = idPersona;
                     persona.personal.idEmpleado = idEmpleado;
-                    //await _usuarioRepository.InsertUsuario(persona);
+                    await _usuarioRepository.InsertUsuario(persona);
                 }
-                return "Ingreso Exitoso Persona";
             }
             catch (Exception ex)
             {
-                return "Error en el guardado " + ex.Message;
+                mensaje = "Error en el guardado " + ex.Message;
             }
+            
+            return mensaje;
         }
         public async Task<string> UpdatePersona(PersonaDTO persona)
         {

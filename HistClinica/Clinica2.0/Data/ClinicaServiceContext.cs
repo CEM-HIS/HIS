@@ -6,6 +6,10 @@ namespace Clinica2._0.Data
 {
     public class ClinicaServiceContext : DbContext
     {
+        public ClinicaServiceContext()
+        {
+        }
+
         public ClinicaServiceContext(DbContextOptions<ClinicaServiceContext> options)
        : base(options)
         { }
@@ -27,12 +31,12 @@ namespace Clinica2._0.Data
         #region Tablas de Sesion
         public DbSet<USER> USER { get; set; }
         public DbSet<IdentityRole> ROLE { get; set; }
-        public DbSet<IdentityUserRole<string>> USEROL { get; set; }
-        public DbSet<IdentityRoleClaim<string>> ROLCLAIM { get; set; }
-        public DbSet<IdentityUserClaim<string>> USERCLAIM { get; set; }
-        public DbSet<IdentityUserLogin<string>> USERLOGIN { get; set; }
-        public DbSet<IdentityUserToken<string>> USERTOKEN { get; set; }
-        public DbSet<USERPROFILE> USERPROFILE { get; set; }
+        public DbSet<IdentityUserRole<string>> USER_ROLE { get; set; }
+        public DbSet<IdentityRoleClaim<string>> ROL_CLAIM { get; set; }
+        public DbSet<IdentityUserClaim<string>> USER_CLAIM { get; set; }
+        public DbSet<IdentityUserLogin<string>> USER_LOGIN { get; set; }
+        public DbSet<IdentityUserToken<string>> USER_TOKEN { get; set; }
+        public DbSet<USERPROFILE> USER_PROFILE { get; set; }
         public DbSet<PROFILE> PROFILE { get; set; }
         public DbSet<COMPANY> COMPANY { get; set; }
         public DbSet<CAMPUS> CAMPUS { get; set; }
@@ -47,12 +51,12 @@ namespace Clinica2._0.Data
             #region Tablas de Sesion
             modelBuilder.Entity<IdentityUser>().ToTable("USER", "dbo");
             modelBuilder.Entity<IdentityRole>().ToTable("ROLE", "dbo");
-            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("USERROL", "dbo").HasKey(ur => new { ur.UserId, ur.RoleId });
-            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("ROLCLAIM", "dbo");
-            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("USERCLAIM", "dbo");
-            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("USERLOGIN", "dbo").HasKey(ul => new { ul.LoginProvider, ul.ProviderKey });
-            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("USERTOKEN", "dbo").HasKey(ut => new { ut.UserId, ut.LoginProvider, ut.Name });
-            modelBuilder.Entity<USERPROFILE>().ToTable("USERPROFILE", "dbo").HasKey(up => new { up.idUser, up.idProfile});
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("USER_ROL", "dbo").HasKey(ur => new { ur.UserId, ur.RoleId });
+            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("ROL_CLAIM", "dbo");
+            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("USER_CLAIM", "dbo");
+            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("USER_LOGIN", "dbo").HasKey(ul => new { ul.LoginProvider, ul.ProviderKey });
+            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("USER_TOKEN", "dbo").HasKey(ut => new { ut.UserId, ut.LoginProvider, ut.Name });
+            modelBuilder.Entity<USERPROFILE>().ToTable("USER_PROFILE", "dbo").HasKey(up => new { up.idUser, up.idProfile});
             #endregion Tablas de Sesion
         }
     }

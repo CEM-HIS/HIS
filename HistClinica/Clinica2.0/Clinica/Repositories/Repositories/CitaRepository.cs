@@ -55,34 +55,34 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             _context.CITA.Remove(Cita);
             await Save();
         }
-        public async Task<string> InsertCita(CitaDTO Cita)
+        public async Task<string> InsertCita(CitaDTO CitaDTO)
         {
             int idCita = 0;
             try
             {
                 await _context.CITA.AddAsync(new CITA()
                 {
-                    idEmpleado = Cita.idEmpleado,
-                    idPaciente = Cita.idPaciente,
-                    idProgramacionMedica = Cita.idProgramacionMedica,
-                    fechaCita = DateTime.Parse(Cita.fecha + " " + Cita.hora),
-                    idtipoCita = Cita.idTipoCita,
+                    idEmpleado = CitaDTO.idEmpleado,
+                    idPaciente = CitaDTO.idPaciente,
+                    idProgramacionMedica = CitaDTO.idProgramacionMedica,
+                    fechaCita = DateTime.Parse(CitaDTO.fecha + " " + CitaDTO.hora),
+                    idtipoCita = CitaDTO.idTipoCita,
                     idEstadoCita = (from ec in _context.ESTADO_CITA
                                     where ec.estado == "RESERVADO"
                                     select ec.idEstadoCita).FirstOrDefault(),
                     idConsultorio = (from cm in _context.CRONOGRAMA_MEDICO
-                                     where cm.idProgramMedica == Cita.idProgramacionMedica
+                                     where cm.idProgramMedica == CitaDTO.idProgramacionMedica
                                      select cm.idConsultorio).FirstOrDefault(),
-                    idServicioClinica = Cita.idServicioClinica
+                    idServicioClinica = CitaDTO.idServicioClinica
                 });
                 await Save();
                 idCita = (from c in _context.CITA
-                          where c.idPaciente == Cita.idPaciente
-                          && c.idProgramacionMedica == Cita.idProgramacionMedica
+                          where c.idPaciente == CitaDTO.idPaciente
+                          && c.idProgramacionMedica == CitaDTO.idProgramacionMedica
                           select c.idCita).FirstOrDefault();
                 await _context.PAGO.AddAsync(new PAGO()
                 {
-                    monto = Cita.total,
+                    monto = CitaDTO.total,
                     fechaRegistro = DateTime.Now,
                     idCita = idCita, 
                     estado = "Pendiente"
@@ -93,6 +93,26 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             catch (Exception ex)
             {
                 return "Error en el guardado " + ex.StackTrace;
+            }
+        }
+        public async Task<string> ReservaCupoCita(CitaDTO CitaDTO)
+        {
+            try
+            {
+                CITA Cita = (from c in _context.CITA
+                             where c.idCita == CitaDTO.idCita
+                             select c).FirstOrDefault();
+                Cita.idPaciente = CitaDTO.idPaciente;
+                Cita.observacion = CitaDTO.observacion;
+                Cita.observacionAfiliacion = CitaDTO.observacionAfiliacion;
+
+                _context.Update(Cita);
+                await Save();
+                return "Se reservo la cita correctamente";
+            }
+            catch(Exception ex)
+            {
+                return "Error en la reserva de la cita";
             }
         }
         public async Task<string> AnularCita(int? CitaID,string motivoAnula)
@@ -254,7 +274,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             //return await GetCitas(idmedico, idespecialidad, fecha, Citas);
             return Citas;
         }
-
         public async Task<CitaDTO> GetById(int? Id)
         {
             CitaDTO Cita = await (from c in _context.CITA
@@ -311,11 +330,17 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                         join ci in _context.CITA on pac.idPaciente equals ci.idPaciente
                                                         join per in _context.PERSONA on pac.idPersona equals per.idPersona
                                                         where pac.idPaciente == ci.idPaciente
-                                                        select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault()
+                                                        select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
+                                      CMP = (from cm in _context.CRONOGRAMA_MEDICO
+                                             join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                             where cm.idProgramMedica == c.idProgramacionMedica
+                                             select m.numeroColegio).FirstOrDefault(),
+                                      idPaciente = c.idPaciente,
+                                      observacion = c.observacion,
+                                      observacionAfiliacion = c.observacionAfiliacion
                                   }).FirstOrDefaultAsync();
             return Cita;
         }
-        
         public async Task<string> CambiarEstadoCita(CitaDTO cita)
         {
             try

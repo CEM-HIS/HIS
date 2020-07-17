@@ -13,7 +13,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         //Task<string> InsertUsuario(int id);
         //Task<string> UpdateUsuario(USUARIO usuario);
         Task<bool> UsuarioExists(int? id);
-        Task DeleteUsuario(int? UsuarioID);
+        //Task DeleteUsuario(int? UsuarioID);
         Task Save();
     }
 }
