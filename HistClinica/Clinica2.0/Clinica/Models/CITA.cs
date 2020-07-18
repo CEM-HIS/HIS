@@ -31,5 +31,7 @@ namespace Clinica2._0.Models
 		public int? idProgramacionMedica { get; set; }
 		public int? idServicioClinica { get; set; }
 		public DateTime? fechaBaja { get; set; }
+		public string horaregistro { get; set; }
+		public string nroorden { get; set; }
 	}
 }

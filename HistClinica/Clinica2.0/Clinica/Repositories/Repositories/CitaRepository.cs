@@ -4,6 +4,7 @@ using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -99,15 +100,41 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             try
             {
-                CITA Cita = (from c in _context.CITA
-                                  where c.idCita == CitaID
-                                  select c).FirstOrDefault();
-                Cita.idEstadoCita = (from ec in _context.ESTADO_CITA
-                                     where ec.estado ==  "ANULADO"
-                                     select ec.idEstadoCita).FirstOrDefault();
-                Cita.motivoAnulacion = motivoAnula;
-                _context.Update(Cita);
+                CitaDTO citaact = await GetById(CitaID);
+
+                CITA citaactual = new CITA()
+                {
+                    idCita = citaact.idCita,
+                    idPaciente = null,
+                    fechaCita = DateTime.Parse(citaact.fecha + " " + citaact.hora),
+                    numeroCita = null,
+                    ultCie10 = null,
+                    codigoCita = null,
+                    idServicioClinica = null,
+                    idConsultorio = citaact.idconsultorio,
+                    idEstadoCita = (from ec in _context.ESTADO_CITA
+                                    where ec.estado == "ANULADO"
+                                    select ec.idEstadoCita).FirstOrDefault(),
+                    idProgramacionMedica = citaact.idProgramacionMedica,
+                    idEmpleado = citaact.idEmpleado,
+                    idTipoAtencion = null,
+                    idtipoCita = null,
+                    igv = null,
+                    coa = null,
+                    descripcion = null,
+                    descuento = null,
+                    ejecutado = null,
+                    estadoReprogramacion = null,
+                    fechaBaja = null,
+                    motivoAnulacion = motivoAnula,
+                    motivoReprogramacion = null,
+                    numeroHC = null,
+                    precio = null,
+                    prioridad = null,
+                };
+                _context.Update(citaactual);
                 await Save();
+
                 return "Se anulo la cita correctamente";
             }
             catch (Exception ex)
@@ -259,7 +286,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                           CMP = (from cm in _context.CRONOGRAMA_MEDICO
                                                  join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                                  where cm.idProgramMedica == c.idProgramacionMedica
-                                                 select m.numeroColegio).FirstOrDefault()
+                                                 select m.numeroColegio).FirstOrDefault(),
+                                          horaregistro = c.horaregistro
                                       }
                                         ).ToListAsync();
             //return await GetCitas(idmedico, idespecialidad, fecha, Citas);
@@ -326,6 +354,11 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                         join per in _context.PERSONA on pac.idPersona equals per.idPersona
                                                         where pac.idPaciente == ci.idPaciente
                                                         select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
+                                      idPaciente = (from pac in _context.PACIENTE
+                                                        join ci in _context.CITA on pac.idPaciente equals ci.idPaciente
+                                                        join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                        where pac.idPaciente == ci.idPaciente
+                                                        select pac.idPaciente).FirstOrDefault(),
                                       CMP = (from cm in _context.CRONOGRAMA_MEDICO
                                              join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                              where cm.idProgramMedica == c.idProgramacionMedica
@@ -384,6 +417,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     numeroHC = null,
                     precio = null,
                     prioridad = null,
+                    horaregistro = DateTime.Now.ToString("hh:mm:ss"),
+                    nroorden = null
                 };
                 _context.Update(cita);
                 await Save();
@@ -391,7 +426,87 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             }
             catch (Exception ex)
             {
-                return "Error al guardado" + ex.Message;
+                return "Error al guardado" + ex.InnerException.Message;
+            }
+        }
+
+        public async Task<string> ReprogramarCupo(int paciente, CitaDTO cita, int idcitaactual)
+        {
+            try
+            {
+                CITA nuevacita = new CITA()
+                {
+                    idCita = cita.idCita,
+                    idPaciente = cita.idPaciente,
+                    fechaCita = DateTime.Parse(cita.fecha + " " + cita.hora),
+                    numeroCita = null,
+                    ultCie10 = null,
+                    codigoCita = null,
+                    idServicioClinica = null,
+                    idConsultorio = cita.idconsultorio,
+                    idEstadoCita = null,
+                    idProgramacionMedica = cita.idProgramacionMedica,
+                    idEmpleado = cita.idEmpleado,
+                    idTipoAtencion = null,
+                    idtipoCita = null,
+                    igv = null,
+                    coa = null,
+                    descripcion = null,
+                    descuento = null,
+                    ejecutado = null,
+                    estadoReprogramacion = null,
+                    fechaBaja = null,
+                    motivoAnulacion = null,
+                    motivoReprogramacion = null,
+                    numeroHC = null,
+                    precio = null,
+                    prioridad = null,
+                    horaregistro = DateTime.Now.ToString("hh:mm:ss"),
+                    nroorden = null
+                };
+                _context.Update(nuevacita);
+                await Save();
+
+                CitaDTO citaact = await GetById(idcitaactual);
+                CITA citaactual = new CITA()
+                {
+                    idCita = citaact.idCita,
+                    idPaciente = null,
+                    fechaCita = DateTime.Parse(citaact.fecha + " " + citaact.hora),
+                    numeroCita = null,
+                    ultCie10 = null,
+                    codigoCita = null,
+                    idServicioClinica = null,
+                    idConsultorio = citaact.idconsultorio,
+                    idEstadoCita = null,
+                    idProgramacionMedica = citaact.idProgramacionMedica,
+                    idEmpleado = citaact.idEmpleado,
+                    idTipoAtencion = null,
+                    idtipoCita = null,
+                    igv = null,
+                    coa = null,
+                    descripcion = null,
+                    descuento = null,
+                    ejecutado = null,
+                    estadoReprogramacion = null,
+                    fechaBaja = null,
+                    motivoAnulacion = null,
+                    motivoReprogramacion = null,
+                    numeroHC = null,
+                    precio = null,
+                    prioridad = null,
+                    horaregistro = null,
+                    nroorden = null
+                };
+                _context.Update(citaactual);
+                await Save();
+
+
+                return "Se reprogramo la cita correctamente";
+            }
+            catch (Exception ex)
+            {
+                return "Error al reprogramar" + ex.StackTrace;
             }
         }
     }

@@ -57,5 +57,6 @@ namespace Clinica2._0.Models
 		public bool? concienteDato { get; set; }
 		public int? idEstado { get; set; }
 		public string fechaBaja { get; set; }
+		public string cuenta { get; set; }
 	}
 }
