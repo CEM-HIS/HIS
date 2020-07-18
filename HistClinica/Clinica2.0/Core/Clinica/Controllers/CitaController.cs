@@ -17,15 +17,24 @@ namespace Clinica2._0.Controllers
     {
         private readonly IPacienteRepository _pacienteRepository;
         private readonly ClinicaServiceContext _context;
-        private readonly ICitaRepository _repository;
+        private readonly ICitaRepository _citarepository;
         private readonly IUtilRepository _utilrepository;
+        private readonly ICronogramaRepository _cronogramarepository;
+        private readonly IMedicoRepository _medicorepository;
 
-        public CitaController(ClinicaServiceContext clinicaService,ICitaRepository repository, IUtilRepository utilRepository, IPacienteRepository pacienterepository)
+        public CitaController(ClinicaServiceContext clinicaService,
+            ICitaRepository repository, 
+            IUtilRepository utilRepository, 
+            IPacienteRepository pacienterepository,
+            ICronogramaRepository cronogramaRepository,
+            IMedicoRepository medicoRepository)
         {
-            _repository = repository;
+            _citarepository = repository;
             _context = clinicaService;
             _utilrepository = utilRepository;
             _pacienteRepository = pacienterepository;
+            _cronogramarepository = cronogramaRepository;
+            _medicorepository = medicoRepository;
         }
 
         // GET: Cita
@@ -43,7 +52,7 @@ namespace Clinica2._0.Controllers
                 return NotFound();
             }
 
-            var t068_CITA = await _repository.GetById(id);
+            var t068_CITA = await _citarepository.GetById(id);
             if (t068_CITA == null)
             {
                 return NotFound();
@@ -69,7 +78,7 @@ namespace Clinica2._0.Controllers
         {
             if (Cita != null)
             {
-                await _repository.InsertCita(Cita);
+                await _citarepository.InsertCita(Cita);
                 return RedirectToAction(nameof(Index));
             }
             return View(Cita);
@@ -87,11 +96,11 @@ namespace Clinica2._0.Controllers
             lespecialidads = await _utilrepository.GetTipo("Especialidad");
             ViewBag.listaespecialidades = lespecialidads;
 
-            var medico = await _utilrepository.GetMedicos();
+            var medico = await _medicorepository.GetMedicos();
             ViewBag.listamedicos = medico;
 
-            CitaDTO cita = await _repository.GetById(id);
-            List<CitaDTO> citas = await _repository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha);
+            CitaDTO cita = await _citarepository.GetById(id);
+            List<CitaDTO> citas = await _citarepository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha);
 
             CitaCupoDTO citaCupo = new CitaCupoDTO();
             citaCupo.citas = citas;
@@ -140,7 +149,7 @@ namespace Clinica2._0.Controllers
                 return NotFound();
             }
 
-            var t068_CITA = await _repository.GetById(id);
+            var t068_CITA = await _citarepository.GetById(id);
             if (t068_CITA == null)
             {
                 return NotFound();
@@ -160,19 +169,19 @@ namespace Clinica2._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _repository.DeleteCita(id);
+            await _citarepository.DeleteCita(id);
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<JsonResult> GetMedicoByEsp(int id)
         {
-            var medico = await _utilrepository.GetMedicoByEspecialidad(id);
+            var medico = await _medicorepository.GetMedicoByEspecialidad(id);
             return Json(medico);
         }
 
         public async Task<JsonResult> GetCronogramaByMedico(int id)
         {
-            var cronograma = await _utilrepository.GetCronogramaByMedico(id);
+            var cronograma = await _cronogramarepository.GetCronogramaByMedico(id);
             return Json(cronograma);
         }
 
@@ -188,7 +197,7 @@ namespace Clinica2._0.Controllers
             {
                 return NotFound();
             }
-            CitaDTO cita = await _repository.GetById(id);
+            CitaDTO cita = await _citarepository.GetById(id);
             return View(cita);
         }
 
@@ -198,7 +207,7 @@ namespace Clinica2._0.Controllers
             if (cita != null)
             {
              //   TempData["dni"] = dni;
-                TempData["mensajecita"] = await _repository.UpdateCita(cita);
+                TempData["mensajecita"] = await _citarepository.UpdateCita(cita);
                 return RedirectToAction("RegistroCita");
             }
             return View(cita);
@@ -207,7 +216,7 @@ namespace Clinica2._0.Controllers
 
         public async Task<IActionResult> AnularCita(int? id)
         {
-            var t068_CITA = await _repository.GetById(id);
+            var t068_CITA = await _citarepository.GetById(id);
             if (t068_CITA == null)
             {
                 return NotFound();
@@ -218,22 +227,22 @@ namespace Clinica2._0.Controllers
         public async Task<IActionResult> AnularCita(CitaDTO cita)
         {
             TempData["dni"] = cita.dniPaciente;
-            TempData["mensajecita"] = await _repository.AnularCita(cita.idCita, cita.motivoAnulacion);
+            TempData["mensajecita"] = await _citarepository.AnularCita(cita.idCita, cita.motivoAnulacion);
             return RedirectToAction("Index", "Paciente");
         }
 
         public async Task<IActionResult> CambiarEstadoCita(int id)
         {
-            var estado = await _utilrepository.getEstadoCita();
+            var estado = await _citarepository.getEstadoCita();
             ViewBag.idEstado = estado;
-            CitaDTO cita = await _repository.GetById(id);
+            CitaDTO cita = await _citarepository.GetById(id);
             return PartialView(cita);
         }
 
         [HttpPost]
         public async Task<IActionResult> CambiarEstadoCita(CitaDTO cita)
         {
-            TempData["msjcita"] = await _repository.CambiarEstadoCita(cita);
+            TempData["msjcita"] = await _citarepository.CambiarEstadoCita(cita);
             return RedirectToAction("AdmicionMedico", "Paciente");
         }
 
@@ -250,9 +259,9 @@ namespace Clinica2._0.Controllers
             lespecialidads = await _utilrepository.GetTipo("Especialidad");
             ViewBag.listaespecialidades = lespecialidads;
 
-            var medico = await _utilrepository.GetMedicos();
+            var medico = await _medicorepository.GetMedicos();
             ViewBag.listamedicos = medico;
-            List<CitaDTO> cita = await _repository.GetAllCitas(idmedico, idespecialidad, fecha);
+            List<CitaDTO> cita = await _citarepository.GetAllCitas(idmedico, idespecialidad, fecha);
             return View(cita);
         }
 

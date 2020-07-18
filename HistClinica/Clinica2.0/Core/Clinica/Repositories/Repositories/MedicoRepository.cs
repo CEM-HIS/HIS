@@ -151,5 +151,33 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                              }).ToListAsync();
             return medicos;
         }
+        public async Task<object> GetMedicoByEspecialidad(int id)
+        {
+            var medico = await (from td in _context.TABLA_DETALLE
+                                join med in _context.MEDICO
+                                on td.idTablaDetalle equals med.idEspecialidad
+                                join per in _context.PERSONA
+                                on med.idPersona equals per.idPersona
+                                where td.idTablaDetalle == id
+                                select new
+                                {
+                                    med.idMedico,
+                                    nombres = per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno
+                                }).ToListAsync();
+            return medico;
+        }
+        public async Task<object> GetMedicos()
+        {
+            var medico = await (from per in _context.PERSONA
+                                join e in _context.EMPLEADO on per.idPersona
+                                equals e.idPersona
+                                join med in _context.MEDICO on e.idPersona equals med.idPersona
+                                select new
+                                {
+                                    idMedico = med.idMedico,
+                                    nombres = per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno
+                                }).ToListAsync();
+            return medico;
+        }
     }
 }

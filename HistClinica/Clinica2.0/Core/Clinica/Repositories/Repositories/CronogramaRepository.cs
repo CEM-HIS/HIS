@@ -277,5 +277,13 @@ namespace Clinica2._0.Repositories.Repositories
 														  }).ToListAsync();
 			return D012_CRONOMEDICOs;
 		}
+		public async Task<object> GetCronogramaByMedico(int id)
+		{
+			List<CRONOGRAMA_MEDICO> cronograma = await (from cro in _context.CRONOGRAMA_MEDICO
+														join med in _context.MEDICO on cro.idMedico equals med.idMedico
+														where med.idMedico == id
+														select cro).ToListAsync();
+			return ObtenerFechaHora(cronograma);
+		}
 	}
 }

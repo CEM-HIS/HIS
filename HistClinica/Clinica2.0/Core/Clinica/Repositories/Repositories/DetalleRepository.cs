@@ -136,5 +136,18 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                            on p.idTablaGeneral equals g.idTablaGeneral where g.idTablaGeneral == id select p).ToListAsync();
             return general;
         }
+        public async Task<object> GetEspecialidad(int id)
+        {
+            var combo = await (from td in _context.TABLA_DETALLE
+                               join med in _context.MEDICO
+                               on td.idTablaDetalle equals med.idEspecialidad
+                               where med.idMedico == id
+                               select new
+                               {
+                                   idtab = td.idTablaDetalle,
+                                   descripcion = td.descripcion
+                               }).ToListAsync();
+            return combo;
+        }
     }
 }

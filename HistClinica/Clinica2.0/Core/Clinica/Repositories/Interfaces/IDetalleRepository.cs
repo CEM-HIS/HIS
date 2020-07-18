@@ -20,5 +20,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         Task<DetalleDTO> GetDetalle(int? id);
         Task<int> GetIdDetalleByDescripcion(string descripcion);
         Task<List<TABLA_DETALLE>> GetDetalleByIdGeneral(int? id);
+        Task<object> GetEspecialidad(int id);
     }
 }

@@ -18,5 +18,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 		Task DeleteCronograma(int? CronoID);
 		Task Save();
 		Task<List<CronogramaDTO>> GetCronogramaByMedico(string nombre,string apellido, int especialidad);
+		Task<object> GetCronogramaByMedico(int id);
 	}
 }

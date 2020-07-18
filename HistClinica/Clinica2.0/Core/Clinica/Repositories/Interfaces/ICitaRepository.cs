@@ -21,5 +21,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 
         Task<string> UpdateCita(CitaDTO cita);
         Task<string> CambiarEstadoCita(CitaDTO cita);
+        Task<List<ESTADO_CITA>> getEstadoCita();
     }
 }

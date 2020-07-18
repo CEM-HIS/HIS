@@ -17,13 +17,19 @@ namespace Clinica2._0.Controllers
         private readonly ICronogramaRepository cronogramaRepository;
         private readonly IUtilRepository _utilrepository;
         private readonly IMedicoRepository _medicorepository;
+        private readonly IDetalleRepository _detalleRepository;
 
-        public CronogramaController(ClinicaServiceContext clinicaService, ICronogramaRepository cronograma, IUtilRepository utilRepository, IMedicoRepository medicoRepository)
+        public CronogramaController(ClinicaServiceContext clinicaService, 
+            ICronogramaRepository cronograma, 
+            IUtilRepository utilRepository, 
+            IMedicoRepository medicoRepository,
+            IDetalleRepository detalleRepository)
         {
             _context = clinicaService;
             cronogramaRepository = cronograma;
             _utilrepository = utilRepository;
             _medicorepository = medicoRepository;
+            _detalleRepository = detalleRepository;
         }
 
         public class Intervalos
@@ -61,7 +67,7 @@ namespace Clinica2._0.Controllers
             ViewBag.intervalos = intervalos;
 
             //combo medicos
-            var medico = await _utilrepository.GetMedicos();
+            var medico = await _medicorepository.GetMedicos();
             ViewBag.listamedicos = medico;
 
             //listar
@@ -78,7 +84,7 @@ namespace Clinica2._0.Controllers
 
         public async Task<JsonResult> GetEspecialidad(int id)
         {
-            var newlistespe = await _utilrepository.GetEspecialidad(id);
+            var newlistespe = await _detalleRepository.GetEspecialidad(id);
            // ViewBag.listaespecialidades = newlistespe;
             return Json(newlistespe);
         }
@@ -143,7 +149,7 @@ namespace Clinica2._0.Controllers
             ViewBag.lestado = estado;
 
             //combo medicos
-            var medico = await _utilrepository.GetMedicos();
+            var medico = await _medicorepository.GetMedicos();
             ViewBag.listamedicos = medico;
 
             ViewBag.listahoras = horas;

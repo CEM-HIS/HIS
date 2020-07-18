@@ -1,4 +1,5 @@
 ﻿using Clinica2._0.Models;
+using Clinica2._0.Sesion.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,10 +7,6 @@ namespace Clinica2._0.Data
 {
     public class ClinicaServiceContext : DbContext
     {
-        public ClinicaServiceContext()
-        {
-        }
-
         public ClinicaServiceContext(DbContextOptions<ClinicaServiceContext> options)
        : base(options)
         { }
@@ -30,7 +27,7 @@ namespace Clinica2._0.Data
         #endregion Tablas de Clinica
         #region Tablas de Sesion
         public DbSet<USER> USER { get; set; }
-        public DbSet<IdentityRole> ROLE { get; set; }
+        public DbSet<ROLE> ROLE { get; set; }
         public DbSet<IdentityUserRole<string>> USER_ROLE { get; set; }
         public DbSet<IdentityRoleClaim<string>> ROL_CLAIM { get; set; }
         public DbSet<IdentityUserClaim<string>> USER_CLAIM { get; set; }

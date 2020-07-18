@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200710235453_InicialMigracion.cs" />
-    <Compile Remove="Migrations\20200710235453_InicialMigracion.Designer.cs" />
-    <Compile Remove="Migrations\20200714151219_Sesion Tablas.cs" />
-    <Compile Remove="Migrations\20200714151219_Sesion Tablas.Designer.cs" />
+    <Compile Remove="Core\Migrations\20200710235453_InicialMigracion.cs" />
+    <Compile Remove="Core\Migrations\20200710235453_InicialMigracion.Designer.cs" />
+    <Compile Remove="Core\Migrations\20200714151219_Sesion Tablas.cs" />
+    <Compile Remove="Core\Migrations\20200714151219_Sesion Tablas.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

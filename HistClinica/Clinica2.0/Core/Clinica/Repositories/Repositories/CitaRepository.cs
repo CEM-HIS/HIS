@@ -415,5 +415,12 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 return "Error al guardado" + ex.Message;
             }
         }
+        public async Task<List<ESTADO_CITA>> getEstadoCita()
+        {
+
+            List<ESTADO_CITA> estado = await (from e in _context.ESTADO_CITA
+                                              select e).ToListAsync();
+            return estado;
+        }
     }
 }

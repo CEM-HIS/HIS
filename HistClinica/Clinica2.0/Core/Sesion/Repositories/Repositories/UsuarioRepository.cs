@@ -4,40 +4,32 @@ using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly SignInManager<USER> _signInManager;
         private readonly UserManager<USER> _userManager;
         private readonly ILogger<USER> _logger;
-        private readonly IEmailSender _emailSender;
         private readonly ClinicaServiceContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUtilRepository _utilRepository;
 
         public UsuarioRepository(
             UserManager<USER> userManager,
-            SignInManager<USER> signInManager,
             ILogger<USER> logger,
-            IEmailSender emailSender,
-            IHttpContextAccessor httpContextAccessor,
+            IUtilRepository utilRepository,
             ClinicaServiceContext context)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
+            _utilRepository = utilRepository;
         }
 
         private bool disposed = false;
@@ -80,7 +72,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                       join e in _context.EMPLEADO on p.idPersona equals e.idPersona
                                       where e.idEmpleado == persona.personal.idEmpleado
                                       select p).FirstOrDefaultAsync();
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             try
             {
                 if (!await UsuarioExists(persona.personal.idEmpleado))
@@ -111,7 +102,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                         PhoneNumber = _Persona.celular ?? _Persona.telefono,
                         idEmployee = persona.personal.idEmpleado,
                         idState = 1,
-                        creationUser = userId,
+                        creationUser = _utilRepository.GetUserApplication(),
                         creationDate = DateTime.Now.ToString(),
                         modifyUser = null,
                         modifyDate = null,
@@ -133,7 +124,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 {
                     USER Usuario = await (from u in _context.USER where u.idEmployee == persona.personal.idEmpleado select u).FirstOrDefaultAsync();
                     Usuario.modifyDate = DateTime.Now.ToString();
-                    Usuario.modifyUser = userId;
+                    Usuario.modifyUser = _utilRepository.GetUserApplication();
                     _context.Update(Usuario);
                     await Save();
                     return "Usuario ya asignado";
