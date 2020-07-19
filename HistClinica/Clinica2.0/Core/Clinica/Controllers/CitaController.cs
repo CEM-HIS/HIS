@@ -140,8 +140,8 @@ namespace Clinica2._0.Controllers
         [HttpGet]
         public async Task<IActionResult> Reprogramar(ParametrosCitaDTO parametros)
         {
-            CitaDTO cita = await _repository.GetById(parametros.idcita);
-            await _repository.ReprogramarCupo(parametros.idpaciente, cita, parametros.idcitaactual);
+            CitaDTO cita = await _citarepository.GetById(parametros.idcita);
+            await _citarepository.ReprogramarCupo(parametros.idpaciente, cita, parametros.idcitaactual);
             return RedirectToAction("Edit");
         }
 
@@ -231,7 +231,7 @@ namespace Clinica2._0.Controllers
         public async Task<IActionResult> AnularCita(CitaDTO cita)
         {
             TempData["dni"] = cita.dniPaciente;
-            TempData["mensajecita"] = await _repository.AnularCita(cita.idCita, cita.motivoAnulacion);
+            TempData["mensajecita"] = await _citarepository.AnularCita(cita.idCita, cita.motivoAnulacion);
             return RedirectToAction("RegistroCita");
         }
 
