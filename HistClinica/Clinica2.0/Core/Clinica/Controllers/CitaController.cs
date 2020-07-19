@@ -85,11 +85,22 @@ namespace Clinica2._0.Controllers
         }
 
         // GET: Cita/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int medicocita, int especialidad, string fechacita)
         {
-            var idmedico = HttpContext.Session.GetInt32("idmedico");
-            var idespecialidad = HttpContext.Session.GetInt32("idespecialidad");
-            var fecha = HttpContext.Session.GetString("fecha");
+            int? idmedico = medicocita;
+            int? idespecialidad = especialidad;
+            string fecha = fechacita;
+            if (medicocita == 0 && especialidad == 0 && fechacita == null)
+            {
+                idmedico = HttpContext.Session.GetInt32("idmedico");
+                idespecialidad = HttpContext.Session.GetInt32("idespecialidad");
+                fecha = HttpContext.Session.GetString("fecha");
+            } else
+            {
+                HttpContext.Session.SetInt32("idmedico", Convert.ToInt32(idmedico));
+                HttpContext.Session.SetInt32("idespecialidad", Convert.ToInt32(idespecialidad));
+                HttpContext.Session.SetString("fecha", fecha);
+            }
 
 
             var lespecialidads = new Object();
@@ -104,41 +115,34 @@ namespace Clinica2._0.Controllers
 
             CitaCupoDTO citaCupo = new CitaCupoDTO();
             citaCupo.citas = citas;
-            citaCupo.idcita = cita.idCita;
+            if (cita != null)
+            {
+                citaCupo.idcita = cita.idCita;
+                citaCupo.idpaciente = cita.idPaciente;
+            }
 
             return PartialView(citaCupo);
 
         }
 
+    /*    [HttpGet]
+        public async Task<IActionResult> BuscarReprogramacion(int idmedico, int idespecialidad, string fecha)
+        {
+            CitaCupoDTO citas = new CitaCupoDTO();
+            citas.citas = await _repository.GetAllCitas(idmedico,idespecialidad,fecha);
+
+            return PartialView("Edit", citas);
+        }*/
+
         // POST: Cita/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id)
+        [HttpGet]
+        public async Task<IActionResult> Reprogramar(ParametrosCitaDTO parametros)
         {
-           
-           /* if (cita.idCita != 0)
-            {
-                try
-                {
-                    TempData["dni"] = cita.dniPaciente;
-                   TempData["mensajecita"] = await _repository.ReprogramarCita(cita);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!await _repository.CitaExists(cita.idCita))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index","Paciente");
-            }*/
-            return View();
+            CitaDTO cita = await _repository.GetById(parametros.idcita);
+            await _repository.ReprogramarCupo(parametros.idpaciente, cita, parametros.idcitaactual);
+            return RedirectToAction("Edit");
         }
 
         // GET: Cita/Delete/5
@@ -227,8 +231,8 @@ namespace Clinica2._0.Controllers
         public async Task<IActionResult> AnularCita(CitaDTO cita)
         {
             TempData["dni"] = cita.dniPaciente;
-            TempData["mensajecita"] = await _citarepository.AnularCita(cita.idCita, cita.motivoAnulacion);
-            return RedirectToAction("Index", "Paciente");
+            TempData["mensajecita"] = await _repository.AnularCita(cita.idCita, cita.motivoAnulacion);
+            return RedirectToAction("RegistroCita");
         }
 
         public async Task<IActionResult> CambiarEstadoCita(int id)

@@ -18,8 +18,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         Task DeleteCita(int CitaID);
         Task<bool> CitaExists(int? id);
         Task Save();
-
         Task<string> UpdateCita(CitaDTO cita);
+        Task<string> ReprogramarCupo(int paciente, CitaDTO cita, int citaactual);
         Task<string> CambiarEstadoCita(CitaDTO cita);
         Task<List<ESTADO_CITA>> getEstadoCita();
     }

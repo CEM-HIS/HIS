@@ -120,10 +120,13 @@
 
 	$("#citagrid #editar").click(function () {
 		var id = $(this).closest("tr").find("td").eq(0).html();
+		var idmedico = $("#idmedicocit").val();
+		var idespecialidad = $("#idespecialidadcit").val();
+		var fechas = $("#fechacita").val();
 		$.ajax({
 			type: "GET",
 			url: "/Cita/Edit",
-			data: { id: id },
+			data: { id: id, medicocita: idmedico, especialidad: idespecialidad, fechacita:fechas },
 			contentType: "application/json; charset=utf-8",
 			dataType: "html",
 			success: function (response) {
@@ -322,6 +325,33 @@ $(document).on('change', '#idmedico', function (event) {
 
 });
 
+$(document).on('click', '#citareprogrid #reprogramar', function (event) {
+
+	var id = $(this).closest("tr").find("td").eq(0).html();
+	var idpaciente = $("#idpaciente").val();
+	var idcitaactual = $("#idcita").val();
+	$.ajax({
+		type: "GET",
+		url: "/Cita/Reprogramar",
+		data: { idcita: id, idcitaactual: idcitaactual, idpaciente: idpaciente },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalreprogramar').html(response);
+			$('#modalreprogramar').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+
+});
+
+
+
 $(document).on('change', '#cboafilia', function (event) {
 
 	var id = $("#cboafilia option:selected").val();
@@ -331,8 +361,30 @@ $(document).on('change', '#cboafilia', function (event) {
 		$("#caja").prop('disabled', true);
     }
 });
-
-
+function BuscarCita() {
+	var id = "0";
+	var idmedico = $("#idmedicocit").val();
+	var idespecialidad = $("#espe option:selected").val();
+	var fechas = $("#fechacita").val();
+	$.ajax({
+		type: "GET",
+		url: "/Cita/Edit",
+		data: { id: id, medicocita: idmedico, especialidad: idespecialidad, fechacita: fechas },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalreprogramar').html(response);
+			$('#modalreprogramar').modal('show');
+			$.validator.unobtrusive.parse("#frmeditcita");
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
 
 function alerta1() {
 
