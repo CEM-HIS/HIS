@@ -215,6 +215,9 @@ table.dataTable thead .sorting_desc_disabled:before {
 	bottom: .5em;
 }
 
+.custom-select-sm.form-control {
+	padding: 0px 15px;
+}
 @media (max-width:710px) {
 	.card-height {
 		height: auto;
