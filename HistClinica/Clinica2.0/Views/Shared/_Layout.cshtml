@@ -102,146 +102,155 @@
                     -->
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<!-- Add icons to the links using the .nav-icon class
-	with font-awesome or any other icon font library -->
-						<li style="margin-bottom: 1rem;">
-							<a asp-controller="Home" asp-action="Index" class="brand-link">
-								<img src="@Url.Content("~/Content/dist/img/cem2.jpg")" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-									 style="opacity: .8">
-								<span class="brand-text font-weight-light"><font face="Kaushan Script, coursive  ">HIS</font></span>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                        <li style="margin-bottom: 1rem;">
+                            <a asp-controller="Home" asp-action="Index" class="brand-link">
+                                <img src="@Url.Content("~/Content/dist/img/cem2.jpg")" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                                     style="opacity: .8">
+                                <span class="brand-text font-weight-light"><font face="Kaushan Script, coursive  ">HIS</font></span>
 
-							</a>
-						</li>
-						<li class="hidden-sm-up">
-							<a href="#" class="nav-link ">
-								<img style="width:35px;border-radius:50%;border:2px solid white;margin-right:9px;" src="~/images/profile.png" /><span style="font-weight: bold;
+                            </a>
+                        </li>
+                        <li class="hidden-sm-up">
+                            <a href="#" class="nav-link ">
+                                <img style="width:35px;border-radius:50%;border:2px solid white;margin-right:9px;" src="~/images/profile.png" /><span style="font-weight: bold;
     color:white;"> Rafael Sanchez</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a asp-action="Index" asp-controller="Persona" class="nav-link ">
-								<i class="nav-icon fas fa-user-injured"></i>
-								<p>
-									Gestionar Personal
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Persona" class="nav-link ">
+                                <i class="nav-icon fas fa-user-injured"></i>
+                                <p>
+                                    Gestionar Personal
 
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a asp-action="Index" asp-controller="Cronograma" class="nav-link ">
-								<i class="nav-icon fas fa-user-injured"></i>
-								<p>
-									Horario de Medicos
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Cronograma" class="nav-link ">
+                                <i class="nav-icon fas fa-user-injured"></i>
+                                <p>
+                                    Horario de Medicos
 
-								</p>
-							</a>
-						</li>
+                                </p>
+                            </a>
+                        </li>
 
-						<li class="nav-item">
-							<a asp-action="Index" asp-controller="Licencia" class="nav-link ">
-								<i class="nav-icon fas fa-user-injured"></i>
-								<p>
-									Licencias
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Licencia" class="nav-link ">
+                                <i class="nav-icon fas fa-user-injured"></i>
+                                <p>
+                                    Licencias
 
-								</p>
-							</a>
-						</li>
+                                </p>
+                            </a>
+                        </li>
 
-						<li class="nav-item">
-							<a asp-action="Index" asp-controller="Paciente" class="nav-link ">
-								<i class="nav-icon fas fa-user-injured"></i>
-								<p>
-									Pacientes
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Paciente" class="nav-link ">
+                                <i class="nav-icon fas fa-user-injured"></i>
+                                <p>
+                                    Pacientes
 
-								</p>
-							</a>
-						</li>
+                                </p>
+                            </a>
+                        </li>
 
-						<li class="nav-item">
-							<a asp-action="RegistroCita" asp-controller="Cita" class="nav-link ">
-								<i class="nav-icon fas fa-notes-medical"></i>
-								<p>
-									Reserva de Citas
+                        <li class="nav-item">
+                            <a asp-action="RegistroCita" asp-controller="Cita" class="nav-link ">
+                                <i class="nav-icon fas fa-notes-medical"></i>
+                                <p>
+                                    Reserva de Citas
 
-								</p>
-							</a>
-						</li>
+                                </p>
+                            </a>
+                        </li>
 
-						@*	<li class="nav-item">
-			<a asp-action="AdmicionMedico" asp-controller="Paciente" class="nav-link ">
-				<i class="nav-icon fas fa-notes-medical"></i>
-				<p>
-					Listado de Citas
+                        @*	<li class="nav-item">
+            <a asp-action="AdmicionMedico" asp-controller="Paciente" class="nav-link ">
+                <i class="nav-icon fas fa-notes-medical"></i>
+                <p>
+                    Listado de Citas
 
-				</p>
-			</a>
-		</li>*@
-						@*     <li class="nav-item pl-1">
-			<a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa fa-table"></i> <span class="pl-2 d-none d-sm-inline">Reports</span></a>
-			<div class="collapse" id="submenu1" aria-expanded="false">
-				<ul class="flex-column pl-4 nav">
-					<li class="nav-item"><a class="nav-link py-0" href="#"><span>Orders</span></a></li>
-					<li class="nav-item">
-						<a class="nav-link collapsed py-1" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1"><span>Customers</span></a>
-						<div class="collapse" id="submenu1sub1" aria-expanded="false">
-							<ul class="flex-column nav pl-4">
-								<li class="nav-item">
-									<a class="nav-link p-1" href="#">
-										<i class="fa fa-fw fa-clock-o"></i> Daily
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link p-1" href="#">
-										<i class="fa fa-fw fa-dashboard"></i> Dashboard
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link p-1" href="#">
-										<i class="fa fa-fw fa-bar-chart"></i> Charts
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link p-1" href="#">
-										<i class="fa fa-fw fa-compass"></i> Areas
-									</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</li> *@
+                </p>
+            </a>
+        </li>*@
+                        @*     <li class="nav-item pl-1">
+            <a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa fa-table"></i> <span class="pl-2 d-none d-sm-inline">Reports</span></a>
+            <div class="collapse" id="submenu1" aria-expanded="false">
+                <ul class="flex-column pl-4 nav">
+                    <li class="nav-item"><a class="nav-link py-0" href="#"><span>Orders</span></a></li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1"><span>Customers</span></a>
+                        <div class="collapse" id="submenu1sub1" aria-expanded="false">
+                            <ul class="flex-column nav pl-4">
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" href="#">
+                                        <i class="fa fa-fw fa-clock-o"></i> Daily
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" href="#">
+                                        <i class="fa fa-fw fa-dashboard"></i> Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" href="#">
+                                        <i class="fa fa-fw fa-bar-chart"></i> Charts
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" href="#">
+                                        <i class="fa fa-fw fa-compass"></i> Areas
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li> *@
 
-						<li class="nav-item">
-							<a asp-controller="Tablas" asp-action="Index" class="nav-link ">
-								<i class="nav-icon far fa-calendar-alt"></i>
-								<p>
-									Gestión de tablas
+                        <li class="nav-item">
+                            <a asp-controller="Tablas" asp-action="Index" class="nav-link ">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Gestión de tablas
 
-								</p>
-							</a>
-						</li>
-						<li class="hidden-sm-up nav-item">
-							<a href="#" class="nav-link ">
-								<i class="far fa-times-circle"></i>
-								<p>
-									Gestión de tablas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Sesion" asp-action="Index" class="nav-link ">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                 Roles
 
-								</p>
-							</a>
-						</li>
-						<li class="hidden-sm-up nav-item">
-							<a href="#" class="nav-link ">
-								<i class="far fa-times-circle"></i> <p>
-	                         Gestión de tablas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="hidden-sm-up nav-item">
+                            <a href="#" class="nav-link ">
+                                <i class="far fa-times-circle"></i>
+                                <p>
+                                    Gestión de tablas
 
-</p>
-							</a>
-						</li>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="hidden-sm-up nav-item">
+                            <a href="#" class="nav-link ">
+                                <i class="far fa-times-circle"></i> <p>
+                                    Gestión de tablas
+
+                                </p>
+                            </a>
+                        </li>
 
 
-					</ul>
+                    </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
