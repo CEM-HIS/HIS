@@ -848,8 +848,8 @@ INSERT INTO [dbo].[PROFILE] ([profileCode],[profileName],[idState])
 VALUES (N'Adm',N'Admicionista',1)
 GO
 
-INSERT INTO [dbo].[USER_ROLE] ([UserId],[RoleId],[Discriminator])
-VALUES (N'be108687-fdf0-447a-bb92-48520759d24d',N'be108687-fdf0-447a-bb92-48520759d24d','USER_ROLE')
+INSERT INTO [dbo].[USER_ROLE] ([UserId],[RoleId])
+VALUES (N'be108687-fdf0-447a-bb92-48520759d24d',N'be108687-fdf0-447a-bb92-48520759d24d')
 GO
 
 INSERT INTO [dbo].[USER_PROFILE] ([idUser],[idProfile])
