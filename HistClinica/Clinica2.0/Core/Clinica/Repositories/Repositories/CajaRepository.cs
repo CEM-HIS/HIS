@@ -13,9 +13,16 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
     public class CajaRepository:ICajaRepository
     {
         private readonly ClinicaServiceContext _context;
-        public CajaRepository(ClinicaServiceContext context)
+        private readonly IUtilRepository _utilrepository;
+        private readonly IEmpleadoRepository _empleadorepository;
+
+        public CajaRepository(ClinicaServiceContext context,
+            IUtilRepository utilRepository,
+            IEmpleadoRepository empleadorepository)
         {
             _context = context;
+            _utilrepository = utilRepository;
+            _empleadorepository = empleadorepository;
         }
 
         private bool disposed = false;
@@ -205,7 +212,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
         public async Task<List<CajaDTO>> GetAllCajasAsignadas()
         {
-            List<CajaDTO> Cajas = await (from c in _context.CAJA
+            return await (from c in _context.CAJA
                                         select new CajaDTO()
                                         {
                                             idCaja = c.idCaja,
@@ -230,12 +237,38 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                      select ca.turno).FirstOrDefault()
                                         }
                                 ).ToListAsync();
-            return Cajas;
         }
 
-        public Task<List<CajaDTO>> GetCajaAsignadaxUsuario()
+        public async Task<CajaDTO> GetCajaAsignadaxUsuario()
         {
-            throw new NotImplementedException();
+            int idEmpleado = await _empleadorepository.GetIdEmpleadobyIdUser(_utilrepository.GetUserApplication());
+            return await(from c in _context.CAJA
+                         join ca in _context.CAJA_ASIGNADA on c.idCaja equals ca.idCaja
+                         where ca.idEmpleado == idEmpleado
+                         select new CajaDTO()
+                         {
+                             idCaja = c.idCaja,
+                             fechaApertura = getCajaAsignadabyIdCaja(c.idCaja).fechaApertura,
+                             horaApertura = getCajaAsignadabyIdCaja(c.idCaja).horaApertura,
+                             montoSolesApertura = getCajaAsignadabyIdCaja(c.idCaja).montoSolesApertura,
+                             montoDolaresApertura = getCajaAsignadabyIdCaja(c.idCaja).montoDolaresApertura,
+                             montoEurosApertura = getCajaAsignadabyIdCaja(c.idCaja).montoEurosApertura,
+                             montoSolesCierre = getCajaAsignadabyIdCaja(c.idCaja).montoSolesCierre,
+                             montoDolaresCierre = getCajaAsignadabyIdCaja(c.idCaja).montoDolaresCierre,
+                             montoEurosCierre = getCajaAsignadabyIdCaja(c.idCaja).montoEurosCierre,
+                             fechaCierre = getCajaAsignadabyIdCaja(c.idCaja).fechaCierre,
+                             horaCierre = getCajaAsignadabyIdCaja(c.idCaja).horaCierre,
+                             empleado = (from ca in _context.CAJA_ASIGNADA
+                                         join em in _context.EMPLEADO on ca.idEmpleado equals em.idEmpleado
+                                         join p in _context.PERSONA on em.idPersona equals p.idPersona
+                                         where ca.idCaja == c.idCaja
+                                         select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)
+                                         ).FirstOrDefault(),
+                             turno = (from ca in _context.CAJA_ASIGNADA
+                                      where ca.idCaja == c.idCaja
+                                      select ca.turno).FirstOrDefault()
+                         }
+                        ).FirstOrDefaultAsync();
         }
     }
 }

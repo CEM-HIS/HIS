@@ -150,7 +150,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     if (persona.personal != null)
                     {
                         if(!await _empleadoRepository.EmpleadoExists(idPersona)) await _empleadoRepository.InsertEmpleado(persona, idPersona);
-                        idEmpleado = await _empleadoRepository.GetIdEmpleado(idPersona);
+                        idEmpleado = await _empleadoRepository.GetIdEmpleadobyIdPersona(idPersona);
                         if (persona.personal.idTipoEmpleado == (int)await _detalleRepository.GetIdDetalleByDescripcion("MEDICA/O"))
                         {
                             if (!await _medicoRepository.MedicoExists(idPersona)) await _medicoRepository.InsertMedico(persona, idPersona, idEmpleado);

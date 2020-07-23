@@ -197,6 +197,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             return (from pf in _context.PROFILE
                     select pf).ToListAsync();
         }
+
+        
         #endregion Perfil
         #region Modulo
         #endregion Modulo
