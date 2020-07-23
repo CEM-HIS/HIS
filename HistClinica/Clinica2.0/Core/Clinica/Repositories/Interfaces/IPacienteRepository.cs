@@ -9,6 +9,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
     {
         Task<List<PACIENTE>> GetAllPacientes();
         Task<PersonaDTO> GetById(int? id);
+        Task<int> GetIdPaciente(int? id);
         Task<PersonaDTO> GetByDnioNombresyApellidos(int? Dni, string nombres, string apellidos);
         //Operaciones Transaccionales
         Task<string> InsertPaciente(PersonaDTO Paciente, int idPersona);

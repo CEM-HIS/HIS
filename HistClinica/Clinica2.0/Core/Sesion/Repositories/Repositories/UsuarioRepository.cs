@@ -56,7 +56,11 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         #region Usuario
         public async Task<bool> UsuarioExists(int? id)
         {
-            return await _context.USER.AnyAsync(e => e.idEmployee == id);
+            return await (from u in _context.USER
+                          join e in _context.EMPLEADO on u.idEmployee equals e.idEmpleado
+                          join p in _context.PERSONA on e.idPersona equals p.idPersona
+                          where p.idPersona == id
+                          select u).AnyAsync();
         }
         //public async Task DeleteUsuario(int? UsuarioID)
         //{
@@ -68,13 +72,24 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         //}
         public async Task<string> InsertUsuario(PersonaDTO persona)
         {
-            PERSONA _Persona = await (from p in _context.PERSONA
-                                      join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                      where e.idEmpleado == persona.personal.idEmpleado
-                                      select p).FirstOrDefaultAsync();
+            PERSONA _Persona;
+            if (persona.personal != null)
+            {
+                _Persona = await (from p in _context.PERSONA
+                                          join e in _context.EMPLEADO on p.idPersona equals e.idPersona
+                                          where e.idEmpleado == persona.personal.idEmpleado
+                                          select p).FirstOrDefaultAsync();
+            }
+            else
+            {
+                _Persona = await (from p in _context.PERSONA
+                                          join pa in _context.PACIENTE on p.idPersona equals pa.idPersona
+                                          where pa.idPaciente == persona.paciente.idPaciente
+                                          select p).FirstOrDefaultAsync();
+            }
             try
             {
-                if (!await UsuarioExists(persona.personal.idEmpleado))
+                if (!await UsuarioExists(persona.idPersona))
                 {
                     string primeraletraapellido = _Persona.apellidoPaterno.Substring(0, 1).Trim();
                     string primernombre = "";

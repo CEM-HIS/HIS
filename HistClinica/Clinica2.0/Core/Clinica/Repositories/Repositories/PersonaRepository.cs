@@ -85,6 +85,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             int idPersona = 0;
             int idEmpleado = 0;
+            int idPaciente = 0;
             string mensaje;
             try
             {
@@ -154,13 +155,15 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                         {
                             if (!await _medicoRepository.MedicoExists(idPersona)) await _medicoRepository.InsertMedico(persona, idPersona, idEmpleado);
                         }
+                        persona.personal.idEmpleado = idEmpleado;
                     }
                     else
                     {
                         if (!await _pacienteRepository.PacienteExists(idPersona)) await _pacienteRepository.InsertPaciente(persona, idPersona);
+                        idPaciente = await _pacienteRepository.GetIdPaciente(idPersona);
+                        persona.paciente.idPaciente = idPaciente;
                     }
                     persona.idPersona = idPersona;
-                    persona.personal.idEmpleado = idEmpleado;
                     await _usuarioRepository.InsertUsuario(persona);
                 }
             }
