@@ -196,30 +196,38 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             return "Cierre de caja exitoso";
         }
 
+        public CAJA_ASIGNADA getCajaAsignadabyIdCaja(int id)
+        {
+            return (from ca in _context.CAJA_ASIGNADA
+                    where ca.idCaja == id
+                    select ca).FirstOrDefault();
+        }
+
         public async Task<List<CajaDTO>> GetAllCajasAsignadas()
         {
             List<CajaDTO> Cajas = await (from c in _context.CAJA
                                         select new CajaDTO()
                                         {
-                                            fechaApertura = (from ca in _context.CAJA_ASIGNADA
-                                                             where ca.idCaja == c.idCaja
-                                                             select ca.fechaApertura).FirstOrDefault(),
                                             idCaja = c.idCaja,
-                                            idEmpleado = (from ca in _context.CAJA_ASIGNADA
-                                                          where ca.idCaja == c.idCaja
-                                                          select ca.idEmpleado).FirstOrDefault(),
+                                            fechaApertura = getCajaAsignadabyIdCaja(c.idCaja).fechaApertura,
+                                            horaApertura = getCajaAsignadabyIdCaja(c.idCaja).horaApertura,
+                                            montoSolesApertura = getCajaAsignadabyIdCaja(c.idCaja).montoSolesApertura,
+                                            montoDolaresApertura = getCajaAsignadabyIdCaja(c.idCaja).montoDolaresApertura,
+                                            montoEurosApertura = getCajaAsignadabyIdCaja(c.idCaja).montoEurosApertura,
+                                            montoSolesCierre = getCajaAsignadabyIdCaja(c.idCaja).montoSolesCierre,
+                                            montoDolaresCierre = getCajaAsignadabyIdCaja(c.idCaja).montoDolaresCierre,
+                                            montoEurosCierre = getCajaAsignadabyIdCaja(c.idCaja).montoEurosCierre,
+                                            fechaCierre = getCajaAsignadabyIdCaja(c.idCaja).fechaCierre,
+                                            horaCierre = getCajaAsignadabyIdCaja(c.idCaja).horaCierre,
                                             empleado = (from ca in _context.CAJA_ASIGNADA
                                                         join em in _context.EMPLEADO on ca.idEmpleado equals em.idEmpleado
                                                         join p in _context.PERSONA on em.idPersona equals p.idPersona
                                                         where ca.idCaja == c.idCaja
                                                         select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)
                                                         ).FirstOrDefault(),
-                                            tipo = "",
                                             turno = (from ca in _context.CAJA_ASIGNADA
                                                      where ca.idCaja == c.idCaja
-                                                     select ca.turno).FirstOrDefault(),
-                                            idEstado = c.idEstado,
-                                            estado = ""
+                                                     select ca.turno).FirstOrDefault()
                                         }
                                 ).ToListAsync();
             return Cajas;
