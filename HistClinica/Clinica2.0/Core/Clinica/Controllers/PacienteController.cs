@@ -240,5 +240,11 @@ namespace Clinica2._0.Controllers
             return Json(await _pacienteRepository.GetByHC(historia));
         }
 
+        public async Task<IActionResult> ReportConsentimiento(int id)
+        {
+            PersonaDTO personaDTO = await _pacienteRepository.GetById(id);
+            return PartialView(personaDTO);
+        }
+
     }
 }

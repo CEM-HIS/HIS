@@ -147,7 +147,8 @@ namespace Clinica2._0.Controllers
         public async Task<IActionResult> Reprogramar(ParametrosCitaDTO parametros)
         {
             CitaDTO cita = await _citarepository.GetById(parametros.idcitaactual);
-            await _citarepository.ReprogramarCupo(parametros.idpaciente, cita, parametros.idcita);
+            CitaDTO citaact = await _citarepository.GetById(parametros.idcita);
+            await _citarepository.ReprogramarCupo(parametros.idpaciente,citaact, cita, parametros.idcita);
             return RedirectToAction("Edit");
         }
 

@@ -160,7 +160,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                         if (!await _pacienteRepository.PacienteExists(idPersona)) await _pacienteRepository.InsertPaciente(persona, idPersona);
                     }
                     persona.idPersona = idPersona;
-                    persona.personal.idEmpleado = idEmpleado;
+                    if (persona.personal != null)
+                    {
+                        persona.personal.idEmpleado = idEmpleado;
+                    }
                     await _usuarioRepository.InsertUsuario(persona);
                 }
             }
