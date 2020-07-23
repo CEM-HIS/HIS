@@ -510,5 +510,13 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                 }).FirstOrDefaultAsync();
             return Persona;
         }
+
+        public async Task<int> GetIdPaciente(int? id)
+        {
+            int idPaciente = await (from p in _context.PACIENTE
+                                    where p.idPersona == id
+                                    select p.idPaciente).FirstOrDefaultAsync();
+            return idPaciente;
+        }
     }
 }
