@@ -1,7 +1,7 @@
 ﻿@model Clinica2._0.Clinica.DTO.CitaCupoDTO
 <div class="modal-dialog modal-lg" role="document">
 	<div class="modal-content">
-		<div class="modal-header">
+		<div class="modal-header bg-primary">
 			<h2 class="modal-title text-center" id="exampleModalLabel1">Reprogramacion de cita ambulatoria</h2>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
@@ -15,7 +15,8 @@
             									border-radius: 9px;
             									margin-top: 1rem;
             			">
-							<input type="hidden" id="cita" name="name" asp-for="idcita"/>
+							<input type="hidden" id="idcita" name="name" asp-for="idcita" />
+							<input type="hidden" id="idpaciente" name="name" asp-for="idpaciente" />
 							<div class="row">
 								<div class="col-sm-12">
 									<span class="text-red">Elija fecha y medico, a quien le transferira los pacientes citados</span>
@@ -25,7 +26,7 @@
 								<div class="col-sm-4">
 									<div class="input-style">
 										<label for="txtNroDocumento" class="form-label">Fecha</label>
-										<input type="date" name="fecha" value="" class="form-control" />
+										<input type="date" name="fecha" id="fechacita" class="form-control" />
 									</div>
 								</div>
 								<div class="col-sm-8">
@@ -36,12 +37,12 @@
 								<div class="col-sm-5">
 									<div class="input-style">
 										<label for="txtNroDocumento" class="form-label">Medico</label>
-										@Html.DropDownList("idmedico", new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccionar", new
+										@Html.DropDownList("idmedicocit", new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccionar", new
 									{
 								   @class = "form-control",
-								   data_cascade_combo = "#stypes",
-								   data_cascade_combo_source = Url.Action("GetEspecialidad", "Cronograma"),
-								   data_cascade_combo_param_name = "id"
+								   data_cascade_combo_med = "#espe",
+								   data_cascade_combo_source_med = Url.Action("GetEspecialidad", "Cronograma"),
+								   data_cascade_combo_param_name_med = "id"
 							   })
 									</div>
 								</div>
@@ -53,7 +54,7 @@
 								<div class="col-sm-5">
 									<div class="input-style">
 										<label for="txtNroDocumento" class="form-label">Especialidad</label>
-										@Html.DropDownList("idespecialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "stypes" })
+										@Html.DropDownList("idespecialidadcit", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "espe" })
 									</div>
 								</div>
 								<div class="col-sm-7">
@@ -62,14 +63,14 @@
 							</div>
 							<div class="row pt-2">
 								<div class="col-sm-12">
-									<button class="btn btn-primary">Buscar</button>
+									<a style="color:white;" class="btn btn-primary" onclick="BuscarCita();">Buscar</a>
 								</div>
 							</div>
 
 
 							<div class="row pt-3">
 								<div class="col-sm-12">
-									<table class="table table-responsive table-bordered table-hover text-center" id="citagrid">
+									<table class="table table-responsive table-bordered table-hover text-center" id="citareprogrid">
 										<thead>
 											<tr>
 												<th>Id</th>
@@ -95,16 +96,16 @@
 													<td>@item.hora</td>
 													<td nowrap>@item.Medico</td>
 													<td>@item.CMP</td>
-													<td></td>
+													<td>@item.numeroHc</td>
 													<td>@item.nombrePaciente</td>
 													<td>@item.estadoPago</td>
-													<td></td>
-													<td></td>
-													<td></td>
+													<td>@item.horaregistro</td>
+													<td>@item.cuenta</td>
+													<td>@item.numeroorden</td>
 													<td>@item.consultorio</td>
 													<td></td>
 													<td>
-														<a asp-controller="Cita" asp-action="Edit" asp-route-id="@item.idCita" type="submit" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></a>
+														<a style="color:white;" id="reprogramar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></a>
 													</td>
 												</tr>
 											}

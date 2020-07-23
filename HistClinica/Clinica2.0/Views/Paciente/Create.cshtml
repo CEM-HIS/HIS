@@ -20,24 +20,60 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<div class="col-sm-12">
 								<div class="row">
-                                    <div class="col-sm-7">
-                                        <div class="input-style">
-                                            <label class="form-label">*Tipo de paciente</label>
-                                            @Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
-                                            @Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
-                                        </div>
+									<div class="col-sm-8">
+										<div class="input-style">
+											<label class="form-label">*Tipo de paciente</label>
+											@Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
+											@Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
 										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-4">
-
+						<div class="col-sm-3">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-10">
+										<div class="input-style">
+											<label class="form-label">*Nro plan salud</label>
+											@Html.TextBoxFor(m => m.paciente.numeroPlan, new { @class = "form-control", @id="plansalud" })
+											@Html.ValidationMessageFor(m => m.paciente.numeroPlan, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-sm-2 text-left p-0">
+										<div class="input-style">
+											<a onclick="BuscarPlan();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="col-sm-4">
-
+						<div class="col-sm-3">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-7">
+										<div class="input-style">
+											<label class="form-label">*Aseguradora</label>
+											<input type="text" name="name" id="aseguradora" class="form-control" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-7">
+										<div class="input-style">
+											<label class="form-label">*Contratante</label>
+											<input type="text" name="name" id="contratante" class="form-control"/>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,56 @@
+﻿@model List<Clinica2._0.Core.Clinica.Models.LABORATORIO>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title text-center" id="exampleModalLabel1">Reprogramacion de cita ambulatoria</h2>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="container-fluid">
+				<div class="col-sm-12 left" style="height: 50px;">
+					<div class="card card-primary card-his">
+						<div class="card-header card-shadow">
+							<h2>Examenes de Laboratorio</h2>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-12">
+									<table class="table table-bordered pt-2" id="laboratorioGrid">
+										<thead>
+											<tr>
+												<th style="display:none;">Id</th>
+												<th>Codigo</th>
+												<th>Tipo</th>
+												<th>Descripcion</th>
+												<th>Precio</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+											@foreach (var item in Model)
+											{
+											<tr>
+												<td style="display:none;">@item.idLaboratorio</td>
+												<td>@item.codigo</td>
+												<td>@item.tipo</td>
+												<td>@item.descripcion</td>
+												<td>@item.precio</td>
+												<td><a asp-controller="Cita" asp-action="SeleccionarLaboratorio" asp-route-id="@item.idLaboratorio" class="btn btn-primary" style="color:white;"><i class="fas fa-plus"></i></a></td>
+											</tr>
+											}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

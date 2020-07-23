@@ -40,10 +40,10 @@
 		<a type="submit" style="color:white;" class="btn btn-primary" onclick="cargarmodalCrearDetalle()">Crear</a><br /><br />
 	</div>
 	<div class="col-sm-12">
-		<table class="table table-bordered table-hover" id="detallegrid">
+		<table class="table table-striped table-bordered" style="width:100%" id="detallegrid">
 			<thead>
 				<tr>
-					<th style="visibility:hidden;">
+					<th style="display:none;">
 						Id
 					</th>
 					<th>
@@ -61,7 +61,7 @@
 				@foreach (var item in Model.detalles)
 				{
 					<tr>
-						<td style="visibility:hidden;">@item.idTablaDetalle</td>
+						<td style="display:none;">@item.idTablaDetalle</td>
 						<td>@item.codigoTablaDetalle</td>
 						<td>@item.descripcion</td>
 						<td>
