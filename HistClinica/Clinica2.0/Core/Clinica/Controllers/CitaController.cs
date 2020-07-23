@@ -1,5 +1,5 @@
 ﻿using Clinica2._0.Clinica.DTO;
-using Clinica2._0.Core.Clinica.DTO;
+using Clinica2._0.DTO;
 using Clinica2._0.Core.Clinica.Models;
 using Clinica2._0.Core.Clinica.Repositories.Interfaces;
 using Clinica2._0.Data;
@@ -304,18 +304,25 @@ namespace Clinica2._0.Controllers
             var personaDTO = await _pacienteRepository.GetByDnioNombresyApellidos(dni, "", "");
             return View(personaDTO);
         }
+   
 
         public async Task<IActionResult> OrdenAtencion()
         {
-            return PartialView();
+            int idorden = Convert.ToInt32(HttpContext.Session.GetInt32("orden"));
+            OrdenDTO dto = await _ordenRepository.GetOrden(idorden);
+            return PartialView(dto);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> OrdenAtencion(OrdenDTO modelo)
+
+        public async Task<IActionResult> OrdenAtencionAdd(OrdenDTO modelo)
         {
-            OrdenDTO dto = await _ordenRepository.AddOrden(modelo, 0);
-            HttpContext.Session.SetInt32("orden", dto.idorden);
-            return PartialView(dto);
+            OrdenDTO dto = new OrdenDTO();
+            if (modelo.numeroHC != null)
+            {
+             int idorden = await _ordenRepository.AddOrden(modelo);
+                HttpContext.Session.SetInt32("orden", idorden);
+            }
+            return RedirectToAction("OrdenAtencion");
         }
 
         public async Task<IActionResult> DetalleLaboratorio()

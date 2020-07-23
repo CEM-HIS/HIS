@@ -67,7 +67,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         public async Task DeletePersona(int? PersonaID)
         {
             PERSONA Persona = await _context.PERSONA.FindAsync(PersonaID);
-            Persona.idEstado = 2;
+            Persona.idEstado = 172;
             Persona.fechaBaja = DateTime.Now.ToString();
             _context.Update(Persona);
             await Save();
@@ -248,7 +248,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             List<PersonaDTO> Personas = await (from p in _context.PERSONA
                                                join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                               where e.idTipoEmpleado != null
+                                               where e.idTipoEmpleado != null where p.idEstado != 172
                                                select new PersonaDTO
                                                {
                                                    idPersona = p.idPersona,

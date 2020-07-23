@@ -261,6 +261,7 @@
 			contentType: "application/json; charset=utf-8",
 			dataType: "html",
 			success: function (response) {
+				console.log(response);
 				$('#modaleditardetalle').html(response);
 				$('#modaleditardetalle').modal('show');
 				$.validator.unobtrusive.parse("#frmeditardetalle");
@@ -364,6 +365,30 @@ $(document).on('click', '#citareprogrid #reprogramar', function (event) {
 
 });
 
+$(document).on('click', '#laboratorioGrid #addLab', function (event) {
+
+	var id = $(this).closest("tr").find("td").eq(0).html();
+	$.ajax({
+		type: "GET",
+		url: "/Cita/SeleccionarLaboratorio",
+		data: { id: id,},
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalordenes').html(response);
+			$('#modalordenes').modal('show');
+			$('#modallaboratorio').modal('hide');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+
+});
+
 
 
 $(document).on('change', '#cboafilia', function (event) {
@@ -375,6 +400,54 @@ $(document).on('change', '#cboafilia', function (event) {
 		$("#caja").prop('disabled', true);
     }
 });
+
+/*
+$('#nombrePaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
+$('#plan').val(response.paciente.numeroPlan);
+$('#contrato').val(response.paciente.numeroContrato);
+$('#aseguradora').val(response.paciente.aseguradora);
+$('#contratante').val(response.paciente.contratante);
+$('#idPaciente').val(response.paciente.idPaciente);
+$('#cuenta').val(response.paciente.cuenta);*/
+function GrabarOrdenAtencion() {
+	var objOrden = {
+		idorden:0,
+		numeroorden: "", 
+		idPaciente: $('#idPaciente').val(),
+		nombrepaciente:"",
+		codigoplan:"", 
+	    contratante:"", 
+	    aseguradora:"",
+		contrato:"", 
+		cuenta: $('#cuenta').val(),
+		numeroHC: $('#historia').val(),
+		idMedico: 0,
+		detalleorden: []
+	}
+
+	$.ajax({
+		type: "GET",
+		url: "/Cita/OrdenAtencionAdd",
+		data: objOrden,
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			console.log(response);
+			$('#modalordenes').html(response);
+			$('#modalordenes').modal('show');
+			//$("#idpaciente").val(idpaciente);
+		/*	$("#idcita").val(idcitaactual);
+			$.validator.unobtrusive.parse("#frmeditcita");*/
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
 function BuscarCita() {
 	var id = "0";
 	var idpaciente = $("#idpaciente").val();
