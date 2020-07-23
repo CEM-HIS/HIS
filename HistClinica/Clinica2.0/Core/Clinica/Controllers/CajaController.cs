@@ -29,7 +29,7 @@ namespace Clinica2._0.Controllers
             _cajarepository = cajaRepository;
         }
         // GET: CajaController
-        public async Task<ActionResult> IndexAsync()
+        public async Task<ActionResult> Index()
         {
             // Find user
             USER user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
@@ -56,7 +56,7 @@ namespace Clinica2._0.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -77,7 +77,7 @@ namespace Clinica2._0.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -98,7 +98,7 @@ namespace Clinica2._0.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
