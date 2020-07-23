@@ -1,4 +1,7 @@
 ﻿using Clinica2._0.Clinica.DTO;
+using Clinica2._0.Core.Clinica.DTO;
+using Clinica2._0.Core.Clinica.Models;
+using Clinica2._0.Core.Clinica.Repositories.Interfaces;
 using Clinica2._0.Data;
 using Clinica2._0.DTO;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
@@ -21,13 +24,15 @@ namespace Clinica2._0.Controllers
         private readonly IUtilRepository _utilrepository;
         private readonly ICronogramaRepository _cronogramarepository;
         private readonly IMedicoRepository _medicorepository;
+        private readonly IOrdenRepository _ordenRepository;
 
         public CitaController(ClinicaServiceContext clinicaService,
             ICitaRepository repository, 
             IUtilRepository utilRepository, 
             IPacienteRepository pacienterepository,
             ICronogramaRepository cronogramaRepository,
-            IMedicoRepository medicoRepository)
+            IMedicoRepository medicoRepository,
+            IOrdenRepository ordenrepository)
         {
             _citarepository = repository;
             _context = clinicaService;
@@ -35,6 +40,7 @@ namespace Clinica2._0.Controllers
             _pacienteRepository = pacienterepository;
             _cronogramarepository = cronogramaRepository;
             _medicorepository = medicoRepository;
+            _ordenRepository = ordenrepository;
         }
 
         // GET: Cita
@@ -140,8 +146,8 @@ namespace Clinica2._0.Controllers
         [HttpGet]
         public async Task<IActionResult> Reprogramar(ParametrosCitaDTO parametros)
         {
-            CitaDTO cita = await _citarepository.GetById(parametros.idcita);
-            await _citarepository.ReprogramarCupo(parametros.idpaciente, cita, parametros.idcitaactual);
+            CitaDTO cita = await _citarepository.GetById(parametros.idcitaactual);
+            await _citarepository.ReprogramarCupo(parametros.idpaciente, cita, parametros.idcita);
             return RedirectToAction("Edit");
         }
 
@@ -250,13 +256,18 @@ namespace Clinica2._0.Controllers
             return RedirectToAction("AdmicionMedico", "Paciente");
         }
 
-        public async Task<IActionResult> RegistroCita(int idmedico, int idespecialidad, string fecha)
+        public async Task<IActionResult> RegistroCita(int? idmedico, int? idespecialidad, string fecha)
         {
             if (idmedico != 0 && idespecialidad != 0 && fecha != null)
             {
-                HttpContext.Session.SetInt32("idmedico", idmedico);
-                HttpContext.Session.SetInt32("idespecialidad", idespecialidad);
+                HttpContext.Session.SetInt32("idmedico", Convert.ToInt32(idmedico));
+                HttpContext.Session.SetInt32("idespecialidad", Convert.ToInt32(idespecialidad));
                 HttpContext.Session.SetString("fecha", fecha);
+            } else
+            {
+                idmedico = HttpContext.Session.GetInt32("idmedico");
+                idespecialidad = HttpContext.Session.GetInt32("idespecialidad");
+                fecha = HttpContext.Session.GetString("fecha");
             }
 
             var lespecialidads = new Object();
@@ -265,13 +276,14 @@ namespace Clinica2._0.Controllers
 
             var medico = await _medicorepository.GetMedicos();
             ViewBag.listamedicos = medico;
-            List<CitaDTO> cita = await _citarepository.GetAllCitas(idmedico, idespecialidad, fecha);
+            List<CitaDTO> cita = await _citarepository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha);
             return View(cita);
         }
 
-        public IActionResult ConfirmacionReprogramacion()
+        public async Task<IActionResult> ConfirmacionReprogramacion(int id)
         {
-            return PartialView();
+            CitaDTO cita = await _citarepository.GetById(id);
+            return PartialView(cita);
         }
 
         public async Task<IActionResult> BuscarPaciente()
@@ -290,6 +302,33 @@ namespace Clinica2._0.Controllers
         {
             var personaDTO = await _pacienteRepository.GetByDnioNombresyApellidos(dni, "", "");
             return View(personaDTO);
+        }
+
+        public async Task<IActionResult> OrdenAtencion()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OrdenAtencion(OrdenDTO modelo)
+        {
+            OrdenDTO dto = await _ordenRepository.AddOrden(modelo, 0);
+            HttpContext.Session.SetInt32("orden", dto.idorden);
+            return PartialView(dto);
+        }
+
+        public async Task<IActionResult> DetalleLaboratorio()
+        {
+            List<LABORATORIO> data = await _utilrepository.getLaboratorio();
+            return PartialView(data);
+        }
+
+        public async Task<IActionResult> SeleccionarLaboratorio(int id)
+        {
+            int idorden = Convert.ToInt32(HttpContext.Session.GetInt32("orden"));
+            LABORATORIO lab = await _utilrepository.getLab(id);
+            await _ordenRepository.AddDetalleOrden(idorden,lab);
+            return RedirectToAction("OrdenAtencion");
         }
     }
 }

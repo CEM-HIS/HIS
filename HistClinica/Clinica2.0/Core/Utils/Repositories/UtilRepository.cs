@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Clinica2._0.Core.Clinica.Models;
 
 namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 {
@@ -107,5 +108,25 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 		{
 			return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
 		}
-	}
+
+        public async Task<PLAN_SALUD> getPlan(string numero)
+        {
+            PLAN_SALUD plan = await (from p in _context.PLAN_SALUD
+                                     where p.codigoPlanSalud.Contains(numero)
+                                     select p).FirstOrDefaultAsync();
+            return plan;
+        }
+
+        public async Task<List<LABORATORIO>> getLaboratorio()
+        {
+            List<LABORATORIO> data = await (from p in _context.LABORATORIO select p).ToListAsync();
+            return data;
+        }
+
+        public async Task<LABORATORIO> getLab(int id)
+        {
+            LABORATORIO dato = await (from p in _context.LABORATORIO where p.idLaboratorio == id select p).FirstOrDefaultAsync();
+            return dato;
+        }
+    }
 }

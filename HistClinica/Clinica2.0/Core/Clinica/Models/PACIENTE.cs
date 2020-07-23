@@ -58,5 +58,8 @@ namespace Clinica2._0.Models
 		public int? idEstado { get; set; }
 		public string fechaBaja { get; set; }
 		public string cuenta { get; set; }
+		public string nroorden { get; set; }
+
+		public string codigoPlanSalud { get; set; }
 	}
 }

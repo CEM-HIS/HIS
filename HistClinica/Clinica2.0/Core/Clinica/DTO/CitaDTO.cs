@@ -53,6 +53,9 @@ namespace Clinica2._0.DTO
         public string observacionAfiliacion { get; set; }
         public int? idconsultorio { get; set; }
         public string horaregistro { get; set; }
+        public string numeroorden { get; set; }
+        public string cuenta { get; set; }
+        public string numeroHc { get; set; }
 
     }
 }

@@ -33,6 +33,8 @@ namespace Clinica2._0.Models
 		public DateTime? fechaBaja { get; set; }
 		public string observacion { get; set; }
 		public string observacionAfiliacion { get; set; }
+
+		public string cuenta { get; set; }
 		public string horaregistro { get; set; }
 		public string nroorden { get; set; }
 	}

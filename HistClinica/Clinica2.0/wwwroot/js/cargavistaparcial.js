@@ -325,6 +325,17 @@ $(document).on('change', '#idmedico', function (event) {
 
 });
 
+$(document).on('click', '#consultacronogrid #btnseleccionar', function (event) {
+	var $row = $(this).closest("tr");    // Find the row
+	var idespecialidad = $row.find(".especialidad").text();
+	var idmedico = $row.find(".idmedico").text();
+	var medico = $row.find(".medico").text();// Find the text
+	$("#idespecialidad").val(idespecialidad);
+	$("#idmedicocro").val(idmedico);
+	$("#medico").val(medico);
+	$('#modalconsultar').modal('hide');
+});
+
 $(document).on('click', '#citareprogrid #reprogramar', function (event) {
 
 	var id = $(this).closest("tr").find("td").eq(0).html();
@@ -339,6 +350,9 @@ $(document).on('click', '#citareprogrid #reprogramar', function (event) {
 		success: function (response) {
 			$('#modalreprogramar').html(response);
 			$('#modalreprogramar').modal('show');
+			$('#idcita').val(id);
+			$("#idpaciente").val(idpaciente);
+			cargarModalConfirmacion(id);
 		},
 		failure: function (response) {
 			alert(response.responseText);
@@ -363,6 +377,8 @@ $(document).on('change', '#cboafilia', function (event) {
 });
 function BuscarCita() {
 	var id = "0";
+	var idpaciente = $("#idpaciente").val();
+	var idcitaactual = $("#idcita").val();
 	var idmedico = $("#idmedicocit").val();
 	var idespecialidad = $("#espe option:selected").val();
 	var fechas = $("#fechacita").val();
@@ -375,6 +391,8 @@ function BuscarCita() {
 		success: function (response) {
 			$('#modalreprogramar').html(response);
 			$('#modalreprogramar').modal('show');
+			$("#idpaciente").val(idpaciente);
+			$("#idcita").val(idcitaactual);
 			$.validator.unobtrusive.parse("#frmeditcita");
 		},
 		failure: function (response) {
@@ -450,11 +468,11 @@ function cargarModalCrearLicencia() {
 		});
 }
 
-function cargarModalConfirmacion() {
+function cargarModalConfirmacion(id) {
 	$.ajax({
 		type: "GET",
 		url: "/Cita/ConfirmacionReprogramacion",
-		//data: { id: id },
+		data: { id: id },
 		contentType: "application/json; charset=utf-8",
 		dataType: "html",
 		success: function (response) {
@@ -601,6 +619,25 @@ function FiltroCronogramaMedEsp() {
 	});
 }
 
+function OpenModalOrdenes() {
+	$.ajax({
+		type: "GET",
+		url: "/Cita/OrdenAtencion",
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalordenes').html(response);
+			$('#modalordenes').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
 function FiltroCronogramaMedEspPost() {
 	var idespecialidad = $("#especialidad option:selected").val();
 	var nombre = $("#nombremedico").val();
@@ -635,9 +672,59 @@ function BuscarPaciente() {
 		success: function (response) {
 			console.log(response);
 			$('#nombrepaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
+			$('#historiac').val(response.paciente.numeroHc);
+			$('#cuenta').val(response.paciente.cuenta);
+			$('#nrorden').val(response.paciente.numeroorden);
 			console.log(response.paciente.idPaciente);
 			$('#idpaciente').val(response.paciente.idPaciente);
 
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
+function BuscarPacienteHC() {
+	var id = $('#historia').val();
+	$.ajax({
+		type: "GET",
+		url: "/Paciente/GetByHC",
+		data: { historia: id },
+		contentType: "application/json; charset=utf-8",
+		dataType: "Json",
+		success: function (response) {
+			console.log(response);
+			$('#nombrePaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
+			$('#plan').val(response.paciente.numeroPlan);
+			$('#contrato').val(response.paciente.numeroContrato);
+			$('#aseguradora').val(response.paciente.aseguradora);
+			$('#contratante').val(response.paciente.contratante);
+			$('#idPaciente').val(response.paciente.idPaciente);
+			$('#cuenta').val(response.paciente.cuenta);
+
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
+function ConsultarLaboratorio() {
+	$.ajax({
+		type: "GET",
+		url: "/Cita/DetalleLaboratorio",
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modallaboratorio').html(response);
+			$('#modallaboratorio').modal('show');
 		},
 		failure: function (response) {
 			alert(response.responseText);

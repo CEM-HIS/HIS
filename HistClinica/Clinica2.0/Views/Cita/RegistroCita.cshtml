@@ -28,7 +28,7 @@
 						CAJA
 					</button>
 					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"> <i class="far fa-clock"></i> CITA</button>
-					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="fas fa-flask"></i> LAB</button>
+					<a style="font-weight:bold; color:white;" onclick="OpenModalOrdenes();" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="fas fa-flask"></i> LAB</a>
 					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="far fa-image"></i> IMA</button>
 					@*	<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" style="display:none" id="Crear"><i class="fas fa-user-check"></i>Listado Paciente</button> *@
 					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt- ml-1" id="Crear"><i class="fas fa-clinic-medical"></i> INTER</button>
@@ -40,19 +40,19 @@
 				<div class="row pb-2">
 					<div class="col-sm-3">
 						<div class="row">
-							<div class="col-sm-11">
+							<div class="col-sm-10">
 								<div class="input-style">
 									<label class="form-label">Medico</label>
-
-									@Html.DropDownList("idmedico", new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccionar", new
-									{
-								   @class = "form-control",
-								   data_cascade_combo = "#stypes",
-								   data_cascade_combo_source = Url.Action("GetEspecialidad", "Cronograma"),
-								   data_cascade_combo_param_name = "id"
-							   })
+									<input type="hidden" name="idmedico" id="idmedicocro" />
+									<input type="text" class="form-control" id="medico" />
 									<span class="field-validation-valid text-danger" data-valmsg-for="idMedico" data-valmsg-replace="true"></span>
 								</div>
+							</div>
+							<div class="col-sm-2 text-right">
+								<div class="input-style">
+									<a onclick="FiltroCronogramaMedEsp();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -61,7 +61,7 @@
 							<div class="col-sm-11">
 								<div class="input-style">
 									<label class="form-label">Especialidad</label>
-									@Html.DropDownList("idespecialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "stypes" })
+									@Html.DropDownList("idespecialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "idespecialidad" })
 									<span class="field-validation-valid text-danger" data-valmsg-for="idEspecialidad" data-valmsg-replace="true"></span>
 								</div>
 							</div>
@@ -121,12 +121,12 @@
 									<td>@item.hora</td>
 									<td nowrap>@item.Medico</td>
 									<td>@item.CMP</td>
-									<td></td>
+									<td>@item.numeroHc</td>
 									<td>@item.nombrePaciente</td>
 									<td>@item.estadoPago</td>
 									<td>@item.horaregistro</td>
-									<td></td>
-									<td></td>
+									<td>@item.cuenta</td>
+									<td>@item.numeroorden</td>
 									<td>@item.consultorio</td>
 									<td></td>
 									<td>
@@ -141,1354 +141,242 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+</div>
+
+
+<div class="modal fade" id="buscarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document" style="max-width: 50%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Paciente SITEDS</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<div class="modal-body">
+				<div class="col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active text-center" data-toggle="tab" href="#tabs-1" role="tab" style="font-size: 16px;font-weight:500;">Cobertura servicios</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-center" data-toggle="tab" href="#tabs-2" role="tab" style="font-size: 16px;font-weight:500;"> Contacto Seguro/empresa</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-center" data-toggle="tab" href="#tabs-3" role="tab" style="font-size: 16px;font-weight:500;">Plan Paciente</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-center" data-toggle="tab" href="#tabs-4" role="tab" style="font-size: 16px;font-weight:500;">Documentos</a>
+						</li>
+					</ul><!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="tabs-1" role="tabpanel">
+							<div class="col-sm-12">
+								<div class="col-sm-12 mt-2">
 
-		</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<label>SITEDS</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Estado Seg.</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
 
-
-		<div class="modal fade" id="buscarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document" style="max-width: 50%;">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Paciente SITEDS</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="col-sm-12">
-							<ul class="nav nav-tabs" role="tablist">
-								<li class="nav-item">
-									<a class="nav-link active text-center" data-toggle="tab" href="#tabs-1" role="tab" style="font-size: 16px;font-weight:500;">Cobertura servicios</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-center" data-toggle="tab" href="#tabs-2" role="tab" style="font-size: 16px;font-weight:500;"> Contacto Seguro/empresa</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-center" data-toggle="tab" href="#tabs-3" role="tab" style="font-size: 16px;font-weight:500;">Plan Paciente</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-center" data-toggle="tab" href="#tabs-4" role="tab" style="font-size: 16px;font-weight:500;">Documentos</a>
-								</li>
-							</ul><!-- Tab panes -->
-							<div class="tab-content">
-								<div class="tab-pane active" id="tabs-1" role="tabpanel">
-									<div class="col-sm-12">
-										<div class="col-sm-12 mt-2">
-
-											<div class="row">
-												<div class="col-sm-6">
-													<label>SITEDS</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Estado Seg.</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-
-												<div class="col-sm-6">
-													<label>Cod Aseg.</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Fecha Vige.</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>N° Placa</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Poliza</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-12">
-													<label>Beneficio</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Parentesco</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>% Cob.</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-											</div>
-
+										<div class="col-sm-6">
+											<label>Cod Aseg.</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Fecha Vige.</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>N° Placa</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Poliza</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-12">
+											<label>Beneficio</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Parentesco</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>% Cob.</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
 										</div>
 									</div>
+
 								</div>
-								<div class="tab-pane" id="tabs-2" role="tabpanel">
-									<div class="col-sm-12">
+							</div>
+						</div>
+						<div class="tab-pane" id="tabs-2" role="tabpanel">
+							<div class="col-sm-12">
+								<div class="col-sm-12 mt-2">
+
+									<div class="row">
+										<div class="col-sm-12">
+											<label>Ejecutivo</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Teléfono</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+
+										<div class="col-sm-6">
+											<label>Cod llam.</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+
 										<div class="col-sm-12 mt-2">
-
 											<div class="row">
-												<div class="col-sm-12">
-													<label>Ejecutivo</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
+												<div class="col-sm-6"><p>Gen. fecha y hora</p></div>
 												<div class="col-sm-6">
-													<label>Teléfono</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+													<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+													<label class="form-check-label" for="exampleRadios1">
+														<span>13/05/2020 - 5:58pm</span>
+
+													</label>
 												</div>
-
-												<div class="col-sm-6">
-													<label>Cod llam.</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-
-												<div class="col-sm-12 mt-2">
-													<div class="row">
-														<div class="col-sm-6"><p>Gen. fecha y hora</p></div>
-														<div class="col-sm-6">
-															<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
-															<label class="form-check-label" for="exampleRadios1">
-																<span>13/05/2020 - 5:58pm</span>
-
-															</label>
-														</div>
-													</div>
-
-
-
-
-												</div>
-
-
 											</div>
 
+
+
+
 										</div>
+
+
 									</div>
+
 								</div>
-								<div class="tab-pane" id="tabs-3" role="tabpanel">
-									<div class="col-sm-12">
-										<div class="col-sm-12 mt-2">
+							</div>
+						</div>
+						<div class="tab-pane" id="tabs-3" role="tabpanel">
+							<div class="col-sm-12">
+								<div class="col-sm-12 mt-2">
 
-											<div class="row">
-
-
-
-
+									<div class="row">
 
 
 
-												<div class="col-sm-6">
-													<label>Tipo Paciente</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Mec. Pago</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Aseguradora</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Contratante</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Deducible</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Coaseguro:</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-											</div>
 
+
+
+
+										<div class="col-sm-6">
+											<label>Tipo Paciente</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Mec. Pago</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Aseguradora</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Contratante</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Deducible</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Coaseguro:</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
 										</div>
 									</div>
+
 								</div>
-								<div class="tab-pane" id="tabs-4" role="tabpanel">
-									<div class="col-sm-12">
+							</div>
+						</div>
+						<div class="tab-pane" id="tabs-4" role="tabpanel">
+							<div class="col-sm-12">
+								<div class="col-sm-12 mt-2">
+
+									<div class="row">
+										<div class="col-sm-6">
+											<label>Tipo documento</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>N° documento.</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+
+										<div class="col-sm-12">
+											<label>Ejecutivo</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Monto S/</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
+										<div class="col-sm-6">
+											<label>Total S/</label>
+											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										</div>
 										<div class="col-sm-12 mt-2">
-
 											<div class="row">
+												<div class="col-sm-6"><p>Gen. fecha y hora</p></div>
 												<div class="col-sm-6">
-													<label>Tipo documento</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>N° documento.</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
+													<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+													<label class="form-check-label" for="exampleRadios1">
+														<span>13/05/2020 - 5:58pm</span>
 
-												<div class="col-sm-12">
-													<label>Ejecutivo</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Monto S/</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-6">
-													<label>Total S/</label>
-													<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-												</div>
-												<div class="col-sm-12 mt-2">
-													<div class="row">
-														<div class="col-sm-6"><p>Gen. fecha y hora</p></div>
-														<div class="col-sm-6">
-															<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
-															<label class="form-check-label" for="exampleRadios1">
-																<span>13/05/2020 - 5:58pm</span>
-
-															</label>
-														</div>
-													</div>
-
-
-
-
+													</label>
 												</div>
 											</div>
 
+
+
+
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
 				</div>
 			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
 		</div>
-
-		<div class="modal fade" id="modalreprogramar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-
-		</div>
-		<div id="modalanular" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-		</div>
-		<div id="modalconfirmacion" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-		</div>
-
-		<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="col-sm-12" style="padding: 2rem;">
-							<div class="layout-content">
-								<div class="layout-content-body">
-									<div class="col-sm-12" id="formpaciente">
-										<div class="col-sm-12 text-center pt-2 pb-4 card-height">
-											<br>
-											<div class="card card-primary card-his">
-												<div class="card-header card-shadow">
-													<h1>Registro de Citas</h1>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-12">
-											<div class="card">
-												<div class="card-body">
-													<h1></h1>
-
-													<div class="row">
-														<div class="col-sm-4">
-															<div class="col-sm-12">
-																<div class="row">
-																	<div class="col-sm-12">
-
-
-																		<div class="form-check-inline">
-																			<div class="row">
-																				<div class="col-sm-6">
-																					<label for="cboparentesco2"></label>
-																				</div>
-
-																				<select class="form-control small-input"
-																						id="paciente_idParentescoCompa_ia"
-																						name="paciente.idParentescoCompañia">
-																					<option value="">Seleccione una Opcion</option>
-																					<option value="40">DNI</option>
-																					<option value="41">PASAPORTE</option>
-																					<option value="41">CON HISTORIA</option>
-
-																				</select>
-
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-sm-12">
-											<a data-toggle="collapse"
-											   href="#collapseacom2"
-											   role="button"
-											   aria-expanded="false"
-											   aria-controls="collapseacom">
-												<div class="card card-primary">
-													<div class="card-header">
-														<div class="row">
-															<div class="col-sm-6 card-title">
-																<h3>Medico</h3>
-															</div>
-															<div class="col-sm-6 text-right">
-																<i style="font-size: 30px;"
-																   class="fas fa-plus fx-5"></i>
-															</div>
-														</div>
-													</div>
-												</div>
-											</a>
-											<div class="card">
-												<div class="collapse multi-collapse"
-													 id="collapseacom2">
-													<div class="card-body">
-														<div class="row mb-12-inline">
-															<div class="row">
-																<div class="col-sm-12">
-																	<div class="btn-group" style="padding-left: 49rem;" class="fa-pull-right">
-																		<button type="button" class="btn btn-primary" onclick="alerta()">Grabar</button>
-
-																		<button onclick="alerta1()" type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-																	</div>
-																	<br>
-
-																	<div class="row">
-																		<div class="col-sm-6" style="padding-left: 2.5rem;">
-																			<input type="text"
-																				   class="form-control"
-																				   placeholder="Buscar" />
-																		</div>
-																	</div>
-																	<br>
-																	<br>
-
-																</div>
-
-															</div>
-															<div class="col-sm-12">
-
-																<div class="row">
-																	<div class="col-sm-12" style="padding-left: 2rem;">
-																		<label for="cbotipdocacom"><h2>Medico:</h2></label>
-																		<label for="cbotipdocacom">
-																			<h1>00050 Fredy Flores Yaricua</h1>
-																		</label>
-																	</div>
-
-																	<div class="col-sm-12">
-																		<div class="container">
-																			<div class="row">
-																				<div class="col-sm-4">
-																					<div class="row">
-																						<div class="col-sm-12">
-																							<div class="
-                                                          <div class="form-group">
-                                                            <input
-                                                              class="form-control"
-                                                              data-val="true"
-                                                              data-val-required="Seleccione la fecha de inicio"
-                                                              id="fechaIni"
-                                                              name="fechaIni"
-                                                              type="Date"
-                                                              value=""
-                                                            />
-                                                            <span
-                                                              class="field-validation-valid text-danger"
-                                                              data-valmsg-for="fechaIni"
-                                                              data-valmsg-replace="true"
-                                                            ></span>
-                                                          </div>
-                                                        </div>
-																						</div>
-																					</div>
-
-																					<div class="col-sm-4">
-																						<div class="form-group">
-																							<div class="input-group date"
-																								 id="datetimepicker1">
-																								<input type="text"
-																									   class="form-control"
-																									   placeholder="Hora" />
-																								<span class="input-group-addon">
-																									<span class="glyphicon glyphicon-calendar"></span>
-																								</span>
-																							</div>
-																						</div>
-																					</div>
-																					<div class="col-sm-4">
-																						<div class="form-group">
-																							<div class="input-group date">
-																								<input type="text"
-																									   class="form-control"
-																									   placeholder="Consultorio 001" />
-																								<span class="input-group-addon">
-																									<span class="glyphicon glyphicon-calendar"></span>
-																								</span>
-																							</div>
-																						</div>
-																					</div>
-
-																					<hr />
-																				</div>
-																			</div>
-																			<div class="container">
-																				<div class="row " style=" border-top: 0.1rem solid #ced4da;padding-top: 1.5rem;" ">
-
-																					<div class="col-sm-4">
-
-																						<div class="form-group">
-																							<div class="input-group date"
-																								 id="datetimepicker1">
-																								<input type="text"
-																									   class="form-control"
-																									   placeholder="N° Historia" />
-																								<span class="input-group-addon">
-																									<span class="glyphicon glyphicon-calendar"></span>
-																								</span>
-																							</div>
-																						</div>
-																					</div>
-
-																					<div class="col-sm-4">
-																						<div class="form-group">
-																							<div class="input-group date"
-																								 id="datetimepicker1">
-																								<input type="text"
-																									   class="form-control"
-																									   placeholder="N° Cuenta" />
-																								<span class="input-group-addon">
-																									<span class="glyphicon glyphicon-calendar"></span>
-																								</span>
-																							</div>
-																						</div>
-																					</div>
-																					<div class="col-sm-4">
-																						<div class="form-group">
-																							<div class="input-group date">
-																								<input type="text"
-																									   class="form-control"
-																									   placeholder="N° Orden 001" />
-																								<span class="input-group-addon">
-																									<span class="glyphicon glyphicon-calendar"></span>
-																								</span>
-																							</div>
-																						</div>
-																					</div>
-
-																				</div>
-																			</div>
-
-
-																			<div class="container">
-																				<div class="row">
-																					<div class="col-sm-8">
-																						<div class="form-group">
-																							<div class="input-group date"
-																								 id="datetimepicker1">
-																								<input type="text"
-																									   class="form-control"
-																									   placeholder="Paciente" />
-																								<span class="input-group-addon">
-																									<span class="glyphicon glyphicon-calendar"></span>
-																								</span>
-																							</div>
-																						</div>
-																					</div>
-
-
-																					<div class="col-sm-4">
-																						<select class="form-control"
-																								id="paciente_idParentescoAcompa_ante"
-																								name="paciente.idParentescoAcompañante">
-																							<option value="">
-																								Tipo de Citado
-																							</option>
-																							<option value="40">
-																								Continuador
-																							</option>
-																							<option value="40">
-																								Interconsulta
-																							</option>
-																							<option value="41">
-																								Nuevo
-																							</option>
-																							<option value="41">
-																								Reingreso
-																							</option>
-																						</select>
-																					</div>
-																					<div class="col-sm-12">
-																						<textarea class="form-control" rows="3" placeholder="Observacion"></textarea>
-																						<br>
-
-
-																						<textarea class="form-control" rows="3" placeholder=" Observacion Filacion Paciente"></textarea>
-																					</div>
-
-
-
-																				</div>
-
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-
-
-												<div class="col-sm-12">
-													<a data-toggle="collapse"
-													   href="#collapseaTipoPaciente"
-													   role="button"
-													   aria-expanded="false"
-													   aria-controls="collapseacom">
-														<div class="card card-primary">
-															<div class="card-header">
-																<div class="row">
-																	<div class="col-sm-6 card-title">
-																		<h3>Tipo de Paciente</h3>
-																	</div>
-																	<div class="col-sm-6 text-right">
-																		<i style="font-size: 30px;"
-																		   class="fas fa-plus fx-5"></i>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</a>
-													<div class="card">
-														<div class="collapse multi-collapse"
-															 id="collapseaTipoPaciente">
-															<div class="card-body">
-																<div class="row mb-12-inline">
-																	<div class="col-sm-12">
-																		<div class="row">
-																			<div class="col-sm-12">
-																				<di class="container">
-																					<div class="row">
-																						<div class="form-group" style="padding-left: 2rem;">
-																							<div class="form-check-inline">
-																								<input class="form-check-input"
-																									   type="radio"
-																									   name="exampleRadios"
-																									   id="exampleRadios1"
-																									   value="option1"
-																									   checked />
-																								<label class="form-check-label"
-																									   for="exampleRadios1">
-																									Particular
-																								</label>
-																							</div>
-																							<div class="form-check-inline">
-																								<input class="form-check-input"
-																									   type="radio"
-																									   name="exampleRadios"
-																									   id="exampleRadios2"
-																									   value="option2" />
-																								<label class="form-check-label"
-																									   for="exampleRadios2">
-																									Asegurado/Convenio
-																								</label>
-																							</div>
-																						</div>
-																					</div>
-																				</di>
-																				<div class="container">
-																					<div class="row">
-																						<div class="col-sm-4">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Codigo Plan" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-
-																						<div class="col-sm-4">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="N° Contrato" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																						<div class="col-sm-4">
-																							<select class="form-control"
-																									id="paciente_idParentescoAcompa_ante"
-																									name="paciente.idParentescoAcompañante">
-																								<option value="">
-																									Moneda
-																								</option>
-																								<option value="40">
-																									soles
-																								</option>
-																								<option value="41">
-																									Dolares
-																								</option>
-																								<option value="41">
-																									Euros
-																								</option>
-																							</select>
-																						</div>
-																					</div>
-																				</div>
-																				<div class="container">
-																					<div class="row">
-																						<div class="col-sm-8">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Aseguradora" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-
-																						<div class="col-sm-4">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Deducible" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-
-																				<div class="container">
-																					<div class="row">
-																						<div class="col-sm-8">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Contratante" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-
-																						<div class="col-sm-4">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="CoaSeguro" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																				<div class="container">
-																					<div class="row">
-																						<div class="col-sm-8">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Tarifa" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-
-																						<div class="col-sm-4">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Consulta General" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-
-																				<div class="container">
-																					<div class="row">
-																						<div class="col-sm-2">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Sub Total" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																						<div class="col-sm-2">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="IGV" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																						<div class="col-sm-2">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Total" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																						<div class="col-sm-2">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Tot Seguro" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																						<div class="col-sm-2">
-																							<div class="form-group">
-																								<div class="input-group date"
-																									 id="datetimepicker1">
-																									<input type="text"
-																										   class="form-control"
-																										   placeholder="Tot Paciente" />
-																									<span class="input-group-addon">
-																										<span class="glyphicon glyphicon-calendar"></span>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-sm-12">
-													<div class="row">
-														<div class="col-sm-6">
-															<div class="row">
-																<div class="col-md-12">
-																	<a data-toggle="collapse"
-																	   href="#collapseaFechaVigencia"
-																	   role="button"
-																	   aria-expanded="false"
-																	   aria-controls="collapseacom">
-																		<div class="card card-primary">
-																			<div class="card-header">
-																				<div class="row">
-																					<div class="col-sm-6 card-title">
-																						<h3>Fecha de Vigencias</h3>
-																					</div>
-																					<div class="col-sm-6 text-right">
-																						<i style="font-size: 30px;"
-																						   class="fas fa-plus fx-5"></i>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</a>
-																	<div class="card">
-																		<div class="collapse multi-collapse"
-																			 id="collapseaFechaVigencia">
-																			<div class="card-body">
-																				<div class="row mb-12-inline">
-																					<div class="col-sm-12">
-																						<div class="row">
-																							<div class="col-sm-12">
-																								<div class="container">
-																									<div class="row">
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="Fecha Inicio" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="Fecha Caducidad" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-
-																									</div>
-																								</div>
-																								<div class="container">
-																									<div class="row">
-																										<div class="col-sm-12">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="Carta de Garantia" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-
-
-																									</div>
-																									<div class="row">
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="Fecha Garantia" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="Cobertura" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-																									</div>
-
-																								</div>
-
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="col-sm-6">
-															<div class="row">
-																<div class="col-md-12">
-																	<a data-toggle="collapse"
-																	   href="#collapseaFactura"
-																	   role="button"
-																	   aria-expanded="false"
-																	   aria-controls="collapseacom">
-																		<div class="card card-primary">
-																			<div class="card-header">
-																				<div class="row">
-																					<div class="col-sm-6 card-title">
-																						<h3>Factura - [Electronica]</h3>
-																					</div>
-																					<div class="col-sm-6 text-right">
-																						<i style="font-size: 30px;"
-																						   class="fas fa-plus fx-5"></i>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</a>
-																	<div class="card">
-																		<div class="collapse multi-collapse"
-																			 id="collapseaFactura">
-																			<div class="card-body">
-																				<div class="row mb-12-inline">
-																					<div class="col-sm-12">
-																						<div class="row">
-																							<div class="col-sm-12">
-																								<div class="container">
-																									<div class="row">
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="Autorizacion" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="Cod Asegurado" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-
-																									</div>
-																								</div>
-																								<div class="container">
-
-																									<div class="row">
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="N° Atencion" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-
-																										<div class="col-sm-6">
-																											<div class="form-group">
-																												<div class="input-group date"
-																													 id="datetimepicker1">
-																													<input type="text"
-																														   class="form-control"
-																														   placeholder="N° Item" />
-																													<span class="input-group-addon">
-																														<span class="glyphicon glyphicon-calendar"></span>
-																													</span>
-																												</div>
-																											</div>
-																										</div>
-																									</div>
-																								</div>
-
-																							</div>
-
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-
-
-
-												<div class="card">
-													<div class="multi-collapse collapse show" id="collapseacom">
-
-													</div>
-												</div>
-
-
-												<div class="col-sm-12"
-													 id="divpacotros"
-													 style="display: none;">
-													<a data-toggle="collapse"
-													   href="#collapseotroscompañia1"
-													   role="button"
-													   aria-expanded="false"
-													   aria-controls="collapseotroscompañia">
-														<div class="card card-primary">
-															<div class="card-header">
-																<div class="row">
-																	<div class="col-sm-6 card-title">
-																		<h4>Otros</h4>
-																	</div>
-																	<div class="col-sm-6 text-right">
-																		<i style="font-size: 30px;"
-																		   class="fas fa-plus fx-5"></i>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</a>
-													<div class="card">
-														<div class="collapse multi-collapse"
-															 id="collapseotroscompañia">
-															<div id="actcompañia"
-																 class="card-body"
-																 style="display: none;">
-																<div class="row pb-2">
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="cobertura">Cobertura</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control small-input"
-																					   id="paciente_coberturaCompa_ia"
-																					   name="paciente.coberturaCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="nroatenmed">Ord. Atencion medica</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control small-input"
-																					   id="paciente_ordenAtencionMedicaCompa_ia"
-																					   name="paciente.ordenAtencionMedicaCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="nomaseg">Nombre de la Aseguradora</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control small-input"
-																					   id="paciente_nombreAseguradoraCompa_ia"
-																					   name="paciente.nombreAseguradoraCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="codaseg">Cod. del asegurado</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control small-input"
-																					   id="paciente_codAseguradoCompa_ia"
-																					   name="paciente.codAseguradoCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="row pb-3">
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="poliza">Poliza</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control small-input"
-																					   id="paciente_polizaCompa_ia"
-																					   name="paciente.polizaCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="cboparentesco2">Parentesco</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<select class="form-control small-input"
-																						id="paciente_idParentescoCompa_ia"
-																						name="paciente.idParentescoCompañia">
-																					<option value="">Seleccione</option>
-																					<option value="40">PADRE</option>
-																					<option value="41">MADRE</option>
-																					<option value="42">HIJO/A</option>
-																					<option value="43">ABUELA/O</option>
-																					<option value="44">TIA/O</option>
-																					<option value="45">NIETA/O</option>
-																					<option value="46">PADRASTRO</option>
-																					<option value="47">MADRASTRA</option>
-																					<option value="48">SOBRINA/O</option>
-																					<option value="49">PRIMA/O</option>
-																					<option value="50">
-																						BIS-ABUELA/O
-																					</option>
-																					<option value="51">AMIGA/O</option>
-																					<option value="52">HERMANA/O</option>
-																					<option value="53">YERNO</option>
-																					<option value="54">NUERA</option>
-																				</select>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="fechinivig">Inicio de vig.</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_inicioVigenciaCompa_ia"
-																					   name="paciente.inicioVigenciaCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="fechfinvig">Fin de vig.</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_finVigenciaCompa_ia"
-																					   name="paciente.finVigenciaCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="tpplansalud">Tip Plan de salud</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_tipoPlanSaludCompa_ia"
-																					   name="paciente.tipoPlanSaludCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="nroplansalud">N° plan de salud</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_numeroPlanSaludCompa_ia"
-																					   name="paciente.numeroPlanSaludCompañia"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3"></div>
-																	<div class="col-sm-3"></div>
-																</div>
-															</div>
-															<div id="actconvenio"
-																 class="card-body"
-																 style="display: none;">
-																<div class="row pb-2">
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="coberturacov">Cobertura</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_coberturaConvenio"
-																					   name="paciente.coberturaConvenio"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="ordatencioncov">Ord. Atencion medica</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_ordenAtencionMedicaConvenio"
-																					   name="paciente.ordenAtencionMedicaConvenio"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="cboparentesco3">Parentesco</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<select class="form-control"
-																						id="paciente_idParentesoConvenio"
-																						name="paciente.idParentesoConvenio">
-																					<option value="">Seleccione</option>
-																					<option value="40">PADRE</option>
-																					<option value="41">MADRE</option>
-																					<option value="42">HIJO/A</option>
-																					<option value="43">ABUELA/O</option>
-																					<option value="44">TIA/O</option>
-																					<option value="45">NIETA/O</option>
-																					<option value="46">PADRASTRO</option>
-																					<option value="47">MADRASTRA</option>
-																					<option value="48">SOBRINA/O</option>
-																					<option value="49">PRIMA/O</option>
-																					<option value="50">
-																						BIS-ABUELA/O
-																					</option>
-																					<option value="51">AMIGA/O</option>
-																					<option value="52">HERMANA/O</option>
-																					<option value="53">YERNO</option>
-																					<option value="54">NUERA</option>
-																				</select>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="fechinicov">Inicio de vig.</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_inicioVigenciaConvenio"
-																					   name="paciente.inicioVigenciaConvenio"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="row pb-3">
-																	<div class="col-sm-3">
-																		<div class="row">
-																			<div class="col-sm-5">
-																				<label for="fechfincov">Fin de vig.</label>
-																			</div>
-																			<div class="col-sm-7">
-																				<input class="form-control"
-																					   id="paciente_finVigenciaConvenio"
-																					   name="paciente.finVigenciaConvenio"
-																					   type="text"
-																					   value="" />
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-sm-3"></div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-
-												<input name="__RequestVerificationToken"
-													   type="hidden"
-													   value="CfDJ8EZArBrd5jZLg1_sLSb7wTBHWC5AuAsvSQFzuXrA0sto5M4e7suxF0Lu4IEvA25GtrWqKoUhPkl6NKdmN1g9owFJYMS6MEEREAOERk3KuG9_reg_WeylFB1vB2L3ExLZekJFQXJLilmFzMC2Iwv0z78" />
-											</div>
-											<script src="/js/Mantenedor_Paciente.js"></script>
-
-											<input type="hidden" id="hdnBaseUrl" value="" />
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<script src="~/js/comboaninado.js"></script>
-				<script src="~/js/cargavistaparcial.js"></script>
-				@section Scripts {
-					@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-				}
+	</div>
+</div>
+
+<div class="modal fade" id="modalreprogramar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+</div>
+<div id="modalanular" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+</div>
+<div id="modalconfirmacion" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+</div>
+<div class="modal fade" id="modalconsultar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="modalordenes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="modallaboratorio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+
+
+<script src="~/js/comboaninado.js"></script>
+<script src="~/js/cargavistaparcial.js"></script>
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
