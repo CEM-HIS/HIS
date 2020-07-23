@@ -54,7 +54,7 @@ namespace Clinica2._0.Data
             #region Tablas de Sesion
             modelBuilder.Entity<IdentityUser>().ToTable("USER", "dbo");
             modelBuilder.Entity<IdentityRole>().ToTable("ROLE", "dbo");
-            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("USER_ROL", "dbo").HasKey(ur => new { ur.UserId, ur.RoleId });
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("USER_ROLE", "dbo").HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("ROL_CLAIM", "dbo");
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("USER_CLAIM", "dbo");
             modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("USER_LOGIN", "dbo").HasKey(ul => new { ul.LoginProvider, ul.ProviderKey });

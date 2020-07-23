@@ -376,11 +376,11 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                         join per in _context.PERSONA on pac.idPersona equals per.idPersona
                                                         where pac.idPaciente == ci.idPaciente
                                                         select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
-                                      idPaciente = (from pac in _context.PACIENTE
-                                                        join ci in _context.CITA on pac.idPaciente equals ci.idPaciente
-                                                        join per in _context.PERSONA on pac.idPersona equals per.idPersona
-                                                        where pac.idPaciente == ci.idPaciente
-                                                        select pac.idPaciente).FirstOrDefault(),
+                                      //idPaciente = (from pac in _context.PACIENTE
+                                      //                  join ci in _context.CITA on pac.idPaciente equals ci.idPaciente
+                                      //                  join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                      //                  where pac.idPaciente == ci.idPaciente
+                                      //                  select pac.idPaciente).FirstOrDefault(),
                                       CMP = (from cm in _context.CRONOGRAMA_MEDICO
                                              join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                              where cm.idProgramMedica == c.idProgramacionMedica

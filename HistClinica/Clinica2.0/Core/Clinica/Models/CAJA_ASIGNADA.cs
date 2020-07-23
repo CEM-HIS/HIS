@@ -9,7 +9,6 @@ namespace Clinica2._0.Models
 {
     public class CAJA_ASIGNADA
     {
-        [Key]
         public int idEmpleado { get; set; }
         public int idCaja { get; set; }
         public string fechaApertura { get; set; }

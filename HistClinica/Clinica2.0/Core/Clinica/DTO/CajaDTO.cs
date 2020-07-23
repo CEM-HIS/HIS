@@ -7,13 +7,28 @@ namespace Clinica2._0.DTO
 {
     public class CajaDTO
     {
-        public int? idEmpleado { get; set; }
-        public string empleado { get; set; }
         public int? idCaja { get; set; }
-        public string fecha { get; set; }
+        public int? idTipo { get; set; }
         public string tipo { get; set; }
-        public string turno { get; set; }
         public string estado { get; set; }
         public int? idEstado { get; set; }
+        #region CAJA ASIGNADA
+        public int idEmpleado { get; set; }
+        public string empleado { get; set; }
+        public string fechaApertura { get; set; }
+        public string horaApertura { get; set; }
+        public string fechaCierre { get; set; }
+        public string horaCierre { get; set; }
+        public string turno { get; set; }
+        public bool? pos { get; set; }
+        public double? montoSolesApertura { get; set; }
+        public double? montoDolaresApertura { get; set; }
+        public double? montoEurosApertura { get; set; }
+        public double? montoSolesCierre { get; set; }
+        public double? montoDolaresCierre { get; set; }
+        public double? montoEurosCierre { get; set; }
+        public string glosaApertura { get; set; }
+        public string glosaCierre { get; set; }
+        #endregion CAJA ASIGNADA
     }
 }

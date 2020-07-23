@@ -139,6 +139,49 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         #region Rol
         #endregion Rol
         #region Perfil
+        public async Task<string> InsertPerfil(PROFILE perfil)
+        {
+            try
+            {
+                await _context.AddAsync(perfil);
+                await Save();
+                return "Perfil Ingresado Exitosamente";
+            }
+            catch (Exception)
+            {
+                return "Error en el ingreso de perfil";                
+            }
+
+        }
+        public async Task<string> UpdatePerfil(PROFILE perfil)
+        {
+            try
+            {
+                _context.Update(perfil);
+                await Save();
+                return "Perfil Actualizdo Exitosamente";
+            }
+            catch (Exception)
+            {
+                return "Error en el actualizacion de perfil";
+            }
+        }
+        public async Task<bool> PerfilExists(int? id)
+        {
+            return await _context.PROFILE.AnyAsync(e => e.idProfile == id);
+        }
+        public async Task DeletePerfil(int? PerfilID)
+        {
+            PROFILE Perfil = await _context.PROFILE.FindAsync(PerfilID);
+            Perfil.idState = 2;
+            _context.Update(Perfil);
+            await Save();
+        }
+        public Task<List<PROFILE>> GetAllProfiles()
+        {
+            return (from pf in _context.PROFILE
+                    select pf).ToListAsync();
+        }
         #endregion Perfil
         #region Modulo
         #endregion Modulo

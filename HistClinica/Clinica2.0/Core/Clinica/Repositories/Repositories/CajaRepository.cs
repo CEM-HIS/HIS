@@ -82,12 +82,23 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             List<CajaDTO> Cajas = await (from c in _context.CAJA
                                 select new CajaDTO()
                                 {
-                                    fecha = "",
+                                    fechaApertura = (from ca in _context.CAJA_ASIGNADA
+                                                     where ca.idCaja == c.idCaja
+                                                     select ca.fechaApertura).FirstOrDefault(),
                                     idCaja = c.idCaja,
-                                    idEmpleado = null,
-                                    empleado = "",
+                                    idEmpleado = (from ca in _context.CAJA_ASIGNADA
+                                                  where ca.idCaja == c.idCaja
+                                                  select ca.idEmpleado).FirstOrDefault(),
+                                    empleado = (from ca in _context.CAJA_ASIGNADA
+                                                join em in _context.EMPLEADO on ca.idEmpleado equals em.idEmpleado
+                                                join p in _context.PERSONA on em.idPersona equals p.idPersona
+                                                where ca.idCaja == c.idCaja
+                                                select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)
+                                                ).FirstOrDefault(),
                                     tipo = "",
-                                    turno = "",
+                                    turno = (from ca in _context.CAJA_ASIGNADA
+                                                          where ca.idCaja == c.idCaja
+                                                          select ca.turno).FirstOrDefault(),
                                     idEstado = c.idEstado,
                                     estado = ""
                                 }
@@ -169,18 +180,54 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                     montoSolesApertura = c.montoSolesApertura,
                                                     montoDolaresApertura = c.montoDolaresApertura,
                                                     montoEurosApertura = c.montoEurosApertura,
+                                                    //Datos de Cierre
                                                     fechaCierre = DateTime.Now.ToShortDateString(),
                                                     horaCierre = DateTime.Now.ToShortTimeString(),
                                                     montoSolesCierre = cajaAsignada.montoSolesCierre,
                                                     montoDolaresCierre = cajaAsignada.montoDolaresCierre,
                                                     montoEurosCierre = cajaAsignada.montoEurosCierre,
-                                                    glosaApertura = cajaAsignada.glosaApertura,
-                                                    glosaCierre = cajaAsignada.glosaCierre
+                                                    glosaCierre = cajaAsignada.glosaCierre,
+                                                    //Datos de Cierre
+                                                    glosaApertura = cajaAsignada.glosaApertura
                                                 }).FirstOrDefaultAsync();
             
             _context.Update(CajaAsignada);
             await Save();
             return "Cierre de caja exitoso";
+        }
+
+        public async Task<List<CajaDTO>> GetAllCajasAsignadas()
+        {
+            List<CajaDTO> Cajas = await (from c in _context.CAJA
+                                        select new CajaDTO()
+                                        {
+                                            fechaApertura = (from ca in _context.CAJA_ASIGNADA
+                                                             where ca.idCaja == c.idCaja
+                                                             select ca.fechaApertura).FirstOrDefault(),
+                                            idCaja = c.idCaja,
+                                            idEmpleado = (from ca in _context.CAJA_ASIGNADA
+                                                          where ca.idCaja == c.idCaja
+                                                          select ca.idEmpleado).FirstOrDefault(),
+                                            empleado = (from ca in _context.CAJA_ASIGNADA
+                                                        join em in _context.EMPLEADO on ca.idEmpleado equals em.idEmpleado
+                                                        join p in _context.PERSONA on em.idPersona equals p.idPersona
+                                                        where ca.idCaja == c.idCaja
+                                                        select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)
+                                                        ).FirstOrDefault(),
+                                            tipo = "",
+                                            turno = (from ca in _context.CAJA_ASIGNADA
+                                                     where ca.idCaja == c.idCaja
+                                                     select ca.turno).FirstOrDefault(),
+                                            idEstado = c.idEstado,
+                                            estado = ""
+                                        }
+                                ).ToListAsync();
+            return Cajas;
+        }
+
+        public Task<List<CajaDTO>> GetCajaAsignadaxUsuario()
+        {
+            throw new NotImplementedException();
         }
     }
 }

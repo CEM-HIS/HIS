@@ -96,7 +96,9 @@ namespace Clinica2._0.Migrations
                     idServicioClinica = table.Column<int>(nullable: true),
                     fechaBaja = table.Column<DateTime>(nullable: true),
                     observacion = table.Column<string>(nullable: true),
-                    observacionAfiliacion = table.Column<string>(nullable: true)
+                    observacionAfiliacion = table.Column<string>(nullable: true),
+                    horaregistro = table.Column<string>(nullable: true),
+                    nroorden = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -301,7 +303,8 @@ namespace Clinica2._0.Migrations
                     hojafiliacion = table.Column<bool>(nullable: true),
                     concienteDato = table.Column<bool>(nullable: true),
                     idEstado = table.Column<int>(nullable: true),
-                    fechaBaja = table.Column<string>(nullable: true)
+                    fechaBaja = table.Column<string>(nullable: true),
+                    cuenta = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -460,7 +463,8 @@ namespace Clinica2._0.Migrations
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     NormalizedName = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -546,7 +550,7 @@ namespace Clinica2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "USER_ROL",
+                name: "USER_ROLE",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -555,7 +559,7 @@ namespace Clinica2._0.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_USER_ROL", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_USER_ROLE", x => new { x.UserId, x.RoleId });
                 });
 
             migrationBuilder.CreateTable(
@@ -655,7 +659,7 @@ namespace Clinica2._0.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "USER_ROL",
+                name: "USER_ROLE",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
