@@ -42,7 +42,13 @@ namespace Clinica2._0.DTO
         public bool? hojafiliacion { get; set; }
         public bool? concienteDato { get; set; }
         public string fechabaja { get; set; }
+        public string cuenta { get; set; }
+        public string numeroorden { get; set; }
+        public string numeroPlan { get; set; }
         public List<CitaDTO> cita { get; set; }
+        public string contratante { get; set; }
+        public string aseguradora { get; set; }
+        public string numeroContrato { get; set; }
 
         #region Ubicacion
         public int? idDepartamentoUbicacion { get; set; }

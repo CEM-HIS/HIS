@@ -1,4 +1,5 @@
-﻿using Clinica2._0.Models;
+﻿using Clinica2._0.Core.Clinica.Models;
+using Clinica2._0.Models;
 using Clinica2._0.Sesion.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,11 @@ namespace Clinica2._0.Data
         public DbSet<LICENCIA> LICENCIA { get; set; }
         public DbSet<CAJA_ASIGNADA> CAJA_ASIGNADA { get; set; }
         public DbSet<PAGO> PAGO { get; set; }
+        public DbSet<PLAN_SALUD> PLAN_SALUD { get; set; }
+        public DbSet<LABORATORIO> LABORATORIO { get; set; }
+
+        public DbSet<ORDEN_ATENCION> ORDEN_ATENCION { get; set; }
+        public DbSet<ORDEN_ATE_DETALLE> ORDEN_ATE_DETALLE { get; set; }
         #endregion Tablas de Clinica
         #region Tablas de Sesion
         public DbSet<USER> USER { get; set; }

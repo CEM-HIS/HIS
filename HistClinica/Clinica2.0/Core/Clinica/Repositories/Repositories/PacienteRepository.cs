@@ -64,7 +64,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 {
                     codigoPaciente = persona.paciente.codigoPaciente,
                     descripcion = persona.paciente.descripcion,
-                    numeroHc = persona.paciente.numeroHc,
+                    numeroHc = string.Format("{0:000000}", idPersona),
                     nombreAcompañante = persona.paciente.NombreAcompañante,
                     edadAcompañante = persona.paciente.edadAcompañante,
                     dniAcompañante = persona.paciente.numeroDocumentoAcompañante,
@@ -111,7 +111,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     idEstado = 1,
                     fechaBaja = persona.paciente.fechabaja,
                     idEstadoSeguro = null,
-                    idTipoPaciente = null
+                    idTipoPaciente = null,
+                    cuenta = string.Format("{0:000001}", idPersona),
+                    nroorden = string.Format("{0:000011}", idPersona),
+                    codigoPlanSalud = persona.paciente.numeroPlan
                 };
                 if (persona.paciente.estadoSeguro != null) Paciente.idEstadoSeguro = (int)persona.paciente.estadoSeguro;
                 if (persona.paciente.idTipoPaciente != null) Paciente.idTipoPaciente = (int)persona.paciente.idTipoPaciente;
@@ -224,7 +227,34 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                          cita = new List<CitaDTO>(),
                                          idTipoPaciente = (from pan in _context.PACIENTE
                                                            where pa.idPersona == p.idPersona
-                                                           select pa.idTipoDocumento).FirstOrDefault()
+                                                           select pa.idTipoDocumento).FirstOrDefault(),
+                                         numeroHc = (from pan in _context.PACIENTE
+                                                     where pa.idPersona == p.idPersona
+                                                     select pa.numeroHc).FirstOrDefault(),
+                                         cuenta = (from pan in _context.PACIENTE
+                                                   where pa.idPersona == p.idPersona
+                                                   select pa.cuenta).FirstOrDefault(),
+                                         numeroorden = (from pan in _context.PACIENTE
+                                                        where pa.idPersona == p.idPersona
+                                                        select pa.nroorden).FirstOrDefault(),
+                                         contratante = (from pac in _context.PACIENTE join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                        join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud where pa.idPersona == p.idPersona
+                                                        select pla.contratante).FirstOrDefault(),
+                                         aseguradora = (from pac in _context.PACIENTE
+                                                        join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                        join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud
+                                                        where pa.idPersona == p.idPersona
+                                                        select pla.asegurado).FirstOrDefault(),
+                                         numeroContrato = (from pac in _context.PACIENTE
+                                                           join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                           join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud
+                                                           where pa.idPersona == p.idPersona
+                                                           select pla.numeroContrato).FirstOrDefault(),
+                                         numeroPlan = (from pac in _context.PACIENTE
+                                                           join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                           join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud
+                                                           where pa.idPersona == p.idPersona
+                                                           select pla.codigoPlanSalud).FirstOrDefault()
                                      }
                                  }).FirstOrDefaultAsync();
                 if (Persona != null)
@@ -419,6 +449,65 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             //{
             //    Persona.paciente.cita[i].especialidad = (from tb in _context.TABLA_DETALLE where tb.idDet == Persona.paciente.cita[i].idEspecialidad select tb.descripcion).FirstOrDefault();
             //}
+            return Persona;
+        }
+
+        public async Task<PersonaDTO> GetByHC(string historia)
+        {
+            PersonaDTO Persona;
+      
+                Persona = await(from p in _context.PERSONA
+                                join pa in _context.PACIENTE on p.idPersona equals pa.idPersona
+                                where pa.numeroHc == historia
+                                select new PersonaDTO
+                                {
+                                    nombres = p.nombres,
+                                    apellidoPaterno = p.apellidoPaterno,
+                                    apellidoMaterno = p.apellidoMaterno,
+                                    numeroDocumento = p.dniPersona,
+                                    correo = p.correo,
+                                    edad = p.edad,
+                                    descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idOcupacion select det.descripcion).FirstOrDefault(),
+                                    paciente = new PacienteDTO()
+                                    {
+                                        idPaciente = (from pa in _context.PACIENTE
+                                                      where pa.idPersona == p.idPersona
+                                                      select pa.idPaciente).FirstOrDefault(),
+                                        cita = new List<CitaDTO>(),
+                                        idTipoPaciente = (from pan in _context.PACIENTE
+                                                          where pa.idPersona == p.idPersona
+                                                          select pa.idTipoDocumento).FirstOrDefault(),
+                                        numeroHc = (from pan in _context.PACIENTE
+                                                    where pa.idPersona == p.idPersona
+                                                    select pa.numeroHc).FirstOrDefault(),
+                                        cuenta = (from pan in _context.PACIENTE
+                                                  where pa.idPersona == p.idPersona
+                                                  select pa.cuenta).FirstOrDefault(),
+                                        numeroorden = (from pan in _context.PACIENTE
+                                                       where pa.idPersona == p.idPersona
+                                                       select pa.nroorden).FirstOrDefault(),
+                                        contratante = (from pac in _context.PACIENTE
+                                                       join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                       join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud
+                                                       where pa.idPersona == p.idPersona
+                                                       select pla.contratante).FirstOrDefault(),
+                                        aseguradora = (from pac in _context.PACIENTE
+                                                       join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                       join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud
+                                                       where pa.idPersona == p.idPersona
+                                                       select pla.asegurado).FirstOrDefault(),
+                                        numeroContrato = (from pac in _context.PACIENTE
+                                                          join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                          join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud
+                                                          where pa.idPersona == p.idPersona
+                                                          select pla.numeroContrato).FirstOrDefault(),
+                                        numeroPlan = (from pac in _context.PACIENTE
+                                                      join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                      join pla in _context.PLAN_SALUD on pac.codigoPlanSalud equals pla.codigoPlanSalud
+                                                      where pa.idPersona == p.idPersona
+                                                      select pla.codigoPlanSalud).FirstOrDefault()
+                                    }
+                                }).FirstOrDefaultAsync();
             return Persona;
         }
     }

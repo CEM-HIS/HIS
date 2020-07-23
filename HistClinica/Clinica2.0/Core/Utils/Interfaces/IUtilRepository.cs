@@ -1,4 +1,5 @@
-﻿using Clinica2._0.Models;
+﻿using Clinica2._0.Core.Clinica.Models;
+using Clinica2._0.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 		//Task<List<CAJA>> getCajas();
 		//Task<List<TABLA_DETALLE>> getServicios();
 		List<Fecha> ObtenerFechaHora(List<CRONOGRAMA_MEDICO> cronograma);
+		Task<PLAN_SALUD> getPlan(string numero);
+		Task<List<LABORATORIO>> getLaboratorio();
+		Task<LABORATORIO> getLab(int id);
 	}
 }

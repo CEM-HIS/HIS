@@ -13,6 +13,8 @@ using Clinica2._0.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Clinica2._0.Core.Clinica.Repositories.Interfaces;
+using Clinica2._0.Core.Clinica.Repositories.Repositories;
 
 namespace Clinica2._0
 {
@@ -43,6 +45,7 @@ namespace Clinica2._0
             services.AddTransient<IDetalleRepository, DetalleRepository>();
             services.AddTransient<IGeneralRepository, GeneralRepository>();
             services.AddTransient<ILicenciaRepository, LicenciaRepository>();
+            services.AddTransient<IOrdenRepository, OrdenRepository>();
             services.AddDbContext<ClinicaServiceContext>(options => options.UseSqlServer(Configuration["Connection:ClinicaServiceConnection"]));
             services.AddDefaultIdentity<USER>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ClinicaServiceContext>();
             services.AddRazorPages();

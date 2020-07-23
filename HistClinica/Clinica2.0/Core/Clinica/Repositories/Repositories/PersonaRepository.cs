@@ -168,7 +168,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             {
                 mensaje = "Error en el guardado " + ex.Message;
             }
-            
             return mensaje;
         }
         public async Task<string> UpdatePersona(PersonaDTO persona)

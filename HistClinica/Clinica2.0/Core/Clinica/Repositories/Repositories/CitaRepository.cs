@@ -307,7 +307,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                  join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                                  where cm.idProgramMedica == c.idProgramacionMedica
                                                  select m.numeroColegio).FirstOrDefault(),
-                                          horaregistro = c.horaregistro
+                                          horaregistro = c.horaregistro,
+                                          numeroorden = c.nroorden,
+                                          cuenta = c.cuenta,
+                                          numeroHc = c.numeroHC
                                       }
                                         ).ToListAsync();
             //return await GetCitas(idmedico, idespecialidad, fecha, Citas);
@@ -382,9 +385,13 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                              join m in _context.MEDICO on cm.idMedico equals m.idMedico
                                              where cm.idProgramMedica == c.idProgramacionMedica
                                              select m.numeroColegio).FirstOrDefault(),
-                                      idPaciente = c.idPaciente,
+                                    //  idPaciente = c.idPaciente,
                                       observacion = c.observacion,
-                                      observacionAfiliacion = c.observacionAfiliacion
+                                      observacionAfiliacion = c.observacionAfiliacion,
+                                      horaregistro = c.horaregistro,
+                                      cuenta = c.cuenta,
+                                      numeroorden = c.nroorden,
+                                      numeroHc = c.numeroHC
                                   }).FirstOrDefaultAsync();
             return Cita;
         }
@@ -435,12 +442,13 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     fechaBaja = null,
                     motivoAnulacion = null,
                     motivoReprogramacion = null,
-                    numeroHC = null,
+                    numeroHC = model.numeroHc,
                     precio = null,
                     prioridad = null,
                     horaregistro = DateTime.Now.ToString("hh:mm:ss"),
-                    nroorden = null
-                };
+                    nroorden = model.numeroorden,
+                    cuenta = model.cuenta
+            };
                 _context.Update(cita);
                 await Save();
                 return "Se registro cita correctamente";
@@ -457,7 +465,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             {
                 CITA nuevacita = new CITA()
                 {
-                    idCita = cita.idCita,
+                    idCita = idcitaactual,
                     idPaciente = cita.idPaciente,
                     fechaCita = DateTime.Parse(cita.fecha + " " + cita.hora),
                     numeroCita = null,
@@ -479,16 +487,17 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     fechaBaja = null,
                     motivoAnulacion = null,
                     motivoReprogramacion = null,
-                    numeroHC = null,
+                    numeroHC = cita.numeroHc,
                     precio = null,
                     prioridad = null,
                     horaregistro = DateTime.Now.ToString("hh:mm:ss"),
-                    nroorden = null
+                    nroorden = cita.numeroorden,
+                    cuenta = cita.cuenta
                 };
                 _context.Update(nuevacita);
                 await Save();
 
-                CitaDTO citaact = await GetById(idcitaactual);
+                CitaDTO citaact = await GetById(cita.idCita);
                 CITA citaactual = new CITA()
                 {
                     idCita = citaact.idCita,
@@ -517,7 +526,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     precio = null,
                     prioridad = null,
                     horaregistro = null,
-                    nroorden = null
+                    nroorden = null,
+                    cuenta = null
                 };
                 _context.Update(citaactual);
                 await Save();

@@ -16,5 +16,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         Task DeletePaciente(int PacienteID);
         Task<bool> PacienteExists(int? id);
         Task Save();
+        Task<PersonaDTO> GetByHC(string historia);
     }
 }

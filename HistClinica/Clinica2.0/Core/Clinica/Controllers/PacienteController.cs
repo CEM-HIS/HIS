@@ -216,6 +216,10 @@ namespace Clinica2._0.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<JsonResult> GetPlan(string numero)
+        {
+            return Json(await _utilrepository.getPlan(numero));
+        }
 
         public IActionResult Pago()
         {
@@ -231,6 +235,10 @@ namespace Clinica2._0.Controllers
             return View();
         }
 
+        public async Task<JsonResult> GetByHC(string historia)
+        {
+            return Json(await _pacienteRepository.GetByHC(historia));
+        }
 
     }
 }
