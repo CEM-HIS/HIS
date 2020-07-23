@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinica2._0.Core.Clinica.DTO
+namespace Clinica2._0.DTO
 {
 	public class OrdenDTO
 	{

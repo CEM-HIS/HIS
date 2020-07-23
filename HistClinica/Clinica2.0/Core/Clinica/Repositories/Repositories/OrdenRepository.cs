@@ -1,4 +1,4 @@
-﻿using Clinica2._0.Core.Clinica.DTO;
+﻿using Clinica2._0.DTO;
 using Clinica2._0.Core.Clinica.Models;
 using Clinica2._0.Core.Clinica.Repositories.Interfaces;
 using Clinica2._0.Data;
@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace Clinica2._0.Core.Clinica.Repositories.Repositories
 {
@@ -25,8 +26,9 @@ namespace Clinica2._0.Core.Clinica.Repositories.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<OrdenDTO> AddOrden(OrdenDTO modelo, int idorden)
+		public async Task<int> AddOrden(OrdenDTO modelo)
 		{
+			int IdOrden;
 			OrdenDTO data = new OrdenDTO();
 			Random rnd = new Random();
 			int nroorden = rnd.Next(1, 100);
@@ -45,11 +47,10 @@ namespace Clinica2._0.Core.Clinica.Repositories.Repositories
 			}
 			catch (Exception ex)
 			{
-			 string msg = ex.Message;
+				string msg = ex.Message;
 			}
-			idorden = (await _context.ORDEN_ATENCION.FirstOrDefaultAsync(o => o.idPaciente == modelo.idPaciente)).idOrden;
-			data = await GetOrden(idorden);
-			return data;
+			IdOrden = (await _context.ORDEN_ATENCION.FirstOrDefaultAsync(m => m.numeroHC == modelo.numeroHC)).idOrden;
+			return IdOrden;
 		}
 
 		public async Task<OrdenDTO> GetOrden(int orden)
@@ -73,6 +74,10 @@ namespace Clinica2._0.Core.Clinica.Repositories.Repositories
 									  idMedico = o.idMedico,
 									  cuenta = pe.cuenta
 								  }).FirstOrDefaultAsync();
+			if (dto != null)
+			{
+				dto.detalleorden = await (from p in _context.ORDEN_ATE_DETALLE where p.nroOrden == dto.numeroorden select p).ToListAsync();
+			}
 			return dto;
 		}
 
