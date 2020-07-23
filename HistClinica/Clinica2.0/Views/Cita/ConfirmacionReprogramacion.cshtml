@@ -1,7 +1,7 @@
 ﻿
 
 @model Clinica2._0.DTO.CitaDTO
-<div class="modal-dialog modal-md" role="document">
+<div class="modal-dialog modal-md" style="max-width: 500px;" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
 			<h2 class="modal-title text-center" id="exampleModalLabel1">Reprogramación</h2>
@@ -11,82 +11,82 @@
 		</div>
 		@using (Html.BeginForm())
 		{
-			<div class="container">
-				<div class="col-sm-12 pt-2 pb-3">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-						<label class="form-check-label" for="inlineRadio1">Cita</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-						<label class="form-check-label" for="inlineRadio2">Procedimiento</label>
-					</div>
-				</div>
-				<div class="col-sm-12 pt-2 pb-3">
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="input-style">
-								<label for="txtNroDocumento" class="form-label">N° Cita</label>
-								@Html.EditorFor(m => m.idCita, new { htmlAttributes = new { @class = "form-control", @type = "text", @disabled="true" } })
-							</div>
-						</div>
-						<div class="col-sm-6">
-
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="input-style">
-								<label for="txtNroDocumento" class="form-label">Paciente</label>
-								@Html.EditorFor(m => m.nombrePaciente, new { htmlAttributes = new { @class = "form-control", @type = "text", @disabled = "true" } })
-							</div>
-						</div>
-						<div class="col-sm-6">
-
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="input-style">
-								<label for="txtNroDocumento" class="form-label">Fecha Cita</label>
-								@Html.EditorFor(m => m.fecha, new { htmlAttributes = new { @class = "form-control", @type = "text", @disabled = "true" } })
-							</div>
-						</div>
-						<div class="col-sm-6">
-
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="input-style">
-								<label for="txtNroDocumento" class="form-label">N° veces</label>
-								<input type="text" name="name" value="" class="form-control" />
-							</div>
-						</div>
-						<div class="col-sm-6">
-
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="input-style">
-								<label for="txtNroDocumento" class="form-label">Usuario</label>
-								<input type="text" name="name" value="" class="form-control" />
-							</div>
-						</div>
-						<div class="col-sm-6">
-
-						</div>
+	<div class="container">
+		@*	<div class="col-sm-12 pt-2 pb-3">
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+				<label class="form-check-label" for="inlineRadio1">Cita</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+				<label class="form-check-label" for="inlineRadio2">Procedimiento</label>
+			</div>
+		</div> *@
+		<div class="col-sm-12 pt-2 pb-3">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="input-style">
+						<label for="txtNroDocumento" class="form-label">N° Cita</label>
+						@Html.EditorFor(m => m.idCita, new { htmlAttributes = new { @class = "form-control", @type = "text", @disabled = "true" } })
 					</div>
 				</div>
-				<div class="col-sm-12 pb-3">
-					<div class="row">
-						<div class="col-sm-12 text-center">
-							<a style="width:100px; color:white;" asp-action="RegistroCita" asp-controller="Cita" class="btn btn-success">Aceptar</a>
-						</div>
-					</div>
+				<div class="col-sm-6">
+
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="input-style">
+						<label for="txtNroDocumento" class="form-label">Paciente</label>
+						@Html.EditorFor(m => m.nombrePaciente, new { htmlAttributes = new { @class = "form-control", @type = "text", @disabled = "true" } })
+					</div>
+				</div>
+				<div class="col-sm-6">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="input-style">
+						<label for="txtNroDocumento" class="form-label">Fecha Cita</label>
+						@Html.EditorFor(m => m.fecha, new { htmlAttributes = new { @class = "form-control", @type = "text", @disabled = "true" } })
+					</div>
+				</div>
+				<div class="col-sm-6">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="input-style">
+						<label for="txtNroDocumento" class="form-label">N° veces</label>
+						<input type="text" name="name" value="" class="form-control" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="input-style">
+						<label for="txtNroDocumento" class="form-label">Usuario</label>
+						<input type="text" name="name" value="" class="form-control" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 pb-3">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<a style="width:100px; color:white;" asp-action="RegistroCita" asp-controller="Cita" class="btn btn-success">Aceptar</a>
+				</div>
+			</div>
+		</div>
+	</div>
 		}
 	</div>
 </div>

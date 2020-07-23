@@ -1,0 +1,44 @@
+﻿@model Clinica2._0.DTO.PersonaDTO
+<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content">
+		<div class="modal-header bg-primary">
+			<h5 class="modal-title" id="exampleModalLongTitle">CLÁUSULA DE CONSENTIMIENTO DE TRATAMIENTO DE DATOS PERSONALES </h5>
+
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="col-sm-12" id="printableArea">
+				<h5>CLÁUSULA DE CONSENTIMIENTO DE TRATAMIENTO DE DATOS PERSONALES </h5>
+				<p>(Ley General de Salud N° 26842, Ley de Protección de datos N°29733 y normas complementarias)</p>
+				<p>Yo, (DATOS DEL PACIENTE)</p>
+				<p style="display:inline;"> Nombres y Apellidos: </p> <span style="font-weight:bold;"> @Html.DisplayFor(m => m.nombres) @Html.DisplayFor(m => m.apellidoPaterno) @Html.DisplayFor(m => m.apellidoMaterno) </span>
+				<p> Fecha:</p>
+				<p style="display:inline;">Con DNI o Documento de identidad:</p> <span style="font-weight:bold;"> @Html.DisplayFor(m => m.numeroDocumento) </span> <br />
+				<p style="display:inline;">Edad:</p> <span style="font-weight:bold;"> @Html.DisplayFor(m => m.edad) </span>
+
+				<p>De ser el caso,</p>
+				<p>Nombres y Apellidos del representante u apoderado:</p>
+				<p>Con DNI o Documento de Identidad:</p>
+
+
+				<p>En la Clínica ESPECIALIDADES MEDICAS, nos preocupamos por la protección y privacidad de los datos personales de nuestros pacientes. Por ello, queremos informarte que de acuerdo con lo establecido en la Ley N° 29733 – Ley de Protección de Datos Personales y su Reglamento, estamos autorizados a dar tratamiento a tus datos personales que son necesarios para que puedas recibir una atención médica, pues de no obtenerlos no podremos cumplir con dicha atención.</p>
+
+				<p>
+					Nos autorizas a utilizar tus datos personales para las siguientes finalidades:<br>
+					- Realizar encuestas de satisfacción para mejorar la calidad de los servicios que ofrecemos.<br>
+					- Enviar comunicaciones referidas a nuevos servicios y promociones.
+
+				</p>
+				<p class="pt-5">Firma y Huella digital</p>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" onclick="window.print();return false;">Imprimir</button>
+
+
+		</div>
+	</div>
+</div>

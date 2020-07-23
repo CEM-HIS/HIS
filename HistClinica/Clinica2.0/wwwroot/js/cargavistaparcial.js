@@ -508,6 +508,27 @@ function cargarmodalCrearTipo() {
 	});
 }
 
+function cargarReporteConsentimientodatos() {
+	var id = $('#paciente_idPaciente').val();
+	$.ajax({
+		type: "GET",
+		url: "/Paciente/ReportConsentimiento",
+		data: { id: id },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalreporte').html(response);
+			$('#modalreporte').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
 function cargarmodalCrearDetalle() {
 	var id = $('#idTablaGeneral').val();
 	$.ajax({

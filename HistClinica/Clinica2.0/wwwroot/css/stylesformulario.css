@@ -1,5 +1,4 @@
-﻿
-#formpaciente label {
+﻿#formpaciente label {
 	font-size: 14px;
 }
 
@@ -9,47 +8,51 @@
 	border-radius: .25rem;
 	background-color: #e9ecef;
 }
+
 body {
 	background: rgb(244, 246, 249);
 	height: auto;
 	position: fixed;
 	width: 100%;
 }
-body .elevation-4 {
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) !important;
-}
 
-body [class*=sidebar-dark] .brand-link {
-	border-bottom: 1px solid white;
-}
-
-body [class*=sidebar-dark-] {
-	background: white;
-}
-
-	body [class*=sidebar-dark-] .sidebar a {
-		color: white;
+	body .elevation-4 {
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) !important;
 	}
 
-body [class*=sidebar-dark] .user-panel {
-	border-bottom: 1px solid rgba(136, 136, 136, 0.22);
-}
-
-body .nav-sidebar > .nav-item:hover {
-	background-color: #f3f3f3;
-}
-
-	body .nav-sidebar > .nav-item:hover a {
-		color: #00aee5 !important;
+	body [class*=sidebar-dark] .brand-link {
+		border-bottom: 1px solid white;
 	}
 
-body .form-control.small-input {
-	padding: 0.3rem 1rem;
-	height: calc(2.1rem + 2px);
-}
+	body [class*=sidebar-dark-] {
+		background: white;
+	}
+
+		body [class*=sidebar-dark-] .sidebar a {
+			color: white;
+		}
+
+	body [class*=sidebar-dark] .user-panel {
+		border-bottom: 1px solid rgba(136, 136, 136, 0.22);
+	}
+
+	body .nav-sidebar > .nav-item:hover {
+		background-color: #f3f3f3;
+	}
+
+		body .nav-sidebar > .nav-item:hover a {
+			color: #00aee5 !important;
+		}
+
+	body .form-control.small-input {
+		padding: 0.3rem 1rem;
+		height: calc(2.1rem + 2px);
+	}
+
 nav {
 	margin-top: -22px;
 }
+
 .card-cem {
 	background: white;
 	padding: 0;
@@ -64,7 +67,6 @@ nav {
 		max-width: 96%;
 	}
 }
-
 
 body .btn-primary {
 	background-color: #00aee5;
@@ -213,9 +215,6 @@ table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
 	bottom: .5em;
-}
-.input-style a {
-	height: calc(2.1rem + 2px);
 }
 
 .custom-select-sm.form-control {
@@ -399,8 +398,6 @@ body [class*=sidebar-dark-] {
 		color: white;
 	}
 
-
-
 .avatar-upload {
 	position: relative;
 	max-width: 205px;
@@ -462,7 +459,6 @@ body [class*=sidebar-dark-] {
 			background-repeat: no-repeat;
 			background-position: center;
 		}
-
 
 @media (min-width: 576px) {
 	.modal-dialog {

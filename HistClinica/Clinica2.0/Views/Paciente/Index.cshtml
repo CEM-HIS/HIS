@@ -1,641 +1,459 @@
 ﻿@model Clinica2._0.DTO.PersonaDTO
 
 @{ ViewBag.Title = "ProgramarCitaAdmision";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+	Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 left" style="height: 50px;">
-                <div class="card card-primary card-his">
-                    <div class="card-header card-shadow">
-                        <h2>Pacientes</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 ">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Datos Paciente</a>
-                    </li>
-                </ul><!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                        <div class="col-sm-12">
-                            <div class="row mb-5" style="padding-top:20px;">
-                                <div class="col-sm-12 pb-3">
-                                    <span style="font-size: 18px;">Buscar por:</span>
-                                    <div class="pl-3 form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" checked name="radiofiltro" id="inlineRadio1" value="1">
-                                        <label class="form-check-label" for="inlineRadio1">Por Dni</label>
-                                    </div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 left" style="height: 50px;">
+			<div class="card card-primary card-his">
+				<div class="card-header card-shadow">
+					<h2>Pacientes</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 ">
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Datos Paciente</a>
+				</li>
+			</ul><!-- Tab panes -->
+			<div class="tab-content">
+			
+				<div class="tab-pane active" id="tabs-2" role="tabpanel">
+					@using (Html.BeginForm())
+					{
+						<div class="col-sm-12 pt-3 pb-2 " style="border-bottom: 1px solid rgba(128, 128, 128, 0.34901960784313724);">
+							<div class="row">
+								@Html.HiddenFor(m => m.paciente.idPaciente)
+								<div class="col-sm-2"><p>Buscar Paciente</p></div>
+								<div class="col-sm-2">
+									<select class="form-control  small-input">
+										<option value="value">DNI</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="dnipe" name="dni" class="form-control small-input" />
+								</div>
 
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="radiofiltro" id="inlineRadio2" value="2">
-                                        <label class="form-check-label" for="inlineRadio2">Por Nombre y apellido</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    @using (Html.BeginForm())
-                                    {
-                                        <div class="row">
-                                            @Html.HiddenFor(m => m.paciente.idPaciente)
-                                            <div class="col-sm-2">
-                                                <select class="form-control  small-input">
-                                                    <option value="value">DNI</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" id="dni" name="dni" class="form-control small-input" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" id="nombre" name="nombre" class="form-control  small-input" placeholder="Ingrese nombre" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" id="apellidos" name="apellidos" class="form-control  small-input" placeholder="Ingrese apellidos" />
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <button class="btn btn-info" type="submit" id="btnBuscar"><i class="fas fa-search"></i></button>
-                                                <a class="btn btn-primary" type="submit" asp-action="Create" asp-controller="Paciente"><i class="fas fa-user-plus"></i></a>
-                                                @if (Model != null)
-                                                {
-                                                    <a class="btn btn-secondary" type="submit" asp-action="Edit" asp-controller="Paciente" asp-route-id="@Model.paciente.idPaciente"><i class="fas fa-edit"></i></a>}
-                                            </div>
-                                        </div>}
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">
-                                    <div class="row pt-3">
-                                        <div class="col-sm-4">
-                                            <label>Paciente</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="divpac">
-                                                <label>@Html.DisplayFor(m => m.apellidoPaterno) @Html.DisplayFor(m => m.apellidoMaterno) @Html.DisplayFor(m => m.nombres) </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-top: 10px;">
-                                        <div class="col-sm-4">
-                                            <label>DNI</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control  small-input", @disabled = "true" })
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-top: 10px;">
-                                        <div class="col-sm-4">
-                                            <label>Correo</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            @Html.TextBoxFor(m => m.correo, new { @class = "form-control  small-input", @disabled = "true" })
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-top: 10px;">
-                                        <div class="col-sm-4">
-                                            <label>Edad</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            @Html.TextBoxFor(m => m.edad, new { @class = "form-control  small-input", @disabled = "true" })
-                                        </div>
-                                    </div>
-                                    <div class="row pb-2" style="padding-top: 10px;">
-                                        <div class="col-sm-4">
-                                            <label>Ocupación</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            @Html.TextBoxFor(m => m.descripcionOcupacion, new { @class = "form-control  small-input", @disabled = "true" })
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-4">
+									<button class="btn btn-info" type="submit" id="btnBuscar"><i class="fas fa-search"></i></button>
+									<a class="btn btn-primary" type="submit" asp-action="Create" asp-controller="Paciente"><i class="fas fa-user-plus"></i></a>
+									@if (Model != null)
+									{
+										<a class="btn btn-secondary" type="submit" asp-action="Edit" asp-controller="Paciente" asp-route-id="@Model.paciente.idPaciente"><i class="fas fa-edit"></i></a>}
+								</div>
 
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-4">
+							</div>
+						</div>
+					}
 
-                                </div>
-                            </div>
-                            <div class="row" style="padding-top: 10px;">
-                                @*  <div class="col-sm-12">
-                <button style="width: 135px; font-size: 15px;" class="btn btn-primary" onclick="CargaModalCitas();">Citas</button>
-                <button style="width: 135px; font-size: 15px;" class="btn btn-primary mt-small-2">Orden</button>
-                <button onclick="CargaConsultaCronograma();" style="width: 135px; font-size: 15px;" class="btn btn-primary mt-small-2">Cronograma</button>
-            </div>*@
-                            </div>
-                            @if (ViewBag.message != null)
-                            {
-                                <div class="col-sm-12 alert alert-info alert-dismissible text-center" id="success-alert" role="alert" style="margin-top: 15px;">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    @ViewBag.message
-                                </div>}
-                            <div class="row" style="padding-top: 80px;">
-                                <div class="col-sm-12">
-                                    @*  <table class="table table-bordered table-responsive table-hover" style="font-size:14px;" id="citagrid">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>N°</th>
-                            <th>Tipo</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Producto</th>
-                            <th>Descripción</th>
-                            <th>Medico</th>
-                            <th>Especialidad</th>
-                            <th>Precio</th>
-                            <th>IGV</th>
-                            <th>Estado</th>
-                            <th>Est.Pago</th>
-                            <th>Total</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{ if (Model != null)
-                                        {
-                                            foreach (var item in Model.paciente.cita)
-                                            {
-                            <tr>
-                                <td>@item.idCita</td>
-                                <td>@item.numeroCita</td>
-                                <td>@item.TipoCita</td>
-                                <td nowrap>@item.fecha</td>
-                                <td>@item.hora</td>
-                                <td>@item.consultorio</td>
-                                <td>@item.descripcion</td>
-                                <td nowrap>@item.Medico</td>
-                                <td>@item.especialidad </td>
-                                <td nowrap>@item.precio</td>
-                                <td nowrap>@item.igv</td>
-                                <td>@item.descripcionEstado</td>
-                                <td>@item.descripcionEstadoPago</td>
-                                <td>@item.precio</td>
-                                <td nowrap>
-                                    <button title="Reprogramar" class="edit btn btn-primary"><i class="fas fa-address-book"></i></button>
-                                    <button title="Consultar" class="detail btn btn-primary">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </button>
-                                    <button title="Anular" class="anular btn btn-danger">
-                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                            </tr> }
-                                        } }
-                    </tbody>
-                </table> *@
-                                </div>
-                                @*   <div class="col-sm-12 text-right">
-                <span style="margin-right:10px;">TOTAL DE VALOR VENTA - OPERACION GRAVADA</span><span>300</span><br />
-                <span style="margin-right:10px;">IGV(18%)</span><span>54</span><br />
-                <span style="margin-right:10px;">IMPORTE TOTAL</span><span>354</span>
-            </div>
-            <div class="col-sm-12" style="padding-top: 10px;">
-                <div class="row">
-                    <div class="col-sm-6">
+					<div class="content">
 
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <a asp-action="Pago" asp-controller="Paciente" class="btn btn-primary" style="width: 112px;font-size: 16px;">Pagar</a>
-                    </div>
-                </div>
+						<div class="acc col-sm-12 mt-3">
+							<div class="col-sm-2 pl-0 pr-2">
+								<div class="">
 
-            </div>*@
-                                </div>
-                            </div>
+									<div class="avatar-upload">
+										<div class="avatar-edit">
+											<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+											<label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
+										</div>
+										<div class="avatar-preview">
+											<div id="imagePreview" style="background-image: url(images/profile.png);">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="acc__card row">
+								<div class="col-sm-2">
+									<div class="acc__title btn btn-primary btn-menu">Información General</div>
+								</div>
+								<div class="col-sm-10 align-right">
+									<div class="acc__panel">
+										<div class="row">
+											<div class="col-sm-12 mb-3">
+												<div class="row">
+													<div class="col-sm-6"><h5>Informacion General</h5></div>
+													<div class="col-sm-5 text-right"> <button class="btn btn-primary btn-icon-small text-white" onclick="cargarReporteConsentimientodatos();" type="submit"><i class="far fa-save pr-1"></i>Consentimiento de tratamiento de datos</button></div>
+												</div>
+											</div>
+											<div class="col-sm-12">
+												<div class="row mb-3">
+													<div class="col-md-1 col-sm-12"><label>Dni*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="numeroDocumento" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Tipo de Doc*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<select class="form-control" data-val="true" data-val-required="Seleccione el tipo de documento" id="idTipoDocumento" name="idTipoDocumento">
+															<option value="">Seleccione</option>
+															<option value="1">LIBRETA ELECTORAL O DNI</option>
+															<option value="2">CARNET DE EXTRANJERIA</option>
+															<option value="3">REGISTRO UNICO CONTRIBUYENTES</option>
+															<option value="4">PASAPORTE</option>
+															<option value="5">PARTIDA NACIMIENTO -IDENTIDAD</option>
+															<option value="6">OTROS</option>
+														</select>
+													</div>
+													<div class="col-md-2 col-sm-12"><label>Tipo de Paciente*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<select class="form-control" data-val="true" data-val-required="Seleccione el tipo de paciente" id="cbotppac" name="paciente.idTipoPaciente">
+															<option value="">Seleccione</option>
+															<option value="119">PARTICULAR</option>
+															<option value="120">ASEGURADO</option>
+															<option value="121">CONVENIO</option>
+															<option value="122">SOAT</option>
+															<option value="123">EXTERNO</option>
+															<option value="124">EXTERNO</option>
+														</select>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-1 col-sm-12"><label>Nombre*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="nombres" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Apellido Paterno*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="apellidoPaterno" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Apellido Materno*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="apellidoMaterno" class="form-control"></div>
+												</div>
 
-                        </div>
-                    <div class="tab-pane" id="tabs-2" role="tabpanel">
-                        <div class="col-sm-12 pt-3 pb-2 " style="border-bottom: 1px solid rgba(128, 128, 128, 0.34901960784313724);">
-                            <div class="row">
-                                <div class="col-sm-2"><p>Buscar Paciente</p></div>
-                                <div class="col-sm-2">
-                                    <select class="form-control  small-input">
-                                        <option value="value">DNI</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="text" id="dnipe" name="dni" class="form-control small-input" />
-                                </div>
+												<div class="row mb-3">
+													<div class="col-md-1 col-sm-12"><label>Fecha*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<input class="form-control" data-val="true" data-val-required="Seleccione la fecha de inicio" id="fechaIni" name="fechaIni" type="Date" value="">
+														<span class="field-validation-valid text-danger" data-valmsg-for="fechaIni" data-valmsg-replace="true"></span>
+													</div>
+													<div class="col-md-2 col-sm-12"><label>Edad*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="edad" class="form-control"></div>
+													<div class="col-md-1 col-sm-12"><label>Sexo*</label></div>
+													<div class="col-md-4 col-sm-12">
+														<div class="form-check d-inline ">
+															<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+															<label class="form-check-label" for="exampleRadios1">
+																Femenino
+															</label>
+														</div>
+														<div class="form-check d-inline ">
+															<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+															<label class="form-check-label" for="exampleRadios2">
+																Masculino
+															</label>
+														</div>
 
-                                <div class="col-sm-4">
-                                    <button class="btn btn-info btn-icon-small" type="submit" id="btnBuscar"><i class="fas fa-search"></i></button>
-                                    <a class="btn btn-primary btn-icon-small" type="submit"><i class="fas fa-user-plus"></i></a>
-                                    <a class="btn btn-secondary btn-icon-small" type="submit"><i class="fas fa-edit"></i></a>
-                                </div>
+													</div>
+												</div>
 
-                            </div>
-                        </div>
-                        <div class="content">
+												<div class="row mb-3">
+													<div class="col-md-1 col-sm-12"><label>Ocupación</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="descripcionOcupacion" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Grado de Instruccion</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Estado Civil</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-1 col-sm-12"><label>Email*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="correo" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Celular*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Parentesco*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<select class="form-control" data-val="true" data-val-required="Seleccione el parentesco" id="paciente_idParentescoPaciente" name="paciente.idParentescoPaciente">
+															<option value="">Seleccione</option>
+															<option value="40">PADRE</option>
+															<option value="41">MADRE</option>
+															<option value="42">HIJO/A</option>
+															<option value="43">ABUELA/O</option>
+															<option value="44">TIA/O</option>
+															<option value="45">NIETA/O</option>
+															<option value="46">PADRASTRO</option>
+															<option value="47">MADRASTRA</option>
+															<option value="48">SOBRINA/O</option>
+															<option value="49">PRIMA/O</option>
+															<option value="50">BIS-ABUELA/O</option>
+															<option value="51">AMIGA/O</option>
+															<option value="52">HERMANA/O</option>
+															<option value="53">YERNO</option>
+															<option value="54">NUERA</option>
+														</select>
+													</div>
+												</div>
+												<div class="row mb-3">
 
-                            <div class="acc col-sm-12 mt-3">
-                                <div class="col-sm-2 pl-0 pr-2">
-                                    <div class="">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="acc__card row">
+								<div class="col-sm-2">
+									<div class="acc__title btn btn-primary btn-menu">Ubicación y Nacimiento</div>
+								</div>
+								<div class="col-sm-10 align-right">
+									<div class="acc__panel" style="display: none;">
+										<div class="row">
+											<div class="col-sm-12 mb-2"><h5>Ubicación</h5></div>
+											<div class="col-sm-12">
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Departamento</label></div>
+													<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Provincia</label></div>
+													<div class="col-md-3 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                        <div class="avatar-upload">
-                                            <div class="avatar-edit">
-                                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                                <label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
-                                            </div>
-                                            <div class="avatar-preview">
-                                                <div id="imagePreview" style="background-image: url(images/profile.png);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="acc__card row">
-                                    <div class="col-sm-2">
-                                        <div class="acc__title btn btn-primary btn-menu">Información General</div>
-                                    </div>
-                                    <div class="col-sm-10 align-right">
-                                        <div class="acc__panel">
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-3">
-                                                    <div class="row">
-                                                        <div class="col-sm-6"><h5>Informacion General</h5></div>
-                                                        <div class="col-sm-5 text-right"> <button class="btn btn-primary btn-icon-small text-white" data-toggle="modal" data-target="#exampleModalCenter" type="submit"><i class="far fa-save pr-1"></i>Guardar</button></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-1 col-sm-12"><label>Dni*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Tipo de Doc*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <select class="form-control" data-val="true" data-val-required="Seleccione el tipo de documento" id="idTipoDocumento" name="idTipoDocumento">
-                                                                <option value="">Seleccione</option>
-                                                                <option value="1">LIBRETA ELECTORAL O DNI</option>
-                                                                <option value="2">CARNET DE EXTRANJERIA</option>
-                                                                <option value="3">REGISTRO UNICO CONTRIBUYENTES</option>
-                                                                <option value="4">PASAPORTE</option>
-                                                                <option value="5">PARTIDA NACIMIENTO -IDENTIDAD</option>
-                                                                <option value="6">OTROS</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12"><label>Tipo de Paciente*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <select class="form-control" data-val="true" data-val-required="Seleccione el tipo de paciente" id="cbotppac" name="paciente.idTipoPaciente">
-                                                                <option value="">Seleccione</option>
-                                                                <option value="119">PARTICULAR</option>
-                                                                <option value="120">ASEGURADO</option>
-                                                                <option value="121">CONVENIO</option>
-                                                                <option value="122">SOAT</option>
-                                                                <option value="123">EXTERNO</option>
-                                                                <option value="124">EXTERNO</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-1 col-sm-12"><label>Nombre*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Apellido Paterno*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Apellido Materno*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                    </div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2   col-sm-12"><label>Tipo de via</label></div>
+													<div class="col-md-1 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+													<div class="col-md-2 col-sm-12"><label>Nombre de Via</label></div>
+													<div class="col-md-1 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-1 col-sm-12"><label>N°</label></div>
+													<div class="col-md-1 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+													<div class="col-md-1 col-sm-12"><label>DPTO N°</label></div>
+													<div class="col-md-1 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-1 col-sm-12"><label>Fecha*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <input class="form-control" data-val="true" data-val-required="Seleccione la fecha de inicio" id="fechaIni" name="fechaIni" type="Date" value="">
-                                                            <span class="field-validation-valid text-danger" data-valmsg-for="fechaIni" data-valmsg-replace="true"></span>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12"><label>Edad*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-1 col-sm-12"><label>Sexo*</label></div>
-                                                        <div class="col-md-4 col-sm-12">
-                                                            <div class="form-check d-inline ">
-                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                                <label class="form-check-label" for="exampleRadios1">
-                                                                    Femenino
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check d-inline ">
-                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                                <label class="form-check-label" for="exampleRadios2">
-                                                                    Masculino
-                                                                </label>
-                                                            </div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Interior</label></div>
+													<div class="col-md-1 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+													<div class="col-md-2 col-sm-12"><label>N° de Lote</label></div>
+													<div class="col-md-1 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-1 col-sm-12"><label>N° Etapa</label></div>
+													<div class="col-md-1 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+													<div class="col-md-1 col-sm-12"><label>N° KM</label></div>
+													<div class="col-md-1 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                                        </div>
-                                                    </div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>N° Bloque</label></div>
+													<div class="col-md-1 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-12 mb-2"><h5>Datos de Nacimiento</h5></div>
+											<div class="col-sm-12 mb-2">
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Pais Origen</label></div>
+													<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Departamento</label></div>
+													<div class="col-md-3 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-1 col-sm-12"><label>Ocupación</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Grado de Instruccion</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Estado Civil</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-1 col-sm-12"><label>Email*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Celular*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Parentesco*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <select class="form-control" data-val="true" data-val-required="Seleccione el parentesco" id="paciente_idParentescoPaciente" name="paciente.idParentescoPaciente">
-                                                                <option value="">Seleccione</option>
-                                                                <option value="40">PADRE</option>
-                                                                <option value="41">MADRE</option>
-                                                                <option value="42">HIJO/A</option>
-                                                                <option value="43">ABUELA/O</option>
-                                                                <option value="44">TIA/O</option>
-                                                                <option value="45">NIETA/O</option>
-                                                                <option value="46">PADRASTRO</option>
-                                                                <option value="47">MADRASTRA</option>
-                                                                <option value="48">SOBRINA/O</option>
-                                                                <option value="49">PRIMA/O</option>
-                                                                <option value="50">BIS-ABUELA/O</option>
-                                                                <option value="51">AMIGA/O</option>
-                                                                <option value="52">HERMANA/O</option>
-                                                                <option value="53">YERNO</option>
-                                                                <option value="54">NUERA</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Provincia</label></div>
+													<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Distrito</label></div>
+													<div class="col-md-3 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="acc__card row">
-                                    <div class="col-sm-2">
-                                        <div class="acc__title btn btn-primary btn-menu">Ubicación y Nacimiento</div>
-                                    </div>
-                                    <div class="col-sm-10 align-right">
-                                        <div class="acc__panel" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-2"><h5>Ubicación</h5></div>
-                                                <div class="col-sm-12">
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Departamento</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Provincia</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="acc__card row">
+								<div class="col-sm-2">
+									<div class="acc__title btn btn-primary btn-menu">Datos del Seguro</div>
+								</div>
+								<div class="col-sm-10 align-right">
+									<div class="acc__panel" style="display: none;">
+										<div class="row">
+											<div class="col-sm-12 mb-2"><h5>Datos del Seguro</h5></div>
+											<div class="col-sm-12 mb-2">
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Tipo de Paciente</label></div>
+													<div class="col-md-6 col-sm-12">
+														<div class="form-check d-inline ">
+															<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+															<label class="form-check-label" for="exampleRadios1">
+																Particular
+															</label>
+														</div>
+														<div class="form-check d-inline ">
+															<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+															<label class="form-check-label" for="exampleRadios2">
+																Asegurado/convenio
+															</label>
+														</div>
 
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2   col-sm-12"><label>Tipo de via</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12"><label>Nombre de Via</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-1 col-sm-12"><label>N°</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-1 col-sm-12"><label>DPTO N°</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Codigo de Plan*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>N de contrato*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+													<div class="col-md-2 col-sm-12"><label>Aseguradora</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Contratante*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
 
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Interior</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12"><label>N° de Lote</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-1 col-sm-12"><label>N° Etapa</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-1 col-sm-12"><label>N° KM</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="acc__card row">
+								<div class="col-sm-2">
+									<div class="acc__title btn btn-primary btn-menu">Empresa</div>
+								</div>
+								<div class="col-sm-10 align-right">
+									<div class="acc__panel" style="display: none;">
+										<div class="row">
+											<div class="col-sm-12 mb-2"><h5>Empresa</h5></div>
+											<div class="col-sm-12 mb-2">
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>RUC</label></div>
+													<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Razón Social</label></div>
+													<div class="col-md-3 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>N° Bloque</label></div>
-                                                        <div class="col-md-1 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 mb-2"><h5>Datos de Nacimiento</h5></div>
-                                                <div class="col-sm-12 mb-2">
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Pais Origen</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Departamento</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Estado del RUC</label></div>
+													<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Condición del RUC</label></div>
+													<div class="col-md-3 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Provincia</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Distrito</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
+												</div>
+												<div class="row mb-3">
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="acc__card row">
-                                    <div class="col-sm-2">
-                                        <div class="acc__title btn btn-primary btn-menu">Datos del Seguro</div>
-                                    </div>
-                                    <div class="col-sm-10 align-right">
-                                        <div class="acc__panel" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-2"><h5>Datos del Seguro</h5></div>
-                                                <div class="col-sm-12 mb-2">
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Tipo de Paciente</label></div>
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="form-check d-inline ">
-                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                                <label class="form-check-label" for="exampleRadios1">
-                                                                    Particular
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check d-inline ">
-                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                                <label class="form-check-label" for="exampleRadios2">
-                                                                    Asegurado/convenio
-                                                                </label>
-                                                            </div>
+													<div class="col-md-2 col-sm-12"><label>Domicilio fiscal</label></div>
+													<div class="col-md-3 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Codigo de Plan*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>N de contrato*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12"><label>Aseguradora</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Contratante*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="acc__card row">
-                                    <div class="col-sm-2">
-                                        <div class="acc__title btn btn-primary btn-menu">Empresa</div>
-                                    </div>
-                                    <div class="col-sm-10 align-right">
-                                        <div class="acc__panel" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-2"><h5>Empresa</h5></div>
-                                                <div class="col-sm-12 mb-2">
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>RUC</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Razón Social</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Estado del RUC</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Condición del RUC</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row mb-3">
-
-                                                        <div class="col-md-2 col-sm-12"><label>Domicilio fiscal</label></div>
-                                                        <div class="col-md-3 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="acc__card row">
-                                    <div class="col-sm-2">
-                                        <div class="acc__title btn btn-primary btn-menu">Datos del acompañante</div>
-                                    </div>
-                                    <div class="col-sm-10 align-right">
-                                        <div class="acc__panel" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-2"><h5>Datos del Acompañante</h5></div>
-                                                <div class="col-sm-12 mb-2">
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Tipo de Doc*</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <select class="form-control" data-val="true" data-val-required="Seleccione el tipo de documento" id="idTipoDocumento" name="idTipoDocumento">
-                                                                <option value="">Seleccione</option>
-                                                                <option value="1">LIBRETA ELECTORAL O DNI</option>
-                                                                <option value="2">CARNET DE EXTRANJERIA</option>
-                                                                <option value="3">REGISTRO UNICO CONTRIBUYENTES</option>
-                                                                <option value="4">PASAPORTE</option>
-                                                                <option value="5">PARTIDA NACIMIENTO -IDENTIDAD</option>
-                                                                <option value="6">OTROS</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-1 col-sm-12"><label>N° de Doc</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Apellido Paterno</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="acc__card row">
+								<div class="col-sm-2">
+									<div class="acc__title btn btn-primary btn-menu">Datos del acompañante</div>
+								</div>
+								<div class="col-sm-10 align-right">
+									<div class="acc__panel" style="display: none;">
+										<div class="row">
+											<div class="col-sm-12 mb-2"><h5>Datos del Acompañante</h5></div>
+											<div class="col-sm-12 mb-2">
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Tipo de Doc*</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<select class="form-control" data-val="true" data-val-required="Seleccione el tipo de documento" id="idTipoDocumento" name="idTipoDocumento">
+															<option value="">Seleccione</option>
+															<option value="1">LIBRETA ELECTORAL O DNI</option>
+															<option value="2">CARNET DE EXTRANJERIA</option>
+															<option value="3">REGISTRO UNICO CONTRIBUYENTES</option>
+															<option value="4">PASAPORTE</option>
+															<option value="5">PARTIDA NACIMIENTO -IDENTIDAD</option>
+															<option value="6">OTROS</option>
+														</select>
+													</div>
+													<div class="col-md-1 col-sm-12"><label>N° de Doc</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Apellido Paterno</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
 
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Apellido Materno</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-1 col-sm-12"><label>Nombres</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Parentesco</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <select class="form-control small-input" id="paciente_idParentescoAcompa_ante" name="paciente.idParentescoAcompañante">
-                                                                <option value="">Seleccione</option>
-                                                                <option value="40">PADRE</option>
-                                                                <option value="41">MADRE</option>
-                                                                <option value="42">HIJO/A</option>
-                                                                <option value="43">ABUELA/O</option>
-                                                                <option value="44">TIA/O</option>
-                                                                <option value="45">NIETA/O</option>
-                                                                <option value="46">PADRASTRO</option>
-                                                                <option value="47">MADRASTRA</option>
-                                                                <option value="48">SOBRINA/O</option>
-                                                                <option value="49">PRIMA/O</option>
-                                                                <option value="50">BIS-ABUELA/O</option>
-                                                                <option value="51">AMIGA/O</option>
-                                                                <option value="52">HERMANA/O</option>
-                                                                <option value="53">YERNO</option>
-                                                                <option value="54">NUERA</option>
-                                                            </select>
-                                                        </div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Apellido Materno</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+													<div class="col-md-1 col-sm-12"><label>Nombres</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Parentesco</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<select class="form-control small-input" id="paciente_idParentescoAcompa_ante" name="paciente.idParentescoAcompañante">
+															<option value="">Seleccione</option>
+															<option value="40">PADRE</option>
+															<option value="41">MADRE</option>
+															<option value="42">HIJO/A</option>
+															<option value="43">ABUELA/O</option>
+															<option value="44">TIA/O</option>
+															<option value="45">NIETA/O</option>
+															<option value="46">PADRASTRO</option>
+															<option value="47">MADRASTRA</option>
+															<option value="48">SOBRINA/O</option>
+															<option value="49">PRIMA/O</option>
+															<option value="50">BIS-ABUELA/O</option>
+															<option value="51">AMIGA/O</option>
+															<option value="52">HERMANA/O</option>
+															<option value="53">YERNO</option>
+															<option value="54">NUERA</option>
+														</select>
+													</div>
 
 
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-2 col-sm-12"><label>Edad</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-1 col-sm-12"><label>Celular Personal</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
-                                                        <div class="col-md-2 col-sm-12"><label>Correo Electronico</label></div>
-                                                        <div class="col-md-2 col-sm-12 inputInline">
-                                                            <input type="text" name="name" class="form-control">
-                                                        </div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-md-2 col-sm-12"><label>Edad</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
+													<div class="col-md-1 col-sm-12"><label>Celular Personal</label></div>
+													<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+													<div class="col-md-2 col-sm-12"><label>Correo Electronico</label></div>
+													<div class="col-md-2 col-sm-12 inputInline">
+														<input type="text" name="name" class="form-control">
+													</div>
 
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                </div>
-            </div>
-        </div>
+			</div>
+		</div>
+	</div>
 
 
 
-       
-        </div>
+
+</div>
     </div>
 
 <div class="modal fade" id="modalcitas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -653,55 +471,13 @@
 </div>
 <div id="modaldetalle" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 </div>
+<div class="modal fade" id="modalreporte" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+</div>
 <script src="~/js/cargavistaparcial.js"></script>
 <script src="~/js/combosaninadoscitas.js"></script>
 <script src="~/js/profile-picture.js"></script>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title" id="exampleModalLongTitle">CLÁUSULA DE CONSENTIMIENTO DE TRATAMIENTO DE DATOS PERSONALES </h5>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-sm-12" id="printableArea">
-                    <h5>CLÁUSULA DE CONSENTIMIENTO DE TRATAMIENTO DE DATOS PERSONALES </h5>
-                    <p>(Ley General de Salud N° 26842, Ley de Protección de datos N°29733 y normas complementarias)</p>
-                    <p>Yo, (DATOS DEL PACIENTE)</p>
-                    <p> Nombres y Apellidos: </p>
-                    <p> Fecha:</p>
-                    <p>Con DNI o Documento de identidad:</p>
-                    <p>Edad:</p>
-
-                    <p>De ser el caso,</p>
-                    <p>Nombres y Apellidos del representante u apoderado:</p>
-                    <p>Con DNI o Documento de Identidad:</p>
-
-
-                    <p>En la Clínica ESPECIALIDADES MEDICAS, nos preocupamos por la protección y privacidad de los datos personales de nuestros pacientes. Por ello, queremos informarte que de acuerdo con lo establecido en la Ley N° 29733 – Ley de Protección de Datos Personales y su Reglamento, estamos autorizados a dar tratamiento a tus datos personales que son necesarios para que puedas recibir una atención médica, pues de no obtenerlos no podremos cumplir con dicha atención.</p>
-
-                    <p>
-                        Nos autorizas a utilizar tus datos personales para las siguientes finalidades:<br>
-                        - Realizar encuestas de satisfacción para mejorar la calidad de los servicios que ofrecemos.<br>
-                        - Enviar comunicaciones referidas a nuevos servicios y promociones.
-
-                    </p>
-                    <p class="pt-5">Firma y Huella digital</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="window.print();return false;">Save changes</button>
-
-
-            </div>
-        </div>
-    </div>
-</div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

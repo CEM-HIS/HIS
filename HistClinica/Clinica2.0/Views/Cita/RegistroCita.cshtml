@@ -9,7 +9,7 @@
 		<div class="col-sm-12 left" style="height: 20px;">
 			<div class="card card-primary card-his">
 				<div class="card-header card-shadow">
-					<h2>Registro de citas</h2>
+                    <h2>Admición ambulatoria</h2>
 				</div>
 			</div>
 		</div>
@@ -23,10 +23,10 @@
             								}">
 			<div class="row pb-2 text-left">
 				<div class="col-sm-12">
-					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1" id="Crear">
+					<a asp-controller="Caja" asp-action="Index" style="font-weight:bold; color:white;" class="btn btn-primary mt-4 pt-1" id="Crear">
 						<i class="far fa-credit-card"></i>
 						CAJA
-					</button>
+					</a>
 					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"> <i class="far fa-clock"></i> CITA</button>
 					<a style="font-weight:bold; color:white;" onclick="OpenModalOrdenes();" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="fas fa-flask"></i> LAB</a>
 					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="far fa-image"></i> IMA</button>
