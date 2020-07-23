@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
+using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 
 namespace Clinica2._0.Controllers
 {
@@ -15,14 +16,17 @@ namespace Clinica2._0.Controllers
         private readonly Microsoft.AspNetCore.Identity.UserManager<USER> _userManager;
         private readonly SignInManager<USER> _signInManager;
         private readonly ILogger<LoginController> _logger;
+        private readonly ICajaRepository _cajarepository;
 
         public CajaController(SignInManager<USER> signInManager,
             ILogger<LoginController> logger,
-            Microsoft.AspNetCore.Identity.UserManager<USER> userManager)
+            Microsoft.AspNetCore.Identity.UserManager<USER> userManager,
+            ICajaRepository cajaRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _cajarepository = cajaRepository;
         }
         // GET: CajaController
         public async Task<ActionResult> IndexAsync()
@@ -30,7 +34,7 @@ namespace Clinica2._0.Controllers
             // Find user
             USER user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
             string nombre = user.Id;
-            return View();
+            return View(await _cajarepository.GetAllCajas());
         }
 
         // GET: CajaController/Details/5
