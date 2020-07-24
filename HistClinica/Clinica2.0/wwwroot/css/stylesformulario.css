@@ -474,3 +474,12 @@ body [class*=sidebar-dark-] {
 		overflow-y: auto;
 	}
 }
+
+/*Tabla laboratorio fix*/
+body #laboratorioGrid_wrapper .dataTables_scrollHeadInner {
+	width: 1169px!important;
+}
+
+body #laboratorioGrid_wrapper .dataTables_scrollHead th {
+	width: 192px !important;
+}
