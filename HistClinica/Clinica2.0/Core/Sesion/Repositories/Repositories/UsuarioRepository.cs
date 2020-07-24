@@ -110,29 +110,32 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     }
                     else return "No se pudo crear usuario por que falta fecha de nacimiento";
 
-                    var user = new USER()
+                    if (persona.personal != null)
                     {
-                        UserName = (primeraletraapellido + primernombre + diaNacimiento).ToLower(),
-                        Email = "userPrueba@gmail.com",
-                        PhoneNumber = _Persona.celular ?? _Persona.telefono,
-                        idEmployee = persona.personal.idEmpleado,
-                        idState = 1,
-                        creationUser = _utilRepository.GetUserApplication(),
-                        creationDate = DateTime.Now.ToString(),
-                        modifyUser = null,
-                        modifyDate = null,
-                        DropDate = null
-                    };
+                        var user = new USER()
+                        {
+                            UserName = (primeraletraapellido + primernombre + diaNacimiento).ToLower(),
+                            Email = "userPrueba@gmail.com",
+                            PhoneNumber = _Persona.celular ?? _Persona.telefono,
+                            idEmployee = persona.personal.idEmpleado,
+                            idState = 1,
+                            creationUser = _utilRepository.GetUserApplication(),
+                            creationDate = DateTime.Now.ToString(),
+                            modifyUser = null,
+                            modifyDate = null,
+                            DropDate = null
+                        };
+                        var result = await _userManager.CreateAsync(user, primeraletraapellido.ToUpper() + primernombre.ToLower() + "_" + _Persona.dniPersona.ToString());
+                        if (result.Succeeded)
+                        {
+                            _logger.LogInformation("User created a new account with password.");
+                            return "Se asigno usuario correctamente";
+                        }
+                        else
+                        {
+                            return "Error en registro de Usuario";
+                        }
 
-                    var result = await _userManager.CreateAsync(user, primeraletraapellido.ToUpper() + primernombre.ToLower()  +"_"+ _Persona.dniPersona.ToString());
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User created a new account with password.");
-                        return "Se asigno usuario correctamente";
-                    }
-                    else
-                    {
-                        return "Error en registro de Usuario";
                     }
                 }
                 else
@@ -149,6 +152,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             {
                 return "Error en el guardado " + ex.Message;
             }
+            return "Se registro usuario correctamente";
         }
         #endregion Usuario
         #region Rol

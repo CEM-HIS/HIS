@@ -842,6 +842,13 @@ function ConsultarLaboratorio() {
 		success: function (response) {
 			$('#modallaboratorio').html(response);
 			$('#modallaboratorio').modal('show');
+			$('#laboratorioGrid').DataTable({
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+				},
+				"scrollY": "200px",
+				"scrollCollapse": true,
+			});
 		},
 		failure: function (response) {
 			alert(response.responseText);

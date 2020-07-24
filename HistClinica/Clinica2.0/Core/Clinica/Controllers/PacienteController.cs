@@ -24,8 +24,6 @@ namespace Clinica2._0.Controllers
             _utilrepository = utilrepository;
             _citarepository = citaRepository;
         }
-
-
         public async Task<IActionResult> Index()
         {
             if (TempData.ContainsKey("mensajecita"))
