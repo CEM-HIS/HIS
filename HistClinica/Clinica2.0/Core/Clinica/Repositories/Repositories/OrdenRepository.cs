@@ -108,5 +108,20 @@ namespace Clinica2._0.Core.Clinica.Repositories.Repositories
 			}
 			
 		}
+
+		public async Task<string> DeleteDetalleOrden(int id)
+		{
+				try
+				{
+					ORDEN_ATE_DETALLE detalle = await _context.ORDEN_ATE_DETALLE.FindAsync(id);
+					_context.ORDEN_ATE_DETALLE.Remove(detalle);
+					await Save();
+					return "Registro eliminado correctamente";
+				}
+				catch (Exception ex)
+				{
+					return "error" + ex.Message;
+				}
+		}
 	}
 }
