@@ -13,5 +13,6 @@ namespace Clinica2._0.Core.Clinica.Repositories.Interfaces
 		Task<string> AddDetalleOrden(int idorden, LABORATORIO model);
 		Task Save();
 		Task<OrdenDTO> GetOrden(int orden);
+		Task<string> DeleteDetalleOrden(int id);
 	}
 }

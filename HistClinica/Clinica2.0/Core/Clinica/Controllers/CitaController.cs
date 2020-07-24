@@ -338,5 +338,11 @@ namespace Clinica2._0.Controllers
             await _ordenRepository.AddDetalleOrden(idorden,lab);
             return RedirectToAction("OrdenAtencion");
         }
+
+        public async Task<IActionResult> DeleteDetalleOrden(int id)
+        {
+            await _ordenRepository.DeleteDetalleOrden(id);
+            return RedirectToAction("OrdenAtencion");
+        }
     }
 }

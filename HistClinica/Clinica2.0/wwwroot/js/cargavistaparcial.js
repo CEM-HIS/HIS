@@ -389,6 +389,29 @@ $(document).on('click', '#laboratorioGrid #addLab', function (event) {
 
 });
 
+$(document).on('click', '#ordengrid #anular', function (event) {
+
+	var id = $(this).closest("tr").find("td").eq(0).html();
+	$.ajax({
+		type: "GET",
+		url: "/Cita/DeleteDetalleOrden",
+		data: { id: id, },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalordenes').html(response);
+			$('#modalordenes').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+
+});
+
 
 
 $(document).on('change', '#cboafilia', function (event) {

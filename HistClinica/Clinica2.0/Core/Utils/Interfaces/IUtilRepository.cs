@@ -26,5 +26,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 		Task<PLAN_SALUD> getPlan(string numero);
 		Task<List<LABORATORIO>> getLaboratorio();
 		Task<LABORATORIO> getLab(int id);
+		Task Save();
 	}
 }
