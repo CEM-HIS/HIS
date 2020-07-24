@@ -56,8 +56,6 @@
 
                         <option value="0">SELECCIONAR TURNO</option>
 
-
-                           
                     </select>
 
                 </div>
@@ -144,7 +142,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td style="visibility:hidden;">@item.fecha</td>
+                            <td>@item.fechaApertura</td>
                             <td>@item.idCaja</td>
                             <td>@item.idEmpleado</td>
                             <td>@item.turno</td>
@@ -251,49 +249,72 @@
                                 Hora Apertura
                             </th>
                             <th>
-                                Monto Apertura
+                                Monto Soles Apertura
                             </th>
                             <th>
-                                Tipo Divisa
+                                Monto Dolares Apertura
                             </th>
+                            <th>
+                                Monto Euros Apertura
+                            </th>
+                            <th>
+                                Monto Soles Cierre
+                            </th>
+                            <th>
+                                Monto Dolares Cierre
+                            </th>
+                            <th>
+                                Monto Euros Cierre
+                            </th>
+                            <th>
+                                Fecha Cierre
 
+                            </th>
+                            <th>
+                                Hora Cierre
+                            </th>
                         </tr>
                     </thead>
                     <tbody class="tbody">
                         <tr>
                             <th scope="row">001</th>
                             <td>2020-07-20</td>
-                            <td>2020-07-20</td>
+                            <td>8:00</td>
                             <td>1500.0</td>
-                            <td>Soles</td>
-
+                            <td>1500.0</td>
+                            <td>1500.0</td>
+                            <td>2000.0</td>
+                            <td>2000.0</td>
+                            <td>2000.0</td>
+                            <td>2020-07-20</td>
+                            <td>18:00</td>
                         </tr>
                         <tr>
                             <th scope="row">002</th>
-                            <td>2020-07-20</td>
-                            <td>2020-07-20</td>
+                            <td>2020-07-19</td>
+                            <td>10:00</td>
+                            <td>1000.0</td>
+                            <td>1000.0</td>
+                            <td>1000.0</td>
                             <td>1500.0</td>
-                            <td>Dolares</td>
+                            <td>1500.0</td>
+                            <td>1500.0</td>
+                            <td>2020-07-20</td>
+                            <td>20:00</td>
                         </tr>
                         <tr>
                             <th scope="row">003</th>
+                            <td>2020-07-15</td>
+                            <td>7:00</td>
+                            <td>800.0</td>
+                            <td>800.0</td>
+                            <td>800.0</td>
+                            <td>1000.0</td>
+                            <td>1000.0</td>
+                            <td>1000.0</td>
                             <td>2020-07-20</td>
-                            <td>2020-07-20</td>
-                            <td>1500.0</td>
-                            <td>Soles</td>
-
-
+                            <td>19:00</td>
                         </tr>
-                        <tr>
-                            <th scope="row">004</th>
-                            <td>2020-07-20</td>
-                            <td>2020-07-20</td>
-                            <td>1500.0</td>
-                            <td>Euros</td>
-
-
-                        </tr>
-
                     </tbody>
                 </table>
 

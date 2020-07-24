@@ -4,6 +4,30 @@ $(document).ready(function () {
     camposlongitud();
 });
 
+function BuscarPlan() {
+    var numero = $('#plansalud').val();
+    $.ajax({
+        type: "GET",
+        url: "/Paciente/GetPlan",
+        data: { numero: numero },
+        contentType: "application/json; charset=utf-8",
+        dataType: "Json",
+        success: function (response) {
+            console.log(response);
+            $('#aseguradora').val(response.asegurado);
+            $('#contratante').val(response.contratante);
+            $('#plansalud').val(numero);
+
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });
+}
+
 $(document).on('change', '#cbotppac', function (event) {
     var value = $("#cbotppac option:selected").val();
     if (value == 121) {

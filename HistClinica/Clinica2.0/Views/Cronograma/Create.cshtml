@@ -7,28 +7,27 @@
 	<div class="row pb-2">
 		<div class="col-sm-4">
 			<div class="row">
-				<div class="col-sm-11">
+				<div class="col-sm-10">
 					<div class="input-style">
 						<label class="form-label">Medico</label>
-
-						@Html.DropDownListFor(m => m.idMedico, new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccionar", new
-						{
-							@class = "form-control",
-					   data_cascade_combo = "#stypes",
-					   data_cascade_combo_source = Url.Action("GetEspecialidad", "Cronograma"),
-					   data_cascade_combo_param_name = "id"
-				   })
-						@Html.ValidationMessageFor(model => model.idMedico, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(m => m.idMedico, new { @id= "idmedicocro" })
+						<input type="text" class="form-control" id="medico"/>
 					</div>
 				</div>
+                <div class="col-sm-2 text-left p-0">
+						<div class="input-style">
+							<a onclick="FiltroCronogramaMedEsp();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
+						</div>
+					</div>
+                </div>
+
 			</div>
-		</div>
 		<div class="col-sm-4">
 			<div class="row">
 				<div class="col-sm-11">
 					<div class="input-style">
 						<label class="form-label">Especialidad</label>
-						@Html.DropDownListFor(m => m.idEspecialidad, new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "stypes" })
+						@Html.DropDownListFor(m => m.idEspecialidad, new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "idespecialidad" })
 						@Html.ValidationMessageFor(model => model.idEspecialidad, "", new { @class = "text-danger" })
 					</div>
 				</div>

@@ -1,0 +1,323 @@
+﻿@model Clinica2._0.DTO.OrdenDTO
+
+<div class="modal-dialog modal-lg" style="max-width:1250px;" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2 class="modal-title text-center" id="exampleModalLabel1">Reprogramacion de cita ambulatoria</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="container-fluid">
+			<div class="col-sm-12 left" style="height: 50px;">
+				<div class="card card-primary card-his">
+					<div class="card-header card-shadow">
+						<h2>Registro de ordenes</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12">
+				@using (Html.BeginForm()) {
+					<div class="row pb-2 text-left">
+						<div class="col-sm-12">
+							<a type="submit" style="font-weight:bold; color:white;" onclick="GrabarOrdenAtencion();" class="btn btn-primary mt-4 pt-1" id="Crear">
+								<i class="far fa-credit-card"></i>
+								GRABAR
+							</a>
+							<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"> <i class="far fa-clock"></i> CAJA</button>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-sm-6 pr-3">
+							<div class="row border pt-2 pl-3 pr-3 pb-3" style="border-radius:3px">
+								<div class="col-sm-12">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="input-style">
+												<label class="form-label">Nro orden</label>
+												<input type="hidden" id="idorden" asp-for="idorden" />
+												@Html.EditorFor(m => m.numeroorden, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+											</div>
+										</div>
+										<div class="col-sm-6">
+
+										</div>
+									</div>
+									<div class="row pt-3">
+										<div class="col-sm-8">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+												<label class="form-check-label" for="inlineRadio1">Paciente</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+												<label class="form-check-label" for="inlineRadio2">Externo</label>
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">Cuenta</label>
+												@Html.EditorFor(m => m.cuenta, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "cuenta" } })
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">N°Atencion</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">N°Item</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">Historia</label>
+												@Html.EditorFor(m => m.numeroHC, new { htmlAttributes = new { @class = "form-control", @type = "text", @id="historia", onkeydown= "BuscarPacienteHC();" } })
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">N°Autorizacion</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">Cod. Asegurado</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-8">
+											<div class="input-style">
+												<input type="hidden" id="idPaciente" asp-for="idPaciente" />
+												<label class="form-label">Paciente</label>
+												@Html.EditorFor(m => m.nombrepaciente, new { htmlAttributes = new { @class = "form-control", @type = "text", @id= "nombrePaciente" } })
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-8">
+											<div class="input-style">
+												<label class="form-label">Direccion</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-8">
+											<div class="input-style">
+												<label class="form-label">Medico Tratante</label>
+												<input type="Text" name="name" id="nombremedico" class="form-control"/>
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-8">
+											<div class="input-style">
+												<label class="form-label">Observacion</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 pl-3">
+							<div class="row border pt-2 pl-3 pr-3 pb-3" style="border-radius:3px">
+								<div class="col-sm-12">
+									<div class="row">
+										<div class="col-sm-8">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+												<label class="form-check-label" for="inlineRadio1">Asegurado/Convenio</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+												<label class="form-check-label" for="inlineRadio2">Particular</label>
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-6">
+											<div class="input-style">
+												<label class="form-label">Plan</label>
+												@Html.EditorFor(m => m.codigoplan, new { htmlAttributes = new { @class = "form-control", @type = "text", @id="plan" } })
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="input-style">
+												<label class="form-label">N°Contrato</label>
+												@Html.EditorFor(m => m.contrato, new { htmlAttributes = new { @class = "form-control", @type = "text", @id="contrato" } })
+											</div>
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-8">
+											<div class="input-style">
+												<label class="form-label">Aseguradora</label>
+												@Html.EditorFor(m => m.aseguradora, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-8">
+											<div class="input-style">
+												<label class="form-label">Contratante</label>
+												@Html.EditorFor(m => m.contratante, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">Deducicle</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">Coaseguro</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="input-style">
+												<label class="form-label">Moneda</label>
+												<select class="form-control">
+													<option value="value">SOL</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-6">
+											<div class="input-style">
+												<label class="form-label">Descuento</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="input-style">
+												<label class="form-label">Cobertura</label>
+												<input type="text" name="name" class="form-control" />
+											</div>
+										</div>
+									</div>
+									<div class="row pt-2">
+										<div class="col-sm-8">
+											<div class="input-style">
+												<label class="form-label">Medico envia</label>
+												<select class="form-control">
+													<option value="value">Alonso arrieta</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-4">
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="row">
+							<div class="col-sm-12">
+								<table class="table table-bordered pt-2">
+									<thead>
+										<tr>
+											<th>Item</th>
+											<th>Tarifa</th>
+											<th>Cant.</th>
+											<th>Precio Unitario</th>
+											<th>% Dscto</th>
+											<th>Importe</th>
+											<th>Seguro</th>
+											<th>Paciente</th>
+											<th>Interviniente</th>
+										</tr>
+									</thead>
+									<tbody>
+										@{
+											if (Model != null)
+											{
+												if (Model.detalleorden != null)
+												{
+													foreach (var item in Model.detalleorden)
+													{
+																				<tr>
+																					<th>@item.idDetalleOrden</th>
+																					<th nowrap>@item.tarifa</th>
+																					<th>@item.cantidad</th>
+																					<th>@item.PrecioUnitario</th>
+																					<th>@item.descuento</th>
+																					<th>@item.importe</th>
+																					<th>@item.seguro</th>
+																					<th>@item.paciente</th>
+																					<th>@item.interviniente</th>
+																				</tr>
+													}
+												}
+											}
+										}
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="row pt-5">
+							<div class="col-sm-12">
+								<button type="submit" style="color:white;" onclick="ConsultarLaboratorio();" class="btn btn-primary">Insertar</button>
+							</div>
+							<div class="col-sm-12">
+								<button class="btn btn-primary">Eliminar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
