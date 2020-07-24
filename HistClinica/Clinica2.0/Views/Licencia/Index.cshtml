@@ -67,9 +67,10 @@
 								</td>
 								<td>@item.estado</td>
 								<td>
-									<a type="submit" style="color:white;" class="edit btn btn-primary mt-small-2" aria-hidden="true">
+									<button type="submit" id="editar" style="color:white;" class="edit btn btn-primary mt-small-2" aria-hidden="true">
 										<i class="fas fa-edit"></i>
-									</a>
+									</button>
+									<button type="submit" id="anular" class="delete btn btn-danger"><i class="fas fa-minus"></i></button>
 								</td>
 							</tr>
 						}
@@ -81,5 +82,9 @@
 </div>
 
 <div class="modal fade" id="modalagregarlicencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="modaleditarlicencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="modaleliminarlicencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 </div>
 <script src="~/js/cargavistaparcial.js"></script>

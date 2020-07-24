@@ -12,6 +12,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 	{
 		Task Save();
 		Task<string> insertLicencia(LICENCIA licencia);
+		Task<string> updateLicencia(LICENCIA licencia);
 		Task<List<licenciaDTO>> getAll();
+
+		Task<LICENCIA> getLicencia(int id);
+		Task<string> deleteLicencia(LICENCIA licencia);
 	}
 }

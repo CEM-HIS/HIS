@@ -19,6 +19,21 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 			_context = contexto;
 		}
 
+		public async Task<string> deleteLicencia(LICENCIA modelo)
+		{
+			try
+			{
+				LICENCIA licencia = await _context.LICENCIA.FindAsync(modelo.idLicencia);
+				_context.LICENCIA.Remove(licencia);
+				await Save();
+				return "Se anulo la licencia correctamente";
+			}
+			catch (Exception ex)
+			{
+				return "Error al anular" + ex.Message;
+			}
+		}
+
 		public async Task<List<licenciaDTO>> getAll()
 		{
 			List<licenciaDTO> licencia = await (from l in _context.LICENCIA	
@@ -36,6 +51,12 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 			return licencia;
 		}
 
+		public async Task<LICENCIA> getLicencia(int id)
+		{
+			LICENCIA licencia = await (from l in _context.LICENCIA where l.idLicencia == id select l).FirstOrDefaultAsync();
+			return licencia;
+		}
+
 		public async Task<string> insertLicencia(LICENCIA licencia)
 		{
 			try
@@ -47,7 +68,7 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 					fechaInicio = licencia.fechaInicio,
 					fechaFin = licencia.fechaFin,
 					idMedico = licencia.idMedico,
-					idEstado = 171
+					idEstado = 1171
 				});
 				await Save();
 				return "Se registro licencia correctamente";
@@ -62,6 +83,20 @@ namespace HistClinica.Repositories.EntityRepositories.Repositories
 		public async Task Save()
 		{
 			await _context.SaveChangesAsync();
+		}
+
+		public async Task<string> updateLicencia(LICENCIA licencia)
+		{
+			try
+			{
+				_context.Entry(licencia).State = EntityState.Modified;
+				await Save();
+				return "Actualizacion exitosa";
+			}
+			catch (Exception ex)
+			{
+				return "Error al actualizar" + ex.Message;
+			}
 		}
 	}
 }

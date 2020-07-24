@@ -317,6 +317,48 @@
 		});
 	});
 
+	$("#licenciagrid #editar").click(function () {
+		var id = $(this).closest("tr").find("td").eq(0).html();
+		$.ajax({
+			type: "GET",
+			url: "/Licencia/Edit",
+			data: { id: id },
+			contentType: "application/json; charset=utf-8",
+			dataType: "html",
+			success: function (response) {
+				$('#modaleditarlicencia').html(response);
+				$('#modaleditarlicencia').modal('show');
+			},
+			failure: function (response) {
+				alert(response.responseText);
+			},
+			error: function (response) {
+				alert(response.responseText);
+			}
+		});
+	});
+
+	$("#licenciagrid #anular").click(function () {
+		var id = $(this).closest("tr").find("td").eq(0).html();
+		$.ajax({
+			type: "GET",
+			url: "/Licencia/Delete",
+			data: { id: id },
+			contentType: "application/json; charset=utf-8",
+			dataType: "html",
+			success: function (response) {
+				$('#modaleliminarlicencia').html(response);
+				$('#modaleliminarlicencia').modal('show');
+			},
+			failure: function (response) {
+				alert(response.responseText);
+			},
+			error: function (response) {
+				alert(response.responseText);
+			}
+		});
+	});
+
 });
 
 $(document).on('change', '#idmedico', function (event) {
@@ -745,6 +787,13 @@ function OpenModalOrdenes() {
 		success: function (response) {
 			$('#modalordenes').html(response);
 			$('#modalordenes').modal('show');
+			$('#ordengrid').DataTable({
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+				},
+				"scrollY": "200px",
+				"scrollCollapse": true,
+			});
 		},
 		failure: function (response) {
 			alert(response.responseText);
