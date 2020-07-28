@@ -461,15 +461,15 @@ body [class*=sidebar-dark-] {
 		}
 
 @media (min-width: 576px) {
-	.modal-dialog {
+	#modalreporte .modal-dialog {
 		max-width: 60%;
 	}
 
-	.modal-dialog {
+	#modalreporte .modal-dialog {
 		overflow-y: initial !important
 	}
 
-	.modal-body {
+	#modalreporte .modal-body {
 		height: 600px;
 		overflow-y: auto;
 	}

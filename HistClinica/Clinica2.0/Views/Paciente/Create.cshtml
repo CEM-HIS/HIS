@@ -19,7 +19,25 @@
 		<div class="col-sm-12">
 			<div class="card">
 				<div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="">
+
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                        <label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview" style="background-image: url(images/profile.png);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 					<div class="row">
+                        
 						<div class="col-sm-3">
 							<div class="col-sm-12">
 								<div class="row">
@@ -855,6 +873,7 @@
 	}
 </div>
 <script src="~/js/Mantenedor_Paciente.js"></script>
+<script src="~/js/profile-picture.js"></script>
 @section Scripts {
 	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
