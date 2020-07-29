@@ -105,5 +105,15 @@ namespace Clinica2._0.Controllers
                 return View();
             }
         }
+
+        public ActionResult GeneracionComprobante()
+        {
+            return View();
+        }
+
+        public ActionResult Apertura()
+        {
+            return PartialView();
+        }
     }
 }

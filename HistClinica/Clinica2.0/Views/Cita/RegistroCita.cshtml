@@ -91,53 +91,67 @@
 
 
 
-			<div class="row pt-3">
-				<div class="col-sm-12">
-					<table class="table table-striped table-bordered" style="width:100%" id="citagrid">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Hora</th>
-								<th>Medico</th>
-								<th>CMP</th>
-								<th>Historia</th>
-								<th>Paciente</th>
-								<th>Confirmado</th>
-								<th>Hora <br> Registro</th>
-								<th>N° <br>cuenta</th>
-								<th>N° Orden</th>
-								<th>Consultorio</th>
-								<th>Tipo Afiliado</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var item in Model)
-							{
-								<tr>
-									<td>@item.idCita</td>
-									<td>@item.hora</td>
-									<td nowrap>@item.Medico</td>
-									<td>@item.CMP</td>
-									<td>@item.numeroHc</td>
-									<td>@item.nombrePaciente</td>
-									<td>@item.estadoPago</td>
-									<td>@item.horaregistro</td>
-									<td>@item.cuenta</td>
-									<td>@item.numeroorden</td>
-									<td>@item.consultorio</td>
-									<td></td>
-									<td>
-										<a asp-controller="Cita" asp-action="Registro" asp-route-id="@item.idCita" style="color:white;" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></a>
-										<button type="submit" id="editar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></button>
-										<button type="submit" id="anular" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
-									</td>
-								</tr>
-							}
-						</tbody>
-					</table>
+		<div class="row pt-3">
+			@if (ViewBag.message != null)
+			{
+				<div class="col-sm-12 pb-2 alert alert-info alert-dismissible text-center" id="success-alert" role="alert" style="margin-top: 15px;">
+					<button type="button" class="close" data-dismiss="alert" aria-label="close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					@ViewBag.message
 				</div>
+			}
+			<div class="col-sm-12">
+				<table class="table table-striped table-bordered" style="width:100%" id="citagrid">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Hora</th>
+							<th>Medico</th>
+							<th>CMP</th>
+							<th>Historia</th>
+							<th>Paciente</th>
+							<th>Confirmado</th>
+							<th>Hora <br> Registro</th>
+							<th>N° <br>cuenta</th>
+							<th>N° Orden</th>
+							<th>Consultorio</th>
+							<th>Tipo Afiliado</th>
+							<th>Estado</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+						<tr>
+							<td>@item.idCita</td>
+							<td>@item.hora</td>
+							<td nowrap>@item.Medico</td>
+							<td>@item.CMP</td>
+							<td>@item.numeroHc</td>
+							<td>@item.nombrePaciente</td>
+							<td>@item.estadoPago</td>
+							<td>@item.horaregistro</td>
+							<td>@item.cuenta</td>
+							<td>@item.numeroorden</td>
+							<td>@item.consultorio</td>
+							<td></td>
+							<td>@item.descripcionEstado</td>
+							<td>
+								<button type="submit" id="add" style="color:white;" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
+								@if (item.descripcionEstado != "REPROGRAMADO")
+								{
+									<button type="submit" id="editar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></button>
+								}
+								<button type="submit" id="anular" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
+							</td>
+						</tr>
+						}
+					</tbody>
+				</table>
 			</div>
+		</div>
 		</div>
 	</div>
 
@@ -370,6 +384,8 @@
 <div class="modal fade" id="modalordenes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 </div>
 <div class="modal fade" id="modallaboratorio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="modalregistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 </div>
 
 

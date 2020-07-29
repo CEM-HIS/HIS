@@ -28,6 +28,10 @@ namespace Clinica2._0.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            if (TempData["mensajelicencia"] != null)
+            {
+                ViewBag.message = TempData["mensajelicencia"].ToString();
+            }
             return View(await licenciarepository.getAll());
         }
 
@@ -46,7 +50,7 @@ namespace Clinica2._0.Controllers
         {
             if (model != null)
             {
-                await licenciarepository.insertLicencia(model);
+              TempData["mensajelicencia"] = await licenciarepository.insertLicencia(model);
                 return RedirectToAction("Index");
             }
             return PartialView();
@@ -68,7 +72,7 @@ namespace Clinica2._0.Controllers
         {
             if (modelo != null)
             {
-                await licenciarepository.updateLicencia(modelo);
+                TempData["mensajelicencia"] = await licenciarepository.updateLicencia(modelo);
                 return RedirectToAction("Index");
             }
             return PartialView();
@@ -85,7 +89,7 @@ namespace Clinica2._0.Controllers
         {
             if (modelo != null)
             {
-                await licenciarepository.deleteLicencia(modelo);
+                TempData["mensajelicencia"] = await licenciarepository.deleteLicencia(modelo);
                 return RedirectToAction("Index");
             }
            

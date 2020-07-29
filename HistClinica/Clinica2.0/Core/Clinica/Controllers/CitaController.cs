@@ -148,7 +148,7 @@ namespace Clinica2._0.Controllers
         {
             CitaDTO cita = await _citarepository.GetById(parametros.idcitaactual);
             CitaDTO citaact = await _citarepository.GetById(parametros.idcita);
-            await _citarepository.ReprogramarCupo(parametros.idpaciente,citaact, cita, parametros.idcita);
+            TempData["mensajecita"] = await _citarepository.ReprogramarCupo(parametros.idpaciente,citaact, cita, parametros.idcita);
             return RedirectToAction("Edit");
         }
 
@@ -209,7 +209,7 @@ namespace Clinica2._0.Controllers
                 return NotFound();
             }
             CitaDTO cita = await _citarepository.GetById(id);
-            return View(cita);
+            return PartialView(cita);
         }
 
         [HttpPost]
@@ -221,12 +221,14 @@ namespace Clinica2._0.Controllers
                 TempData["mensajecita"] = await _citarepository.UpdateCita(cita);
                 return RedirectToAction("RegistroCita");
             }
-            return View(cita);
+            return PartialView(cita);
         }
 
 
         public async Task<IActionResult> AnularCita(int? id)
         {
+            string[] motivos = new string[] { "Reprogramacion de especialidad","Paciente no asistirá a la cita" };
+            ViewBag.motivos = motivos;
             var t068_CITA = await _citarepository.GetById(id);
             if (t068_CITA == null)
             {
@@ -259,6 +261,11 @@ namespace Clinica2._0.Controllers
 
         public async Task<IActionResult> RegistroCita(int? idmedico, int? idespecialidad, string fecha)
         {
+
+            if (TempData["mensajecita"] != null)
+            {
+                ViewBag.message = TempData["mensajecita"].ToString();
+            }
             if (idmedico != 0 && idespecialidad != 0 && fecha != null)
             {
                 HttpContext.Session.SetInt32("idmedico", Convert.ToInt32(idmedico));
@@ -298,13 +305,18 @@ namespace Clinica2._0.Controllers
             return View();
         }
 
-        [HttpPost]
+      /*  [HttpPost]
         public async Task<IActionResult> BuscarPaciente(int dni)
         {
             var personaDTO = await _pacienteRepository.GetByDnioNombresyApellidos(dni, "", "");
             return View(personaDTO);
+        }*/
+
+
+        public async Task<JsonResult> BuscarPacienteByDni(int dni)
+        {
+            return Json(await _pacienteRepository.GetByDnioNombresyApellidos(dni, "", ""));
         }
-   
 
         public async Task<IActionResult> OrdenAtencion()
         {
