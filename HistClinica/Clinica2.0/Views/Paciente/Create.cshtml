@@ -5,6 +5,7 @@
 
 
 <div class="col-sm-12" id="formpaciente">
+    <div class="" id="accordion">
 	@using (Html.BeginForm())
 	{
 		@Html.AntiForgeryToken()
@@ -16,862 +17,813 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-12">
-			<div class="card">
-				<div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="">
+        <div class="col-sm-12 accordion" id="headingOne">
+            <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="acc-icons">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6 card-title">
+                                <h5>Datos del paciente</h5>
+                            </div>
+                            <div class="col-sm-6 text-right">
 
-                                <div class="avatar-upload">
-                                    <div class="avatar-edit">
-                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                        <label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="card">
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="">
+
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                            <label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
+                                        </div>
+                                        <div class="avatar-preview">
+                                            <div id="imagePreview" style="background-image: url(images/profile.png);">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url(images/profile.png);">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="">
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="input-style">
+                                                        <label class="form-label">*Tipo de paciente</label>
+                                                        @Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
+                                                        @Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="">
+                                            <div class="row">
+                                                <div class="col-sm-10">
+                                                    <div class="input-style">
+                                                        <label class="form-label">*Nro plan salud</label>
+                                                        @Html.TextBoxFor(m => m.paciente.numeroPlan, new { @class = "form-control", @id = "plansalud" })
+                                                        @Html.ValidationMessageFor(m => m.paciente.numeroPlan, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 text-left p-0">
+                                                    <div class="input-style">
+                                                        <a onclick="BuscarPlan();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="">
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="input-style">
+                                                        <label class="form-label">*Aseguradora</label>
+                                                        <input type="text" name="name" id="aseguradora" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="">
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="input-style">
+                                                        <label class="form-label">*Contratante</label>
+                                                        <input type="text" name="name" id="contratante" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label class="form-label" for="apepatpac">*Apellido paterno</label>
+                                                    @Html.TextBoxFor(m => m.apellidoPaterno, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.apellidoPaterno, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-10">
+                                                <div class="input-style">
+                                                    <label for="apematpac" class="form-label">*Apellido Materno</label>
+                                                    @Html.TextBoxFor(m => m.apellidoMaterno, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.apellidoMaterno, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="cbosexo" class="form-label">*Sexo</label>
+                                                    @Html.DropDownListFor(m => m.idSexo, new SelectList(ViewBag.lssexo, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.idSexo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="fechdate" class="form-label">*Fecha de nacimiento</label>
+                                                    @Html.TextBoxFor(m => m.fechaNacimiento, new { @class = "form-control", @type = "Date" })
+                                                    @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="cboocupacion" class="form-label">*Ocupación</label>
+                                                    @Html.DropDownListFor(m => m.idOcupacion, new SelectList(ViewBag.locupacion, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.idOcupacion, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-10">
+                                                <div class="input-style">
+                                                    <label for="cbogrdinstruccion" class="form-label">*Grado de instruccion</label>
+                                                    @Html.DropDownListFor(m => m.idGradoInstruccion, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.idGradoInstruccion, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="estcivil" class="form-label">*Estado civil</label>
+                                                    @Html.DropDownListFor(m => m.idEstadoCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.idEstadoCivil, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="emailpac" class="form-label">*Email</label>
+                                                    @Html.TextBoxFor(m => m.correo, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.correo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="celularpac" class="form-label">*Celular</label>
+                                                    @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                                    @Html.ValidationMessageFor(m => m.celular, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <div class="input-style">
+                                                    <label for="cbodoc" class="form-label">*Tipo de Doc</label>
+                                                    @Html.DropDownListFor(m => m.idTipoDocumento, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.idTipoDocumento, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="nrodoc" class="form-label">*Nro. Doc.</label>
+                                                    @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                                    @Html.ValidationMessageFor(m => m.numeroDocumento, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="cboparentesco" class="form-label">*Parentesco</label>
+                                                    @Html.DropDownListFor(m => m.paciente.idParentescoPaciente, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.paciente.idParentescoPaciente, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row" id="divpacconv" style="display:none;">
+                                            <div class="col-sm-8">
+                                                <div class="input-style">
+                                                    <label for="factor_rh" class="form-label">*Factor RH</label>
+                                                    @Html.DropDownListFor(m => m.paciente.idFactorRrh, new SelectList(ViewBag.lfh, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.paciente.idFactorRrh, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+                    <div class="col-sm-12 accordion" id="headingTwo" >
+                        <a class="collapsed acc-icons" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 card-title">
+                                            <h4>Ubicación</h4>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="card">
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="departamentopac">Departamento</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="departamentopac" class="custom-select">
+                                                        <option value="value">text</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="provinciapac">Provincia</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="provinciapac" class="custom-select">
+                                                        <option value="value">text</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="tipvia">Tipo de vía</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.paciente.idTipoViaUbicacion, new SelectList(ViewBag.ltipovia, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="nomvia">Nombre de via</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.nombreViaUbicacion, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="nro">N°</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.numeroUbicacion, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="nrodpto">DPTO N°</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.numeroDepartamentoUbicacion, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="nroInterior">Interior</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.interiorUbicacion, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="nrolote">N° de lote</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.numeroLoteUbicacion, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-					<div class="row">
-                        
-						<div class="col-sm-3">
-							<div class="col-sm-12">
-								<div class="row">
-									<div class="col-sm-8">
-										<div class="input-style">
-											<label class="form-label">*Tipo de paciente</label>
-											@Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
-											@Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="col-sm-12">
-								<div class="row">
-									<div class="col-sm-10">
-										<div class="input-style">
-											<label class="form-label">*Nro plan salud</label>
-											@Html.TextBoxFor(m => m.paciente.numeroPlan, new { @class = "form-control", @id="plansalud" })
-											@Html.ValidationMessageFor(m => m.paciente.numeroPlan, "", new { @class = "text-danger" })
-										</div>
-									</div>
-									<div class="col-sm-2 text-left p-0">
-										<div class="input-style">
-											<a onclick="BuscarPlan();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="col-sm-12">
-								<div class="row">
-									<div class="col-sm-7">
-										<div class="input-style">
-											<label class="form-label">*Aseguradora</label>
-											<input type="text" name="name" id="aseguradora" class="form-control" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="col-sm-12">
-								<div class="row">
-									<div class="col-sm-7">
-										<div class="input-style">
-											<label class="form-label">*Contratante</label>
-											<input type="text" name="name" id="contratante" class="form-control"/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="row pb-2">
-						<div class="col-sm-3">
-							<div class="row">
-								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label class="form-label" for="apepatpac">*Apellido paterno</label>
-                                        @Html.TextBoxFor(m => m.apellidoPaterno, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.apellidoPaterno, "", new { @class = "text-danger" })
-										</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="apematpac" class="form-label">*Apellido Materno</label>
-                                        @Html.TextBoxFor(m => m.apellidoMaterno, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.apellidoMaterno, "", new { @class = "text-danger" })
-										</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-							
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="firstname" class="form-label">*Primer nombre</label>
-                                        @Html.TextBoxFor(m => m.nombres, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.nombres, "", new { @class = "text-danger" })
-										</div>
-                                    </div>
-                                </div>
-						</div>
-					</div>
-					<div class="row pb-2">
-						<div class="col-sm-3">
-							<div class="row">
-							
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="cbosexo" class="form-label">*Sexo</label>
-                                        @Html.DropDownListFor(m => m.idSexo, new SelectList(ViewBag.lssexo, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.idSexo, "", new { @class = "text-danger" })
-									</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="fechdate" class="form-label">*Fecha de nacimiento</label>
-                                        @Html.TextBoxFor(m => m.fechaNacimiento, new { @class = "form-control", @type = "Date" })
-                                        @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
-									</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-							
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="edadpac" class="form-label">*Edad</label>
-                                        @Html.TextBoxFor(m => m.edad, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-                                        @Html.ValidationMessageFor(m => m.edad, "", new { @class = "text-danger" })
-									</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-							
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="cboocupacion" class="form-label">*Ocupación</label>
-                                        @Html.DropDownListFor(m => m.idOcupacion, new SelectList(ViewBag.locupacion, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.idOcupacion, "", new { @class = "text-danger" })
-									</div>
-                                    </div>
-                                </div>
-						</div>
-					</div>
-					<div class="row pb-2">
-						<div class="col-sm-3">
-							<div class="row">
-								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="cbogrdinstruccion" class="form-label">*Grado de instruccion</label>
-                                        @Html.DropDownListFor(m => m.idGradoInstruccion, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.idGradoInstruccion, "", new { @class = "text-danger" })
-										</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="estcivil" class="form-label">*Estado civil</label>
-                                        @Html.DropDownListFor(m => m.idEstadoCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.idEstadoCivil, "", new { @class = "text-danger" })
-										</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="emailpac" class="form-label">*Email</label>
-                                        @Html.TextBoxFor(m => m.correo, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.correo, "", new { @class = "text-danger" })
-										</div>
-                                    </div>
-                                </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="celularpac" class="form-label">*Celular</label>
-                                        @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-                                        @Html.ValidationMessageFor(m => m.celular, "", new { @class = "text-danger" })
-										</div>
+                    <div class="col-sm-12 accordion" id="headingThree">
+                        <a class="collapsed acc-icons" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 card-title">
+                                            <h4>Datos nacimiento</h4>
+                                        </div>
 
                                     </div>
                                 </div>
-						</div>
-					</div>
-					<div class="row pb-3">
-						<div class="col-sm-3">
-							<div class="row">
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="cbodoc" class="form-label">*Tipo de Doc</label>
-                                        @Html.DropDownListFor(m => m.idTipoDocumento, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.idTipoDocumento, "", new { @class = "text-danger" })
-										</div>
+                            </div>
+                        </a>
+                        <div class="card">
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="paisnac">Pais origen</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="paisnac" class="form-control small-input">
+                                                        <option value="value">Peru</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="dptonac">Departamento</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="dptonac" class="form-control small-input">
+                                                        <option value="value">Peru</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="provinnac">Provincia</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="provinnac" class="form-control small-input">
+                                                        <option value="value">Peru</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="cbodistritonac">Distrito</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="cbodistritonac" class="form-control small-input">
+                                                        <option value="value">Peru</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="nrodoc" class="form-label">*Nro. Doc.</label>
-                                        @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-                                        @Html.ValidationMessageFor(m => m.numeroDocumento, "", new { @class = "text-danger" })
-										</div>
-                                    </div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row">
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="cboparentesco" class="form-label">*Parentesco</label>
-                                        @Html.DropDownListFor(m => m.paciente.idParentescoPaciente, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.paciente.idParentescoPaciente, "", new { @class = "text-danger" })
-										</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" id="divpacotros" style="display: none;">
+                        <a data-toggle="collapse" href="#collapseotroscompañia" role="button" aria-expanded="false" aria-controls="collapseotroscompañia">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 card-title">
+                                            <h4>Otros</h4>
+                                        </div>
+
                                     </div>
                                 </div>
-						</div>
-						<div class="col-sm-3">
-							<div class="row" id="divpacconv" style="display:none;">
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="factor_rh" class="form-label">*Factor RH</label>
-                                        @Html.DropDownListFor(m => m.paciente.idFactorRrh, new SelectList(ViewBag.lfh, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.paciente.idFactorRrh, "", new { @class = "text-danger" })
-									</div>
+                            </div>
+                        </a>
+                        <div class="card">
+                            <div class="collapse multi-collapse" id="collapseotroscompañia">
+                                <div id="actcompañia" class="card-body" style="display:none;">
+                                    <div class="row pb-2">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="cobertura">Cobertura</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.coberturaCompañia, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="nroatenmed">Ord. Atencion medica</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.ordenAtencionMedicaCompañia, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="nomaseg">Nombre de la Aseguradora</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.nombreAseguradoraCompañia, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="codaseg">Cod. del asegurado</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.codigoAseguradoCompañia, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-3">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="poliza">Poliza</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.polizaCompañia, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="cboparentesco2">Parentesco</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.DropDownListFor(m => m.paciente.idParentescoCompañia, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="fechinivig">Inicio de vig.</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.inicioVigenciaCompañia, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="fechfinvig">Fin de vig.</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.finVigenciaCompañia, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="tpplansalud">Tip Plan de salud</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.tipoPlanSaludCompañia, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="nroplansalud">N° plan de salud</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.numeroPlanSaludCompañia, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+
+                                        </div>
+                                        <div class="col-sm-3">
+
+                                        </div>
                                     </div>
                                 </div>
-						</div>
-					</div>
-					<div class="row pb-2">
-						<div class="col-sm-3">
-							<div class="row" id="divpaccomp" style="display:none;">
-								
-                                <div class="col-sm-8">
-                                    <div class="input-style">
-                                        <label for="cbogruposanguineo" class="form-label">*Grupo sanguineo</label>
-                                        @Html.DropDownListFor(m => m.paciente.idGrupoSanguineo, new SelectList(ViewBag.lgpsangre, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.paciente.idGrupoSanguineo, "", new { @class = "text-danger" })
-										</div>
+                                <div id="actconvenio" class="card-body" style="display:none;">
+                                    <div class="row pb-2">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="coberturacov">Cobertura</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.coberturaConvenio, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="ordatencioncov">Ord. Atencion medica</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.ordenAtencionMedicaConvenio, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="cboparentesco3">Parentesco</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.DropDownListFor(m => m.paciente.idParentesoConvenio, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="fechinicov">Inicio de vig.</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.inicioVigenciaConvenio, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-3">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label for="fechfincov">Fin de vig.</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.paciente.finVigenciaConvenio, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                        </div>
                                     </div>
                                 </div>
-						</div>
-						<div class="col-sm-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 accordion" id="headingFourth">
+                        <a class="collapsed acc-icons" data-toggle="collapse" data-target="#collapseFourth" aria-expanded="false" aria-controls="collapseFourth">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 card-title">
+                                            <h4>Empresa</h4>
+                                        </div>
 
-						</div>
-						<div class="col-sm-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="card">
+                            <div id="collapseFourth" class="collapse" aria-labelledby="headingFourth" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="nroruc">RUC</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.numeroRuc, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="razsoc">Razon social</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.razonSocialEmpresa, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="estruc">Estado del RUC</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.estadoRucEmpresa, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="domfiscal">Domicilio fiscal</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.domicilioFiscalEmpresa, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 accordion" id="headingFive">
+                        <a class="collapsed acc-icons" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 card-title">
+                                            <h4>Datos del acompañante</h4>
+                                        </div>
 
-						</div>
-						<div class="col-sm-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="card">
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="cbotipdocacom">Tipo de Doc</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.paciente.idTipoDocumentoAcompañante, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="nrodocacom">Nro Doc.</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.numeroDocumentoAcompañante, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label>Buscar</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-				<div class="card card-primary">
-					<div class="card-header">
-						<div class="row">
-							<div class="col-sm-6 card-title">
-								<h4>Ubicación</h4>
-							</div>
-							<div class="col-sm-6 text-right">
-								<i style="font-size: 30px;" class="fas fa-plus fx-5"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<div class="card">
-				<div class="collapse multi-collapse" id="multiCollapseExample1">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="departamentopac">Departamento</label>
-									</div>
-									<div class="col-sm-8">
-										<select id="departamentopac" class="custom-select">
-											<option value="value">text</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="provinciapac">Provincia</label>
-									</div>
-									<div class="col-sm-8">
-										<select id="provinciapac" class="custom-select">
-											<option value="value">text</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="tipvia">Tipo de vía</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.DropDownListFor(m => m.paciente.idTipoViaUbicacion, new SelectList(ViewBag.ltipovia, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="nomvia">Nombre de via</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.nombreViaUbicacion, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="nro">N°</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.numeroUbicacion, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="nrodpto">DPTO N°</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.numeroDepartamentoUbicacion, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="nroInterior">Interior</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.interiorUbicacion, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="nrolote">N° de lote</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.numeroLoteUbicacion, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<a data-toggle="collapse" href="#collapsedatosnac" role="button" aria-expanded="false" aria-controls="collapsedatosnac">
-				<div class="card card-primary">
-					<div class="card-header">
-						<div class="row">
-							<div class="col-sm-6 card-title">
-								<h4>Datos nacimiento</h4>
-							</div>
-							<div class="col-sm-6 text-right">
-								<i style="font-size: 30px;" class="fas fa-plus fx-5"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<div class="card">
-				<div class="collapse multi-collapse" id="collapsedatosnac">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="paisnac">Pais origen</label>
-									</div>
-									<div class="col-sm-8">
-										<select id="paisnac" class="form-control small-input">
-											<option value="value">Peru</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="dptonac">Departamento</label>
-									</div>
-									<div class="col-sm-8">
-										<select id="dptonac" class="form-control small-input">
-											<option value="value">Peru</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="provinnac">Provincia</label>
-									</div>
-									<div class="col-sm-8">
-										<select id="provinnac" class="form-control small-input">
-											<option value="value">Peru</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="cbodistritonac">Distrito</label>
-									</div>
-									<div class="col-sm-8">
-										<select id="cbodistritonac" class="form-control small-input">
-											<option value="value">Peru</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12" id="divpacotros" style="display: none;">
-			<a data-toggle="collapse" href="#collapseotroscompañia" role="button" aria-expanded="false" aria-controls="collapseotroscompañia">
-				<div class="card card-primary">
-					<div class="card-header">
-						<div class="row">
-							<div class="col-sm-6 card-title">
-								<h4>Otros</h4>
-							</div>
-							<div class="col-sm-6 text-right">
-								<i style="font-size: 30px;" class="fas fa-plus fx-5"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<div class="card">
-				<div class="collapse multi-collapse" id="collapseotroscompañia">
-					<div id="actcompañia" class="card-body" style="display:none;">
-						<div class="row pb-2">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="cobertura">Cobertura</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.coberturaCompañia, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="nroatenmed">Ord. Atencion medica</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.ordenAtencionMedicaCompañia, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="nomaseg">Nombre de la Aseguradora</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.nombreAseguradoraCompañia, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="codaseg">Cod. del asegurado</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.codigoAseguradoCompañia, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row pb-3">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="poliza">Poliza</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.polizaCompañia, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="cboparentesco2">Parentesco</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.DropDownListFor(m => m.paciente.idParentescoCompañia, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="fechinivig">Inicio de vig.</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.inicioVigenciaCompañia, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="fechfinvig">Fin de vig.</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.finVigenciaCompañia, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="tpplansalud">Tip Plan de salud</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.tipoPlanSaludCompañia, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="nroplansalud">N° plan de salud</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.numeroPlanSaludCompañia, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="apepatacom">Apellido paterno</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.apellidoPaternoAcompañante, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="apematacom">Apellido materno</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.apellidoMaternoAcompañante, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="firstnomacom">Primer nombre</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.NombreAcompañante, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="cboparentescoacom">Parentesco</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.paciente.idParentescoAcompañante, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
 
-							</div>
-							<div class="col-sm-3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="edadacom">Edad</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.paciente.edadAcompañante, new { @class = "form-control small-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
 
-							</div>
-						</div>
-					</div>
-					<div id="actconvenio" class="card-body" style="display:none;">
-						<div class="row pb-2">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="coberturacov">Cobertura</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.coberturaConvenio, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="ordatencioncov">Ord. Atencion medica</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.ordenAtencionMedicaConvenio, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="cboparentesco3">Parentesco</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.DropDownListFor(m => m.paciente.idParentesoConvenio, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="fechinicov">Inicio de vig.</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.inicioVigenciaConvenio, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row pb-3">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-5">
-										<label for="fechfincov">Fin de vig.</label>
-									</div>
-									<div class="col-sm-7">
-										@Html.TextBoxFor(m => m.paciente.finVigenciaConvenio, new { @class = "form-control" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<a data-toggle="collapse" href="#collapsedatosempresa" role="button" aria-expanded="false" aria-controls="collapsedatosempresa">
-				<div class="card card-primary">
-					<div class="card-header">
-						<div class="row">
-							<div class="col-sm-6 card-title">
-								<h4>Empresa</h4>
-							</div>
-							<div class="col-sm-6 text-right">
-								<i style="font-size: 30px;" class="fas fa-plus fx-5"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<div class="card">
-				<div class="collapse multi-collapse" id="collapsedatosempresa">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="nroruc">RUC</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.numeroRuc, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="razsoc">Razon social</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.razonSocialEmpresa, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="estruc">Estado del RUC</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.estadoRucEmpresa, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="domfiscal">Domicilio fiscal</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.domicilioFiscalEmpresa, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<a data-toggle="collapse" href="#collapseacom" role="button" aria-expanded="false" aria-controls="collapseacom">
-				<div class="card card-primary">
-					<div class="card-header">
-						<div class="row">
-							<div class="col-sm-6 card-title">
-								<h4>Datos del acompañante</h4>
-							</div>
-							<div class="col-sm-6 text-right">
-								<i style="font-size: 30px;" class="fas fa-plus fx-5"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<div class="card">
-				<div class="collapse multi-collapse" id="collapseacom">
-					<div class="card-body">
-						<div class="row mb-3">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="cbotipdocacom">Tipo de Doc</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.DropDownListFor(m => m.paciente.idTipoDocumentoAcompañante, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="nrodocacom">Nro Doc.</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.numeroDocumentoAcompañante, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label>Buscar</label>
-									</div>
-									<div class="col-sm-8">
-										<button class="btn btn-primary"><i class="fa fa-search"></i></button>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
+                                        </div>
+                                        <div class="col-sm-3">
 
-							</div>
-						</div>
-						<div class="row mb-1">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="apepatacom">Apellido paterno</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.apellidoPaternoAcompañante, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="apematacom">Apellido materno</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.apellidoMaternoAcompañante, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="firstnomacom">Primer nombre</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.NombreAcompañante, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="cboparentescoacom">Parentesco</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.DropDownListFor(m => m.paciente.idParentescoAcompañante, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control small-input" })
+                                        </div>
+                                    </div>
 
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="row">
-									<div class="col-sm-4">
-										<label for="edadacom">Edad</label>
-									</div>
-									<div class="col-sm-8">
-										@Html.TextBoxFor(m => m.paciente.edadAcompañante, new { @class = "form-control small-input" })
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
+                                </div>
 
-							</div>
-							<div class="col-sm-3">
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12 text-right pb-2">
-			<button type="submit" class="btn btn-primary">Guardar</button>
-			<a asp-action="RegistroCita" asp-controller="Cita" type="submit" class="btn btn-primary">Cerrar</a>
-		</div>
-	}
-</div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-sm-12 text-right pb-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a asp-action="RegistroCita" asp-controller="Cita" type="submit" class="btn btn-primary">Cerrar</a>
+            </div>
+            }
+        </div>
 <script src="~/js/Mantenedor_Paciente.js"></script>
 <script src="~/js/profile-picture.js"></script>
 @section Scripts {
