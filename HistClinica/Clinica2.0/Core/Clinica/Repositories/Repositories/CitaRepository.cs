@@ -132,11 +132,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     codigoCita = null,
                     idServicioClinica = null,
                     idConsultorio = citaact.idconsultorio,
-                    idEstadoCita = (from ec in _context.ESTADO_CITA
-                                    where ec.estado == "ANULADO"
-                                    select ec.idEstadoCita).FirstOrDefault(),
-                    idProgramacionMedica = citaact.idProgramacionMedica,
-                    idEmpleado = citaact.idEmpleado,
+                    idEstadoCita = 1175,
+                    idEmpleado = null,
                     idTipoAtencion = null,
                     idtipoCita = null,
                     igv = null,
@@ -284,7 +281,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         public async Task<List<CitaDTO>> GetAllCitas(int idmedico, int idespecialidad, string fecha)
         {
             List<CitaDTO> Citas = await (from c in _context.CITA join cro in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cro.idProgramMedica
-                                         where cro.idMedico == idmedico && cro.idEspecialidad == idespecialidad && c.fechaCita.Value.Date.ToString() == fecha
+                                         where cro.idMedico == idmedico || cro.idEspecialidad == idespecialidad || c.fechaCita.Value.Date.ToString() == fecha
                                       //select c
                                       select new CitaDTO()
                                       {
@@ -310,7 +307,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                           horaregistro = c.horaregistro,
                                           numeroorden = c.nroorden,
                                           cuenta = c.cuenta,
-                                          numeroHc = c.numeroHC
+                                          numeroHc = c.numeroHC,
+                                          descripcionEstado = (from de in _context.TABLA_DETALLE
+                                                               where de.idTablaDetalle == c.idEstadoCita
+                                                               select de.descripcion).FirstOrDefault()
                                       }
                                         ).ToListAsync();
             //return await GetCitas(idmedico, idespecialidad, fecha, Citas);
@@ -428,7 +428,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     codigoCita = null,
                     idServicioClinica = null,
                     idConsultorio = model.idconsultorio,
-                    idEstadoCita = null,
+                    idEstadoCita = 1174,
                     idProgramacionMedica = model.idProgramacionMedica,
                     idEmpleado = model.idEmpleado,
                     idTipoAtencion = null,
@@ -446,9 +446,9 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     precio = null,
                     prioridad = null,
                     horaregistro = DateTime.Now.ToString("hh:mm:ss"),
-                    nroorden = model.numeroorden,
-                    cuenta = model.cuenta
-            };
+                    nroorden = string.Format("{0:000011}", model.idCita),
+                    cuenta = string.Format("{0:000001}", model.idCita)
+                };
                 _context.Update(cita);
                 await Save();
                 return "Se registro cita correctamente";
@@ -473,7 +473,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     codigoCita = null,
                     idServicioClinica = null,
                     idConsultorio = cita.idconsultorio,
-                    idEstadoCita = null,
+                    idEstadoCita = 1176,
                     idProgramacionMedica = cita.idProgramacionMedica,
                     idEmpleado = cita.idEmpleado,
                     idTipoAtencion = null,

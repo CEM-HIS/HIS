@@ -112,8 +112,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     fechaBaja = persona.paciente.fechabaja,
                     idEstadoSeguro = null,
                     idTipoPaciente = null,
-                    cuenta = string.Format("{0:000001}", idPersona),
-                    nroorden = string.Format("{0:000011}", idPersona),
+                    cuenta = null,
+                    nroorden = null,
                     codigoPlanSalud = persona.paciente.numeroPlan
                 };
                 if (persona.paciente.estadoSeguro != null) Paciente.idEstadoSeguro = (int)persona.paciente.estadoSeguro;

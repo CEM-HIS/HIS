@@ -1,325 +1,175 @@
 ﻿@model List<Clinica2._0.DTO.CajaDTO>
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
 <div class="container">
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-12 pb-4">
-                <h2>APERTURA-CIERRE CAJA</h2>
-                <div class="col-sm-12 text-right pb-2">
-                    <button onclick="" class="btn btn-primary">Apertura</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+	<div class="col-sm-12">
+		<div class="row">
+			<div class="col-sm-12 pb-4">
+				<h2>CAJA AMBULATORIA</h2>
 
-            <form class="form-inline">
-                <div class="form-group mx-sm-3">
-                    <label for="inputUser" class="sr-only">FechaInicio</label>
-                    <input type="password" class="form-control" id="inputUser" placeholder="Fecha Inicio">
-                </div>
-                <div class="form-group mx-sm-3">
-                    <label for="inputPass" class="sr-only">FechaFin</label>
-                    <input type="password" class="form-control" id="inputPass" placeholder="Fecha Fin ">
-                </div>
-
-
-
-                <div class="form-group mx-sm-3">
-
-                    <span class="input-group-addon"></span>
-
-                    <select class="form-control input-lg" id="Caja" name="Caja" required>
-
-                        <option value="0">SELECCIONAR CAJA</option>
-
-
-
-                    </select>
-
-                </div>
-
-
-
-
-
-                <div class="form-group mx-sm-3">
-
-                    <span class="input-group-addon"></span>
-
-                    <select class="form-control input-lg" id="Turno" name="Turno" required>
-
-                        <option value="0">SELECCIONAR TURNO</option>
-
-                    </select>
-
-                </div>
-
-
-
-
-                <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
-
-
-        </div>
-
-        <div class="row pt-2">
-
-            <div class="col-sm-12">
-                <table  class="table table-striped table-bordered" style="width:100%" id="licenciagrid">
-                    <thead>
-                        <tr>
-                            <th>
-                                Fecha
-                            </th>
-                            <th>
-                                Caja
-                            </th>
-                            <th>
-                                usuario
-                            </th>
-                            <th>
-                                Turno
-                            </th>
-                            <th>
-                                Estado
-                            </th>
-                            <th>
-                                Acciones
-                            </th>
-                        </tr>
-                    </thead>
-                    @*<tbody class="tbody">
-            <tr>
-                <th scope="row">2020-07-20</th>
-                <td>Central</td>
-                <td>Administrador</td>
-                <td>1500.0</td>
-                <td>Apertura</td>
-                <td>Ver/Cerrar</td>
-            </tr>
-            <tr>
-                <th scope="row">2020-07-20</th>
-                <td>Central</td>
-                <td>Administrador</td>
-                <td>1500.0</td>
-                <td>Apertura</td>
-                <td>Ver/Cerrar</td>
-            </tr>
-            <tr>
-                <th scope="row">2020-07-20</th>
-                <td>Central</td>
-                <td>Administrador</td>
-                <td>1500.0</td>
-                <td>Apertura</td>
-                <td>Ver/Cerrar</td>
-            </tr>
-            <tr>
-                <th scope="row">2020-07-20</th>
-                <td>Central</td>
-                <td>Administrador</td>
-                <td>1500.0</td>
-                <td>Apertura</td>
-                <td>Ver/Cerrar</td>
-            </tr>
-            <tr>
-                <th scope="row">2020-07-20</th>
-                <td>Central</td>
-                <td>Administrador</td>
-                <td>1500.0</td>
-                <td>Apertura</td>
-                <td>Ver/Cerrar</td>
+			</div>
+		</div>
+		<div class="row">
 
-            </tr>
+			<form class="form-inline">
 
-        </tbody>*@
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.fechaApertura</td>
-                            <td>@item.idCaja</td>
-                            <td>@item.idEmpleado</td>
-                            <td>@item.turno</td>
-                            <td>@item.idEstado</td>
-                            <td>
-                                <a type="submit" style="color:white;" class="edit btn btn-primary" aria-hidden="true">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                @Html.ActionLink("Caja", "VistaDetalle", new { id = item.idCaja }, new { @class = "btn btn-primary fas fa-search" })
-                                <a type="submit" style="color:white;" class="delete btn btn-danger" aria-hidden="true">
-                                    <i class="fas fa-minus"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    } 
-                </table>
-            </div>
-        </div>
-    </div>
+				<div class="form-group mx-sm-3">
 
-    <hr />
-    <br />
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-12 pb-4">
-                <h2>CAJA AMBULATORIA</h2>
+					<span class="input-group-addon"></span>
 
-            </div>
-        </div>
-        <div class="row">
+					<select class="form-control input-lg" id="Caja" name="Caja" required>
 
-            <form class="form-inline">
+						<option value="0">SELECCIONAR CAJERO</option>
 
-                <div class="form-group mx-sm-3">
 
-                    <span class="input-group-addon"></span>
 
-                    <select class="form-control input-lg" id="Caja" name="Caja" required>
+					</select>
 
-                        <option value="0">SELECCIONAR CAJERO</option>
+				</div>
 
-
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group mx-sm-3">
-
-                    <span class="input-group-addon"></span>
-
-                    <select class="form-control input-lg" id="Caja" name="Caja" required>
-
-                        <option value="0">SELECCIONAR CAJA</option>
-
-
-
-                    </select>
-
-                </div>
-
-
-
-
-
-                <div class="form-group mx-sm-3">
-
-                    <span class="input-group-addon"></span>
-
-                    <select class="form-control input-lg" id="Turno" name="Turno" required>
-
-                        <option value="0">SELECCIONAR TURNO</option>
-
-
-
-                    </select>
-
-                </div>
-
-
-
-
-                <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
-
-
-        </div>
-
-        <div class="row pt-2">
-
-            <div class="col-sm-12 table table-sm">
-                <table  class="table table-striped table-bordered" style="width:100%" id="cajagrid">
-                    <thead>
-                        <tr>
-                            <th>
-                                Caja
-                            </th>
-                            <th>
-                                Fecha Apertura
-
-                            </th>
-                            <th>
-                                Hora Apertura
-                            </th>
-                            <th>
-                                Monto Soles Apertura
-                            </th>
-                            <th>
-                                Monto Dolares Apertura
-                            </th>
-                            <th>
-                                Monto Euros Apertura
-                            </th>
-                            <th>
-                                Monto Soles Cierre
-                            </th>
-                            <th>
-                                Monto Dolares Cierre
-                            </th>
-                            <th>
-                                Monto Euros Cierre
-                            </th>
-                            <th>
-                                Fecha Cierre
-
-                            </th>
-                            <th>
-                                Hora Cierre
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody">
-                        <tr>
-                            <th scope="row">001</th>
-                            <td>2020-07-20</td>
-                            <td>8:00</td>
-                            <td>1500.0</td>
-                            <td>1500.0</td>
-                            <td>1500.0</td>
-                            <td>2000.0</td>
-                            <td>2000.0</td>
-                            <td>2000.0</td>
-                            <td>2020-07-20</td>
-                            <td>18:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">002</th>
-                            <td>2020-07-19</td>
-                            <td>10:00</td>
-                            <td>1000.0</td>
-                            <td>1000.0</td>
-                            <td>1000.0</td>
-                            <td>1500.0</td>
-                            <td>1500.0</td>
-                            <td>1500.0</td>
-                            <td>2020-07-20</td>
-                            <td>20:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">003</th>
-                            <td>2020-07-15</td>
-                            <td>7:00</td>
-                            <td>800.0</td>
-                            <td>800.0</td>
-                            <td>800.0</td>
-                            <td>1000.0</td>
-                            <td>1000.0</td>
-                            <td>1000.0</td>
-                            <td>2020-07-20</td>
-                            <td>19:00</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
+
+				<div class="form-group mx-sm-3">
+
+					<span class="input-group-addon"></span>
+
+					<select class="form-control input-lg" id="Caja" name="Caja" required>
+
+						<option value="0">SELECCIONAR CAJA</option>
+
+
+
+					</select>
+
+				</div>
+
+
+
+
+
+				<div class="form-group mx-sm-3">
+
+					<span class="input-group-addon"></span>
+
+					<select class="form-control input-lg" id="Turno" name="Turno" required>
+
+						<option value="0">SELECCIONAR TURNO</option>
+
+
+
+					</select>
+
+				</div>
+
+
+
+
+				<button type="submit" class="btn btn-primary">Buscar</button>
+			</form>
+
+
+		</div>
+
+		<div class="row pt-2">
+
+			<div class="col-sm-12 table table-sm">
+				<table class="table table-striped table-bordered" style="width:100%" id="cajagrid">
+					<thead>
+						<tr>
+							<th>
+								Caja
+							</th>
+							<th>
+								Fecha Apertura
+
+							</th>
+							<th>
+								Hora Apertura
+							</th>
+							<th>
+								Monto Soles Apertura
+							</th>
+							<th>
+								Monto Dolares Apertura
+							</th>
+							<th>
+								Monto Euros Apertura
+							</th>
+							<th>
+								Monto Soles Cierre
+							</th>
+							<th>
+								Monto Dolares Cierre
+							</th>
+							<th>
+								Monto Euros Cierre
+							</th>
+							<th>
+								Fecha Cierre
+
+							</th>
+							<th>
+								Hora Cierre
+							</th>
+						</tr>
+					</thead>
+					<tbody class="tbody">
+						<tr>
+							<th scope="row">001</th>
+							<td>2020-07-20</td>
+							<td>8:00</td>
+							<td>1500.0</td>
+							<td>1500.0</td>
+							<td>1500.0</td>
+							<td>2000.0</td>
+							<td>2000.0</td>
+							<td>2000.0</td>
+							<td>2020-07-20</td>
+							<td>18:00</td>
+						</tr>
+						<tr>
+							<th scope="row">002</th>
+							<td>2020-07-19</td>
+							<td>10:00</td>
+							<td>1000.0</td>
+							<td>1000.0</td>
+							<td>1000.0</td>
+							<td>1500.0</td>
+							<td>1500.0</td>
+							<td>1500.0</td>
+							<td>2020-07-20</td>
+							<td>20:00</td>
+						</tr>
+						<tr>
+							<th scope="row">003</th>
+							<td>2020-07-15</td>
+							<td>7:00</td>
+							<td>800.0</td>
+							<td>800.0</td>
+							<td>800.0</td>
+							<td>1000.0</td>
+							<td>1000.0</td>
+							<td>1000.0</td>
+							<td>2020-07-20</td>
+							<td>19:00</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
 </div>
+
+<div class="modal fade" id="modalapertura" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+</div>
+
+<script src="~/js/cargavistaparcial.js"></script>
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "Listado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+	<div class="container-fluid">
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-12 text-left card-height">
+					<div class="card card-primary card-his">
+						<div class="card-header card-shadow">
+							<h2>Pacientes citados - Con cita o sin cita</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12" style="padding-top:50px;">
+			<div class="row">
+				<div class="pd-xs-0 col-sm-3">
+
+					<div class="col-sm-12 ">
+						<div class="input-style">
+							<label for="dniper" class="form-label">Paciente</label>
+
+							<input type="text" id="dniper" name="dniper" class="form-control" style="width: 100%;" />
+						</div>
+
+					</div>
+				</div>
+				<div class="pd-xs-0 col-sm-3">
+
+					<div class="col-sm-12 ">
+						<div class="input-style">
+							<label for="dniper" class="form-label">Medico</label>
+
+							<input type="text" id="dniper" name="dniper" class="form-control" style="width: 100%;" />
+						</div>
+
+					</div>
+				</div>
+				<div class="pd-xs-0 col-sm-3">
+
+					<div class="col-sm-12 ">
+						<div class="input-style">
+							<label for="fechacit" class="form-label">Fecha</label>
+
+							<input type="date" id="fechacit" name="fechacit" class="form-control" style="width: 100%;" />
+						</div>
+
+					</div>
+				</div>
+				<div class="pd-xs-0 col-sm-3" style="height: 100px; display: flex; flex-direction: column; justify-content: center;">
+					<div class="col-sm-12" style="height: 100px; display: flex; flex-direction: column; justify-content: center;">
+						<button type="submit" onclick="getByNombre();" class="btn btn-primary btn-buscar" style="width: 45px;"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-text">Buscar</span></button>
+					</div>
+				</div>
+			</div>
+			<div class="row pt-3">
+				<div class="col-sm-12">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Apellidos y nombres</th>
+								<th>Medico</th>
+								<th>Fecha</th>
+								<th>Hora</th>
+								<th>Estado</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>asasasads</td>
+								<td>sadsadas</td>
+								<td>sadsa</td>
+								<td>sadsa</td>
+								<td>sadasd</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+    </div>
+

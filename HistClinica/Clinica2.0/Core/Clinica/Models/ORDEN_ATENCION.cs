@@ -11,7 +11,6 @@ namespace Clinica2._0.Core.Clinica.Models
 		[Key]
 		public int idOrden { get; set; }
 		public string nroOrden { get; set; }
-
 		public int idPaciente { get; set; }
 		public string numeroHC { get; set; }
         public int idMedico { get; set; }

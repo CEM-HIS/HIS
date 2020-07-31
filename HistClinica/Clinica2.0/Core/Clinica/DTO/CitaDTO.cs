@@ -55,6 +55,8 @@ namespace Clinica2._0.DTO
         public string horaregistro { get; set; }
         public string numeroorden { get; set; }
         public string cuenta { get; set; }
+
+        [Required(ErrorMessage = "Se requiere este campo")]
         public string numeroHc { get; set; }
 
     }

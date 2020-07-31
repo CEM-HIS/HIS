@@ -10,7 +10,6 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 	{
 		Task<List<TABLA_GENERAL>> GetAllGeneral();
 		Task<TABLA_GENERAL> GetById(int? id);
-
 		Task<List<TABLA_GENERAL>> GetByCodigo(string codigo,string descripcion);
 		Task<string> InsertGeneral(TABLA_GENERAL general);
 		Task<string> UpdateGeneral(TABLA_GENERAL general);
