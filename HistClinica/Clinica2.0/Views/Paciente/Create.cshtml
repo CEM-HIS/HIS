@@ -4,8 +4,8 @@
 }
 
 
-<div class="col-sm-12" id="formpaciente">
-	@using (Html.BeginForm())
+<div class="col-sm-12">
+	@using (Html.BeginForm("Create","Paciente",FormMethod.Post, new { @id = "formpaciente" }))
 	{
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })

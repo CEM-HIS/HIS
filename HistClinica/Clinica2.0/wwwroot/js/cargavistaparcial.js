@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
+	CargarCita();
 	AperturaCaja();
+	CargarReporte();
 	$("#success-alert").fadeOut(1500).slideUp(300, function () {
 		$("#success-alert").slideUp(700);
 	});
@@ -143,9 +145,9 @@
 
 	$("#citagrid #editar").click(function () {
 		var id = $(this).closest("tr").find("td").eq(0).html();
-		var idmedico = $("#idmedicocit").val();
-		var idespecialidad = $("#idespecialidadcit").val();
-		var fechas = $("#fechacita").val();
+		var idmedico = 0;
+		var idespecialidad = 0;
+		var fechas = null;
 		$.ajax({
 			type: "GET",
 			url: "/Cita/Edit",
@@ -392,6 +394,18 @@ $(document).on('change', '#idmedico', function (event) {
 
 });
 
+function CrearPaciente() {
+	var nro = 1;
+	localStorage.setItem("indicador", nro);
+}
+
+function CargarReporte() {
+	var indicadorreporte = "@ViewBag.reporte";
+	if (indicadorreporte == true) {
+		cargarReporteConsentimientodatos();
+	} 
+}
+
 $(document).on('click', '#consultacronogrid #btnseleccionar', function (event) {
 	var $row = $(this).closest("tr");    // Find the row
 	var idespecialidad = $row.find(".especialidad").text();
@@ -413,16 +427,15 @@ $(document).on('click', '#citareprogrid #reprogramar', function (event) {
 	var idcitaactual = $("#idcita").val();
 	$.ajax({
 		type: "GET",
-		url: "/Cita/Reprogramar",
-		data: { idcita: id, idcitaactual: idcitaactual, idpaciente: idpaciente },
+		url: "/Cita/ConfirmacionReprogramacion",
 		contentType: "application/json; charset=utf-8",
 		dataType: "html",
 		success: function (response) {
-			$('#modalreprogramar').html(response);
-			$('#modalreprogramar').modal('show');
-			$('#idcita').val(id);
-			$("#idpaciente").val(idpaciente);
-			cargarModalConfirmacion(id);
+			$('#modalvalidacion').html(response);
+			$('#modalvalidacion').modal('show');
+			$('#idcitarepro').val(id);
+			$("#idpacienterepro").val(idpaciente);
+			$("#idcitaactual").val(idcitaactual);
 		},
 		failure: function (response) {
 			alert(response.responseText);
@@ -493,14 +506,31 @@ $(document).on('change', '#cboafilia', function (event) {
     }
 });
 
-/*
-$('#nombrePaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
-$('#plan').val(response.paciente.numeroPlan);
-$('#contrato').val(response.paciente.numeroContrato);
-$('#aseguradora').val(response.paciente.aseguradora);
-$('#contratante').val(response.paciente.contratante);
-$('#idPaciente').val(response.paciente.idPaciente);
-$('#cuenta').val(response.paciente.cuenta);*/
+function ReprogramarCita() {
+	var id = $("#idcitarepro").val();
+	var idpaciente = $("#idpacienterepro").val();
+	var idcitaactual = $("#idcitaactual").val();
+	var url = $("#RedirectTo").val();
+	$.ajax({
+		type: "GET",
+		url: "/Cita/Reprogramar",
+		data: { idcita: id, idcitaactual: idcitaactual, idpaciente: idpaciente },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalvalidacion').modal('hide');
+			$('#modalreprogramar').modal('hide');
+			location.href = url;
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
 function GrabarOrdenAtencion() {
 	var objOrden = {
 		idorden:0,
@@ -540,6 +570,41 @@ function GrabarOrdenAtencion() {
 	});
 }
 
+
+function CargarCita() {
+	var id = localStorage.getItem("idCita");
+	if (id != null) {
+		CargarModalActual(id);
+	}
+}
+
+function Limpiarid() {
+	localStorage.clear();
+	$('#modalvalidacion').modal('hide');
+}
+
+function CargarModalActual(id) {
+	$.ajax({
+		type: "GET",
+		url: "/Cita/Registro",
+		data: { id: id },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalregistro').html(response);
+			$('#modalregistro').modal('show');
+			localStorage.clear();
+			$.validator.unobtrusive.parse("#frmregistrocita");
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
+
 function BuscarCita() {
 	var id = "0";
 	var idpaciente = $("#idpaciente").val();
@@ -547,10 +612,16 @@ function BuscarCita() {
 	var idmedico = $("#idmedicorepro").val();
 	var idespecialidad = $("#idespecialidadrepro option:selected").val();
 	var fechas = $("#fechacita").val();
+	var idcita = $('#id').val();
+	var hora = $('#horacita').val();
+	var medico = $('#medicocita').val();
+	var medicorepro = $('#medicorepro').val();
+	var cmp = $('#cmp').val();
+	var paciente = $('#pacientecita').val();
 	$.ajax({
 		type: "GET",
 		url: "/Cita/Edit",
-		data: { id: id, medicocita: idmedico, especialidad: idespecialidad, fechacita: fechas },
+		data: { id: idcitaactual, medicocita: idmedico, especialidad: idespecialidad, fechacita: fechas },
 		contentType: "application/json; charset=utf-8",
 		dataType: "html",
 		success: function (response) {
@@ -558,6 +629,15 @@ function BuscarCita() {
 			$('#modalreprogramar').modal('show');
 			$("#idpaciente").val(idpaciente);
 			$("#idcita").val(idcitaactual);
+			$('#id').val(idcita);
+			$('#horacita').val(hora);
+			$('#medicocita').val(medico);
+			$('#cmp').val(cmp);
+			$('#pacientecita').val(paciente);
+			$('#medicorepro').val(medicorepro);
+			$('#idespecialidadrepro').val(idespecialidad);
+			$("#fechacita").val(fechas);
+
 			$.validator.unobtrusive.parse("#frmeditcita");
 		},
 		failure: function (response) {
@@ -611,6 +691,25 @@ function alerta() {
 
 }
 
+function ValidacionPaciente() {
+	$.ajax({
+		type: "GET",
+		url: "/Cita/ValidacionPaciente",
+		//data: { id: id },
+		contentType: "application/json; charset=utf-8",
+		dataType: "html",
+		success: function (response) {
+			$('#modalvalidacion').html(response);
+			$('#modalvalidacion').modal('show');
+		},
+		failure: function (response) {
+			alert(response.responseText);
+		},
+		error: function (response) {
+			alert(response.responseText);
+		}
+	});
+}
 
 
 function cargarModalCrearLicencia() {
@@ -675,7 +774,7 @@ function cargarmodalCrearTipo() {
 }
 
 function cargarReporteConsentimientodatos() {
-	var id = $('#paciente_idPaciente').val();
+	var id = $('#Persona_paciente_idPaciente').val();
 	$.ajax({
 		type: "GET",
 		url: "/Paciente/ReportConsentimiento",
@@ -881,6 +980,7 @@ function FiltroCronogramaMedEspPost() {
 
 function BuscarPacienteDni() {
 	var id = $('#dnipac').val();
+	var idcita = $('#idCita').val();
 	$.ajax({
 		type: "GET",
 		url: "/Cita/BuscarPacienteByDni",
@@ -889,16 +989,22 @@ function BuscarPacienteDni() {
 		dataType: "Json",
 		success: function (response) {
 			console.log(response);
-			$('#nombrepaciente').val(response.nombres + ' ' + response.apellidoPaterno + ' ' + response.apellidoMaterno);
-			$('#plan').val(response.paciente.numeroPlan);
-			$('#contrato').val(response.paciente.numeroContrato);
-			$('#aseguradora').val(response.paciente.aseguradora);
-			$('#contratante').val(response.paciente.contratante);
-			$('#idPaciente').val(response.paciente.idPaciente);
-			$('#cuenta').val(response.paciente.cuenta);
-			$('#nrorden').val(response.paciente.numeroorden);
-			$('#dnipac').val(response.numeroDocumento);
-			$('#historiac').val(response.paciente.numeroHc);
+			if (response == false) {
+				ValidacionPaciente();
+				localStorage.setItem('idCita', idcita);
+			} else {
+				$('#nombrepaciente').val(response.persona.nombres + ' ' + response.persona.apellidoPaterno + ' ' + response.persona.apellidoMaterno);
+				$('#plan').val(response.persona.paciente.numeroPlan);
+				$('#contrato').val(response.persona.paciente.numeroContrato);
+				$('#idpaciente').val(response.persona.paciente.idPaciente);
+				$('#aseguradora').val(response.persona.paciente.aseguradora);
+				$('#contratante').val(response.persona.paciente.contratante);
+				$('#idPaciente').val(response.persona.paciente.idPaciente);
+				$('#cuenta').val(response.persona.paciente.cuenta);
+				$('#nrorden').val(response.persona.paciente.numeroorden);
+				$('#dnipac').val(response.persona.numeroDocumento);
+				$('#historiac').val(response.persona.paciente.numeroHc);
+            }
 
 		},
 		failure: function (response) {

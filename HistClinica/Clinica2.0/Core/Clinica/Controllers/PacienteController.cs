@@ -1,4 +1,5 @@
-﻿using Clinica2._0.DTO;
+﻿using Clinica2._0.Core.Clinica.DTO;
+using Clinica2._0.DTO;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,8 +34,8 @@ namespace Clinica2._0.Controllers
             if (TempData.ContainsKey("dni"))
             {
                 var dni = TempData["dni"].ToString();
-                PersonaDTO personaDTO = await _pacienteRepository.GetByDnioNombresyApellidos(Convert.ToInt32(dni), "", "");
-                return View(personaDTO);
+                AdmisionDTO admision = await _pacienteRepository.GetByDnioNombresyApellidos(Convert.ToInt32(dni), "", "");
+                return RedirectToAction("RegistroCita","Cita",admision);
             }
             return View();
 
@@ -43,8 +44,8 @@ namespace Clinica2._0.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(int dni, string nombre, string apellidos)
         {
-            PersonaDTO personaDTO = await _pacienteRepository.GetByDnioNombresyApellidos(dni, nombre, apellidos);
-            return View(personaDTO);
+            AdmisionDTO admision = await _pacienteRepository.GetByDnioNombresyApellidos(dni, nombre, apellidos);
+            return RedirectToAction("RegistroCita", "Cita", admision);
         }
 
         public async Task<IActionResult> AdmicionMedico()
@@ -118,8 +119,9 @@ namespace Clinica2._0.Controllers
         }
 
         // GET: Paciente/Create
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
+            TempData["indcita"] = id;
             await CargarCombosPacientes();
             return View();
         }
@@ -131,11 +133,21 @@ namespace Clinica2._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PersonaDTO persona)
         {
+            var indicador = "";
             if (persona != null)
             {
-                TempData["dni"] = persona.numeroDocumento;
-                TempData["mensajecita"] = await _personaRepository.InsertPersona(persona);
-                return RedirectToAction(nameof(Index));
+                indicador = TempData["indcita"].ToString();
+                if (indicador == "1")
+                {
+                    TempData["dni"] = persona.numeroDocumento;
+                    TempData["mensajecita"] = await _personaRepository.InsertPersona(persona);
+                    return RedirectToAction("RegistroCita","Cita");
+                } else
+                {
+                    TempData["dni"] = persona.numeroDocumento;
+                    TempData["mensajecita"] = await _personaRepository.InsertPersona(persona);
+                    return RedirectToAction("RegistroCita", "Cita");
+                }
             }
             return View(persona);
         }

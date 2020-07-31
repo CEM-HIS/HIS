@@ -1,5 +1,10 @@
 ﻿//Cargar datos en la tabla cuando los documentos están listos
 $(document).ready(function () {
+  /*  $('#formpaciente').on('submit', function (e) {
+        e.preventDefault();
+        localStorage.setItem("indicador", true);
+        // Aquí el resto del código
+    })*/
     camposlongitud();
     FechaActual();
 });

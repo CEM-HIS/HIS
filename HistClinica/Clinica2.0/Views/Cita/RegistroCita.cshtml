@@ -1,373 +1,1147 @@
-﻿@model List<Clinica2._0.DTO.CitaDTO>
+﻿@model Clinica2._0.Core.Clinica.DTO.AdmisionDTO
 @{
 	ViewData["Title"] = "RegistroCita";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="container">
-	<div class="row">
+	<div class="row pb-3">
 		<div class="col-sm-12 left" style="height: 20px;">
 			<div class="card card-primary card-his">
 				<div class="card-header card-shadow">
-                    <h2>Admisión ambulatoria</h2>
+					<h2>Admisión ambulatoria</h2>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>   
 	<div class="row">
-		<div class="col-sm-12" style="border: 1px solid rgba(128, 128, 128, 0.29);
+		<div class="col-sm-12 ">
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Admision Ambulatoria</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Datos Paciente</a>
+				</li>
+			</ul><!-- Tab panes -->
+			<div class="tab-content">
+
+				<div class="tab-pane active" id="tabs-1" role="tabpanel">
+
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-12" style="border: 1px solid rgba(128, 128, 128, 0.29);
             									border-radius: 9px;
             									margin-top: 1rem;
             								}">
-			<div class="row pb-2 text-left">
-				<div class="col-sm-12">
-					<a asp-controller="Caja" asp-action="Index" style="font-weight:bold; color:white;" class="btn btn-primary mt-4 pt-1" id="Crear">
-						<i class="far fa-credit-card"></i>
-						CAJA
-					</a>
-					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"> <i class="far fa-clock"></i> CITA</button>
-					<a style="font-weight:bold; color:white;" onclick="OpenModalOrdenes();" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="fas fa-flask"></i> LAB</a>
-					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="far fa-image"></i> IMA</button>
-					@*	<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" style="display:none" id="Crear"><i class="fas fa-user-check"></i>Listado Paciente</button> *@
-					<button style="font-weight:bold;" class="btn btn-primary mt-4 pt- ml-1" id="Crear"><i class="fas fa-clinic-medical"></i> INTER</button>
-				</div>
-
-			</div>
-			@using (Html.BeginForm("RegistroCita", "Cita"))
-			{
-				<div class="row pb-2">
-					<div class="col-sm-3">
-						<div class="row">
-							<div class="col-sm-10">
-								<div class="input-style">
-									<label class="form-label">Medico</label>
-									<input type="hidden" name="idmedico" id="idmedicocro" />
-									<input type="text" class="form-control" id="medico" />
-									<span class="field-validation-valid text-danger" data-valmsg-for="idMedico" data-valmsg-replace="true"></span>
-								</div>
-							</div>
-							<div class="col-sm-2 text-right">
-								<div class="input-style">
-									<a onclick="FiltroCronogramaMedEsp();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
-								</div>
-
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="row">
-							<div class="col-sm-11">
-								<div class="input-style">
-									<label class="form-label">Especialidad</label>
-									@Html.DropDownList("idespecialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "idespecialidad" })
-									<span class="field-validation-valid text-danger" data-valmsg-for="idEspecialidad" data-valmsg-replace="true"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-3">
-						<div class="row">
-							<div class="col-sm-11">
-								<div class="input-style">
-									<label class="form-label">Fecha </label>
-									<input class="form-control" id="fechaIni" name="fecha" type="Date">
-									<span class="field-validation-valid text-danger" data-valmsg-for="fechaIni" data-valmsg-replace="true"></span>
+								<div class="row pb-2 text-left">
+									<div class="col-sm-12">
+										<a asp-controller="Caja" asp-action="Index" style="font-weight:bold; color:white;" class="btn btn-primary mt-4 pt-1" id="Crear">
+											<i class="far fa-credit-card"></i>
+											CAJA
+										</a>
+										<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"> <i class="far fa-clock"></i> CITA</button>
+										<a style="font-weight:bold; color:white;" onclick="OpenModalOrdenes();" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="fas fa-flask"></i> LAB</a>
+										<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"><i class="far fa-image"></i> IMA</button>
+										@*	<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" style="display:none" id="Crear"><i class="fas fa-user-check"></i>Listado Paciente</button> *@
+										<button style="font-weight:bold;" class="btn btn-primary mt-4 pt- ml-1" id="Crear"><i class="fas fa-clinic-medical"></i> INTER</button>
+									</div>
 
 								</div>
-
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3" style="height: 65px; display: flex; flex-direction: column; justify-content: center;">
-						<div class="col-sm-12" style="height: 65px; display: flex; flex-direction: column; justify-content: center;">
-							<button type="submit" class="btn btn-primary btn-buscar" style="width: 45px;"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-text">Buscar</span></button>
-						</div>
-					</div>
-
-				</div>
-			}
-
-
-
-
-		<div class="row pt-3">
-			@if (ViewBag.message != null)
-			{
-				<div class="col-sm-12 pb-2 alert alert-info alert-dismissible text-center" id="success-alert" role="alert" style="margin-top: 15px;">
-					<button type="button" class="close" data-dismiss="alert" aria-label="close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					@ViewBag.message
-				</div>
-			}
-			<div class="col-sm-12">
-				<table class="table table-striped table-bordered" style="width:100%" id="citagrid">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Hora</th>
-							<th>Medico</th>
-							<th>CMP</th>
-							<th>Historia</th>
-							<th>Paciente</th>
-							<th>Confirmado</th>
-							<th>Hora <br> Registro</th>
-							<th>N° <br>cuenta</th>
-							<th>N° Orden</th>
-							<th>Consultorio</th>
-							<th>Tipo Afiliado</th>
-							<th>Estado</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var item in Model)
-						{
-						<tr>
-							<td>@item.idCita</td>
-							<td>@item.hora</td>
-							<td nowrap>@item.Medico</td>
-							<td>@item.CMP</td>
-							<td>@item.numeroHc</td>
-							<td>@item.nombrePaciente</td>
-							<td>@item.estadoPago</td>
-							<td>@item.horaregistro</td>
-							<td>@item.cuenta</td>
-							<td>@item.numeroorden</td>
-							<td>@item.consultorio</td>
-							<td></td>
-							<td>@item.descripcionEstado</td>
-							<td>
-								<button type="submit" id="add" style="color:white;" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
-								@if (item.descripcionEstado != "REPROGRAMADO")
+								@using (Html.BeginForm("RegistroCita", "Cita"))
 								{
-									<button type="submit" id="editar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></button>
+									<div class="row pb-2">
+										<div class="col-sm-3">
+											<div class="row">
+												<div class="col-sm-10">
+													<div class="input-style">
+														<label class="form-label">Medico</label>
+														<input type="hidden" name="idmedico" id="idmedicocro" />
+														<input type="text" class="form-control" id="medico" />
+														<span class="field-validation-valid text-danger" data-valmsg-for="idMedico" data-valmsg-replace="true"></span>
+													</div>
+												</div>
+												<div class="col-sm-2 text-right">
+													<div class="input-style">
+														<a onclick="FiltroCronogramaMedEsp();" class="btn btn-primary text-white">...</a>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="row">
+												<div class="col-sm-11">
+													<div class="input-style">
+														<label class="form-label">Especialidad</label>
+														@Html.DropDownList("idespecialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "idespecialidad" })
+														<span class="field-validation-valid text-danger" data-valmsg-for="idEspecialidad" data-valmsg-replace="true"></span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div class="row">
+												<div class="col-sm-11">
+													<div class="input-style">
+														<label class="form-label">Fecha </label>
+														<input class="form-control" id="fechaIni" name="fecha" type="Date">
+														<span class="field-validation-valid text-danger" data-valmsg-for="fechaIni" data-valmsg-replace="true"></span>
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3" style="height: 65px; display: flex; flex-direction: column; justify-content: center;">
+											<div class="col-sm-12" style="height: 65px; display: flex; flex-direction: column; justify-content: center;">
+												<button type="submit" class="btn btn-primary btn-buscar" style="width: 45px;"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-text">Buscar</span></button>
+											</div>
+										</div>
+
+									</div>
 								}
-								<button type="submit" id="anular" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
-							</td>
-						</tr>
+
+
+
+
+								<div class="row pt-3">
+									@if (ViewBag.message != null)
+									{
+										<div class="col-sm-12 pb-2 alert alert-info alert-dismissible text-center" id="success-alert" role="alert" style="margin-top: 15px;">
+											<button type="button" class="close" data-dismiss="alert" aria-label="close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											@ViewBag.message
+										</div>
+									}
+									<div class="col-sm-12">
+										<table class="table table-striped table-bordered" style="width:100%" id="citagrid">
+											<thead>
+												<tr>
+													<th>Id</th>
+													<th>Hora</th>
+													<th>Medico</th>
+													<th>CMP</th>
+													<th>Historia</th>
+													<th>Dni</th>
+													<th>Paciente</th>
+													<th>Hora <br> Registro</th>
+													<th>N° <br>cuenta</th>
+													<th>N° Orden</th>
+													<th>Consultorio</th>
+													<th>Tipo Afiliado</th>
+													<th>Estado</th>
+													<th>Acciones</th>
+												</tr>
+											</thead>
+											<tbody>
+												@if (Model.Citas != null)
+												{
+													@foreach (var item in Model.Citas)
+													{
+												<tr>
+													<td>@item.idCita</td>
+													<td>@item.hora</td>
+													<td nowrap>@item.Medico</td>
+													<td>@item.CMP</td>
+													<td>@item.numeroHc</td>
+													<td>@item.dniPaciente</td>
+													<td>@item.nombrePaciente</td>
+													<td>@item.horaregistro</td>
+													<td>@item.cuenta</td>
+													<td>@item.numeroorden</td>
+													<td>@item.consultorio</td>
+													<td></td>
+													<td>@item.descripcionEstado</td>
+													<td>
+														@if (item.descripcionEstado != "RESERVADO" && item.descripcionEstado != "REPROGRAMADO")
+														{
+															<button type="submit" id="add" style="color:white;" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
+														}
+														else
+														{
+															<button type="submit" disabled id="add" style="color:white;cursor:no-drop;" class="edit btn btn-primary mb-2"><i class="fas fa-plus"></i></button>
+														}
+														@if (item.descripcionEstado != "REPROGRAMADO" && item.fechaCita.Value.Hour > DateTime.Now.Hour)
+														{
+															<button type="submit" id="editar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></button>
+														}
+														else
+														{
+															<button disabled type="submit" id="editar" style="cursor:no-drop;" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></button>
+														}
+														<button type="submit" id="anular" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button>
+													</td>
+												</tr>
+													}
+												}
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+					<div class="tab-pane" id="tabs-2" role="tabpanel">
+						@using (Html.BeginForm("BuscarPaciente", "Cita", FormMethod.Post))
+						{
+							<div class="col-sm-12 pt-3 pb-2 " style="border-bottom: 1px solid rgba(128, 128, 128, 0.34901960784313724);">
+								<div class="row">
+									@Html.HiddenFor(m => m.Persona.paciente.idPaciente)
+									<div class="col-sm-2"><p>Buscar Paciente</p></div>
+									<div class="col-sm-2">
+										<select class="form-control  small-input">
+											<option value="value">DNI</option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<input type="text" id="dnipe" name="dni" class="form-control small-input" />
+									</div>
+
+									<div class="col-sm-4">
+										<button class="btn btn-info" type="submit" id="btnBuscar"><i class="fas fa-search"></i></button>
+										<a class="btn btn-primary" type="submit" asp-action="Create" asp-controller="Paciente"><i class="fas fa-user-plus"></i></a>
+										@if (Model.Persona != null)
+										{
+											<a class="btn btn-secondary" type="submit" asp-action="Edit" asp-controller="Paciente" asp-route-id="@Model.Persona.paciente.idPaciente"><i class="fas fa-edit"></i></a>}
+									</div>
+
+								</div>
+							</div>
 						}
-					</tbody>
-				</table>
-			</div>
-		</div>
-		</div>
-	</div>
-
-</div>
-
-
-<div class="modal fade" id="buscarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document" style="max-width: 50%;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Paciente SITEDS</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="col-sm-12">
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active text-center" data-toggle="tab" href="#tabs-1" role="tab" style="font-size: 16px;font-weight:500;">Cobertura servicios</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-center" data-toggle="tab" href="#tabs-2" role="tab" style="font-size: 16px;font-weight:500;"> Contacto Seguro/empresa</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-center" data-toggle="tab" href="#tabs-3" role="tab" style="font-size: 16px;font-weight:500;">Plan Paciente</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-center" data-toggle="tab" href="#tabs-4" role="tab" style="font-size: 16px;font-weight:500;">Documentos</a>
-						</li>
-					</ul><!-- Tab panes -->
-					<div class="tab-content">
-						<div class="tab-pane active" id="tabs-1" role="tabpanel">
-							<div class="col-sm-12">
-								<div class="col-sm-12 mt-2">
-
-									<div class="row">
-										<div class="col-sm-6">
-											<label>SITEDS</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+						<div class="content">
+							<div class="row">
+								<div class="col-sm-12 col-md-2">
+									<div class="avatar-upload">
+										<div class="avatar-edit">
+											<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+											<label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
 										</div>
-										<div class="col-sm-6">
-											<label>Estado Seg.</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-
-										<div class="col-sm-6">
-											<label>Cod Aseg.</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Fecha Vige.</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>N° Placa</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Poliza</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-12">
-											<label>Beneficio</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Parentesco</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>% Cob.</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										<div class="avatar-preview">
+											<div id="imagePreview" style="background-image: url(images/profile.png);">
+											</div>
 										</div>
 									</div>
+									<div class="">
+										<ul style="text-decoration: none;list-style: none;padding-left:8%;margin-top:1rem">
+											<li><h6 style="font-weight: bold;">Admision</h6></li>
+											<li><p>Fecha:</p></li>
+											<li><p>Hora:</p></li>
+											<li><p>Admi:</p></li>
+											<li><p>Triado:</p></li>
 
+										</ul>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-2" role="tabpanel">
-							<div class="col-sm-12">
-								<div class="col-sm-12 mt-2">
+								<div class="col-sm-12 col-md-10 tabs-border">
+									<ul class="nav nav-tabs border-0" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" data-toggle="tab" href="#tabs-uno" role="tab">
+												Datos del Paciente
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#tabs-dos" role="tab">Atención Medica</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#tabs-tres" role="tab">Cobertura Paciente</a>
+										</li>
+									</ul><!-- Tab panes -->
+									<div class="tab-content">
+										<div class="tab-pane active" id="tabs-uno" role="tabpanel">
+											<div class="col-sm-12 p-3 scroll-content">
+												<div class="row">
+													<div class="col-sm-12 mb-3">
+														<div class="row">
+															<div class="col-sm-6"><h5>Datos del Paciente</h5></div>
+															<div class="col-sm-5 text-right"> <button class="btn btn-primary btn-icon-small text-white" onclick="cargarReporteConsentimientodatos();" type="submit"><i class="far fa-save pr-1"></i>Consentimiento de tratamiento de datos</button></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="row mb-3">
+															<div class="col-md-1 col-sm-12"><label>Dni*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.numeroDocumento" class="form-control"></div>
+															<div class="col-md-2 col-sm-12"><label>Tipo de Doc*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline">
+																<select class="form-control" data-val="true" data-val-required="Seleccione el tipo de documento" id="idTipoDocumento" name="idTipoDocumento">
+																	<option value="">Seleccione</option>
+																	<option value="1">LIBRETA ELECTORAL O DNI</option>
+																	<option value="2">CARNET DE EXTRANJERIA</option>
+																	<option value="3">REGISTRO UNICO CONTRIBUYENTES</option>
+																	<option value="4">PASAPORTE</option>
+																	<option value="5">PARTIDA NACIMIENTO -IDENTIDAD</option>
+																	<option value="6">OTROS</option>
+																</select>
+															</div>
+															<div class="col-md-2 col-sm-12"><label>Tipo de Paciente*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline">
+																<select class="form-control" data-val="true" data-val-required="Seleccione el tipo de paciente" id="cbotppac" name="paciente.idTipoPaciente">
+																	<option value="">Seleccione</option>
+																	<option value="119">PARTICULAR</option>
+																	<option value="120">ASEGURADO</option>
+																	<option value="121">CONVENIO</option>
+																	<option value="122">SOAT</option>
+																	<option value="123">EXTERNO</option>
+																	<option value="124">EXTERNO</option>
+																</select>
+															</div>
+														</div>
+														<div class="row mb-3">
+															<div class="col-md-1 col-sm-12"><label>Nombre*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.nombres" class="form-control"></div>
+															<div class="col-md-2 col-sm-12"><label>Apellido Paterno*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.apellidoPaterno" class="form-control"></div>
+															<div class="col-md-2 col-sm-12"><label>Apellido Materno*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.apellidoMaterno" class="form-control"></div>
+														</div>
 
-									<div class="row">
-										<div class="col-sm-12">
-											<label>Ejecutivo</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+														<div class="row mb-3">
+															<div class="col-md-1 col-sm-12"><label>Fecha*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline">
+																<input class="form-control" data-val="true" data-val-required="Seleccione la fecha de inicio" id="fechaIni" name="fechaIni" type="Date" value="">
+																<span class="field-validation-valid text-danger" data-valmsg-for="fechaIni" data-valmsg-replace="true"></span>
+															</div>
+															<div class="col-md-2 col-sm-12"><label>Edad*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.edad" class="form-control"></div>
+															<div class="col-md-1 col-sm-12"><label>Sexo*</label></div>
+															<div class="col-md-4 col-sm-12">
+																<div class="form-check d-inline ">
+																	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+																	<label class="form-check-label" for="exampleRadios1">
+																		Femenino
+																	</label>
+																</div>
+																<div class="form-check d-inline ">
+																	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+																	<label class="form-check-label" for="exampleRadios2">
+																		Masculino
+																	</label>
+																</div>
+
+															</div>
+														</div>
+
+														<div class="row mb-3">
+															<div class="col-md-1 col-sm-12"><label>Ocupación</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.descripcionOcupacion" class="form-control"></div>
+															<div class="col-md-2 col-sm-12"><label>Grado de Instruccion</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.gradoInstruccion" class="form-control"></div>
+															<div class="col-md-2 col-sm-12"><label>Estado Civil</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.estadoCivil" class="form-control"></div>
+														</div>
+														<div class="row mb-3">
+															<div class="col-md-1 col-sm-12"><label>Email*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" asp-for="Persona.correo" class="form-control"></div>
+															<div class="col-md-2 col-sm-12"><label>Celular*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+															<div class="col-md-2 col-sm-12"><label>Parentesco*</label></div>
+															<div class="col-md-2 col-sm-12 inputInline">
+																<select class="form-control" data-val="true" data-val-required="Seleccione el parentesco" id="paciente_idParentescoPaciente" name="paciente.idParentescoPaciente">
+																	<option value="">Seleccione</option>
+																	<option value="40">PADRE</option>
+																	<option value="41">MADRE</option>
+																	<option value="42">HIJO/A</option>
+																	<option value="43">ABUELA/O</option>
+																	<option value="44">TIA/O</option>
+																	<option value="45">NIETA/O</option>
+																	<option value="46">PADRASTRO</option>
+																	<option value="47">MADRASTRA</option>
+																	<option value="48">SOBRINA/O</option>
+																	<option value="49">PRIMA/O</option>
+																	<option value="50">BIS-ABUELA/O</option>
+																	<option value="51">AMIGA/O</option>
+																	<option value="52">HERMANA/O</option>
+																	<option value="53">YERNO</option>
+																	<option value="54">NUERA</option>
+																</select>
+															</div>
+														</div>
+														<div class="row mb-3">
+
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="col-sm-6">
-											<label>Teléfono</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
+										<div class="tab-pane" id="tabs-dos" role="tabpanel">
+											<div class="col-sm-12 p-3 scroll-content">
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="">
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="">
+																		<div class="row">
+																			<div class="col-sm-12 mb-2"><p>Datos del titular</p></div>
+																			<div class="col-sm-12">
+																				<div class="row mb-2">
+																					<div class="col-md-2 col-sm-12"><label>Tipo Doc</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-2 col-sm-12"><label>N Doc</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline">
+																						<input type="text" name="name" class="form-control">
+																					</div>
+
+
+																				</div>
+																				<div class="row mb-2">
+																					<div class="col-md-2 col-sm-12"><label>Nombre</label></div>
+																					<div class="col-md-8 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+																				</div>
+																				<div class="row mb-2">
+																					<div class="col-md-2 col-sm-12"><label>Fecha Nac</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-2 col-sm-12"><label>Sexo</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																				</div>
+
+																				<div class="row mb-2">
+																					<div class="col-md-2 col-sm-12"><label>Telef</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-2 col-sm-12"><label>Parentesco</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+
+																				</div>
+
+
+																				<div class="row mb-2">
+
+																				</div>
+																			</div>
+																			<div class="col-sm-12 mb-2">
+																				<p>Datos del acompañante</p>
+																			</div>
+																			<div class="col-sm-12">
+																				<div class="row mb-2">
+																					<div class="col-md-2 col-sm-12"><label>Tipo Doc</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-2 col-sm-12"><label>N Doc</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline">
+																						<input type="text" name="name" class="form-control">
+																					</div>
+
+
+																				</div>
+																				<div class="row mb-2">
+																					<div class="col-md-2 col-sm-12"><label>Nombres</label></div>
+																					<div class="col-md-8 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+																				</div>
+																				<div class="row mb-2">
+																					<div class="col-md-2 col-sm-12"><label>Telefono</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-2 col-sm-12"><label>Parentesco</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+
+																				</div>
+																				<div class="row mb-2">
+
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="">
+																		<div class="row">
+																			<div class="col-sm-12 mb-2"><p>Medico Tratante</p></div>
+																			<div class="col-sm-12">
+																				<div class="row mb-2">
+																					<div class="col-md-3 col-sm-12"><label>Servicios</label></div>
+																					<div class="col-md-8 col-sm-12 inputInline mb-2"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-3 col-sm-12"><label>Espec.</label></div>
+																					<div class="col-md-8 col-sm-12 inputInline">
+																						<input type="text" name="name" class="form-control">
+																					</div>
+
+																				</div>
+																				<div class="row mb-2">
+																					<div class="col-md-3 col-sm-12"><label>Medico</label></div>
+																					<div class="col-md-8 mb-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+
+																				</div>
+
+
+
+
+
+
+																			</div>
+																			<div class="col-sm-12">
+																				<p>N de HC y cuenta</p>
+																			</div>
+																			<div class="col-sm-12">
+																				<div class="row mb-2">
+																					<div class="col-md-3 col-sm-12"><label>Concurrente</label></div>
+																					<div class="col-md-8 col-sm-12 inputInline mb-2"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-3 col-sm-12"><label>N HCE</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline mb-2"> <input type="text" name="name" class="form-control"></div>
+																					<div class="col-md-2 col-sm-12"><label>HC Ant</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+																				</div>
+																				<div class="row mb-2">
+																					<div class="col-md-3 col-sm-12"><label>Cuenta</label></div>
+																					<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+
+																				</div>
+																			</div>
+
+
+																			<div class="row mb-2">
+
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<table id="example" class="table table-striped table-bordered" style="width:100%">
+															<thead>
+																<tr>
+																	<th>Name</th>
+																	<th>Position</th>
+																	<th>Office</th>
+																	<th>Age</th>
+																	<th>Start date</th>
+																	<th>Salary</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>Tiger Nixon</td>
+																	<td>System Architect</td>
+																	<td>Edinburgh</td>
+																	<td>61</td>
+																	<td>2011/04/25</td>
+																	<td>$320,800</td>
+																</tr>
+																<tr>
+																	<td>Garrett Winters</td>
+																	<td>Accountant</td>
+																	<td>Tokyo</td>
+																	<td>63</td>
+																	<td>2011/07/25</td>
+																	<td>$170,750</td>
+																</tr>
+																<tr>
+																	<td>Ashton Cox</td>
+																	<td>Junior Technical Author</td>
+																	<td>San Francisco</td>
+																	<td>66</td>
+																	<td>2009/01/12</td>
+																	<td>$86,000</td>
+																</tr>
+																<tr>
+																	<td>Cedric Kelly</td>
+																	<td>Senior Javascript Developer</td>
+																	<td>Edinburgh</td>
+																	<td>22</td>
+																	<td>2012/03/29</td>
+																	<td>$433,060</td>
+																</tr>
+																<tr>
+																	<td>Airi Satou</td>
+																	<td>Accountant</td>
+																	<td>Tokyo</td>
+																	<td>33</td>
+																	<td>2008/11/28</td>
+																	<td>$162,700</td>
+																</tr>
+																<tr>
+																	<td>Brielle Williamson</td>
+																	<td>Integration Specialist</td>
+																	<td>New York</td>
+																	<td>61</td>
+																	<td>2012/12/02</td>
+																	<td>$372,000</td>
+																</tr>
+																<tr>
+																	<td>Herrod Chandler</td>
+																	<td>Sales Assistant</td>
+																	<td>San Francisco</td>
+																	<td>59</td>
+																	<td>2012/08/06</td>
+																	<td>$137,500</td>
+																</tr>
+																<tr>
+																	<td>Rhona Davidson</td>
+																	<td>Integration Specialist</td>
+																	<td>Tokyo</td>
+																	<td>55</td>
+																	<td>2010/10/14</td>
+																	<td>$327,900</td>
+																</tr>
+																<tr>
+																	<td>Colleen Hurst</td>
+																	<td>Javascript Developer</td>
+																	<td>San Francisco</td>
+																	<td>39</td>
+																	<td>2009/09/15</td>
+																	<td>$205,500</td>
+																</tr>
+																<tr>
+																	<td>Sonya Frost</td>
+																	<td>Software Engineer</td>
+																	<td>Edinburgh</td>
+																	<td>23</td>
+																	<td>2008/12/13</td>
+																	<td>$103,600</td>
+																</tr>
+																<tr>
+																	<td>Jena Gaines</td>
+																	<td>Office Manager</td>
+																	<td>London</td>
+																	<td>30</td>
+																	<td>2008/12/19</td>
+																	<td>$90,560</td>
+																</tr>
+																<tr>
+																	<td>Quinn Flynn</td>
+																	<td>Support Lead</td>
+																	<td>Edinburgh</td>
+																	<td>22</td>
+																	<td>2013/03/03</td>
+																	<td>$342,000</td>
+																</tr>
+																<tr>
+																	<td>Charde Marshall</td>
+																	<td>Regional Director</td>
+																	<td>San Francisco</td>
+																	<td>36</td>
+																	<td>2008/10/16</td>
+																	<td>$470,600</td>
+																</tr>
+																<tr>
+																	<td>Haley Kennedy</td>
+																	<td>Senior Marketing Designer</td>
+																	<td>London</td>
+																	<td>43</td>
+																	<td>2012/12/18</td>
+																	<td>$313,500</td>
+																</tr>
+																<tr>
+																	<td>Tatyana Fitzpatrick</td>
+																	<td>Regional Director</td>
+																	<td>London</td>
+																	<td>19</td>
+																	<td>2010/03/17</td>
+																	<td>$385,750</td>
+																</tr>
+																<tr>
+																	<td>Michael Silva</td>
+																	<td>Marketing Designer</td>
+																	<td>London</td>
+																	<td>66</td>
+																	<td>2012/11/27</td>
+																	<td>$198,500</td>
+																</tr>
+																<tr>
+																	<td>Paul Byrd</td>
+																	<td>Chief Financial Officer (CFO)</td>
+																	<td>New York</td>
+																	<td>64</td>
+																	<td>2010/06/09</td>
+																	<td>$725,000</td>
+																</tr>
+																<tr>
+																	<td>Gloria Little</td>
+																	<td>Systems Administrator</td>
+																	<td>New York</td>
+																	<td>59</td>
+																	<td>2009/04/10</td>
+																	<td>$237,500</td>
+																</tr>
+																<tr>
+																	<td>Bradley Greer</td>
+																	<td>Software Engineer</td>
+																	<td>London</td>
+																	<td>41</td>
+																	<td>2012/10/13</td>
+																	<td>$132,000</td>
+																</tr>
+																<tr>
+																	<td>Dai Rios</td>
+																	<td>Personnel Lead</td>
+																	<td>Edinburgh</td>
+																	<td>35</td>
+																	<td>2012/09/26</td>
+																	<td>$217,500</td>
+																</tr>
+																<tr>
+																	<td>Jenette Caldwell</td>
+																	<td>Development Lead</td>
+																	<td>New York</td>
+																	<td>30</td>
+																	<td>2011/09/03</td>
+																	<td>$345,000</td>
+																</tr>
+																<tr>
+																	<td>Yuri Berry</td>
+																	<td>Chief Marketing Officer (CMO)</td>
+																	<td>New York</td>
+																	<td>40</td>
+																	<td>2009/06/25</td>
+																	<td>$675,000</td>
+																</tr>
+																<tr>
+																	<td>Caesar Vance</td>
+																	<td>Pre-Sales Support</td>
+																	<td>New York</td>
+																	<td>21</td>
+																	<td>2011/12/12</td>
+																	<td>$106,450</td>
+																</tr>
+																<tr>
+																	<td>Doris Wilder</td>
+																	<td>Sales Assistant</td>
+																	<td>Sydney</td>
+																	<td>23</td>
+																	<td>2010/09/20</td>
+																	<td>$85,600</td>
+																</tr>
+																<tr>
+																	<td>Angelica Ramos</td>
+																	<td>Chief Executive Officer (CEO)</td>
+																	<td>London</td>
+																	<td>47</td>
+																	<td>2009/10/09</td>
+																	<td>$1,200,000</td>
+																</tr>
+																<tr>
+																	<td>Gavin Joyce</td>
+																	<td>Developer</td>
+																	<td>Edinburgh</td>
+																	<td>42</td>
+																	<td>2010/12/22</td>
+																	<td>$92,575</td>
+																</tr>
+																<tr>
+																	<td>Jennifer Chang</td>
+																	<td>Regional Director</td>
+																	<td>Singapore</td>
+																	<td>28</td>
+																	<td>2010/11/14</td>
+																	<td>$357,650</td>
+																</tr>
+																<tr>
+																	<td>Brenden Wagner</td>
+																	<td>Software Engineer</td>
+																	<td>San Francisco</td>
+																	<td>28</td>
+																	<td>2011/06/07</td>
+																	<td>$206,850</td>
+																</tr>
+																<tr>
+																	<td>Fiona Green</td>
+																	<td>Chief Operating Officer (COO)</td>
+																	<td>San Francisco</td>
+																	<td>48</td>
+																	<td>2010/03/11</td>
+																	<td>$850,000</td>
+																</tr>
+																<tr>
+																	<td>Shou Itou</td>
+																	<td>Regional Marketing</td>
+																	<td>Tokyo</td>
+																	<td>20</td>
+																	<td>2011/08/14</td>
+																	<td>$163,000</td>
+																</tr>
+																<tr>
+																	<td>Michelle House</td>
+																	<td>Integration Specialist</td>
+																	<td>Sydney</td>
+																	<td>37</td>
+																	<td>2011/06/02</td>
+																	<td>$95,400</td>
+																</tr>
+																<tr>
+																	<td>Suki Burks</td>
+																	<td>Developer</td>
+																	<td>London</td>
+																	<td>53</td>
+																	<td>2009/10/22</td>
+																	<td>$114,500</td>
+																</tr>
+																<tr>
+																	<td>Prescott Bartlett</td>
+																	<td>Technical Author</td>
+																	<td>London</td>
+																	<td>27</td>
+																	<td>2011/05/07</td>
+																	<td>$145,000</td>
+																</tr>
+																<tr>
+																	<td>Gavin Cortez</td>
+																	<td>Team Leader</td>
+																	<td>San Francisco</td>
+																	<td>22</td>
+																	<td>2008/10/26</td>
+																	<td>$235,500</td>
+																</tr>
+																<tr>
+																	<td>Martena Mccray</td>
+																	<td>Post-Sales support</td>
+																	<td>Edinburgh</td>
+																	<td>46</td>
+																	<td>2011/03/09</td>
+																	<td>$324,050</td>
+																</tr>
+																<tr>
+																	<td>Unity Butler</td>
+																	<td>Marketing Designer</td>
+																	<td>San Francisco</td>
+																	<td>47</td>
+																	<td>2009/12/09</td>
+																	<td>$85,675</td>
+																</tr>
+																<tr>
+																	<td>Howard Hatfield</td>
+																	<td>Office Manager</td>
+																	<td>San Francisco</td>
+																	<td>51</td>
+																	<td>2008/12/16</td>
+																	<td>$164,500</td>
+																</tr>
+																<tr>
+																	<td>Hope Fuentes</td>
+																	<td>Secretary</td>
+																	<td>San Francisco</td>
+																	<td>41</td>
+																	<td>2010/02/12</td>
+																	<td>$109,850</td>
+																</tr>
+																<tr>
+																	<td>Vivian Harrell</td>
+																	<td>Financial Controller</td>
+																	<td>San Francisco</td>
+																	<td>62</td>
+																	<td>2009/02/14</td>
+																	<td>$452,500</td>
+																</tr>
+																<tr>
+																	<td>Timothy Mooney</td>
+																	<td>Office Manager</td>
+																	<td>London</td>
+																	<td>37</td>
+																	<td>2008/12/11</td>
+																	<td>$136,200</td>
+																</tr>
+																<tr>
+																	<td>Jackson Bradshaw</td>
+																	<td>Director</td>
+																	<td>New York</td>
+																	<td>65</td>
+																	<td>2008/09/26</td>
+																	<td>$645,750</td>
+																</tr>
+																<tr>
+																	<td>Olivia Liang</td>
+																	<td>Support Engineer</td>
+																	<td>Singapore</td>
+																	<td>64</td>
+																	<td>2011/02/03</td>
+																	<td>$234,500</td>
+																</tr>
+																<tr>
+																	<td>Bruno Nash</td>
+																	<td>Software Engineer</td>
+																	<td>London</td>
+																	<td>38</td>
+																	<td>2011/05/03</td>
+																	<td>$163,500</td>
+																</tr>
+																<tr>
+																	<td>Sakura Yamamoto</td>
+																	<td>Support Engineer</td>
+																	<td>Tokyo</td>
+																	<td>37</td>
+																	<td>2009/08/19</td>
+																	<td>$139,575</td>
+																</tr>
+																<tr>
+																	<td>Thor Walton</td>
+																	<td>Developer</td>
+																	<td>New York</td>
+																	<td>61</td>
+																	<td>2013/08/11</td>
+																	<td>$98,540</td>
+																</tr>
+																<tr>
+																	<td>Finn Camacho</td>
+																	<td>Support Engineer</td>
+																	<td>San Francisco</td>
+																	<td>47</td>
+																	<td>2009/07/07</td>
+																	<td>$87,500</td>
+																</tr>
+																<tr>
+																	<td>Serge Baldwin</td>
+																	<td>Data Coordinator</td>
+																	<td>Singapore</td>
+																	<td>64</td>
+																	<td>2012/04/09</td>
+																	<td>$138,575</td>
+																</tr>
+																<tr>
+																	<td>Zenaida Frank</td>
+																	<td>Software Engineer</td>
+																	<td>New York</td>
+																	<td>63</td>
+																	<td>2010/01/04</td>
+																	<td>$125,250</td>
+																</tr>
+																<tr>
+																	<td>Zorita Serrano</td>
+																	<td>Software Engineer</td>
+																	<td>San Francisco</td>
+																	<td>56</td>
+																	<td>2012/06/01</td>
+																	<td>$115,000</td>
+																</tr>
+																<tr>
+																	<td>Jennifer Acosta</td>
+																	<td>Junior Javascript Developer</td>
+																	<td>Edinburgh</td>
+																	<td>43</td>
+																	<td>2013/02/01</td>
+																	<td>$75,650</td>
+																</tr>
+																<tr>
+																	<td>Cara Stevens</td>
+																	<td>Sales Assistant</td>
+																	<td>New York</td>
+																	<td>46</td>
+																	<td>2011/12/06</td>
+																	<td>$145,600</td>
+																</tr>
+																<tr>
+																	<td>Hermione Butler</td>
+																	<td>Regional Director</td>
+																	<td>London</td>
+																	<td>47</td>
+																	<td>2011/03/21</td>
+																	<td>$356,250</td>
+																</tr>
+																<tr>
+																	<td>Lael Greer</td>
+																	<td>Systems Administrator</td>
+																	<td>London</td>
+																	<td>21</td>
+																	<td>2009/02/27</td>
+																	<td>$103,500</td>
+																</tr>
+																<tr>
+																	<td>Jonas Alexander</td>
+																	<td>Developer</td>
+																	<td>San Francisco</td>
+																	<td>30</td>
+																	<td>2010/07/14</td>
+																	<td>$86,500</td>
+																</tr>
+																<tr>
+																	<td>Shad Decker</td>
+																	<td>Regional Director</td>
+																	<td>Edinburgh</td>
+																	<td>51</td>
+																	<td>2008/11/13</td>
+																	<td>$183,000</td>
+																</tr>
+																<tr>
+																	<td>Michael Bruce</td>
+																	<td>Javascript Developer</td>
+																	<td>Singapore</td>
+																	<td>29</td>
+																	<td>2011/06/27</td>
+																	<td>$183,000</td>
+																</tr>
+																<tr>
+																	<td>Donna Snider</td>
+																	<td>Customer Support</td>
+																	<td>New York</td>
+																	<td>27</td>
+																	<td>2011/01/25</td>
+																	<td>$112,000</td>
+																</tr>
+															</tbody>
+															<tfoot>
+																<tr>
+																	<th>Name</th>
+																	<th>Position</th>
+																	<th>Office</th>
+																	<th>Age</th>
+																	<th>Start date</th>
+																	<th>Salary</th>
+																</tr>
+															</tfoot>
+														</table>
+													</div>
+												</div>
+											</div>
 										</div>
+										<div class="tab-pane" id="tabs-tres" role="tabpanel">
+											<div class="col-sm-12 p-3 scroll-content">
+												<div class="row">
+													<div class="col-sm-6">
+														<div class="">
+															<div class="row">
+																<div class="col-sm-12 mb-2"><p>Cobertura de servicios</p></div>
+																<div class="col-sm-12">
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>SITEDS</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Estado Seguro</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline">
+																			<input type="text" name="name" class="form-control">
+																		</div>
 
-										<div class="col-sm-6">
-											<label>Cod llam.</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
 
-										<div class="col-sm-12 mt-2">
-											<div class="row">
-												<div class="col-sm-6"><p>Gen. fecha y hora</p></div>
-												<div class="col-sm-6">
-													<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
-													<label class="form-check-label" for="exampleRadios1">
-														<span>13/05/2020 - 5:58pm</span>
+																	</div>
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Cod. Asegurado</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Fecha vigencia</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																	</div>
 
-													</label>
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>N de Placa</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Poliza</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+
+																	</div>
+
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Beneficio</label></div>
+																		<div class="col-md-8 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+																	</div>
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Parentesco</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>% Cob</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+
+																	</div>
+																	<div class="row mb-2">
+
+																	</div>
+																</div>
+																<div class="col-sm-12 mb-2">
+																	<p>Comunicacion Seguro / Empresa</p>
+																</div>
+																<div class="col-sm-12">
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Ejecutivo</label></div>
+																		<div class="col-md-8 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+																	</div>
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Telefono</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Cod. Llam</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+
+																	</div>
+																	<div class="row mb-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="">
+															<div class="row">
+																<div class="col-sm-12 mb-2"><p>Plan de paciente</p></div>
+																<div class="col-sm-12">
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Tipo paciente</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Mc. Pago</label></div>
+																		<div class="col-md-4 col-sm-12 inputInline">
+																			<input type="text" name="name" class="form-control">
+																		</div>
+
+																	</div>
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Aseguradora</label></div>
+																		<div class="col-md-9 mb-2 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Contratante</label></div>
+																		<div class="col-md-9 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+																	</div>
+
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Deducible</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline">
+																			<input type="text" name="name" class="form-control">
+																		</div>
+																		<div class="col-md-2 col-sm-12"><label>Coaseguro</label></div>
+																		<div class="col-md-4 col-sm-12 inputInline">
+																			<input type="text" name="name" class="form-control">
+																		</div>
+																	</div>
+
+
+
+
+																</div>
+																<div class="col-sm-12">
+																	<p>Documentos</p>
+																</div>
+																<div class="col-sm-12">
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Tipo docu</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline mb-2"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>N docu</label></div>
+																		<div class="col-md-4 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Ejecutivo</label></div>
+																		<div class="col-md-9 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																	</div>
+																	<div class="row mb-2">
+																		<div class="col-md-2 col-sm-12"><label>Monto</label></div>
+																		<div class="col-md-3 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+																		<div class="col-md-2 col-sm-12"><label>Total</label></div>
+																		<div class="col-md-4 col-sm-12 inputInline"> <input type="text" name="name" class="form-control"></div>
+
+																	</div>
+																</div>
+
+
+																<div class="row mb-2">
+
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 
-
-
-
-										</div>
-
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-3" role="tabpanel">
-							<div class="col-sm-12">
-								<div class="col-sm-12 mt-2">
-
-									<div class="row">
-
-
-
-
-
-
-
-										<div class="col-sm-6">
-											<label>Tipo Paciente</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Mec. Pago</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Aseguradora</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Contratante</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Deducible</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Coaseguro:</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
 										</div>
 									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-4" role="tabpanel">
-							<div class="col-sm-12">
-								<div class="col-sm-12 mt-2">
-
-									<div class="row">
-										<div class="col-sm-6">
-											<label>Tipo documento</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>N° documento.</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-
-										<div class="col-sm-12">
-											<label>Ejecutivo</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Monto S/</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-6">
-											<label>Total S/</label>
-											<input class="form-control  small-input siteds-input" data-val="true" data-val-required="Ingrese la edad" id="edad" name="edad" type="text" value="">
-										</div>
-										<div class="col-sm-12 mt-2">
-											<div class="row">
-												<div class="col-sm-6"><p>Gen. fecha y hora</p></div>
-												<div class="col-sm-6">
-													<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
-													<label class="form-check-label" for="exampleRadios1">
-														<span>13/05/2020 - 5:58pm</span>
-
-													</label>
-												</div>
-											</div>
-
-
-
-
-										</div>
-									</div>
-
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
+
 		</div>
 	</div>
 </div>
@@ -387,10 +1161,17 @@
 </div>
 <div class="modal fade" id="modalregistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 </div>
+<div class="modal fade" id="modalvalidacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="modalreporte" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+</div>
 
 
-<script src="~/js/comboaninado.js"></script>
 <script src="~/js/cargavistaparcial.js"></script>
+<script src="~/js/comboaninado.js"></script>
+<script src="~/js/profile-picture.js"></script>
+
 @section Scripts {
 	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
