@@ -479,12 +479,17 @@ body [class*=sidebar-dark-] {
 }
 
 /*Tabla laboratorio fix*/
-body #laboratorioGrid_wrapper .dataTables_scrollHeadInner, body #ordengrid_wrapper .dataTables_scrollHeadInner {
+body #laboratorioGrid_wrapper .dataTables_scrollHeadInner, body #ordengrid_wrapper .dataTables_scrollHeadInner, body #consultacronogrid_wrapper .dataTables_scrollHeadInner {
 	width: 1169px !important;
 }
 
-body #laboratorioGrid_wrapper .dataTables_scrollHead th, body #ordengrid_wrapper .dataTables_scrollHead th {
+body #laboratorioGrid_wrapper .dataTables_scrollHead th, body #ordengrid_wrapper .dataTables_scrollHead th, body #consultacronogrid_wrapper .dataTables_scrollHead th {
 	width: 192px !important;
+}
+
+
+ body #consultacronogrid_wrapper .dataTables_scrollHead th {
+	width: 100px !important;
 }
 
 .tab-content label {
