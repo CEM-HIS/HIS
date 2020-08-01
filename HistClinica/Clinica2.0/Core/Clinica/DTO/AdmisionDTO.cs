@@ -9,7 +9,6 @@ namespace Clinica2._0.Core.Clinica.DTO
 	public class AdmisionDTO
 	{
 		public List<CitaDTO> Citas { get; set; }
-
 		public PersonaDTO Persona { get; set; }
 	}
 }

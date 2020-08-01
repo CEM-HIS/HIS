@@ -123,7 +123,7 @@ namespace Clinica2._0.Controllers
 
             CitaDTO cita = await _citarepository.GetById(id);
             AdmisionDTO admision = new AdmisionDTO();
-            admision.Citas = await _citarepository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha);
+            admision.Citas = await _citarepository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha,null);
 
             CitaCupoDTO citaCupo = new CitaCupoDTO();
             citaCupo.citas = admision.Citas;
@@ -272,7 +272,7 @@ namespace Clinica2._0.Controllers
         }
 
 
-        public async Task<IActionResult> RegistroCita(int? idmedico, int? idespecialidad, string fecha)
+        public async Task<IActionResult> RegistroCita(int? idmedico, int? idespecialidad, string fecha, string dnipac)
         {
 
             if (TempData["mensajecita"] != null)
@@ -298,7 +298,7 @@ namespace Clinica2._0.Controllers
             var medico = await _medicorepository.GetMedicos();
             ViewBag.listamedicos = medico;
             AdmisionDTO admision = new AdmisionDTO();
-            admision.Citas = await _citarepository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha);
+            admision.Citas = await _citarepository.GetAllCitas(Convert.ToInt32(idmedico), Convert.ToInt32(idespecialidad), fecha, dnipac);
 
 
             if (TempData.ContainsKey("mensajecita"))
@@ -402,6 +402,19 @@ namespace Clinica2._0.Controllers
         public IActionResult ValidacionPaciente()
         {
             return PartialView();
+        }
+
+        public async Task<IActionResult> Pago(int id)
+        {
+            CitaDTO cita = await _citarepository.GetById(id);
+            return PartialView(cita);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Pago(CitaDTO cita)
+        {
+            await _citarepository.Pago(cita);
+            return RedirectToAction("RegistroCita");
         }
     }
 }

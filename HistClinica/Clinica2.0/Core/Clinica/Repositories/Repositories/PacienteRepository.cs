@@ -222,6 +222,11 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                      descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idOcupacion select det.descripcion).FirstOrDefault(),
                                      estadoCivil = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idEstadoCivil select det.descripcion).FirstOrDefault(),
                                      gradoInstruccion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idGradoInstruccion select det.descripcion).FirstOrDefault(),
+                                     celular = p.celular,
+                                     parentesco = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == pa.idParentesco select det.descripcion).FirstOrDefault(),
+                                     tipoDocumento = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idTipoDocumento select det.descripcion).FirstOrDefault(),
+                                     sexo = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idSexo select det.descripcion).FirstOrDefault(),
+                                     fechaNacimiento = p.fechaNacimiento,
                                      paciente = new PacienteDTO()
                                      {
                                          idPaciente = (from pa in _context.PACIENTE
@@ -231,6 +236,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                          idTipoPaciente = (from pan in _context.PACIENTE
                                                            where pa.idPersona == p.idPersona
                                                            select pa.idTipoDocumento).FirstOrDefault(),
+                                         tipopaciente = (from pan in _context.PACIENTE join det in _context.TABLA_DETALLE on pan.idTipoPaciente equals det.idTablaDetalle where pa.idPersona == p.idPersona select det.descripcion).FirstOrDefault(),
                                          numeroHc = (from pan in _context.PACIENTE
                                                      where pa.idPersona == p.idPersona
                                                      select pa.numeroHc).FirstOrDefault(),

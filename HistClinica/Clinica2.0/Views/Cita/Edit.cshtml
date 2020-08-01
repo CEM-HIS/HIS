@@ -1,5 +1,5 @@
 ﻿@model Clinica2._0.Clinica.DTO.CitaCupoDTO
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-lg" style="max-width:1050px;" role="document">
 	<div class="modal-content">
 		<div class="modal-header bg-primary">
 			<h2 class="modal-title text-center" id="exampleModalLabel1">Reprogramacion de cita ambulatoria</h2>
@@ -80,8 +80,8 @@
 							<div class="row pt-3">
 								<div class="col-sm-2">
 									<div class="input-style">
-										<label for="txtNroDocumento" class="form-label">Id</label>
-										<input type="text" asp-for="idcita" id="id" class="form-control" disabled/>
+										<label for="txtNroDocumento" class="form-label">Fecha</label>
+										<input type="text" asp-for="fecha" id="id" class="form-control" disabled/>
 									</div>
 								</div>
 								<div class="col-sm-2">
@@ -116,41 +116,45 @@
 									<table class="table table-responsive table-bordered table-hover text-center" id="citareprogrid">
 										<thead>
 											<tr>
-												<th>Id</th>
+												<th style="display:none;">Id</th>
 												<th>Hora</th>
 												<th>Medico</th>
 												<th>CMP</th>
 												<th>Historia</th>
+												<th>Dni</th>
 												<th>Paciente</th>
-												<th>Confirmado</th>
+												<th>Fecha</th>
 												<th>Hora <br> Registro</th>
 												<th>N° <br>cuenta</th>
 												<th>N° Orden</th>
 												<th>Consultorio</th>
 												<th>Tipo Afiliado</th>
+												<th>Estado</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
 											@foreach (var item in Model.citas)
 											{
-												<tr>
-													<td>@item.idCita</td>
-													<td>@item.hora</td>
-													<td nowrap>@item.Medico</td>
-													<td>@item.CMP</td>
-													<td>@item.numeroHc</td>
-													<td>@item.nombrePaciente</td>
-													<td>@item.estadoPago</td>
-													<td>@item.horaregistro</td>
-													<td>@item.cuenta</td>
-													<td>@item.numeroorden</td>
-													<td>@item.consultorio</td>
-													<td></td>
-													<td>
-														<a style="color:white;" id="reprogramar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></a>
-													</td>
-												</tr>
+											<tr>
+												<td style="display:none;">@item.idCita</td>
+												<td>@item.hora</td>
+												<td nowrap>@item.Medico</td>
+												<td>@item.CMP</td>
+												<td>@item.numeroHc</td>
+												<td>@item.dniPaciente</td>
+												<td nowrap>@item.nombrePaciente</td>
+												<td nowrap>@item.fecha</td>
+												<td>@item.horaregistro</td>
+												<td>@item.cuenta</td>
+												<td>@item.numeroorden</td>
+												<td>@item.consultorio</td>
+												<td></td>
+												<td>@item.descripcionEstado</td>
+												<td>
+													<a style="color:white;" id="reprogramar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></a>
+												</td>
+											</tr>
 											}
 										</tbody>
 									</table>
