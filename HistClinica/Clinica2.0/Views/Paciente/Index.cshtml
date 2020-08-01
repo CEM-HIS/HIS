@@ -97,18 +97,10 @@
 															<option value="6">OTROS</option>
 														</select>
 													</div>
-													<div class="col-md-2 col-sm-12"><label>Tipo de Paciente*</label></div>
-													<div class="col-md-2 col-sm-12 inputInline">
-														<select class="form-control" data-val="true" data-val-required="Seleccione el tipo de paciente" id="cbotppac" name="paciente.idTipoPaciente">
-															<option value="">Seleccione</option>
-															<option value="119">PARTICULAR</option>
-															<option value="120">ASEGURADO</option>
-															<option value="121">CONVENIO</option>
-															<option value="122">SOAT</option>
-															<option value="123">EXTERNO</option>
-															<option value="124">EXTERNO</option>
-														</select>
-													</div>
+													<div class="col-md-2 col-sm-12"><label>Historia Clinica</label></div>
+                                                    <div class="col-md-2 col-sm-12 inputInline">
+                                                        <input type="text" asp-for="paciente.numeroHc" class="form-control">
+                                                    </div>
 												</div>
 												<div class="row mb-3">
 													<div class="col-md-1 col-sm-12"><label>Nombre*</label></div>
