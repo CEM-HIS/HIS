@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Clinica2._0.Core.Clinica.Models;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using System;
 
 namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 {
@@ -127,6 +129,11 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             LABORATORIO dato = await (from p in _context.LABORATORIO where p.idLaboratorio == id select p).FirstOrDefaultAsync();
             return dato;
+        }
+
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

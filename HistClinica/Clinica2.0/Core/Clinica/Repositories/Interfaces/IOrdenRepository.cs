@@ -1,4 +1,4 @@
-﻿using Clinica2._0.Core.Clinica.DTO;
+﻿using Clinica2._0.DTO;
 using Clinica2._0.Core.Clinica.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,10 @@ namespace Clinica2._0.Core.Clinica.Repositories.Interfaces
 {
 	public interface IOrdenRepository
 	{
-		Task<OrdenDTO> AddOrden(OrdenDTO dto, int idorden);
+		Task<int> AddOrden(OrdenDTO dto);
 		Task<string> AddDetalleOrden(int idorden, LABORATORIO model);
 		Task Save();
 		Task<OrdenDTO> GetOrden(int orden);
+		Task<string> DeleteDetalleOrden(int id);
 	}
 }

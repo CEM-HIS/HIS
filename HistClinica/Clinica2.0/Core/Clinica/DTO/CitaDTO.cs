@@ -22,6 +22,7 @@ namespace Clinica2._0.DTO
         public int? idMedico { get; set; }
         public string Medico { get; set; }
         public int? idPaciente { get; set; }
+        public DateTime? fechaCita { get; set; }
 
         [Required(ErrorMessage = "Se requiere este campo")]
         public string nombrePaciente { get; set; }
@@ -55,6 +56,8 @@ namespace Clinica2._0.DTO
         public string horaregistro { get; set; }
         public string numeroorden { get; set; }
         public string cuenta { get; set; }
+
+        [Required(ErrorMessage = "Se requiere este campo")]
         public string numeroHc { get; set; }
 
     }

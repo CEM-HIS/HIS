@@ -1,4 +1,4 @@
-﻿@model Clinica2._0.Core.Clinica.DTO.OrdenDTO
+﻿@model Clinica2._0.DTO.OrdenDTO
 
 <div class="modal-dialog modal-lg" style="max-width:1250px;" role="document">
 	<div class="modal-content">
@@ -9,7 +9,7 @@
 			</button>
 		</div>
 		<div class="container-fluid">
-			<div class="col-sm-12 left" style="height: 50px;">
+			<div class="col-sm-12 left" style="height: 10px;">
 				<div class="card card-primary card-his">
 					<div class="card-header card-shadow">
 						<h2>Registro de ordenes</h2>
@@ -18,13 +18,13 @@
 			</div>
 
 			<div class="col-sm-12">
-				@using (Html.BeginForm("OrdenAtencion", "Cita")) {
+				@using (Html.BeginForm()) {
 					<div class="row pb-2 text-left">
 						<div class="col-sm-12">
-							<button type="submit" style="font-weight:bold;" class="btn btn-primary mt-4 pt-1" id="Crear">
+							<a type="submit" style="font-weight:bold; color:white;" onclick="GrabarOrdenAtencion();" class="btn btn-primary mt-4 pt-1" id="Crear">
 								<i class="far fa-credit-card"></i>
 								GRABAR
-							</button>
+							</a>
 							<button style="font-weight:bold;" class="btn btn-primary mt-4 pt-1 ml-1" id="Crear"> <i class="far fa-clock"></i> CAJA</button>
 						</div>
 
@@ -38,8 +38,7 @@
 											<div class="input-style">
 												<label class="form-label">Nro orden</label>
 												<input type="hidden" id="idorden" asp-for="idorden" />
-												@Html.TextBoxFor(m => m.numeroorden, new { @class = "form-control", @type = "text" })
-
+												@Html.EditorFor(m => m.numeroorden, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
 											</div>
 										</div>
 										<div class="col-sm-6">
@@ -65,7 +64,7 @@
 										<div class="col-sm-4">
 											<div class="input-style">
 												<label class="form-label">Cuenta</label>
-												<input type="text" asp-for="cuenta" id="cuenta" class="form-control" />
+												@Html.EditorFor(m => m.cuenta, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "cuenta" } })
 											</div>
 										</div>
 										<div class="col-sm-4">
@@ -85,7 +84,7 @@
 										<div class="col-sm-4">
 											<div class="input-style">
 												<label class="form-label">Historia</label>
-												<input type="text" asp-for="numeroHC" class="form-control" onkeydown="BuscarPacienteHC();" id="historia" />
+												@Html.EditorFor(m => m.numeroHC, new { htmlAttributes = new { @class = "form-control", @type = "text", @id="historia", onkeydown= "BuscarPacienteHC();" } })
 											</div>
 										</div>
 										<div class="col-sm-4">
@@ -106,7 +105,7 @@
 											<div class="input-style">
 												<input type="hidden" id="idPaciente" asp-for="idPaciente" />
 												<label class="form-label">Paciente</label>
-												<input type="text" asp-for="nombrepaciente" name="name" id="nombrePaciente" class="form-control" />
+												@Html.EditorFor(m => m.nombrepaciente, new { htmlAttributes = new { @class = "form-control", @type = "text", @id= "nombrePaciente" } })
 											</div>
 										</div>
 										<div class="col-sm-4">
@@ -171,13 +170,13 @@
 										<div class="col-sm-6">
 											<div class="input-style">
 												<label class="form-label">Plan</label>
-												<input type="text" asp-for="codigoplan" id="plan" class="form-control" />
+												@Html.EditorFor(m => m.codigoplan, new { htmlAttributes = new { @class = "form-control", @type = "text", @id="plan" } })
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="input-style">
 												<label class="form-label">N°Contrato</label>
-												<input type="text" asp-for="contrato" id="contrato" class="form-control" />
+												@Html.EditorFor(m => m.contrato, new { htmlAttributes = new { @class = "form-control", @type = "text", @id="contrato" } })
 											</div>
 										</div>
 									</div>
@@ -185,7 +184,7 @@
 										<div class="col-sm-8">
 											<div class="input-style">
 												<label class="form-label">Aseguradora</label>
-												<input type="text" asp-for="aseguradora" id="aseguradora" class="form-control" />
+												@Html.EditorFor(m => m.aseguradora, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
 											</div>
 										</div>
 										<div class="col-sm-4">
@@ -196,7 +195,7 @@
 										<div class="col-sm-8">
 											<div class="input-style">
 												<label class="form-label">Contratante</label>
-												<input type="text" asp-for="contratante" id="contratante" class="form-control" />
+												@Html.EditorFor(m => m.contratante, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
 											</div>
 										</div>
 										<div class="col-sm-4">
@@ -258,10 +257,10 @@
 					</div>
 				}
 				<div class="row">
-					<div class="col-sm-10">
+					<div class="col-sm-12 mt-3">
 						<div class="row">
 							<div class="col-sm-12">
-								<table class="table table-bordered pt-2">
+								<table class="table table-bordered pt-2" id="ordengrid">
 									<thead>
 										<tr>
 											<th>Item</th>
@@ -273,6 +272,7 @@
 											<th>Seguro</th>
 											<th>Paciente</th>
 											<th>Interviniente</th>
+											<th>Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -283,26 +283,31 @@
 												{
 													foreach (var item in Model.detalleorden)
 													{
-														<tr>
-														</tr>
+																				<tr>
+																					<td>@item.idDetalleOrden</td>
+																					<td nowrap>@item.tarifa</td>
+																					<td>@item.cantidad</td>
+																					<td>@item.PrecioUnitario</td>
+																					<td>@item.descuento</td>
+																					<td>@item.importe</td>
+																					<td>@item.seguro</td>
+																					<td>@item.paciente</td>
+																					<td>@item.interviniente</td>
+																					<td><button type="submit" id="anular" class="delete btn btn-danger mb-2"><i class="fas fa-minus"></i></button></td>
+																				</tr>
 													}
 												}
 											}
 										}
-
-
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-2">
-						<div class="row pt-5">
-							<div class="col-sm-12">
+					<div class="col-sm-12">
+						<div class="row pt-2 pb-2">
+							<div class="col-sm-12 col-md-1">
 								<button type="submit" style="color:white;" onclick="ConsultarLaboratorio();" class="btn btn-primary">Insertar</button>
-							</div>
-							<div class="col-sm-12">
-								<button class="btn btn-primary">Eliminar</button>
 							</div>
 						</div>
 					</div>

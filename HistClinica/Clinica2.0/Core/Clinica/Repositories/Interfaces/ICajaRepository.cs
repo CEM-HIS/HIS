@@ -11,7 +11,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
     {
         Task<List<CajaDTO>> GetAllCajas();
         Task<List<CajaDTO>> GetAllCajasAsignadas();
-        Task<List<CajaDTO>> GetCajaAsignadaxUsuario();
+        Task<CajaDTO> GetCajaAsignadaxUsuario();
         Task<CAJA> GetById(int? Id);
         //Operaciones Transaccionales
         Task<string> InsertCaja(CAJA Caja);

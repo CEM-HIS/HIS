@@ -98,14 +98,14 @@
                             <div class="col-sm-12">
                                 <div class="input-style">
                                     <label id="txtfecingresopersonal"  class="form-label">FECHA NACIMIENTO</label>
-                                    @Html.TextBoxFor(m => m.fechaNacimiento, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "Date", tabindex = 8, @Value = @DateTime.Now.ToShortDateString() })
+                                    @Html.TextBoxFor(m => m.fechaNacimiento, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "Date", tabindex = 8, @id="fechanacimiento" })
                                     @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="input-style">
                                     <label id="txtfecingresopersonal"  class="form-label">FECHA INGRESO</label>
-                                    @Html.TextBoxFor(m => m.personal.fechaIngreso, new { @class = "form-control", @type = "Date", tabindex = 10 })
+                                    @Html.TextBoxFor(m => m.personal.fechaIngreso, new { @class = "form-control", @type = "Date", tabindex = 10,@id="fechaingreso" })
                                     @Html.ValidationMessageFor(m => m.personal.fechaIngreso, "", new { @class = "text-danger" })
                                 </div>
                             </div>

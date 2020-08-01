@@ -1,4 +1,5 @@
-﻿using Clinica2._0.DTO;
+﻿using Clinica2._0.Core.Clinica.DTO;
+using Clinica2._0.DTO;
 using Clinica2._0.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
     {
         Task<List<PACIENTE>> GetAllPacientes();
         Task<PersonaDTO> GetById(int? id);
-        Task<PersonaDTO> GetByDnioNombresyApellidos(int? Dni, string nombres, string apellidos);
+        Task<int> GetIdPaciente(int? id);
+        Task<AdmisionDTO> GetByDnioNombresyApellidos(int? Dni, string nombres, string apellidos);
         //Operaciones Transaccionales
         Task<string> InsertPaciente(PersonaDTO Paciente, int idPersona);
         Task<string> UpdatePaciente(PersonaDTO Paciente);

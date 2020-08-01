@@ -12,7 +12,7 @@
 body {
 	background: rgb(244, 246, 249);
 	height: auto;
-	position: fixed;
+	/*position: fixed;*/
 	width: 100%;
 }
 
@@ -461,16 +461,69 @@ body [class*=sidebar-dark-] {
 		}
 
 @media (min-width: 576px) {
-	.modal-dialog {
+	#modalreporte .modal-dialog {
 		max-width: 60%;
 	}
 
-	.modal-dialog {
+	#modalreporte .modal-dialog {
 		overflow-y: initial !important
 	}
 
-	.modal-body {
-		height: 500px;
+	#modalreporte .modal-body {
+		height: 600px;
 		overflow-y: auto;
 	}
+}
+
+/*Tabla laboratorio fix*/
+body #laboratorioGrid_wrapper .dataTables_scrollHeadInner, body #ordengrid_wrapper .dataTables_scrollHeadInner {
+	width: 1169px !important;
+}
+
+body #laboratorioGrid_wrapper .dataTables_scrollHead th, body #ordengrid_wrapper .dataTables_scrollHead th {
+	width: 192px !important;
+}
+
+.tab-content label {
+	font-size: 12.5px;
+	line-height: 1;
+}
+
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: white;
+	background-color: #00aee5;
+}
+
+.tabs-border .tab-content {
+	border: 1px solid #e4e6e7;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.scroll-content {
+	overflow-y: auto;
+	height: 400px;
+	width: 100%;
+}
+
+.accordion .acc-icons:after {
+	font-family: 'Font Awesome 5 Free';
+	content: "\f068";
+	float: right;
+	position: absolute;
+	top: 17px;
+	right: 25px;
+	color: white;
+}
+
+.accordion .acc-icons.collapsed:after {
+	/* symbol for "collapsed" panels */
+	content: "\f067";
+	font-family: 'Font Awesome 5 Free';
+	position: absolute;
+	top: 17px;
+	right: 25px;
+	color: white;
 }

@@ -1,8 +1,57 @@
 ﻿//Cargar datos en la tabla cuando los documentos están listos
 $(document).ready(function () {
-    // loadData();
+  /*  $('#formpaciente').on('submit', function (e) {
+        e.preventDefault();
+        localStorage.setItem("indicador", true);
+        // Aquí el resto del código
+    })*/
     camposlongitud();
+    FechaActual();
 });
+
+function FechaActual() {
+    var fecha = new Date(); //Fecha actual
+    var mes = fecha.getMonth() + 1; //obteniendo mes
+    var dia = fecha.getDate(); //obteniendo dia
+    var ano = fecha.getFullYear(); //obteniendo año
+    if (dia < 10)
+        dia = '0' + dia; //agrega cero si el menor de 10
+    if (mes < 10)
+        mes = '0' + mes //agrega cero si el menor de 10
+    $('#fechaNacimiento').val(ano + "-" + mes + "-" + dia);
+}
+
+$("#fechaNacimiento").change(function () {
+    let mifecha = $('#fechaNacimiento').val();
+    let hoy = new Date()
+    let fechaNacimiento = new Date(mifecha)
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+    let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+    if (
+        diferenciaMeses < 0 ||
+        (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+    ) {
+        edad--
+    }
+    $('#edad').val(edad);
+}); 
+
+/*
+function getEdad() {
+    let mifecha = $('#fechaNacimiento').val();
+    let hoy = new Date()
+    let fechaNacimiento = new Date(mifecha)
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+    let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+    if (
+        diferenciaMeses < 0 ||
+        (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+    ) {
+        edad--
+    }
+    $('#edad').val(edad);
+    return edad
+}*/
 
 function BuscarPlan() {
     var numero = $('#plansalud').val();

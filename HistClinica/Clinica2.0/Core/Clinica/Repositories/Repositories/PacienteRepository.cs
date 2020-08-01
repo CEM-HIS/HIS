@@ -1,4 +1,5 @@
-﻿using Clinica2._0.Data;
+﻿using Clinica2._0.Core.Clinica.DTO;
+using Clinica2._0.Data;
 using Clinica2._0.DTO;
 using Clinica2._0.Models;
 using Clinica2._0.Repositories.EntityRepositories.Interfaces;
@@ -64,7 +65,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 {
                     codigoPaciente = persona.paciente.codigoPaciente,
                     descripcion = persona.paciente.descripcion,
-                    numeroHc = string.Format("{0:000000}", idPersona),
+                    numeroHc = Convert.ToString(persona.numeroDocumento),
                     nombreAcompañante = persona.paciente.NombreAcompañante,
                     edadAcompañante = persona.paciente.edadAcompañante,
                     dniAcompañante = persona.paciente.numeroDocumentoAcompañante,
@@ -112,8 +113,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     fechaBaja = persona.paciente.fechabaja,
                     idEstadoSeguro = null,
                     idTipoPaciente = null,
-                    cuenta = string.Format("{0:000001}", idPersona),
-                    nroorden = string.Format("{0:000011}", idPersona),
+                    cuenta = null,
+                    nroorden = null,
                     codigoPlanSalud = persona.paciente.numeroPlan
                 };
                 if (persona.paciente.estadoSeguro != null) Paciente.idEstadoSeguro = (int)persona.paciente.estadoSeguro;
@@ -201,13 +202,13 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
 
             return Pacientes;
         }
-        public async Task<PersonaDTO> GetByDnioNombresyApellidos(int? Dni, string nombres, string apellidos)
+        public async Task<AdmisionDTO> GetByDnioNombresyApellidos(int? Dni, string nombres, string apellidos)
         {
-            PersonaDTO Persona;
+            AdmisionDTO admision = new AdmisionDTO();
             if (Dni != null && Dni != 0)
             {
 
-                Persona = await (from p in _context.PERSONA
+                admision.Persona = await (from p in _context.PERSONA
                                  join pa in _context.PACIENTE on p.idPersona equals pa.idPersona
                                  where p.dniPersona == Dni
                                  select new PersonaDTO
@@ -219,6 +220,13 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                      correo = p.correo,
                                      edad = p.edad,
                                      descripcionOcupacion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idOcupacion select det.descripcion).FirstOrDefault(),
+                                     estadoCivil = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idEstadoCivil select det.descripcion).FirstOrDefault(),
+                                     gradoInstruccion = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idGradoInstruccion select det.descripcion).FirstOrDefault(),
+                                     celular = p.celular,
+                                     parentesco = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == pa.idParentesco select det.descripcion).FirstOrDefault(),
+                                     tipoDocumento = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idTipoDocumento select det.descripcion).FirstOrDefault(),
+                                     sexo = (from det in _context.TABLA_DETALLE where det.idTablaDetalle == p.idSexo select det.descripcion).FirstOrDefault(),
+                                     fechaNacimiento = p.fechaNacimiento,
                                      paciente = new PacienteDTO()
                                      {
                                          idPaciente = (from pa in _context.PACIENTE
@@ -228,6 +236,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                          idTipoPaciente = (from pan in _context.PACIENTE
                                                            where pa.idPersona == p.idPersona
                                                            select pa.idTipoDocumento).FirstOrDefault(),
+                                         tipopaciente = (from pan in _context.PACIENTE join det in _context.TABLA_DETALLE on pan.idTipoPaciente equals det.idTablaDetalle where pa.idPersona == p.idPersona select det.descripcion).FirstOrDefault(),
                                          numeroHc = (from pan in _context.PACIENTE
                                                      where pa.idPersona == p.idPersona
                                                      select pa.numeroHc).FirstOrDefault(),
@@ -257,10 +266,10 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                            select pla.codigoPlanSalud).FirstOrDefault()
                                      }
                                  }).FirstOrDefaultAsync();
-                if (Persona != null)
+                if (admision.Persona != null)
                 {
-                    Persona.paciente.cita = (from c in _context.CITA
-                                             where c.idPaciente == Persona.paciente.idPaciente
+                    admision.Persona.paciente.cita = (from c in _context.CITA
+                                             where c.idPaciente == admision.Persona.paciente.idPaciente
                                              select new CitaDTO
                                              {
                                                  idCita = c.idCita,
@@ -294,14 +303,14 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                                                           where ep.idCita == c.idCita
                                                                           select ep.estado).FirstOrDefault()
                                              }).ToList();
-                }
+                 }
             }
-            else Persona = await GetByNombresyApellido(nombres, apellidos);
+            else admision.Persona = await GetByNombresyApellido(nombres, apellidos);
             //for (int i = 0; i < Persona.paciente.cita.Count; i++)
             //{
             //    Persona.paciente.cita[i].especialidad = (from tb in _context.TABLA_DETALLE where tb.idDet == Persona.paciente.cita[i].idEspecialidad select tb.descripcion).FirstOrDefault();
             //}
-            return Persona;
+            return admision;
         }
         public async Task<PersonaDTO> GetByNombresyApellido(string nombre,string apellidos)
         {
@@ -509,6 +518,14 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                                     }
                                 }).FirstOrDefaultAsync();
             return Persona;
+        }
+
+        public async Task<int> GetIdPaciente(int? id)
+        {
+            int idPaciente = await (from p in _context.PACIENTE
+                                    where p.idPersona == id
+                                    select p.idPaciente).FirstOrDefaultAsync();
+            return idPaciente;
         }
     }
 }

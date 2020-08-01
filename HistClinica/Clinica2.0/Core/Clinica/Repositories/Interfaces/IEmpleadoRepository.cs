@@ -6,7 +6,8 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
     public interface IEmpleadoRepository
     {
         /*Task<List<PersonaDTO>> GetAllEmpleados();*/
-        Task<int> GetIdEmpleado(int? id);
+        Task<int> GetIdEmpleadobyIdPersona(int? id);
+        Task<int> GetIdEmpleadobyIdUser(string id);
         Task<PersonaDTO> GetById(int? id);
         //Operaciones Transaccionales
         Task<string> InsertEmpleado(PersonaDTO Empleado, int idPersona);

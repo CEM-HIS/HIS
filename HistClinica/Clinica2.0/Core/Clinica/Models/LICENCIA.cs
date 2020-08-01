@@ -10,10 +10,20 @@ namespace Clinica2._0.Models
 	{
 		[Key]
 		public int idLicencia { get; set; }
+
+		[Required(ErrorMessage = "Campo requerido")]
 		public int idMedico { get; set; }
+
+		[Required(ErrorMessage = "Campo requerido")]
 		public string horaInicio { get; set; }
+
+		[Required(ErrorMessage = "Campo requerido")]
 		public string horaFin { get; set; }
+
+		[Required(ErrorMessage = "Campo requerido")]
 		public DateTime? fechaInicio { get; set; }
+
+		[Required(ErrorMessage = "Campo requerido")]
 		public DateTime? fechaFin { get; set; }
 		public int? idEstado { get; set; }
 	}

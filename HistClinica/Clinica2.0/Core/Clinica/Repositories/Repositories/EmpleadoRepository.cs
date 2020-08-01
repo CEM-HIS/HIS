@@ -109,7 +109,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 return "Error en el guardado " + ex.StackTrace;
             }
         }
-        public async Task<int> GetIdEmpleado(int? id)
+        public async Task<int> GetIdEmpleadobyIdPersona(int? id)
         {
             int idEmpleado = await (from p in _context.EMPLEADO
                                     where p.idPersona == id
@@ -117,6 +117,15 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             return idEmpleado;
         }
 
+        public async Task<int> GetIdEmpleadobyIdUser(string id)
+        {
+            int idEmpleado = await (from e in _context.EMPLEADO
+                                    join u in _context.USER on e.idEmpleado equals u.idEmployee
+                                    where u.Id == id
+                                    select e.idEmpleado).FirstOrDefaultAsync();
+            return idEmpleado;
+        }
+            
         public async Task<PersonaDTO> GetById(int? id)
         {
             PersonaDTO personaDTO = await (from p in _context.PERSONA

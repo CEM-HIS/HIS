@@ -30,6 +30,7 @@ namespace Clinica2._0.DTO
         public string numeroHc { get; set; }
         public int? idEstado { get; set; }
         public int? estadoPaciente { get; set; }
+        public string tipopaciente { get; set; }
         public string codigoPacienteConvenio { get; set; }
         public string descripcionPacienteConvenio { get; set; }
         public string estadoPacienteConvenio { get; set; }

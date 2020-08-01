@@ -1,5 +1,5 @@
 ﻿@model Clinica2._0.Clinica.DTO.CitaCupoDTO
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-lg" style="max-width:1050px;" role="document">
 	<div class="modal-content">
 		<div class="modal-header bg-primary">
 			<h2 class="modal-title text-center" id="exampleModalLabel1">Reprogramacion de cita ambulatoria</h2>
@@ -26,7 +26,7 @@
 								<div class="col-sm-4">
 									<div class="input-style">
 										<label for="txtNroDocumento" class="form-label">Fecha</label>
-										<input type="date" name="fecha" id="fechacita" class="form-control" />
+										<input type="date" asp-for="fecha" id="fechacita" class="form-control" />
 									</div>
 								</div>
 								<div class="col-sm-8">
@@ -35,15 +35,20 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-5">
-									<div class="input-style">
-										<label for="txtNroDocumento" class="form-label">Medico</label>
-										@Html.DropDownList("idmedicocit", new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccionar", new
-									{
-								   @class = "form-control",
-								   data_cascade_combo_med = "#espe",
-								   data_cascade_combo_source_med = Url.Action("GetEspecialidad", "Cronograma"),
-								   data_cascade_combo_param_name_med = "id"
-							   })
+									<div class="row">
+										<div class="col-sm-10">
+											<div class="input-style">
+												<input type="hidden" asp-for="idmedico" class="form-control" id="idmedicorepro" />
+												<label for="txtNroDocumento" class="form-label">Medico</label>
+												<input type="text" asp-for="medico" class="form-control" id="medicorepro" />
+											</div>
+										</div>
+										<div class="col-sm-2 text-left p-0">
+											<div class="input-style">
+												<a onclick="FiltroCronogramaMedEsp();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
+											</div>
+										</div>
+
 									</div>
 								</div>
 								<div class="col-sm-7">
@@ -54,7 +59,7 @@
 								<div class="col-sm-5">
 									<div class="input-style">
 										<label for="txtNroDocumento" class="form-label">Especialidad</label>
-										@Html.DropDownList("idespecialidadcit", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "espe" })
+										@Html.DropDownListFor(m => m.idespecialidad, new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control", id = "idespecialidadrepro" })
 									</div>
 								</div>
 								<div class="col-sm-7">
@@ -67,47 +72,89 @@
 								</div>
 							</div>
 
+							<div class="row pt-5">
+								<div class="col-sm-12">
+									<span style="font-weight:bolder;">Cita Seleccionada</span>
+								</div>
+							</div>
+							<div class="row pt-3">
+								<div class="col-sm-2">
+									<div class="input-style">
+										<label for="txtNroDocumento" class="form-label">Fecha</label>
+										<input type="text" asp-for="fecha" id="id" class="form-control" disabled/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="input-style">
+										<label for="txtNroDocumento" class="form-label">Hora</label>
+										<input type="text" asp-for="hora" id="horacita" class="form-control" disabled/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="input-style">
+										<label for="txtNroDocumento" class="form-label">Medico</label>
+										<input type="text" asp-for="medico" id="medicocita" class="form-control" disabled/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="input-style">
+										<label for="txtNroDocumento" class="form-label">CMP</label>
+										<input type="text" asp-for="cmp" id="cmp" class="form-control" disabled/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="input-style">
+										<label for="txtNroDocumento" class="form-label">Paciente</label>
+										<input type="text" asp-for="paciente" id="pacientecita" class="form-control" disabled/>
+									</div>
+								</div>
+							</div>
+
 
 							<div class="row pt-3">
 								<div class="col-sm-12">
 									<table class="table table-responsive table-bordered table-hover text-center" id="citareprogrid">
 										<thead>
 											<tr>
-												<th>Id</th>
+												<th style="display:none;">Id</th>
 												<th>Hora</th>
 												<th>Medico</th>
 												<th>CMP</th>
 												<th>Historia</th>
+												<th>Dni</th>
 												<th>Paciente</th>
-												<th>Confirmado</th>
+												<th>Fecha</th>
 												<th>Hora <br> Registro</th>
 												<th>N° <br>cuenta</th>
 												<th>N° Orden</th>
 												<th>Consultorio</th>
 												<th>Tipo Afiliado</th>
+												<th>Estado</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
 											@foreach (var item in Model.citas)
 											{
-												<tr>
-													<td>@item.idCita</td>
-													<td>@item.hora</td>
-													<td nowrap>@item.Medico</td>
-													<td>@item.CMP</td>
-													<td>@item.numeroHc</td>
-													<td>@item.nombrePaciente</td>
-													<td>@item.estadoPago</td>
-													<td>@item.horaregistro</td>
-													<td>@item.cuenta</td>
-													<td>@item.numeroorden</td>
-													<td>@item.consultorio</td>
-													<td></td>
-													<td>
-														<a style="color:white;" id="reprogramar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></a>
-													</td>
-												</tr>
+											<tr>
+												<td style="display:none;">@item.idCita</td>
+												<td>@item.hora</td>
+												<td nowrap>@item.Medico</td>
+												<td>@item.CMP</td>
+												<td>@item.numeroHc</td>
+												<td>@item.dniPaciente</td>
+												<td nowrap>@item.nombrePaciente</td>
+												<td nowrap>@item.fecha</td>
+												<td>@item.horaregistro</td>
+												<td>@item.cuenta</td>
+												<td>@item.numeroorden</td>
+												<td>@item.consultorio</td>
+												<td></td>
+												<td>@item.descripcionEstado</td>
+												<td>
+													<a style="color:white;" id="reprogramar" class="edit btn btn-primary mb-2"><i class="fas fa-address-book"></i></a>
+												</td>
+											</tr>
 											}
 										</tbody>
 									</table>

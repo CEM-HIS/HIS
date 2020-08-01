@@ -1,1118 +1,180 @@
 ﻿@model Clinica2._0.DTO.CitaDTO
-@{
-	ViewData["Title"] = "Registro";
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 
-	<div class="col-sm-12" style="padding: 2rem;">
-		@using (Html.BeginForm())
-		{
-		<div class="col-sm-12">
-			<div class="col-sm-12 text-center pt-2 pb-4 card-height">
-				<br>
-				<div class="card card-primary card-his">
-					<div class="card-header card-shadow">
-						<h1>Registro de Cita</h1>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-12">
-				<div class="card">
-					<div class="card-body">
-						<h1></h1>
-
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="col-sm-12">
-									<div class="row">
-										<div class="col-sm-12">
-
-
-											<div class="form-check-inline">
-												<div class="row">
-													<div class="col-sm-6">
-														<label for="cboparentesco2"></label>
-													</div>
-
-													<select class="form-control small-input"
-															id="paciente_idParentescoCompa_ia"
-															name="paciente.idParentescoCompañia">
-														<option value="">Seleccione una Opcion</option>
-														<option value="40">DNI</option>
-														<option value="41">PASAPORTE</option>
-														<option value="41">CON HISTORIA</option>
-
-													</select>
-
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-12">
-				<a data-toggle="collapse"
-				   href="#collapseacom2"
-				   role="button"
-				   aria-expanded="false"
-				   aria-controls="collapseacom">
-					<div class="card card-primary">
-						<div class="card-header">
-							<div class="row">
-								<div class="col-sm-6 card-title">
-									<h3>Paciente</h3>
-								</div>
-								<div class="col-sm-6 text-right">
-									<i style="font-size: 30px;"
-									   class="fas fa-plus fx-5"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
+<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-content">
+		<div class="modal-header bg-primary">
+			<h2 class="modal-title text-center" id="exampleModalLabel1">Reserva de cita</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="container-fluid">
+			@using (Html.BeginForm(FormMethod.Post, new { @id = "frmregistrocita" }))
+			{
+				@Html.AntiForgeryToken()
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 				@Html.HiddenFor(m => m.idCita)
 				@Html.HiddenFor(m => m.idProgramacionMedica)
 				@Html.HiddenFor(m => m.idconsultorio)
-				<div class="card">
-					<div class="collapse multi-collapse"
-						 id="collapseacom2">
-						<div class="card-body">
-
-							<div class="col-sm-12">
-								<div class="container ml-auto">
-									<div class="row">
-
-
-										<div class="col-sm-4">
-											<div class="form-group">
-												<div class="input-group date"
-													 id="datetimepicker1">
-													<input type="text"
-														   id="dnipac"
-														   class="form-control"
-														   placeholder="Buscar" />
-													<div class="">
-														<button type="button" onclick="BuscarPaciente();" class="btn btn-primary">Buscar</button>
-													</div>
-
-
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="form-group ">
-												<div class="input-group date">
-
-
-													<div class="float-right">
-														<button type="submit" class="btn btn-primary" onclick="alerta()" style="width:150px">Grabar</button>
-
-														<a onclick="alerta1()" class="btn btn-primary" style="width:150px">Cancelar</a>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<hr />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12" style="padding-left: 2rem;">
-
-
-
-										<label for="cbotipdocacom"><h2>Medico:</h2></label>
-										<label for="cbotipdocacom">
-											<h1>@Html.DisplayFor(m => m.Medico)</h1>
-										</label>
-									</div>
-
-									<div class="col-sm-12">
-										<div class="container">
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="row">
-														<div class="col-sm-12">
-															<div class="form-group">
-																@Html.EditorFor(m => m.fecha, new { htmlAttributes = new { @class = "form-control" } })
-																<span class="field-validation-valid text-danger"
-																	  data-valmsg-for="fechaIni"
-																	  data-valmsg-replace="true"></span>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-4">
-														<div class="form-group">
-															<div class="input-group date"
-																 id="datetimepicker1">
-																@Html.EditorFor(m => m.hora, new { htmlAttributes = new { @class = "form-control" } })
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-4">
-														<div class="form-group">
-															<div class="input-group date">
-																@Html.EditorFor(m => m.consultorio, new { htmlAttributes = new { @class = "form-control" } })
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-
-													<hr />
-												</div>
-											</div>
-											<div class="container">
-												<div class="row" style=" border-top: 0.1rem solid #ced4da;padding-top: 1.5rem;">
-
-													<div class="col-sm-4">
-
-														<div class="form-group">
-															<div class="input-group date"
-																 id="datetimepicker1">
-																<input type="text"
-																	   class="form-control"
-                                                                       id="historiac"
-                                                                       asp-for="numeroHc"
-																	   placeholder="N° Historia" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-4">
-														<div class="form-group">
-															<div class="input-group date"
-																 id="datetimepicker1">
-																<input type="text"
-																	   class="form-control"
-                                                                       id="cuenta"
-                                                                       asp-for="cuenta"
-																	   placeholder="N° Cuenta" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-4">
-														<div class="form-group">
-															<div class="input-group date">
-																<input type="text"
-																	   class="form-control"
-                                                                       id="nrorden"
-                                                                       asp-for="numeroorden"
-																	   placeholder="N° Orden" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-
-
-											<div class="container">
-												<div class="row">
-													<div class="col-sm-8">
-														<div class="form-group">
-															<div class="input-group date">
-																<input type="hidden" asp-for="idPaciente" id="idpaciente" />
-																<input type="text"
-																	   id="nombrepaciente"
-																	   class="form-control"
-																	   placeholder="Paciente" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-
-
-													<div class="col-sm-4">
-														<select class="form-control"
-																id="paciente_idParentescoAcompa_ante"
-																name="paciente.idParentescoAcompañante">
-															<option value="">
-																Tipo de Citado
-															</option>
-															<option value="40">
-																Continuador
-															</option>
-															<option value="40">
-																Interconsulta
-															</option>
-															<option value="41">
-																Nuevo
-															</option>
-															<option value="41">
-																Reingreso
-															</option>
-														</select>
-													</div>
-													<div class="col-sm-12">
-														<textarea class="form-control" rows="3" placeholder="Observacion"></textarea>
-														<br>
-
-
-														<textarea class="form-control" rows="3" placeholder=" Observacion Filacion Paciente"></textarea>
-													</div>
-
-
-
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
+			<div class="col-sm-12 pt-3">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="input-style">
+							<label class="form-label">Medico</label>
+							<input style="font-weight:bold;font-size:15px;" type="text" asp-for="Medico" class="form-control" disabled />
 						</div>
 					</div>
 				</div>
-
-
-
-				<div class="col-sm-12">
-					<a data-toggle="collapse"
-					   href="#collapseaTipoPaciente"
-					   role="button"
-					   aria-expanded="false"
-					   aria-controls="collapseacom">
-						<div class="card card-primary">
-							<div class="card-header">
-								<div class="row">
-									<div class="col-sm-6 card-title">
-										<h3>Tipo de Paciente</h3>
-									</div>
-									<div class="col-sm-6 text-right">
-										<i style="font-size: 30px;"
-										   class="fas fa-plus fx-5"></i>
-									</div>
-								</div>
-							</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">Fecha</label>
+							@Html.EditorFor(m => m.fecha, new { htmlAttributes = new { @class = "form-control" } })
 						</div>
-					</a>
-					<div class="card">
-						<div class="collapse multi-collapse"
-							 id="collapseaTipoPaciente">
-							<div class="card-body">
-								<div class="row mb-12-inline">
-									<div class="col-sm-12">
-										<div class="row">
-											<div class="col-sm-12">
-												<di class="container">
-													<div class="row">
-														<div class="form-group" style="padding-left: 2rem;">
-															<div class="form-check-inline">
-																<input class="form-check-input"
-																	   type="radio"
-																	   name="exampleRadios"
-																	   id="exampleRadios1"
-																	   value="option1"
-																	   checked />
-																<label class="form-check-label"
-																	   for="exampleRadios1">
-																	Particular
-																</label>
-															</div>
-															<div class="form-check-inline">
-																<input class="form-check-input"
-																	   type="radio"
-																	   name="exampleRadios"
-																	   id="exampleRadios2"
-																	   value="option2" />
-																<label class="form-check-label"
-																	   for="exampleRadios2">
-																	Asegurado/Convenio
-																</label>
-															</div>
-														</div>
-													</div>
-												</di>
-												<div class="container">
-													<div class="row">
-														<div class="col-sm-4">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Codigo Plan" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-
-														<div class="col-sm-4">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="N° Contrato" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<select class="form-control"
-																	id="paciente_idParentescoAcompa_ante"
-																	name="paciente.idParentescoAcompañante">
-																<option value="">
-																	Moneda
-																</option>
-																<option value="40">
-																	soles
-																</option>
-																<option value="41">
-																	Dolares
-																</option>
-																<option value="41">
-																	Euros
-																</option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-sm-8">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Aseguradora" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-
-														<div class="col-sm-4">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Deducible" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-												<div class="container">
-													<div class="row">
-														<div class="col-sm-8">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Contratante" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-
-														<div class="col-sm-4">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="CoaSeguro" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-sm-8">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Tarifa" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-
-														<div class="col-sm-4">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Consulta General" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-												<div class="container">
-													<div class="row">
-														<div class="col-sm-2">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Sub Total" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-														<div class="col-sm-2">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="IGV" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-														<div class="col-sm-2">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Total" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-														<div class="col-sm-2">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Tot Seguro" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-														<div class="col-sm-2">
-															<div class="form-group">
-																<div class="input-group date"
-																	 id="datetimepicker1">
-																	<input type="text"
-																		   class="form-control"
-																		   placeholder="Tot Paciente" />
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">Hora</label>
+							@Html.EditorFor(m => m.hora, new { htmlAttributes = new { @class = "form-control" } })
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">Consultorio</label>
+							@Html.EditorFor(m => m.consultorio, new { htmlAttributes = new { @class = "form-control" } })
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-12">
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="row">
-								<div class="col-md-12">
-									<a data-toggle="collapse"
-									   href="#collapseaFechaVigencia"
-									   role="button"
-									   aria-expanded="false"
-									   aria-controls="collapseacom">
-										<div class="card card-primary">
-											<div class="card-header">
-												<div class="row">
-													<div class="col-sm-6 card-title">
-														<h3>Fecha de Vigencias</h3>
-													</div>
-													<div class="col-sm-6 text-right">
-														<i style="font-size: 30px;"
-														   class="fas fa-plus fx-5"></i>
-													</div>
-												</div>
-											</div>
-										</div>
-									</a>
-									<div class="card">
-										<div class="collapse multi-collapse"
-											 id="collapseaFechaVigencia">
-											<div class="card-body">
-												<div class="row mb-12-inline">
-													<div class="col-sm-12">
-														<div class="row">
-															<div class="col-sm-12">
-																<div class="container">
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="Fecha Inicio" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="Fecha Caducidad" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-
-																	</div>
-																</div>
-																<div class="container">
-																	<div class="row">
-																		<div class="col-sm-12">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="Carta de Garantia" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-
-
-																	</div>
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="Fecha Garantia" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="Cobertura" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="input-style">
+							<label class="form-label">Dni</label>
+							<input type="text" id="dnipac" class="form-control"/>
+							@Html.ValidationMessageFor(m => m.dniPaciente, "", new { @class = "text-danger" })
 						</div>
-
-						<div class="col-sm-6">
-							<div class="row">
-								<div class="col-md-12">
-									<a data-toggle="collapse"
-									   href="#collapseaFactura"
-									   role="button"
-									   aria-expanded="false"
-									   aria-controls="collapseacom">
-										<div class="card card-primary">
-											<div class="card-header">
-												<div class="row">
-													<div class="col-sm-6 card-title">
-														<h3>Factura - [Electronica]</h3>
-													</div>
-													<div class="col-sm-6 text-right">
-														<i style="font-size: 30px;"
-														   class="fas fa-plus fx-5"></i>
-													</div>
-												</div>
-											</div>
-										</div>
-									</a>
-									<div class="card">
-										<div class="collapse multi-collapse"
-											 id="collapseaFactura">
-											<div class="card-body">
-												<div class="row mb-12-inline">
-													<div class="col-sm-12">
-														<div class="row">
-															<div class="col-sm-12">
-																<div class="container">
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="Autorizacion" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="Cod Asegurado" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-
-																	</div>
-																</div>
-																<div class="container">
-
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="N° Atencion" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<div class="input-group date"
-																					 id="datetimepicker1">
-																					<input type="text"
-																						   class="form-control"
-																						   placeholder="N° Item" />
-																					<span class="input-group-addon">
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
+					</div>
+					<div class="col-sm-1 text-left p-0">
+						<div class="input-style">
+							<a onclick="BuscarPacienteDni();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
+						</div>
+					</div>
+					<div class="col-sm-9">
+						<div class="input-style">
+							<label class="form-label">Paciente</label>
+							<input type="hidden" asp-for="idPaciente" id="idpaciente" />
+							<input type="text" id="nombrepaciente" class="form-control" />
+							@Html.ValidationMessageFor(m => m.nombrePaciente, "", new { @class = "text-danger" })
 						</div>
 					</div>
 				</div>
-
-
-
-				<div class="card">
-					<div class="multi-collapse collapse show" id="collapseacom">
-
-					</div>
-				</div>
-
-				<div class="col-sm-12"
-					 id="divpacotros"
-					 style="display: none;">
-					<a data-toggle="collapse"
-					   href="#collapseotroscompañia1"
-					   role="button"
-					   aria-expanded="false"
-					   aria-controls="collapseotroscompañia">
-						<div class="card card-primary">
-							<div class="card-header">
-								<div class="row">
-									<div class="col-sm-6 card-title">
-										<h4>Otros</h4>
-									</div>
-									<div class="col-sm-6 text-right">
-										<i style="font-size: 30px;"
-										   class="fas fa-plus fx-5"></i>
-									</div>
-								</div>
-							</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">N° Historia</label>
+							<input type="text" id="historiac" asp-for="numeroHc" class="form-control" />
+							@Html.ValidationMessageFor(m => m.numeroHc, "", new { @class = "text-danger" })
 						</div>
-					</a>
-					<div class="card">
-						<div class="collapse multi-collapse"
-							 id="collapseotroscompañia">
-							<div id="actcompañia"
-								 class="card-body"
-								 style="display: none;">
-								<div class="row pb-2">
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="cobertura">Cobertura</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control small-input"
-													   id="paciente_coberturaCompa_ia"
-													   name="paciente.coberturaCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="nroatenmed">Ord. Atencion medica</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control small-input"
-													   id="paciente_ordenAtencionMedicaCompa_ia"
-													   name="paciente.ordenAtencionMedicaCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="nomaseg">Nombre de la Aseguradora</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control small-input"
-													   id="paciente_nombreAseguradoraCompa_ia"
-													   name="paciente.nombreAseguradoraCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="codaseg">Cod. del asegurado</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control small-input"
-													   id="paciente_codAseguradoCompa_ia"
-													   name="paciente.codAseguradoCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row pb-3">
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="poliza">Poliza</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control small-input"
-													   id="paciente_polizaCompa_ia"
-													   name="paciente.polizaCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="cboparentesco2">Parentesco</label>
-											</div>
-											<div class="col-sm-7">
-												<select class="form-control small-input"
-														id="paciente_idParentescoCompa_ia"
-														name="paciente.idParentescoCompañia">
-													<option value="">Seleccione</option>
-													<option value="40">PADRE</option>
-													<option value="41">MADRE</option>
-													<option value="42">HIJO/A</option>
-													<option value="43">ABUELA/O</option>
-													<option value="44">TIA/O</option>
-													<option value="45">NIETA/O</option>
-													<option value="46">PADRASTRO</option>
-													<option value="47">MADRASTRA</option>
-													<option value="48">SOBRINA/O</option>
-													<option value="49">PRIMA/O</option>
-													<option value="50">
-														BIS-ABUELA/O
-													</option>
-													<option value="51">AMIGA/O</option>
-													<option value="52">HERMANA/O</option>
-													<option value="53">YERNO</option>
-													<option value="54">NUERA</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="fechinivig">Inicio de vig.</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_inicioVigenciaCompa_ia"
-													   name="paciente.inicioVigenciaCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="fechfinvig">Fin de vig.</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_finVigenciaCompa_ia"
-													   name="paciente.finVigenciaCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="tpplansalud">Tip Plan de salud</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_tipoPlanSaludCompa_ia"
-													   name="paciente.tipoPlanSaludCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="nroplansalud">N° plan de salud</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_numeroPlanSaludCompa_ia"
-													   name="paciente.numeroPlanSaludCompañia"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3"></div>
-									<div class="col-sm-3"></div>
-								</div>
-							</div>
-							<div id="actconvenio"
-								 class="card-body"
-								 style="display: none;">
-								<div class="row pb-2">
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="coberturacov">Cobertura</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_coberturaConvenio"
-													   name="paciente.coberturaConvenio"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="ordatencioncov">Ord. Atencion medica</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_ordenAtencionMedicaConvenio"
-													   name="paciente.ordenAtencionMedicaConvenio"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="cboparentesco3">Parentesco</label>
-											</div>
-											<div class="col-sm-7">
-												<select class="form-control"
-														id="paciente_idParentesoConvenio"
-														name="paciente.idParentesoConvenio">
-													<option value="">Seleccione</option>
-													<option value="40">PADRE</option>
-													<option value="41">MADRE</option>
-													<option value="42">HIJO/A</option>
-													<option value="43">ABUELA/O</option>
-													<option value="44">TIA/O</option>
-													<option value="45">NIETA/O</option>
-													<option value="46">PADRASTRO</option>
-													<option value="47">MADRASTRA</option>
-													<option value="48">SOBRINA/O</option>
-													<option value="49">PRIMA/O</option>
-													<option value="50">
-														BIS-ABUELA/O
-													</option>
-													<option value="51">AMIGA/O</option>
-													<option value="52">HERMANA/O</option>
-													<option value="53">YERNO</option>
-													<option value="54">NUERA</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="fechinicov">Inicio de vig.</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_inicioVigenciaConvenio"
-													   name="paciente.inicioVigenciaConvenio"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row pb-3">
-									<div class="col-sm-3">
-										<div class="row">
-											<div class="col-sm-5">
-												<label for="fechfincov">Fin de vig.</label>
-											</div>
-											<div class="col-sm-7">
-												<input class="form-control"
-													   id="paciente_finVigenciaConvenio"
-													   name="paciente.finVigenciaConvenio"
-													   type="text"
-													   value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3"></div>
-								</div>
-							</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">N° Cuenta</label>
+							<input type="text" id="cuenta" asp-for="cuenta" class="form-control" />
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">N° Orden</label>
+							<input type="text" id="nrorden" asp-for="numeroorden" class="form-control" />
 						</div>
 					</div>
 				</div>
-
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="input-style">
+							<label class="form-label">Tipo de citado</label>
+							<input type="text" name="name" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">Codigo del Plan</label>
+							<input type="text" id="plan" class="form-control" />
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">N° Contrato</label>
+							<input type="text" id="contrato" class="form-control" />
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-style">
+							<label class="form-label">Moneda</label>
+							<input type="text" name="name" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="input-style">
+							<label class="form-label">Aseguradora</label>
+							<input type="text" id="aseguradora" class="form-control" />
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="input-style">
+							<label class="form-label">Deducicle</label>
+							<input type="text" name="name" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="input-style">
+							<label class="form-label">Contratante</label>
+							<input type="text" id="contratante" class="form-control" />
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="input-style">
+							<label class="form-label">Coaaseguro</label>
+							<input type="text" name="name" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="input-style">
+							<label class="form-label">Tarifa</label>
+							<input type="text" name="name" class="form-control" />
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="input-style">
+							<input type="text" name="name" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row pt-3 pb-3">
+					<div class="col-sm-12 text-right">
+						<button type="submit" class="btn btn-primary">Grabar</button>
+					</div>
+				</div>
 			</div>
+			}
 		</div>
-				}
-			</div>
+	</div>
+</div>
 
-	<script src="~/js/cargavistaparcial.js"></script>
+
+
+
+
+<script src="~/js/cargavistaparcial.js"></script>
+
 
 
 

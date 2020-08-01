@@ -67,7 +67,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         public async Task DeletePersona(int? PersonaID)
         {
             PERSONA Persona = await _context.PERSONA.FindAsync(PersonaID);
-            Persona.idEstado = 2;
+            Persona.idEstado = 172;
             Persona.fechaBaja = DateTime.Now.ToString();
             _context.Update(Persona);
             await Save();
@@ -85,6 +85,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             int idPersona = 0;
             int idEmpleado = 0;
+            int idPaciente = 0;
             string mensaje;
             try
             {
@@ -149,21 +150,20 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     if (persona.personal != null)
                     {
                         if(!await _empleadoRepository.EmpleadoExists(idPersona)) await _empleadoRepository.InsertEmpleado(persona, idPersona);
-                        idEmpleado = await _empleadoRepository.GetIdEmpleado(idPersona);
+                        idEmpleado = await _empleadoRepository.GetIdEmpleadobyIdPersona(idPersona);
                         if (persona.personal.idTipoEmpleado == (int)await _detalleRepository.GetIdDetalleByDescripcion("MEDICA/O"))
                         {
                             if (!await _medicoRepository.MedicoExists(idPersona)) await _medicoRepository.InsertMedico(persona, idPersona, idEmpleado);
                         }
+                        persona.personal.idEmpleado = idEmpleado;
                     }
                     else
                     {
                         if (!await _pacienteRepository.PacienteExists(idPersona)) await _pacienteRepository.InsertPaciente(persona, idPersona);
+                        idPaciente = await _pacienteRepository.GetIdPaciente(idPersona);
+                        persona.paciente.idPaciente = idPaciente;
                     }
                     persona.idPersona = idPersona;
-                    if (persona.personal != null)
-                    {
-                        persona.personal.idEmpleado = idEmpleado;
-                    }
                     await _usuarioRepository.InsertUsuario(persona);
                 }
             }
@@ -248,7 +248,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         {
             List<PersonaDTO> Personas = await (from p in _context.PERSONA
                                                join e in _context.EMPLEADO on p.idPersona equals e.idPersona
-                                               where e.idTipoEmpleado != null
+                                               where e.idTipoEmpleado != null where p.idEstado != 172
                                                select new PersonaDTO
                                                {
                                                    idPersona = p.idPersona,
