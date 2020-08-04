@@ -8,7 +8,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
 {
     public interface ICitaRepository
     {
-        Task<List<CitaDTO>> GetAllCitas(int idmedico, int idespecialidad, string fecha);
+        Task<List<CitaDTO>> GetAllCitas(int idmedico, int idespecialidad, string fecha, string dni);
         Task<CitaDTO> GetById(int? Id);
         //Operaciones Transaccionales
         Task<string> InsertCita(CitaDTO Cita);
@@ -21,5 +21,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Interfaces
         Task<string> ReprogramarCupo(int paciente, CitaDTO cita,CitaDTO nuevacita, int citaactual);
         Task<string> CambiarEstadoCita(CitaDTO cita);
         Task<List<ESTADO_CITA>> getEstadoCita();
+
+        Task<string> Pago(CitaDTO cita);
     }
 }

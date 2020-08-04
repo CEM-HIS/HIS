@@ -96,6 +96,9 @@ namespace Clinica2._0.DTO
         public int? idtipoPersona { get; set; }
         public string gradoInstruccion { get; set; }
         public string estadoCivil { get; set; }
+        public string parentesco { get; set; }
+        public string tipoDocumento { get; set; }
+        public string sexo { get; set; }
         public PersonalDTO personal { get; set; }
         public PacienteDTO paciente { get; set; }
         #endregion Persona

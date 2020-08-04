@@ -279,88 +279,138 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
         //    return citaDTOs;
         //}
 
-        public async Task<List<CitaDTO>> GetAllCitas(int idmedico, int idespecialidad, string fecha)
+        public async Task<List<CitaDTO>> GetAllCitas(int idmedico, int idespecialidad, string fecha, string dni)
         {
             List<CitaDTO> Citas = new List<CitaDTO>();
             if (idmedico != 0)
             {
-              Citas = await (from c in _context.CITA
-                                             join cro in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cro.idProgramMedica
-                                             where (cro.idMedico == idmedico && cro.idEspecialidad.ToString().Contains(Convert.ToString(idespecialidad)) && c.fechaCita.Value.Date.ToString().Contains(fecha)) /*|| (cro.idEspecialidad.ToString().Contains(Convert.ToString(idespecialidad)) && c.fechaCita.Value.Date.ToString() == fecha)*/
-                                             //select c
-                                             select new CitaDTO()
-                                             {
-                                                 idCita = c.idCita,
-                                                 fecha = (c.fechaCita).Value.Date.ToString(),
-                                                 hora = (c.fechaCita).Value.ToString("H:mm"),
-                                                 fechaCita = c.fechaCita,
-                                                 consultorio = (from de in _context.TABLA_DETALLE
-                                                                where de.idTablaDetalle == c.idConsultorio
-                                                                select de.descripcion).FirstOrDefault(),
-                                                 Medico = (from cm in _context.CRONOGRAMA_MEDICO
-                                                           join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                           join p in _context.PERSONA on m.idPersona equals p.idPersona
-                                                           where cm.idProgramMedica == c.idProgramacionMedica
-                                                           select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
-                                                 dniPaciente = (from p in _context.PACIENTE join per in _context.PERSONA on p.idPersona equals per.idPersona
-                                                                where p.idPaciente == c.idPaciente select per.dniPersona).FirstOrDefault(),
-                                                 nombrePaciente = (from pac in _context.PACIENTE
-                                                                   join per in _context.PERSONA on pac.idPersona equals per.idPersona
-                                                                   where pac.idPaciente == c.idPaciente
-                                                                   select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
-                                                 CMP = (from cm in _context.CRONOGRAMA_MEDICO
-                                                        join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                        where cm.idProgramMedica == c.idProgramacionMedica
-                                                        select m.numeroColegio).FirstOrDefault(),
-                                                 horaregistro = c.horaregistro,
-                                                 numeroorden = c.nroorden,
-                                                 cuenta = c.cuenta,
-                                                 numeroHc = c.numeroHC,
-                                                 descripcionEstado = (from de in _context.TABLA_DETALLE
-                                                                      where de.idTablaDetalle == c.idEstadoCita
-                                                                      select de.descripcion).FirstOrDefault()
-                                             }
-                                   ).ToListAsync();
-            } else
+                Citas = await (from c in _context.CITA
+                               join cro in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cro.idProgramMedica
+                               where (cro.idMedico == idmedico && cro.idEspecialidad.ToString().Contains(Convert.ToString(idespecialidad)) && c.fechaCita.Value.Date.ToString().Contains(fecha) && c.fechaCita.Value.Hour > DateTime.Now.Hour)
+                               //select c
+                               select new CitaDTO()
+                               {
+                                   idCita = c.idCita,
+                                   fecha = (c.fechaCita).Value.Date.ToString(),
+                                   hora = (c.fechaCita).Value.ToString("H:mm"),
+                                   fechaCita = c.fechaCita,
+                                   consultorio = (from de in _context.TABLA_DETALLE
+                                                  where de.idTablaDetalle == c.idConsultorio
+                                                  select de.descripcion).FirstOrDefault(),
+                                   Medico = (from cm in _context.CRONOGRAMA_MEDICO
+                                             join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                             join p in _context.PERSONA on m.idPersona equals p.idPersona
+                                             where cm.idProgramMedica == c.idProgramacionMedica
+                                             select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
+                                   dniPaciente = (from p in _context.PACIENTE
+                                                  join per in _context.PERSONA on p.idPersona equals per.idPersona
+                                                  where p.idPaciente == c.idPaciente
+                                                  select per.dniPersona).FirstOrDefault(),
+                                   nombrePaciente = (from pac in _context.PACIENTE
+                                                     join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                     where pac.idPaciente == c.idPaciente
+                                                     select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
+                                   CMP = (from cm in _context.CRONOGRAMA_MEDICO
+                                          join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                          where cm.idProgramMedica == c.idProgramacionMedica
+                                          select m.numeroColegio).FirstOrDefault(),
+                                   horaregistro = c.horaregistro,
+                                   numeroorden = c.nroorden,
+                                   cuenta = c.cuenta,
+                                   numeroHc = c.numeroHC,
+                                   descripcionEstado = (from de in _context.TABLA_DETALLE
+                                                        where de.idTablaDetalle == c.idEstadoCita
+                                                        select de.descripcion).FirstOrDefault()
+                               }
+                                     ).ToListAsync();
+
+            }
+            else if (dni != null)
             {
-               Citas = await (from c in _context.CITA
-                                             join cro in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cro.idProgramMedica
-                                             where (cro.idEspecialidad.ToString().Contains(Convert.ToString(idespecialidad)) && c.fechaCita.Value.Date.ToString().Contains(fecha)) /*|| (cro.idEspecialidad.ToString().Contains(Convert.ToString(idespecialidad)) && c.fechaCita.Value.Date.ToString() == fecha)*/
-                                             //select c
-                                             select new CitaDTO()
-                                             {
-                                                 idCita = c.idCita,
-                                                 fecha = (c.fechaCita).Value.Date.ToString(),
-                                                 hora = (c.fechaCita).Value.ToString("H:mm"),
-                                                 consultorio = (from de in _context.TABLA_DETALLE
-                                                                where de.idTablaDetalle == c.idConsultorio
-                                                                select de.descripcion).FirstOrDefault(),
-                                                 Medico = (from cm in _context.CRONOGRAMA_MEDICO
-                                                           join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                           join p in _context.PERSONA on m.idPersona equals p.idPersona
-                                                           where cm.idProgramMedica == c.idProgramacionMedica
-                                                           select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
-                                                 nombrePaciente = (from pac in _context.PACIENTE
-                                                                   join per in _context.PERSONA on pac.idPersona equals per.idPersona
-                                                                   where pac.idPaciente == c.idPaciente
-                                                                   select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
-                                                 CMP = (from cm in _context.CRONOGRAMA_MEDICO
-                                                        join m in _context.MEDICO on cm.idMedico equals m.idMedico
-                                                        where cm.idProgramMedica == c.idProgramacionMedica
-                                                        select m.numeroColegio).FirstOrDefault(),
-                                                 horaregistro = c.horaregistro,
-                                                 numeroorden = c.nroorden,
-                                                 cuenta = c.cuenta,
-                                                 numeroHc = c.numeroHC,
-                                                 descripcionEstado = (from de in _context.TABLA_DETALLE
-                                                                      where de.idTablaDetalle == c.idEstadoCita
-                                                                      select de.descripcion).FirstOrDefault()
-                                             }
+                Citas = await (from c in _context.CITA
+                               join cro in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cro.idProgramMedica
+                               join pa in _context.PACIENTE on c.idPaciente equals pa.idPaciente join per in _context.PERSONA
+                               on pa.idPersona equals per.idPersona
+                               where per.dniPersona.ToString() == dni
+                               //select c
+                               select new CitaDTO()
+                               {
+                                   idCita = c.idCita,
+                                   fecha = (c.fechaCita).Value.Date.ToString(),
+                                   hora = (c.fechaCita).Value.ToString("H:mm"),
+                                   fechaCita = c.fechaCita,
+                                   consultorio = (from de in _context.TABLA_DETALLE
+                                                  where de.idTablaDetalle == c.idConsultorio
+                                                  select de.descripcion).FirstOrDefault(),
+                                   Medico = (from cm in _context.CRONOGRAMA_MEDICO
+                                             join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                             join p in _context.PERSONA on m.idPersona equals p.idPersona
+                                             where cm.idProgramMedica == c.idProgramacionMedica
+                                             select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
+                                   dniPaciente = (from p in _context.PACIENTE
+                                                  join per in _context.PERSONA on p.idPersona equals per.idPersona
+                                                  where p.idPaciente == c.idPaciente
+                                                  select per.dniPersona).FirstOrDefault(),
+                                   nombrePaciente = (from pac in _context.PACIENTE
+                                                     join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                     where pac.idPaciente == c.idPaciente
+                                                     select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
+                                   CMP = (from cm in _context.CRONOGRAMA_MEDICO
+                                          join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                          where cm.idProgramMedica == c.idProgramacionMedica
+                                          select m.numeroColegio).FirstOrDefault(),
+                                   horaregistro = c.horaregistro,
+                                   numeroorden = c.nroorden,
+                                   cuenta = c.cuenta,
+                                   numeroHc = c.numeroHC,
+                                   descripcionEstado = (from de in _context.TABLA_DETALLE
+                                                        where de.idTablaDetalle == c.idEstadoCita
+                                                        select de.descripcion).FirstOrDefault()
+                               }
                                   ).ToListAsync();
+            }
+            else
+            {
+                Citas = await (from c in _context.CITA
+                               join cro in _context.CRONOGRAMA_MEDICO on c.idProgramacionMedica equals cro.idProgramMedica
+                               where (cro.idEspecialidad.ToString().Contains(Convert.ToString(idespecialidad)) && c.fechaCita.Value.Date.ToString().Contains(fecha)) /*|| (cro.idEspecialidad.ToString().Contains(Convert.ToString(idespecialidad)) && c.fechaCita.Value.Date.ToString() == fecha)*/
+                               //select c
+                               select new CitaDTO()
+                               {
+                                   idCita = c.idCita,
+                                   fecha = (c.fechaCita).Value.Date.ToString(),
+                                   hora = (c.fechaCita).Value.ToString("H:mm"),
+                                   consultorio = (from de in _context.TABLA_DETALLE
+                                                  where de.idTablaDetalle == c.idConsultorio
+                                                  select de.descripcion).FirstOrDefault(),
+                                   Medico = (from cm in _context.CRONOGRAMA_MEDICO
+                                             join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                             join p in _context.PERSONA on m.idPersona equals p.idPersona
+                                             where cm.idProgramMedica == c.idProgramacionMedica
+                                             select (p.nombres + " " + p.apellidoPaterno + " " + p.apellidoMaterno)).FirstOrDefault(),
+                                   nombrePaciente = (from pac in _context.PACIENTE
+                                                     join per in _context.PERSONA on pac.idPersona equals per.idPersona
+                                                     where pac.idPaciente == c.idPaciente
+                                                     select (per.nombres + " " + per.apellidoPaterno + " " + per.apellidoMaterno)).FirstOrDefault(),
+                                   CMP = (from cm in _context.CRONOGRAMA_MEDICO
+                                          join m in _context.MEDICO on cm.idMedico equals m.idMedico
+                                          where cm.idProgramMedica == c.idProgramacionMedica
+                                          select m.numeroColegio).FirstOrDefault(),
+                                   horaregistro = c.horaregistro,
+                                   numeroorden = c.nroorden,
+                                   cuenta = c.cuenta,
+                                   numeroHc = c.numeroHC,
+                                   descripcionEstado = (from de in _context.TABLA_DETALLE
+                                                        where de.idTablaDetalle == c.idEstadoCita
+                                                        select de.descripcion).FirstOrDefault()
+                               }
+                                   ).ToListAsync();
             }
             //return await GetCitas(idmedico, idespecialidad, fecha, Citas);
             return Citas;
         }
+
+
         public async Task<CitaDTO> GetById(int? Id)
         {
             CitaDTO Cita = await (from c in _context.CITA
@@ -589,6 +639,24 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
             List<ESTADO_CITA> estado = await (from e in _context.ESTADO_CITA
                                               select e).ToListAsync();
             return estado;
+        }
+
+        public async Task<string> Pago(CitaDTO cita)
+        {
+            try
+            {
+                CITA Cita = (from c in _context.CITA
+                             where c.idCita == cita.idCita
+                             select c).FirstOrDefault();
+                Cita.idEstadoCita = 1178;
+                _context.Update(Cita);
+                await Save();
+                return "Se pago la cita de forma correcta";
+            }
+            catch (Exception ex)
+            {
+                return "Error en el guardado " + ex.StackTrace;
+            }
         }
     }
 }
