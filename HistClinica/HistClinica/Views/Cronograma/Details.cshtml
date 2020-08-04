@@ -1,0 +1,115 @@
+﻿@model HistClinica.DTO.CronogramaDTO
+<div class="modal-dialog modal-md" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title text-center" id="exampleModalLabel">Actualizar cronograma</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		@using (Html.BeginForm("Edit", "Cronograma"))
+		{
+			<div class="modal-body">
+				<div class="col-sm-12">
+					<div class="row pb-2">
+						<div class="col-sm-6">
+							@Html.HiddenFor(m => m.idProgramMedica)
+
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Medico</label>
+								</div>
+								<div class="col-sm-8">
+									@Html.DropDownListFor(m => m.idMedico, new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccione", new { @class = "form-control", @disabled="true"})
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Especialidad</label>
+								</div>
+								<div class="col-sm-8">
+									@Html.DropDownListFor(m => m.idEspecialidad, new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), new { @class = "form-control", @disabled = "true" })
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row pb-2">
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Fecha Inicio</label>
+								</div>
+								<div class="col-sm-8">
+
+									@Html.DisplayFor(m => m.fechaIni, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Fecha Fin</label>
+								</div>
+								<div class="col-sm-8">
+
+									@Html.DisplayFor(m => m.fechaFin, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row pb-2">
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Hora Inicio</label>
+								</div>
+								<div class="col-sm-8">
+									@Html.DropDownListFor(m => m.hrInicio, new SelectList(ViewBag.listahoras), new { @class = "form-control", @disabled = "true" })
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Hora Fin</label>
+								</div>
+								<div class="col-sm-8">
+									@Html.DropDownListFor(m => m.hrFin, new SelectList(ViewBag.listahoras), new { @class = "form-control", @disabled = "true" })
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row pb-2">
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Estado</label>
+								</div>
+								<div class="col-sm-8">
+									@Html.DropDownListFor(m => m.idEstado, new SelectList(ViewBag.lestado, "idtab", "descripcion"), new { @class = "form-control", @disabled = "true" })
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Consultorio</label>
+								</div>
+								<div class="col-sm-8">
+									@Html.DropDownListFor(m => m.idConsultorio, new SelectList(ViewBag.listaconsultorio, "idtab", "descripcion"), new { @class = "form-control", @disabled = "true" })
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button style="width: 80px;" type="submit" class="btn btn-primary">Guardar</button>
+					<button style="width: 80px;" type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		}
+
+	</div>
+</div>

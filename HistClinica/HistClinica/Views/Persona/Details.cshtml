@@ -1,0 +1,276 @@
+﻿@model HistClinica.Models.T000_PERSONA
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Persona</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.apePaterno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.apePaterno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.apeMaterno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.apeMaterno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nombres)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nombres)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idtpDocumento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idtpDocumento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.dniPersona)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.dniPersona)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idSexo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idSexo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idEtnico)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idEtnico)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fecNace)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fecNace)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idUbigeoResi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idUbigeoResi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idtipoVia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idtipoVia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nombreVia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nombreVia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nroVia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nroVia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nroDpto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nroDpto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.interior)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.interior)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.manzana)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.manzana)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nroLote)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nroLote)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nroKm)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nroKm)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nroBlock)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nroBlock)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nroEtapa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nroEtapa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.edad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.edad)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idUbigeoNace)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idUbigeoNace)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fotografia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fotografia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idGrdInstruc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idGrdInstruc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idReligion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idReligion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.centroEduca)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.centroEduca)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idEstCivil)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idEstCivil)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idOcupacion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idOcupacion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idgpoSangre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idgpoSangre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idFactorrh)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idFactorrh)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nroRuc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nroRuc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.razonSocial)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.razonSocial)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.estadoRuc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.estadoRuc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.condicionRuc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.condicionRuc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.domiFiscal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.domiFiscal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idParentesco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idParentesco)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.celular)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.correo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.iddatoSiteds)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.iddatoSiteds)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idemprConvenio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idemprConvenio)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idciaSeguro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idciaSeguro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idtipoIafa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idtipoIafa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.idPersona">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

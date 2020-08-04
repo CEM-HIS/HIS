@@ -1,0 +1,91 @@
+﻿
+@{
+	ViewData["Title"] = "Pago";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+	<div class="container">
+		<div class="col-sm-12 text-center pt-2 pb-4">
+			<div class="card card-primary">
+				<div class="card-header">
+					<h1>Paga Online de forma segura con tu tarjeta de credito o debito</h1>
+				</div>
+			</div>
+		</div>
+
+		<div align="center">
+			<div align='left'>
+				<font color="gray"><h1>Ingresa los datos de tu tarjeta de credito o debito</h1></font>
+			</div>
+			<h4></h4>
+
+			<h4></h4>
+
+
+			<form action="#" class="credit-card-div">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+
+						<div class="row ">
+							<div class="col-md-4">
+								<input type="text" class="form-control" placeholder="Ingrese el Numero de Tarjeta" />
+							</div>
+						</div>
+						<h4></h4>
+
+						<div class="row ">
+
+
+							<div class="col-md-1 col-sm-1 col-xs-1">
+								<span class="help-block text-muted small-font"> Mes de Vencimiento</span>
+								<input type="text" class="form-control" placeholder="MM" />
+							</div>
+							<div class="col-md-1 col-sm-1 col-xs-1">
+								<span class="help-block text-muted small-font">  Año de Vencimiento</span>
+								<input type="text" class="form-control" placeholder="YY" />
+							</div>
+
+							<div class="col-md-1 col-sm-1 col-xs-1">
+								<span class="help-block text-muted small-font">  Año de Vencimiento</span>
+								<input type="text" class="form-control" placeholder="CCV" />
+							</div>
+						</div>
+
+						<h4></h4>
+
+						<div class="row ">
+							<div class="col-md-4 pad-adjust">
+
+								<input type="text" class="form-control" placeholder="Nombre en la Tarjeta" />
+							</div>
+						</div>
+
+						<h4></h4>
+						<h4></h4>
+						<div class="row" align="left">
+							<div class="col-md-12 pad-adjust">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" checked class="text-muted"> Guardar detalles para pagos rápidos.<a href="#"> ¿cómo?</a>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div align="left">
+
+							<a class="btn btn-primary" asp-action="Agregar" asp-controller="Detalle">
+								Pagar
+							</a>
+
+							<a class="btn btn-danger" asp-action="Index" asp-controller="Paciente" align="right">
+								Cerrar
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
