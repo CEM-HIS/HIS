@@ -9,7 +9,7 @@
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
-        "scrollY": "200px",
+        "scrollY": "300px",
         "scrollCollapse": true,
     });
 
@@ -17,35 +17,35 @@
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
-        "scrollY": "200px",
+        "scrollY": "300px",
         "scrollCollapse": true,
     });
     $('#citagrid').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
-        "scrollY": "200px",
+        "scrollY": "600px",
         "scrollCollapse": true,
     });
     $('#licenciagrid').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
-        "scrollY": "200px",
+        "scrollY": "300px",
         "scrollCollapse": true,
     });
     $('#personalgrid').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
-        "scrollY": "200px",
+        "scrollY": "300px",
         "scrollCollapse": true,
     });
     $('#detallegrid').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
-        "scrollY": "200px",
+        "scrollY": "300px",
         "scrollCollapse": true,
     });
 
@@ -53,9 +53,10 @@
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
-        "scrollY": "200px",
+        "scrollY": "300px",
         "scrollCollapse": true,
     });
+
 
     $('.dataTables_length').addClass('bs-select');
 });

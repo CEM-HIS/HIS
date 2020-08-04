@@ -14,24 +14,33 @@
 				@using (Html.BeginForm("ConsultarMedEsp", "Cronograma"))
 				{
 					<div class="row">
-						<div class="col-sm-12 form-inline mb-5">
+						<div class="col-sm-12 form-inline mb-2">
 
 							<label class="pr-2">Nombre medico:</label>
-							<input type="text" id="nombremedico" class="form form-control small-input col-2" />
+							<input type="text" id="nombremedico" class="form form-control small-input col-3" />
 
 							<label class="pl-3 pr-2">Apellido Medico:</label>
-							<input type="text" id="apellidomedico" class="form form-control small-input col-2" />
+							<input type="text" id="apellidomedico" class="form form-control small-input col-3" />
 
-							<label class="pl-3 pr-2">Especialidad</label>
-							@Html.DropDownList("especialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control small-input col-2", id = "especialidad" })
-							<a class="pl-2 btn btn-primary" style="color:white; margin-left:10px;" onclick="FiltroCronogramaMedEspPost();">Buscar</a>
 						</div>
+                        <div class="col-sm-12 form-inline mb-5 p-0 pl-1">
+							<div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <label class=" pr-2">Especialidad</label>
+                                </div>
+                                <div class="col-sm-12 col-md-9">
+                                    @Html.DropDownList("especialidad", new SelectList(ViewBag.listaespecialidades, "idtab", "descripcion"), "Seleccionar", new { @class = "form-control small-input col-6", id = "especialidad" })
+                                    <a class="pl-2 btn btn-primary" style="color:white; margin-left:10px;" onclick="FiltroCronogramaMedEspPost();">Buscar</a>
+                                </div>
+							</div>
+                           
+                        </div>
 					</div>
 				}
 
 				<div class="row pt-3">
 					<div class="col-sm-12">
-						<table class="table table-bordered table-hover text-center" id="consultacronogrid">
+						<table class="table table-bordered table-hover" id="consultacronogrid" width="100%">
 							<thead>
 								<tr>
 									<th style="display:none">IdEspecialidad</th>
