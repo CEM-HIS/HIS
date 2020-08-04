@@ -132,7 +132,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     codigoCita = null,
                     idServicioClinica = null,
                     idConsultorio = citaact.idconsultorio,
-                    idEstadoCita = 1175,
+                    idEstadoCita = 177,
                     idEmpleado = null,
                     idTipoAtencion = null,
                     idtipoCita = null,
@@ -521,7 +521,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     codigoCita = null,
                     idServicioClinica = null,
                     idConsultorio = model.idconsultorio,
-                    idEstadoCita = 1174,
+                    idEstadoCita = 176,
                     idProgramacionMedica = model.idProgramacionMedica,
                     idEmpleado = model.idEmpleado,
                     idTipoAtencion = null,
@@ -566,7 +566,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                     codigoCita = null,
                     idServicioClinica = null,
                     idConsultorio = cita.idconsultorio,
-                    idEstadoCita = 1176,
+                    idEstadoCita = 178,
                     idProgramacionMedica = cita.idProgramacionMedica,
                     idEmpleado = cita.idEmpleado,
                     idTipoAtencion = null,
@@ -648,7 +648,7 @@ namespace Clinica2._0.Repositories.EntityRepositories.Repositories
                 CITA Cita = (from c in _context.CITA
                              where c.idCita == cita.idCita
                              select c).FirstOrDefault();
-                Cita.idEstadoCita = 1178;
+                Cita.idEstadoCita = 180;
                 _context.Update(Cita);
                 await Save();
                 return "Se pago la cita de forma correcta";

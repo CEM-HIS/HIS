@@ -1,0 +1,23 @@
+﻿
+@model HistClinica.Models.D012_CRONOMEDICO
+
+@using (Html.BeginForm("Filtro", "Cronograma"))
+{
+	<div class="row pb-2">
+		<div class="col-sm-4">
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Medico</label>
+				</div>
+				<div class="col-sm-8">
+					@Html.DropDownListFor(m => m.idMedico, new SelectList(ViewBag.listamedicos, "idMedico", "nombres"), "Seleccione", new { @class = "form-control" })
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+		</div>
+		<div class="col-sm-4">
+			<button type="submit" class="btn btn-primary">Buscar</button>
+		</div>
+	</div>
+}
