@@ -1,11 +1,5 @@
 ﻿$(document).ready(function () {
 	AperturaCaja();
-	const filas = document.getElementById('citagrid').querySelectorAll('tbody tr');
-	filas.forEach(function (valor, indice, array) {
-		if (valor.querySelector('td:last-child').innerText == 'REPROGRAMADO')
-			valor.style.background = '#ff2d00';
-		console.log("Entro");
-	});
 	CargarCita();
 	CargarReporte();
 	$("#success-alert").fadeOut(1500).slideUp(300, function () {
