@@ -32,263 +32,264 @@
                         </div>
                     </div>
                 </a>
-            </div>
-            <div class="card">
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-2">
-                                <div class="crearAvatar">
+                <div class="card">
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="crearAvatar">
 
-                                    <div class="avatar-upload">
-                                        <div class="avatar-edit">
-                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                            <label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
-                                        </div>
-                                        <div class="avatar-preview">
-                                            <div id="imagePreview" style="background-image: url(images/profile.png);">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div id="imagePreview" style="background-image: url(images/profile.png);">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-sm-12 col-md-9">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="">
+                                <div class="col-sm-12 col-md-9">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-style">
+                                                            <label class="form-label">*Tipo de paciente</label>
+                                                            @Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
+                                                            @Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-sm-10">
+                                                        <div class="input-style">
+                                                            <label class="form-label">*Nro plan salud</label>
+                                                            @Html.TextBoxFor(m => m.paciente.numeroPlan, new { @class = "form-control", @id = "plansalud" })
+                                                            @Html.ValidationMessageFor(m => m.paciente.numeroPlan, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2 text-left p-0">
+                                                        <div class="input-style">
+                                                            <a onclick="BuscarPlan();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-style">
+                                                            <label class="form-label">*Aseguradora</label>
+                                                            <input type="text" name="name" id="aseguradora" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-style">
+                                                            <label class="form-label">*Contratante</label>
+                                                            <input type="text" name="name" id="contratante" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
                                             <div class="row">
+
                                                 <div class="col-sm-12">
                                                     <div class="input-style">
-                                                        <label class="form-label">*Tipo de paciente</label>
-                                                        @Html.DropDownListFor(m => m.paciente.idTipoPaciente, new SelectList(ViewBag.ltippac, "idtab", "descripcion"), "Seleccione", new { @class = "form-control", @id = "cbotppac" })
-                                                        @Html.ValidationMessageFor(m => m.paciente.idTipoPaciente, "", new { @class = "text-danger" })
+                                                        <label class="form-label" for="apepatpac">*Apellido paterno</label>
+                                                        @Html.TextBoxFor(m => m.apellidoPaterno, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.apellidoPaterno, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="">
+                                        <div class="col-sm-2">
                                             <div class="row">
-                                                <div class="col-sm-10">
-                                                    <div class="input-style">
-                                                        <label class="form-label">*Nro plan salud</label>
-                                                        @Html.TextBoxFor(m => m.paciente.numeroPlan, new { @class = "form-control", @id = "plansalud" })
-                                                        @Html.ValidationMessageFor(m => m.paciente.numeroPlan, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2 text-left p-0">
-                                                    <div class="input-style">
-                                                        <a onclick="BuscarPlan();" class="btn btn-primary text-white"><i class="fa fa-search" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="">
-                                            <div class="row">
+
                                                 <div class="col-sm-12">
                                                     <div class="input-style">
-                                                        <label class="form-label">*Aseguradora</label>
-                                                        <input type="text" name="name" id="aseguradora" class="form-control" />
+                                                        <label for="apematpac" class="form-label">*Apellido Materno</label>
+                                                        @Html.TextBoxFor(m => m.apellidoMaterno, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.apellidoMaterno, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="">
+                                        <div class="col-sm-2">
                                             <div class="row">
+
                                                 <div class="col-sm-12">
                                                     <div class="input-style">
-                                                        <label class="form-label">*Contratante</label>
-                                                        <input type="text" name="name" id="contratante" class="form-control" />
+                                                        <label for="firstname" class="form-label">Nombre</label>
+                                                        @Html.TextBoxFor(m => m.nombres, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.nombres, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="cbosexo" class="form-label">*Sexo</label>
+                                                        @Html.DropDownListFor(m => m.idSexo, new SelectList(ViewBag.lssexo, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.idSexo, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="row">
 
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label class="form-label" for="apepatpac">*Apellido paterno</label>
-                                                    @Html.TextBoxFor(m => m.apellidoPaterno, new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.apellidoPaterno, "", new { @class = "text-danger" })
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="edadpac" class="form-label">*Edad</label>
+                                                        @Html.TextBoxFor(m => m.edad, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                                        @Html.ValidationMessageFor(m => m.edad, "", new { @class = "text-danger" })
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="row">
 
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="apematpac" class="form-label">*Apellido Materno</label>
-                                                    @Html.TextBoxFor(m => m.apellidoMaterno, new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.apellidoMaterno, "", new { @class = "text-danger" })
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="fechdate" class="form-label">*Fecha de nacimiento</label>
+                                                        @Html.TextBoxFor(m => m.fechaNacimiento, new { @class = "form-control", @type = "Date" })
+                                                        @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="row">
 
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="firstname" class="form-label">Nombre</label>
-                                                    @Html.TextBoxFor(m => m.nombres, new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.nombres, "", new { @class = "text-danger" })
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="cboocupacion" class="form-label">*Ocupación</label>
+                                                        @Html.DropDownListFor(m => m.idOcupacion, new SelectList(ViewBag.locupacion, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.idOcupacion, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="cbogrdinstruccion" class="form-label">*Grado de instruccion</label>
+                                                        @Html.DropDownListFor(m => m.idGradoInstruccion, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.idGradoInstruccion, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="estcivil" class="form-label">*Estado civil</label>
+                                                        @Html.DropDownListFor(m => m.idEstadoCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.idEstadoCivil, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="emailpac" class="form-label">*Email</label>
+                                                        @Html.TextBoxFor(m => m.correo, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.correo, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="celularpac" class="form-label">*Celular</label>
+                                                        @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                                        @Html.ValidationMessageFor(m => m.celular, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="cbodoc" class="form-label">*Tipo de Doc</label>
+                                                        @Html.DropDownListFor(m => m.idTipoDocumento, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.idTipoDocumento, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="nrodoc" class="form-label">*Nro. Doc.</label>
+                                                        @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                                        @Html.ValidationMessageFor(m => m.numeroDocumento, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div class="input-style">
+                                                        <label for="cboparentesco" class="form-label">*Parentesco</label>
+                                                        @Html.DropDownListFor(m => m.paciente.idParentescoPaciente, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.paciente.idParentescoPaciente, "", new { @class = "text-danger" })
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
-
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="cbosexo" class="form-label">*Sexo</label>
-                                                    @Html.DropDownListFor(m => m.idSexo, new SelectList(ViewBag.lssexo, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.idSexo, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="edadpac" class="form-label">*Edad</label>
-                                                    @Html.TextBoxFor(m => m.edad, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-                                                    @Html.ValidationMessageFor(m => m.edad, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="fechdate" class="form-label">*Fecha de nacimiento</label>
-                                                    @Html.TextBoxFor(m => m.fechaNacimiento, new { @class = "form-control", @type = "Date" })
-                                                    @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="cboocupacion" class="form-label">*Ocupación</label>
-                                                    @Html.DropDownListFor(m => m.idOcupacion, new SelectList(ViewBag.locupacion, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.idOcupacion, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="cbogrdinstruccion" class="form-label">*Grado de instruccion</label>
-                                                    @Html.DropDownListFor(m => m.idGradoInstruccion, new SelectList(ViewBag.lgrdinst, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.idGradoInstruccion, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="estcivil" class="form-label">*Estado civil</label>
-                                                    @Html.DropDownListFor(m => m.idEstadoCivil, new SelectList(ViewBag.lestcivil, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.idEstadoCivil, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="emailpac" class="form-label">*Email</label>
-                                                    @Html.TextBoxFor(m => m.correo, new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.correo, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="celularpac" class="form-label">*Celular</label>
-                                                    @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-                                                    @Html.ValidationMessageFor(m => m.celular, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="cbodoc" class="form-label">*Tipo de Doc</label>
-                                                    @Html.DropDownListFor(m => m.idTipoDocumento, new SelectList(ViewBag.ltipdoc, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.idTipoDocumento, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="nrodoc" class="form-label">*Nro. Doc.</label>
-                                                    @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
-                                                    @Html.ValidationMessageFor(m => m.numeroDocumento, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="input-style">
-                                                    <label for="cboparentesco" class="form-label">*Parentesco</label>
-                                                    @Html.DropDownListFor(m => m.paciente.idParentescoPaciente, new SelectList(ViewBag.lparentesco, "idtab", "descripcion"), "Seleccione", new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.paciente.idParentescoPaciente, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
+            </div>
+           
                 <div class="col-sm-12 accordion" id="headingTwo">
                     <a class="collapsed acc-icons" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <div class="card card-primary">
