@@ -1,30 +1,30 @@
 ﻿
 @model Clinica2._0.DTO.CitaDTO
 <div class="modal-dialog modal-md" style="max-width: 800px;" role="document">
-    <div class="modal-content">
-        <div class="modal-header bg-primary">
-            <h2 class="modal-title text-center" id="exampleModalLabel1">Pago Cita Ambulatoria</h2>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+	<div class="modal-content">
+		<div class="modal-header bg-primary">
+			<h2 class="modal-title text-center" id="exampleModalLabel1">Pago Cita Ambulatoria</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 
-        <div class="container pt-2 pb-4">
-            @using (Html.BeginForm())
-            {
-                @Html.HiddenFor(m => m.idCita)
-                <div align="center">
-                    <div align='left'>
+		<div class="container pt-2 pb-4">
+			@using (Html.BeginForm())
+			{
+				@Html.HiddenFor(m => m.idCita)
+				<div align="center">
+					<div align='left'>
+						
+					</div>
+					<h4></h4>
 
-                    </div>
-                    <h4></h4>
-
-                    <h4></h4>
+					<h4></h4>
 
 
-                    <form action="#" class="credit-card-div">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
+					<form action="#" class="credit-card-div">
+						<div class="panel panel-default">
+							<div class="panel-heading">
 
                                 <div class="row mb-3">
                                     <div class="col-md-1 text-left">
@@ -35,9 +35,9 @@
                                     </div>
                                     <div class="col-md-1 text-left">
                                         <label for="divisa" class="d-inline">Divisa</label>
+                                     
 
-
-
+                                       
                                     </div>
                                     <div class="col-md-3">
                                         <select name="divisa" class="form-control" id="divisa">
@@ -48,11 +48,11 @@
                                     </div>
 
                                 </div>
-                                <h4></h4>
+								<h4></h4>
                                 <div class="row mb-3">
                                     <div class="col-md-1 text-left">
                                         <label class="d-inline">Cajero</label>
-
+                                       
 
                                     </div>
                                     <div class="col-md-7">
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="col-md-3">
 
-                                        <input type="text" class="d-inline form-control" placeholder="CE001" />
+                                        <input type="text" class="d-inline form-control" placeholder="CE001"/>
                                     </div>
                                     <div class="col-md-1 text-left">
                                         <label class="d-inline">Turno</label>
@@ -77,42 +77,42 @@
                                     </div>
                                 </div>
 
-                                <h4></h4>
+								<h4></h4>
 
-                                <div class="row ">
+								<div class="row ">
                                     <div class="col-md-6 text-left">
                                         <input type="radio" id="conpos" name="pos" value="male">
                                         <label for="conpos">P.O.S</label>
                                         <input type="radio" class="ml-3" id="sinpos" name="pos" value="female">
                                         <label for="sinpos">SIN P.O.S</label><br>
                                     </div>
-                                </div>
+								</div>
 
-                                <h4></h4>
-                                <h4></h4>
-                                <div class="row" align="left">
-                                    <div class="col-md-12 pad-adjust">
+								<h4></h4>
+								<h4></h4>
+								<div class="row" align="left">
+									<div class="col-md-12 pad-adjust">
+										
+									</div>
+								</div>
+								<div align="left">
 
-                                    </div>
-                                </div>
-                                <div align="left">
+									<button class="btn btn-primary" >
+										Pagar
+									</button>
 
-                                    <button class="btn btn-primary">
-                                        Pagar
-                                    </button>
+									<a style="color:white;" class="btn btn-danger" data-dismiss="modal" align="right">
+										Cerrar
+									</a>
+								</div>
 
-                                    <a style="color:white;" class="btn btn-danger" data-dismiss="modal" align="right">
-                                        Cerrar
-                                    </a>
-                                </div>
+							</div>
+						</div>
+					</form>
 
-                            </div>
-                        </div>
-                    </form>
+				</div>
+			}
+		</div>
 
-                </div>
-            }
-        </div>
-
-    </div>
+	</div>
 </div>
